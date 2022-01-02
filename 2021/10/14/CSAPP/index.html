@@ -1,0 +1,988 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="看到第四章才发现看的第二版，偶emo了。。。。第三版和第二版差别还是挺大的。我找到的第三版电子书还是彩色的暂时记录部分笔者看CSAPP的笔记，参考Kipery的笔记。Kipery,yyds!!! 计算机系统漫游由于系统中所有信息都是由比特表示，因此区分不同数据对象的唯一方法是上下文.如对于hello.c,其编译系统的执行如下：         graph TD   编写hello.c--源程序文本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP">
+<meta property="og:url" content="http://example.com/2021/10/14/CSAPP/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="看到第四章才发现看的第二版，偶emo了。。。。第三版和第二版差别还是挺大的。我找到的第三版电子书还是彩色的暂时记录部分笔者看CSAPP的笔记，参考Kipery的笔记。Kipery,yyds!!! 计算机系统漫游由于系统中所有信息都是由比特表示，因此区分不同数据对象的唯一方法是上下文.如对于hello.c,其编译系统的执行如下：         graph TD   编写hello.c--源程序文本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-06%2017-01-39%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-06%2020-59-09%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-06%2022-06-59%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/1071479-20171217232203780-1004515279.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-09%2013-01-12%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-09%2013-38-45%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-09%2019-18-43%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-09%2019-23-46%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-11-26%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-16-22%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-21-00%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-23-38%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-28-30%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-57-05%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2011-03-26%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2011-05-27%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-11%2010-14-58%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-12%2015-05-45%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-12%2015-55-27%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-12%2016-10-46%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-13%2011-30-49%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-13%2016-52-45%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-13%2017-29-03%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-13%2017-41-30%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2014-02-45%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2014-08-25%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2014-16-57%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2014-34-25%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2014-53-00%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2015-03-33%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2020-05-57%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2020-36-40%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="article:published_time" content="2021-10-14T12:50:17.000Z">
+<meta property="article:modified_time" content="2021-12-31T16:20:04.415Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="cs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-06%2017-01-39%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+  
+  
+  <title>CSAPP - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/rainbow.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"GCX7MRb8jHPOvWy5hXP1pLOT-gzGzoHsz","app_key":"81Myp4Kmaagh7J5spTpIoMWi","server_url":"https://gcx7mrb8.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Heeler-deer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/week/">
+                <i class="iconfont icon-link-fill"></i>
+                week
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://github.com/heeler-deer/absorbing/blob/main/png/6.jpg?raw=true') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="CSAPP">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      John Doe
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-14 20:50" pubdate>
+        2021年10月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      15k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      128 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CSAPP</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年1月1日 凌晨
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>看到第四章才发现看的第二版，偶emo了。。。。<br>第三版和第二版差别还是挺大的。<br><del>我找到的第三版电子书还是彩色的</del><br>暂时记录部分笔者看CSAPP的笔记，参考<a target="_blank" rel="noopener" href="https://kiprey.github.io/2020/07/csapp/">Kipery</a>的笔记。<br>Kipery,yyds!!!</p>
+<h1 id="计算机系统漫游"><a href="#计算机系统漫游" class="headerlink" title="计算机系统漫游"></a>计算机系统漫游</h1><p>由于系统中所有信息都是由比特表示，因此区分不同数据对象的唯一方法是上下文.<br>如对于hello.c,其编译系统的执行如下：     </p>
+
+<pre>
+<code class="mermaid" type>
+graph TD
+  编写hello.c--源程序文本-->x(预处理器)
+  x -->|hello.i--被修改的文本| y(编译器)
+  y -->|hello.s--汇编程序| z(汇编器)
+  z -->|hello.o--可重定位目标程序二进制| m(链接器)
+  m-->|hello--可执行目标程序二进制| exe
+</code>
+</pre>
+<p>为了解决处理器与主存之间的速度差距，系统设计者采用了高速缓存存储器，由此形成了具有层次结构的存储设备。为了操控硬件，程序通过操作系统控制硬件。操作系统的两个基本功能是：</p>
+<ol>
+<li>防止硬件被失控的程序滥用</li>
+<li>控制复杂而又广泛不同的低级硬件<br>程序运行时，操作系统提供<em>进程</em>的假象，使程序看起来好像在独占硬件。这种进程之间的转移通过上下文（进程运行所需的所有状态信息）切换实现。<br>虚拟存储器为每个进程提供假象，虚拟地址空间由：</li>
+</ol>
+<ul>
+<li>程序代码和数据,包括全局变量以及只读变量</li>
+<li>堆，主要是调用内存时分配或释放函数，运行时相当于动态的扩展和收缩</li>
+<li>共享库，地址中间用来存放c的库函数这些共享的数据</li>
+<li>栈，位于用户的虚拟地址空间顶部，编译器调用它来实现函数调用</li>
+<li>内核虚拟存储器，地址最顶部为内核保留，不允许程序读/写/执行该区域，应用程序只能调用内核来执行这些操作<br>从上至下分区。<h1 id="程序执行和结构"><a href="#程序执行和结构" class="headerlink" title="程序执行和结构"></a>程序执行和结构</h1><h2 id="信息的表示和处理"><a href="#信息的表示和处理" class="headerlink" title="信息的表示和处理"></a>信息的表示和处理</h2><h3 id="信息存储"><a href="#信息存储" class="headerlink" title="信息存储"></a>信息存储</h3><blockquote>
+<p>机器级程序将存储器视为一个极大的字节数组（虚拟存储器），存储器的每一个字节都由一个唯一的数字标识（地址），所有地址的集合成为虚拟地址空间。</p>
+</blockquote>
+</li>
+</ul>
+<p>我们以16进制来书写位模式，通过展开每一个16进制数字可以得到2进制，而把二进制高位补0至有4的倍数的位数则可以转为16进制。如：     </p>
+<ul>
+<li>16   0x173A4C</li>
+<li>2    0001 0111 0011 1010 0100 1100<br>每台计算机都有一个字长，对一个字长为n位的计算机，其虚拟地址范围为0～2^n-1,32位字长的虚拟地址空间为4GB<br>对于一个w位的整数，其最高有效字节包括x w-1 ~ x w-8,最低有效字节包括x 7 ~ x 0。机器在存储器中按最低有效字节到最高有效字节存储则称为小端法，反之为大端法<br>字符串以ASCII表示，因此具有更强的平台独立性,而unicode则可以表示包括英语在内的几乎所有语言<h3 id="整数表示"><a href="#整数表示" class="headerlink" title="整数表示"></a>整数表示</h3>负数常以二进制补码表示，即将最高有效位设置为1表示负，设置为0表示正。<br>有符号整数与无符号整数的强制类型转换只是改变了如何解释参数的位。给定一个整数x，类型转换将确定唯一一个整数y.显式类型转换由程序设计者确认，而隐式类型转换则可能导致错误：<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">int</span> x=<span class="hljs-number">-1</span>;<br><span class="hljs-keyword">unsigned</span> y=<span class="hljs-number">0</span>;<br><span class="hljs-keyword">if</span>(x&lt;y) <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;yes&quot;</span>;<br><span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;no&quot;</span>;<br></code></pre></div></td></tr></table></figure>
+上面程序的输出结果是no,原因就在于程序对-1进行了隐式类型转换，表达式等价于4294967295U&lt;0U,因此出错。<br>当将一个无符号数字转为较大类型（字长增加）时，通常在开头加0即可；而对于有符号整数，我们可以执行<strong>符号扩展</strong>，即在表示中添加最高有效位的值。若机器字长为1位，则由<br>$x_{w-1},x_{w-2},…..,x_{0}$变为$x_{w-1},x_{w-1},x_{w-2},…..,x_{0}$这样由于$-2^{w}+2^{w-1}=-2^{w-1}$,运算后就会保持原有数值      <h3 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h3>无符号整数通过舍弃高位来计算，相当于计算%2^w的和。假设我们一共有四位，如9【1001】+12【1100】=21【10101】，舍弃高位得到5【0101】，即21%16=5（我们共有4位）。有符号整数（或二进制补码）加法则也有类似的问题，具体表现为溢出。<br>无符号乘法仍定义为低w位表示的值，仍等价于计算%2^w的值。二进制补码乘法相同。<br>由于整数乘法/除法相当的慢，因此编译器试图通过<strong>1个时钟周期</strong>的 <em>+，-，位级运算，移位</em>来代替乘法。而在这种情况下，即使溢出，我们通过移位得到的结果也是正确的。<h3 id="浮点"><a href="#浮点" class="headerlink" title="浮点"></a>浮点</h3>采用IEEE标准，即<br>$$V= \left ( -1 \right ) ^{s} \times M\times 2^{E} $$<br>来表示一个数：</li>
+<li>符号s决定正负</li>
+<li>尾数M作为有效数，是一个二进制小数（n位）</li>
+<li>阶码E对于浮点数加权（k位）<br>需要注意的是，浮点数中的阶码并非真正的<br>$$2^{exp} $$<br>而是需要减去一个偏移，该偏移为<br>$$ offset=2^{n-1}-1 $$<br>其中n为阶码位数，真正的阶码为<br>$$2^{exp-offset} $$<br>单精度表示中，n,k,s分别为23,8，1位，双精度表示中则分别为52,11,1<br>浮点数编码的值有4种情况，下面是单精度时的4种对应情况：</li>
+<li>规格化：exp!=0&amp;&amp;exp!=255时</li>
+<li>非规格化：exp==0</li>
+<li>无穷大：  exp == 255 &amp;&amp; frac == 0</li>
+<li>NaN(not a number):exp==255&amp;&amp;frac!=0<blockquote>
+<p>尽管浮点数可表达的范围较大，但当浮点数越来越大时，其精度会越来越小；当浮点数越来越小时，其精度也会越来越大。不管精度如何变化，这其中始终存在一个范围。<br>关于舍入，CSAPP提供了四种舍入方式：<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-06%2017-01-39%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><br>通常情况下，任何正常人都应该想到的是浮点运算可以把浮点数看作实数运算进行，但对于浮点运算来讲，存在一些可能致命的威胁：</p>
+</blockquote>
+</li>
+<li>加法/乘法没有可结合性：<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">x=a+b+c;<br>y=b+c+d;<br></code></pre></div></td></tr></table></figure>
+编译器可能通过下面的优化来减少加法次数：<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">t=b+c;<br>x=a+t;<br>y=t+d;<br></code></pre></div></td></tr></table></figure>
+x很有可能因为加法顺序不同导致舍入结果不同<h2 id="程序的机器级表示"><a href="#程序的机器级表示" class="headerlink" title="程序的机器级表示"></a>程序的机器级表示</h2><h3 id="常用汇编指令："><a href="#常用汇编指令：" class="headerlink" title="常用汇编指令："></a>常用汇编指令：</h3></li>
+</ul>
+<ol>
+<li>三种操作数指示符：<br>立即数—$-577<br>寄存器<br>存储器         </li>
+<li>数据传送：<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">movl $<span class="hljs-number">0x4050</span>,%eax  立即数到寄存器<br>movl %ebp,%esp   寄存器到寄存器<br>movl (%edi,%ecx),%eax   存储器到寄存器<br>movl $<span class="hljs-number">-17</span>,(%esp)    立即数到存储器<br>movl %eax,<span class="hljs-number">-12</span>(%ebp)   寄存器到存储器<br></code></pre></div></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-06%2020-59-09%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload>  </li>
+<li>条件：<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">jmp .L1  直接跳转到L1<br>jmp *%eax 将寄存器%eax中的值作为跳转目标<br>jmp *(%eax) 将%eax中的值作为读地址，从存储器中读出跳转目标<br></code></pre></div></td></tr></table></figure>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3></li>
+</ol>
+<ul>
+<li>为单个过程分配的那部分栈称为栈帧，其最顶端以%ebp作为帧指针，以%esp作为栈指针，程序执行时栈指针将移动。因此要访问则需要帧指针，有一个形象的程序可以说明这些操作：<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">swap_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *xp,<span class="hljs-keyword">int</span> *yp)</span></span>&#123;<br>  <span class="hljs-keyword">int</span> x=*xp;<br>  <span class="hljs-keyword">int</span> y=*yp;<br>  *xp=y;<br>  *yp=x;<br>  <span class="hljs-keyword">return</span> x+y;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">caller</span><span class="hljs-params">()</span></span>&#123;<br>  <span class="hljs-keyword">int</span> arg1=<span class="hljs-number">534</span>;<br>  <span class="hljs-keyword">int</span> arg2=<span class="hljs-number">1057</span>;<br>  <span class="hljs-keyword">int</span> sum=swap_add(&amp;arg1,&amp;arg2);<br>  <span class="hljs-keyword">int</span> diff=arg1-arg2;<br>  <span class="hljs-keyword">return</span> sum*diff;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+其栈帧如下：<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-06%2022-06-59%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload>    <h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3>数组A[4][3]被按照行优先的顺序存储，下面的例子拷贝A[i][j]到寄存器%eax:<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">sall $<span class="hljs-number">2</span>,%<span class="hljs-function">ecx</span><br><span class="hljs-function"><span class="hljs-title">leal</span> <span class="hljs-params">(%edx,%edx,<span class="hljs-number">2</span>)</span>,%edx</span><br><span class="hljs-function"><span class="hljs-title">leal</span> <span class="hljs-params">(%ecx,%edx,<span class="hljs-number">4</span>)</span>,%edx</span><br><span class="hljs-function"><span class="hljs-title">movl</span> <span class="hljs-params">(%eax,%edx)</span>,%eax</span><br></code></pre></div></td></tr></table></figure>
+因此当我们使用二维数组时，可以从机器取元素的方式考虑减少程序时间，把数组中频繁用到的数字存取至同行，而不是A[0][0],A[1][0],A[2][0]这样的跳行式存取<h3 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h3>由于c对于数组引用不进行边界检查而局部变量和状态信息存储于栈中，所以当两种情况都发生时，数组越界+写操作将破坏栈中的状态信息。    </li>
+</ul>
+<p><strong>缓冲区溢出</strong>：例如在栈中分配某一个字节数组保存字符串而字符串长度超越数组分配的空间。这会导致所有后来的栈引用都是非法的。程序将返回错误地址。另外，输入一个包含可执行代码的字符串，将会使程序执行它不应该执行的函数<br>第二版补充（来自第三版的知识）：    </p>
+<blockquote>
+<p>实现条件操作的传统方法是通过使用控制的条件转移，例如各类跳转指令。这种机制十分简单而通用。但在现代处理器上，它可能会非常低效。一种替代策略是使用数据的条件转移。这种方法计算一个条件操作的两种结果，然后根据条件是否满足从中选取一个。如果这种策略在某些情况下可行，则只需用一条简单的条件传送指令来实现.</p>
+</blockquote>
+<h2 id="处理器体系结构"><a href="#处理器体系结构" class="headerlink" title="处理器体系结构"></a>处理器体系结构</h2><p>一些“常识”：</p>
+<ul>
+<li>一个处理器支持的指令和指令的字节级编码称为他的ISA（instruction-set architecture）</li>
+<li>ISA模型看上去是顺序执行，实际上为了获得更高性能，人们采用了特殊机制，同时处理多条指令的不同部分</li>
+<li>HCL（hardware control language）,硬件控制语言<h3 id="Y86"><a href="#Y86" class="headerlink" title="Y86"></a>Y86</h3></li>
+<li>八个程序寄存%eax,%ecx,%edx,%ebx,%esi,%edi,%esp,%ebp;其中%esp被入栈出栈调用和返回指令作为栈指针</li>
+<li>条件码：ZF,SF,OF</li>
+<li>指令：<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">irmovl,rrmovl,mrmovl,rmmovl   <br><span class="hljs-comment">//源可以是立即数i，寄存器r，存储器m；目的可以是寄存器r，存储器m</span><br>addl,subl,andl,xorl<br><span class="hljs-comment">//只对寄存器数据进行操作</span><br>jmp,jle,jl,je,jne,jge,jg<br><span class="hljs-comment">//跳转指令</span><br>call,ret<br><span class="hljs-comment">//call将返回地址入栈，ret从过程中调用返回</span><br>pushl,popl<span class="hljs-comment">//入栈，出栈</span><br>halt<span class="hljs-comment">//停止指令的执行</span><br></code></pre></div></td></tr></table></figure>
+鉴于学习任何语言都是要实操的，因此我们直接来程序。<br>这是c：<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *Start,<span class="hljs-keyword">int</span> Count)</span></span>&#123;<br>  <span class="hljs-keyword">int</span> sum=<span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">while</span>(Count)&#123;<br>    sum+=*Start;<br>    Start++;<br>    Count--;<br>  &#125;<br>  <span class="hljs-keyword">return</span> sum;<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<p>这是一个c在处理后的变化：</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">Sum:<br>  pushl %ebp<br>  rrmovl %esp,%ebp<br>  mrmovl <span class="hljs-number">8</span>(%ebp),%ecx   ecx=Start<br>  mrmovl <span class="hljs-number">12</span>(%ebp),%edx  edx=Count<br>  xorl %eax,%eax        sum=<span class="hljs-number">0</span><br>  andl %edx,%edx<br>  je End<br>Loop:<br>  mrmovl (%ecx),%esi    get *Start<br>  addl %esi,%eax        add to sum<br>  irmovl $<span class="hljs-number">4</span>,%ebx<br>  addl %ebx,%ecx        Start++<br>  irmovl $<span class="hljs-number">-1</span>,%ebx<br>  addl %ebx,%edx        Count--<br>  jne Loop              Stop when <span class="hljs-number">0</span><br>End:<br>  rrmovl %ebp,%esp<br>  popl %ebp<br>  ret<br></code></pre></div></td></tr></table></figure>
+<h3 id="HCL"><a href="#HCL" class="headerlink" title="HCL"></a>HCL</h3><blockquote>
+<p>要实现一个数字系统需要三个主要的组成部分：计算位的函数的组合逻辑、存储位的存储器元素、控制存储器元素更新的时钟信号</p>
+</blockquote>
+<ul>
+<li>逻辑门语法：a&amp;&amp;b,a||b,!a分别对应And,Or,Not.</li>
+<li>组合电路满足两个要求：1. 两个及以上的逻辑门的输出不能接在一起 2. 这个网必须无环</li>
+<li>例如测试A和B是否相等，只需要测试A和B的每一位是否相等，最后用AND连起来即可</li>
+<li>多路复用函数采用case来描述，在最后一个case中为1,如一个找出A、B、C最小值的逻辑电路：<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">int</span> Min3=&#123;<br>  A&lt;=B&amp;&amp;A&lt;=C :A;<br>  B&lt;=A&amp;&amp;B&lt;=C :B;<br>  <span class="hljs-number">1</span>          :C;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+Y86的ALU：<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/1.png" srcset="/img/loading.gif" lazyload>     </li>
+<li>由于组合电路实际上不存储信息而是对信息作出响应，因此为了产生时序电路（以时间/顺序为状态且在这个状态上进行计算的系统），我们需要<strong>时钟寄存器</strong>和<strong>随机访问存储器</strong></li>
+</ul>
+<p><em>时钟寄存器</em>：被时钟信号控制，如果产生了一个新的寄存器输入，但时钟是低电位，寄存器输出就仍为上个输出，当时钟变为高电位时，输入信号就加载到寄存器<br><em>随机访问存储器</em>：用地址选择该读/写那个字，通常是多端口随机访问存储器</p>
+<h3 id="Y86的顺序实现"><a href="#Y86的顺序实现" class="headerlink" title="Y86的顺序实现"></a>Y86的顺序实现</h3><p>现代处理器是顺序执行的，为此指令需要组成某个特殊的阶段序列：</p>
+<ul>
+<li>取指</li>
+<li>解码</li>
+<li>执行</li>
+<li>访存</li>
+<li>写回</li>
+<li>更新<h3 id="SEQ"><a href="#SEQ" class="headerlink" title="SEQ"></a>SEQ</h3>该部分来自<a target="_blank" rel="noopener" href="https://kiprey.github.io/2020/07/csapp/#%E5%9B%9B%E3%80%81-%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">kp</a><br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/1071479-20171217232203780-1004515279.png" srcset="/img/loading.gif" lazyload alt="抽象视图"><br>SEQ的阶段实现：   </li>
+<li>取指：以PC作为第一个字节的地址，指令内存硬件单元会一次从内存读出10个字节，并将第一个字节分隔成两个4位的数来计算指令和功能码，PC增加硬件单元会根据当前PC以及CPU内的信号生成下一条指令的PC。即：<br>$$\mathit{newPC} = \mathit{oldPC}+ 1 +  r + 8i $$<br>其中r为当前指令是否需要寄存器指示字节，i为需要的常数字节数</li>
+<li>解码和写回：指令字段解码，产生寄存器文件需要的四个地址的标识符，从寄存器文件中读出的值为valA,valB,写回值为valE和valM</li>
+<li>执行：该阶段包括ALU，对输入的aluA/aluB执行特定操作，每次运行时产生三个与条件码相关的信号：0,符号，溢出；同时确定是否进行条件分支或条件数据传送</li>
+<li>访存：对主存，寄存器文件进行读写</li>
+<li>更新PC：根据指令类型以及是否选择分支来设置新的PC。若没有，则用取指计算新的PC值<h2 id="优化程序性能"><a href="#优化程序性能" class="headerlink" title="优化程序性能"></a>优化程序性能</h2><blockquote>
+<p>程序员必须编写容易优化的代码，以帮助编译器</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="编译器的优化能力有限"><a href="#编译器的优化能力有限" class="headerlink" title="编译器的优化能力有限"></a>编译器的优化能力有限</h3><p>编译器必须执行的是安全的优化，CSAPP举了一个十分形象的例子来说明：</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">twiddle1</span><span class="hljs-params">(<span class="hljs-keyword">long</span> *xp,<span class="hljs-keyword">long</span> *yp)</span></span>&#123;<br>  *xp+=*yp;<br>  *xp+=*yp;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">twiddle2</span><span class="hljs-params">(<span class="hljs-keyword">long</span> *xp,<span class="hljs-keyword">long</span> *yp)</span></span>&#123;<br>  *xp+=<span class="hljs-number">2</span>* *yp;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>我们分析以下这两个函数，他们的行为似乎是相同的。而twiddle1执行了两次对*xp的读，两次对 *yp的读、两次对 *xp的写，twiddle2执行了一次读 <em>xp,一次读 yp,一次写 <em>xp,似乎twiddle2更快。但是CSAPP提出了一个问题：当xp == yp时，是否仍满足上述情况？<br>显然，xp == yp时，twiddle1将使</em>xp的值变为之前的4倍，而twiddle2将使 <em>xp的值变为原先的3倍——因此twiddle1不能优化为twiddle2那样<br>上面的情况叫做</em>内存别名使用</em>，如果编译器不确定指针是否指向同一个位置，那就必须假设有这种可能。     </p>
+<h3 id="表示程序性能"><a href="#表示程序性能" class="headerlink" title="表示程序性能"></a>表示程序性能</h3><ul>
+<li>CPE（cycles per element）用来度量迭代程序的循环性能</li>
+<li>如对于第一个普通代码以及第二个采用了循环展开的代码：<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">p1</span><span class="hljs-params">(<span class="hljs-keyword">float</span> a[],<span class="hljs-keyword">float</span> p[],<span class="hljs-keyword">long</span> n)</span></span>&#123;<br>  <span class="hljs-keyword">long</span> i;<br>  p[<span class="hljs-number">0</span>]=a[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">for</span> (i=<span class="hljs-number">1</span>;i&lt;n;i++)&#123;<br>    p[i]=p[i<span class="hljs-number">-1</span>]+a[i];<br>  &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">p2</span><span class="hljs-params">(<span class="hljs-keyword">float</span> a[],<span class="hljs-keyword">float</span> p[],<span class="hljs-keyword">long</span> n)</span></span>&#123;<br>  <span class="hljs-keyword">long</span> i;<br>  p[<span class="hljs-number">0</span>]=a[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;n<span class="hljs-number">-1</span>;i+=<span class="hljs-number">2</span>)&#123;<br>    <span class="hljs-keyword">float</span> mid=p[i<span class="hljs-number">-1</span>]+a[i];<br>    p[i]=mid;<br>    p[i+<span class="hljs-number">1</span>]=mid+a[i+<span class="hljs-number">1</span>];<br>  &#125;<br>  <span class="hljs-keyword">if</span>(i&lt;n)&#123;<br>    p[i]=p[i<span class="hljs-number">-1</span>]+a[i];<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-09%2013-01-12%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><br>其运行时间分别近似于368+9n和368+6n     </li>
+<li>代码移动：<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">combine</span><span class="hljs-params">(vec_ptr v,<span class="hljs-keyword">data_t</span> *dest)</span></span>&#123;<br>  <span class="hljs-keyword">long</span> i;<br>  <span class="hljs-keyword">long</span> length=<span class="hljs-built_in">vec_length</span>(v);<br>  *dest=IDENT;<br>  <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;length;i++)&#123;<br>    <span class="hljs-keyword">data_t</span> val;<br>    <span class="hljs-built_in">get_vec_element</span>(v,i,&amp;val);<br>    *dest=*dest OP val;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+在上述代码中，把for循环中i &lt; vec_length(v)放到外面，写作i &lt; length，将时间缩小了很多,而优化的时间决定于vec_length(v)的执行时间。加入执行时间为length,则运行时间将由o(n^2)减到o(n)</li>
+<li>减少过程调用/消除不必要的内存引用<blockquote>
+<p>每次迭代时，累积变量的数值都要从内存读出在写入，然而每次迭代开始时读出的值就是上次迭代最后写入的值</p>
+</blockquote>
+</li>
+</ul>
+<p>我们可以用一些int,long之类的临时变量完成迭代最后赋值给数组，这样就改变了频繁的对数组的读写。在CSAPP给出的例子中，消除不必要的内存引用调用优化的时间甚至相当于未减少前-o2优化后的时间</p>
+<h3 id="理解现代处理器"><a href="#理解现代处理器" class="headerlink" title="理解现代处理器"></a>理解现代处理器</h3><blockquote>
+<p>现代处理器同时对多条指令求值（指令级并行），采用了复杂而奇异的结构，同时在代码级上呈现出简单的顺序执行指令的表象</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-09%2013-38-45%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>流水线化：一个典型的浮点加法器包含处理指数值、将小数相加、对结果舍入三个阶段，算术运算不需要等待一个操作完成后再开始下一个，而是连续的通过各个阶段。除法不能这样。<h2 id="存储器层次结构"><a href="#存储器层次结构" class="headerlink" title="存储器层次结构"></a>存储器层次结构</h2><blockquote>
+<p>存储器系统实际上是一个具有不同容量、成本、访问时间的存储设备</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>RAM，随机访问存储器，静态的SRAM比动态的DRAM更快，SRAM用于高速缓存存储器，DRAM用于主存或者图形系统的帧缓冲区</li>
+<li>SRAM的稳定性：<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-09%2019-18-43%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>DRAM对干扰十分敏感，但由于计算机运行的时钟周期以纳秒衡量，因此没事，来看图：<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-09%2019-23-46%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>由于断电后，SRAM、DRAM会丢失他们的信息，因此他们是<em>易失的</em>，而非易失存储器仍能保留信息。如基于闪存的固态硬盘</li>
+<li>数据流通过总线(bus)在处理器和DRAM主存之间来回<h3 id="局部性"><a href="#局部性" class="headerlink" title="局部性"></a>局部性</h3>时间局部性/空间局部性：倾向于引用最近引用过的数据项的数据项<h4 id="通用的高速缓存"><a href="#通用的高速缓存" class="headerlink" title="通用的高速缓存"></a>通用的高速缓存</h4></li>
+<li>一般而言，高速缓存的结构可以用元组(S,E,B,m)来描述，高速缓存的大小C=S* E *B<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-11-26%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>在缓存中找字类似于哈希表，如图：<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-16-22%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><h4 id="直接映射高速缓存"><a href="#直接映射高速缓存" class="headerlink" title="直接映射高速缓存"></a>直接映射高速缓存</h4></li>
+<li>每一个组只有一行的高速缓存被称为直接映射高速缓存<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-21-00%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>请求数据的流程如下：</li>
+</ul>
+<ol>
+<li>组选择–从主存地址中的特定偏移处抽取s个组索引，这些位被解释成一个对应的无符号整数高速缓存组号。<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-23-38%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>行匹配–直接映射高速缓存中每组只有一个高速缓存行。如果当前行的有效位已经设置，并且标记(tag)匹配，则缓存命中。</li>
+<li>字选择–根据后b位的块内偏移来获取所需的字<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-28-30%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>行替换：如果缓存不命中，则需要从下一级存储层次结构中取出请求的块，并驱逐并替换高速缓存行。<br>优点是唯一映射，命中时间小；缺点是缺失率高，关联度低</li>
+</ol>
+<ul>
+<li>抖动—高速缓存反复加载和驱逐相同的高速缓存块的组，方法是在每一个数组的结尾放B字节的填充<h4 id="组相连高速缓存"><a href="#组相连高速缓存" class="headerlink" title="组相连高速缓存"></a>组相连高速缓存</h4><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2010-57-05%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>他必须检查多个行的标记位和有效位，其中的每一个组都可以看成一个小的相连存储器。高速缓存必须搜索组中的每一行，如果命中，就块偏移选择一个字</li>
+<li>未命中则采用LRU策略替换最后一次访问时间最久远的那一行<h4 id="全相连高速缓存"><a href="#全相连高速缓存" class="headerlink" title="全相连高速缓存"></a>全相连高速缓存</h4>唯一的一组:<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2011-03-26%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>其数据选择：<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-10%2011-05-27%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><h4 id="写策略"><a href="#写策略" class="headerlink" title="写策略"></a>写策略</h4></li>
+<li>写命中</li>
+</ul>
+<ol>
+<li>直写，同时写cache和主存，较慢</li>
+<li>回写，只写cache,缺失/更新时一次写回，控制更复杂</li>
+</ol>
+<ul>
+<li>不命中</li>
+</ul>
+<ol>
+<li>写分配：将主存装入cache,然后更新</li>
+<li>直接写进主存单元<h1 id="在系统上运行程序"><a href="#在系统上运行程序" class="headerlink" title="在系统上运行程序"></a>在系统上运行程序</h1><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><blockquote>
+<p>链接是将各种代码和数据片段收集并组合为一个单一文件的过程</p>
+</blockquote>
+</li>
+</ol>
+<p>静态链接示例：<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-11%2010-14-58%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><br>链接器的主要任务：  </p>
+<ul>
+<li>符号解析</li>
+<li>重定位<h3 id="可重定位目标文件"><a href="#可重定位目标文件" class="headerlink" title="可重定位目标文件"></a>可重定位目标文件</h3></li>
+<li>.text 已经编译程序的机器代码</li>
+<li>.rodata只读数据</li>
+<li>.data 已初始化的全局和静态变量</li>
+<li>.bss未初始化的全局和静态变量</li>
+<li>.symtab 符号表，存放在程序中定义和引用的函数和全局变量的信息</li>
+<li>.rel.text 一个.text节中位置的列表</li>
+<li>.rel.data所有全局变量的重定位信息</li>
+<li>.debug调试符号表</li>
+<li>.line 源程序中的行号和.text节中机器指令之间的映射</li>
+<li>.strtab 字符串表<h3 id="符号和符号表"><a href="#符号和符号表" class="headerlink" title="符号和符号表"></a>符号和符号表</h3>每一个可重定位模块m都有一个符号表，</li>
+<li>m定义并被其他模块引用的全局符号</li>
+<li>其他模块定义并被m引用的全局符号</li>
+<li>只被m定义引用的局部符号<h3 id="链接器"><a href="#链接器" class="headerlink" title="链接器"></a>链接器</h3>规则：</li>
+<li>不允许多个同名的强符号（main以及<em>初始化</em>的全局变量等）</li>
+<li>选择强符号（强符号+多个弱符号）</li>
+<li>多个弱符号同名时<strong>任意</strong>选择一个<br>静态库：相关函数被编译为独立的目标模块，然后被封装成为单独的静态库文件<h3 id="动态链接共享库"><a href="#动态链接共享库" class="headerlink" title="动态链接共享库"></a>动态链接共享库</h3><blockquote>
+<p>共享库可以加载到任意的内存地址，并在和一个内存中的程序链接起来。linux中以.so表示，windows称为dll</p>
+</blockquote>
+</li>
+</ul>
+<p>此处仅作摘要</p>
+<ul>
+<li>PIC数据引用：代码段中任何指令和数据段中任何变量之间的距离都是一个运行时常量，通过<em>全局偏移量表</em>实现<h3 id="库打桩"><a href="#库打桩" class="headerlink" title="库打桩"></a>库打桩</h3><blockquote>
+<p>截获对共享库函数的调用，执行自己的代码。通过欺骗系统来实现。</p>
+</blockquote>
+</li>
+</ul>
+<p>本节知识似乎并不能很好的应用于实践，笔者打算做lab时在深入学习。</p>
+<h2 id="异常控制流"><a href="#异常控制流" class="headerlink" title="异常控制流"></a>异常控制流</h2><blockquote>
+<p>现代系统通过使控制流突变来应对特殊情况。这被称作<strong>异常控制流ECF</strong></p>
+</blockquote>
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><blockquote>
+<p>异常就是控制流中的突变，用来响应处理器状态中的某些变化</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-12%2015-05-45%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><br>系统为每一种的异常都分配了唯一的非负整数的异常号，存在异常表里。</p>
+<p>下表来自<strong>kipery</strong><br>| 类别 | 原因 | 异步/同步 | 返回行为 |<br>  | :-  | :– | :——: | :—— |<br>  | 中断(interrupt) | 来自I/O设备的信号|异步|总是返回到下一条指令|<br>  | 陷阱(trap) |有意的异常|同步|总是返回到下一条指令|<br>  | 故障(fault) |潜在可恢复的错误|同步|可能返回到当前指令|<br>  | 终止(abort) |不可恢复的错误|同步|不会返回|</p>
+<ul>
+<li>中断</li>
+</ul>
+<ol>
+<li>异步发生，一些I/O设备或芯片通过向CPU上的某个引脚发送信号，并将异常号放至系统总线上来触发中断。</li>
+<li>在当前指令执行完成后，CPU注意该引脚上的电压变为高电平，则获取异常号并调用中断处理程序，最后将控制流返回到下一条指令。</li>
+</ol>
+<ul>
+<li>陷阱</li>
+</ul>
+<ol>
+<li>先来解释名字，陷阱其实只是一个<em>有意的异常</em>，经常用于用户程序向内核提供接口。当用户想要请求某个服务时，可以通过”syscall n”指令来调用适当的内核程序。即完成系统调用</li>
+</ol>
+<ul>
+<li>故障</li>
+</ul>
+<ol>
+<li>可能能被故障处理程序修正</li>
+<li>经典的故障是缺页异常，即程序引用一个不存在于内存的虚拟地址而导致必须从磁盘中取出时。</li>
+</ol>
+<ul>
+<li>中止</li>
+</ul>
+<ol>
+<li><strong>不可恢复的致命错误造成的结果</strong><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><blockquote>
+<p>异常是允许操作系统内核提供进程概念的基本构造块，而进程是计算机科学中最深刻、最成功的概念之一。</p>
+</blockquote>
+</li>
+</ol>
+<p>进程提供给应用程序两个关键抽象：</p>
+<ul>
+<li>一个独立的逻辑控制流</li>
+<li>一个私有的地址空间<br>进程欺骗了每一个程序，让他们以为自己是唯一被爱的那个。然而计算机是博爱的，进程充当了欺骗程序的帮手。<br>考虑一个运行着三个进程的系统，处理器的一个物理控制流被分为三个逻辑流。实际的执行过程是交替的，每一个进程执行他的一部分，然后就被抢占。注意处理器并不改变程序内存位置或者寄存器内容。      </li>
+<li>一个逻辑流的执行在时间上与另一个重叠，称为<strong>并发流</strong>。需要注意的是，即使两个流运行在同一个处理器上，他们在时间上只要重叠，那他们就是并发流。</li>
+<li>如果两个流<strong>并发的</strong>运行在不同的处理器上，那么他们就是<strong>并行流</strong>。</li>
+<li><del>进程为每一个程序提供它在独占的使用系统地址空间的假象，渣男</del>一般而言，进程提供的地址空间是私有的</li>
+<li>处理器设置模式位来提供对于<strong>用户模式</strong>和<strong>内核模式</strong>的分辨。没有设置时为用户模式，此时不能操作内核，如停止处理器，改变模式位</li>
+<li>内核为每一个进程维持一个上下文–内核重新启动一个被抢占的进程所需的状态。内核决定抢占当前进程的决策叫做<strong>调度</strong><h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3></li>
+<li>首先获取进程ID，即PID<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">pid_t</span> <span class="hljs-title">getpid</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">pid_t</span> <span class="hljs-title">getppid</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;<br></code></pre></div></td></tr></table></figure></li>
+<li>作为一个程序员，我们可以认为进程总是处于以下三种状态之一：</li>
+</ul>
+<ol>
+<li>运行</li>
+<li>停止，挂起</li>
+<li>终止<br>使用fork创建子进程的父进程示例：<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>  <span class="hljs-keyword">pid_t</span>=pid;<br>  <span class="hljs-keyword">int</span> x=<span class="hljs-number">1</span>;<br>  pid=<span class="hljs-built_in">Fork</span>();<br>  <span class="hljs-keyword">if</span>(pid==<span class="hljs-number">0</span>)&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child:x=%d\n&quot;</span>,++x);<br>    <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>  &#125;<br>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;parent: x=%d\n&quot;</span>,--x);<br>  <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+程序输出：<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">parent :<span class="hljs-attribute">x</span>=0;<br>child:<span class="hljs-attribute">x</span>=2;<br></code></pre></div></td></tr></table></figure>
+即：</li>
+</ol>
+<ul>
+<li>调用一次，返回两次，一次父进程，一次新创建的子进程</li>
+<li>并发执行，两个逻辑控制流</li>
+<li>相同但独立的地址空间</li>
+<li>共享文件，当父进程调用fork时，stdout打开，子进程继承了这个文件，因此他的输出并没有打开一个新窗口<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-12%2015-55-27%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>当进程终止时，直到其父进程被回收，该进程才被内核清除。在子进程终止但还未被回收时，他被称作僵尸进程</li>
+<li>如果父进程未回收其僵尸子进程就终止了，所有进程的祖先–init会去回收那些<strong>孤儿进程</strong></li>
+<li>waitpid，挂起调用进程的执行，直到他的等待集合中的一个子进程终止。如果等待时一个进程已经终止，那waitpid就立即返回</li>
+<li>sleep，将一个进程挂起一个指定时间；pause，让函数休眠直到该进程收到一个信号</li>
+<li>execve在当前进程的上下文加载并运行一个新程序<h3 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h3>一个信号就是一个消息，他同志进程系统中发生了一个某种类型的事件。下面是linux只是的30种不同类型的信号：<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-12%2016-10-46%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>发送信号，两个原因：1.内核检测到一个<strong>系统事件</strong>2.一个进程调用了kill函数</li>
+<li>接受信号：目的进程被内核强迫以某种方式对信号的发送作出反映<h4 id="发送信号"><a href="#发送信号" class="headerlink" title="发送信号"></a>发送信号</h4>每一个进程属于一个进程组，进程组由一个正整数ID表示<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">/bin/kill -9 15213<br></code></pre></div></td></tr></table></figure>
+发送信号9给进程15213<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">kill</span><span class="hljs-params">(<span class="hljs-keyword">pid_t</span> pid,<span class="hljs-keyword">int</span> sig)</span></span>;<br></code></pre></div></td></tr></table></figure>
+进程通过调用kill函数发送信号给包括自己在内的进程<h4 id="接收信号"><a href="#接收信号" class="headerlink" title="接收信号"></a>接收信号</h4>每一个信号类型都由一个预定以的默认行为：</li>
+<li>进程终止</li>
+<li>进程终止并转储内存</li>
+<li>进程挂起直到被重启</li>
+<li>进程忽略该信号<h3 id="非本地跳转"><a href="#非本地跳转" class="headerlink" title="非本地跳转"></a>非本地跳转</h3>他将控制直接从一个函数转移到另一个当前正在执行的函数，不需要经过正常的调用-返回序列。<br>非本地跳转通过setjmp和longjmp函数来提供实现的</li>
+<li>setjmp/sigsetjmp<br>setjmp函数会在env缓冲区中保存当前的调用环境，以供longjmp使用，同时返回0。<br>调用环境包括程序计数器，栈指针和通用目的寄存器等等<br>setjmp返回值无法赋值给变量</li>
+<li>longjmp/siglongjmp<br>longjmp函数从env缓冲区中恢复调用环境，然后触发一个从最近一次初始化env的setjmp调用的返回。<br>然后setjmp返回，并带有非零的返回值retval。</li>
+</ul>
+<p><strong>应用</strong>：</p>
+<ul>
+<li>允许从一个深层嵌套的函数调用中立即返回，检测到错误时可以使用</li>
+<li>使一个信号处理程序分支到一个特殊的代码位置。<br><del>大晚上不想写代码了，看书摸鱼</del></li>
+</ul>
+<h2 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h2><blockquote>
+<p>随着电脑对CPU需求的增长，进程合理的以一种平滑方式慢了下来，为了更有效的管理内存并且少出错，现代系统提供了一个叫<strong>虚拟内存</strong>的抽象概念</p>
+</blockquote>
+<p>虚拟内存的三个能力：   </p>
+<ol>
+<li>将主存看成是一个存储在磁盘上的地址空间的高速缓存，在主存中只保存活动区域，并根据需要在磁盘和主存之间来回传送数据</li>
+<li>为每一个进程提供了一致的地址空间，从而简化了内存管理</li>
+<li>他保护了每一个进程的地址空间不被其他进程破坏<br>虚拟内存默默运行，但却存在危险性：带有错误指针的程序可以立即崩溃，也可以默默运行几个小时再崩溃，或者产生不正确的结果        </li>
+</ol>
+<ul>
+<li>计算机系统的主存被组织成一个由M个连续字节大小的单元组成的数组，每一个字节都有唯一的<em>物理地址</em>，</li>
+<li>现代小型计算机的CPU生成一个虚拟地址，虚拟地址被动态翻译成为物理地址。如图：<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-13%2011-30-49%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>地址空间是一个非负整数地址的有序集合，一个地址空间的大小由表示最大地址所需要的位数来表示，如一个包含N=<br>$$2^{n}$$<br>个地址的虚拟地址空间就叫做一个n位地址空间</li>
+<li>任意时刻，虚拟页面的集合都分为三个不相交的子集：</li>
+</ul>
+<ol>
+<li>未分配的：VM系统未分配的页</li>
+<li>缓存的：当前已经缓存在物理内存中的已分配页</li>
+<li>未缓存的：未缓存在物理内存中的分配页</li>
+</ol>
+<ul>
+<li>页表就是一个页表条目的数组。页表条目（PTE）由一个有效位加一个n位地址字段组成，如图所示：<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-13%2016-52-45%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>如果工作集的大小超过了物理内存的大小，那么程序将<em>抖动</em>。页面将不断的换进换出<br>虚拟简化了链接和加载，代码和数据共享，以及应用程序的内存分配，主要体现在以下方面：     </li>
+<li>允许每个进程的内存映像使用相同的基本格式</li>
+<li>加载器无需从磁盘到内存实际复制数据，而是由虚拟系统自动调入数据页</li>
+<li>使每一个进程都有自己私有的代码，数据，堆，栈区域</li>
+<li>使操作系统没有必要分配连续的物理内存页面</li>
+<li>通过虚拟内存保护实际内存<h3 id="地址翻译"><a href="#地址翻译" class="headerlink" title="地址翻译"></a>地址翻译</h3>我们的目的是把一个N元素的虚拟地址空间映射到一个M元素的物理地址空间：<br>$$ MAP:VAS\longrightarrow PAS\cup \varnothing $$<br>页面命中：</li>
+</ul>
+<ol>
+<li>处理器生成虚拟地址传给MMU（分页内存管理单元，位于CPU）</li>
+<li>MMU生成PTE地址，并从高速缓存/主存请求得到</li>
+<li>高速缓存/主存向MMU返回PTE（页表条目）</li>
+<li>MMU构造物理地址，传给高速缓存/主存</li>
+<li>高速缓存/主存返回请求的数据给处理器<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-13%2017-29-03%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><br>缺页：</li>
+<li>上述的1～3</li>
+<li>PTE有效位为0,MMU触发异常，传递CPU中的控制到<em>操作系统</em>内核中的缺页异常处理程序</li>
+<li>缺页处理程序确定物理内存的牺牲页</li>
+<li>缺页处理程序调入新的页面，更新PTE</li>
+<li>再次执行导致缺页的指令，命中<br>为了加速地址翻译，可以：</li>
+</ol>
+<ul>
+<li>使用高速缓存</li>
+<li>使用TLB，即在MMU中包括一个关于PTE的小缓存</li>
+<li>多级页表层次：<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-13%2017-41-30%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+</ul>
+<p>9.9节让我深刻意识到了malloc的复杂，还是java适合设计软件<br>CSAPP的9.9～9.11分别叙述了动态内存分配的实现、垃圾回收以及其危险性，实在劝退了我，因此暂时不予记录。在做实验的时候学习。</p>
+<h1 id="程序间的交流和通信"><a href="#程序间的交流和通信" class="headerlink" title="程序间的交流和通信"></a>程序间的交流和通信</h1><blockquote>
+<p>当学完了这一部分，你将逐渐变成一个很牛的程序员</p>
+</blockquote>
+<h2 id="系统级I-O"><a href="#系统级I-O" class="headerlink" title="系统级I/O"></a>系统级I/O</h2><p>这一部分主要讲的是函数。。。。。先鸽了</p>
+<h3 id="unix-I-O"><a href="#unix-I-O" class="headerlink" title="unix I/O"></a>unix I/O</h3><p>unix将所有的I/O模型化为文件，使所有输入输出以一种统一的方式来执行：</p>
+<ul>
+<li>打开文件，内核返回给应用程序一个非负整数–描述符，应用程序只需记住这个描述符</li>
+<li>每个进程开始时都有三个打开的文件：标准输入/输出/错误</li>
+<li>内核保存的文件位置k是从文件开头起始的字节偏移量</li>
+<li>一个读操作是从当前位置k开始然后将k增加到k+n<h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3>常见的linux文件有：</li>
+<li>普通文件，包括文本文件和二进制文件</li>
+<li>目录，包含一组映射到文件的链接</li>
+<li>套接字，即socket，用来与另一个进程进行跨网络通信的文件<h3 id="RIO包"><a href="#RIO包" class="headerlink" title="RIO包"></a>RIO包</h3><h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2></li>
+<li>客户端-服务器模型中的基本操作是事务</li>
+<li>物理上讲，网络是一个按照地理远近组成的层次系统。最底层是LAN（局域网），而目前最流行的局域网技术是以太网，从3Mb/s演变到10Gb/s，<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2014-02-45%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></li>
+<li>每一个以太网适配器都有一个全球唯一的48位地址，一台主机发送的帧可以被这个网段内的其他任何主机看到</li>
+<li>网桥把多个以太网段连接成较大的局域网</li>
+<li>路由器把多个不兼容的局域网连接起来，组成一个互联网络<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2014-08-25%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><br>互联网采用增加一个运行在每台主机和路由器的协议软件来消除完全不同和不兼容的各种局域网的差异。该软件提供了两种基本能力：</li>
+<li>命名机制，每台主机至少被分配一个唯一的互联网络地址</li>
+<li>传送机制：定义一种把数据位捆扎成不连续的片-包的方式传送数据<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2014-16-57%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><blockquote>
+<p>封装就是关键</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="全球IP因特网"><a href="#全球IP因特网" class="headerlink" title="全球IP因特网"></a>全球IP因特网</h3><p>只讨论IPV4</p>
+<h4 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h4><p>一个IP地址就是一个32位无符号整数，IP地址结构如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">in_addr</span>&#123;</span><br>  <span class="hljs-keyword">uint32_t</span> s_addr;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<p>因为因特网主机中可以有不同的主机字节序列，TCP/IP为任意整数数据项定义了一个统一的网络字节顺序(network byte order) —— 大端字节顺序。即使主机字节顺序是小端法。unix提供相应函数实现转换：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;arpa/inet.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">uint32_t</span> <span class="hljs-title">htonl</span><span class="hljs-params">(<span class="hljs-keyword">uint32_t</span> hostlong)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">uint16_t</span> <span class="hljs-title">htons</span><span class="hljs-params">(<span class="hljs-keyword">uint16_t</span> hostshort)</span></span>;<br><span class="hljs-comment">//返回：按照网络字节顺序的值</span><br><span class="hljs-function"><span class="hljs-keyword">uint32_t</span> <span class="hljs-title">ntohl</span><span class="hljs-params">(<span class="hljs-keyword">uint32_t</span> netlong)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">uint16_t</span> <span class="hljs-title">ntohs</span><span class="hljs-params">(<span class="hljs-keyword">uint16_t</span> netshort)</span></span>;<br><span class="hljs-comment">//返回：按照主机字节顺序的值</span><br></code></pre></div></td></tr></table></figure>
+<p>IP地址通常用点分十进制来表示，例如128.2.194.242就是地址0x800c2f2。</p>
+<h4 id="因特网域名"><a href="#因特网域名" class="headerlink" title="因特网域名"></a>因特网域名</h4><ul>
+<li>因特网定义了一组域名(domain name)以及一种将域名映射到IP地址的机制，便于人们记忆。</li>
+<li>常见的一级域名有com,edu,gov,org,net,二级域名有cmu.edu等<br>下面是因特网域名层次结构的一部分:<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2014-34-25%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><h4 id="因特网连接"><a href="#因特网连接" class="headerlink" title="因特网连接"></a>因特网连接</h4></li>
+<li>连接是点对点、全双工、可靠的</li>
+<li>一个套接字是一个端点，对应一个套接字地址，由一个因特网地址和一个16位的整数端口组成，用“地址：端口”表示</li>
+<li>当客户端发起连接请求时，客户端套接字地址中的端口是由内核自动分配的，称为临时端口(ephemeral port)。但服务器套接字地址中的端口通常是某个知名端口，与服务相对应。 </li>
+<li>一个连接是由两端的套接字地址唯一确定。这对套接字地址叫做套接字对(socket pair)，由下列元组表示：(cliaddr:cliport, servaddr:servport)<h3 id="套接字接口"><a href="#套接字接口" class="headerlink" title="套接字接口"></a>套接字接口</h3></li>
+<li>套接字接口(socket interface)是一组函数，它们和Unix I/O 函数结合，用以创建网络应用。<br>如图：<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2014-53-00%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload>    </li>
+<li>套接字地址结构<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-comment">/* IP socket address structure */</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span>&#123;</span><br>  <span class="hljs-keyword">uint16_t</span>      sin_family;   <span class="hljs-comment">/* Protocol family (always AF_INET) */</span><br>  <span class="hljs-keyword">uint16_t</span>      sin_port;     <span class="hljs-comment">/* Port number in network byte order */</span><br>  <span class="hljs-keyword">uint16_t</span>      sin_addr;     <span class="hljs-comment">/* IP address in network byte order */</span><br>  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> sin_zero[<span class="hljs-number">8</span>];  <span class="hljs-comment">/* Pad to sizeof(struct sockaddr) */</span><br>&#125;<br><span class="hljs-comment">/* Generic socket address structure (for connect, bind, and accept) */</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr</span>&#123;</span><br>  <span class="hljs-keyword">uint16_t</span>  sa_family;    <span class="hljs-comment">/* Protocol family */</span><br>  <span class="hljs-keyword">char</span>      sa_data[<span class="hljs-number">14</span>];  <span class="hljs-comment">/* Address data */</span><br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<li>客户端和服务器使用socket函数创建一个socket:<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;syssocket.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">socket</span><span class="hljs-params">(<span class="hljs-keyword">int</span> domain,<span class="hljs-keyword">int</span> type,<span class="hljs-keyword">int</span> protocol)</span></span>;<br></code></pre></div></td></tr></table></figure></li>
+<li>connect函数建立和服务器的连接</li>
+<li>bind函数告诉内核将addr服务器套接字地址和套接字描述符sockfd联系起来。</li>
+<li>服务器调用listen函数告诉内核描述符是被服务器而不是客户端使用的</li>
+<li>accept函数等待来自客户端的连接请求<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2015-03-33%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><h2 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h2>现代操作系统提供三种基本的构造并发程序的方法：</li>
+</ul>
+<ol>
+<li>进程，使用显式的进程间通信机制（IPC）</li>
+<li>I/O多路复用</li>
+<li>线程<h3 id="基于进程的并发编程"><a href="#基于进程的并发编程" class="headerlink" title="基于进程的并发编程"></a>基于进程的并发编程</h3>在父进程中接受客户端连接请求，然后创建一个新的子进程来为客户端提供服务<img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2020-05-57%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><br>示例：<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;csapp.h&quot;</span><span class="hljs-comment">//别问我这是什么头文件</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">echo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> connfd)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sigchld_handler</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sig)</span></span>&#123;<br>  <span class="hljs-keyword">while</span>(<span class="hljs-built_in">waitpid</span>(<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,WNOHANG)&gt;<span class="hljs-number">0</span>)<br>  ;<br>  <span class="hljs-keyword">return</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc,<span class="hljs-keyword">char</span> **argv)</span></span>&#123;<br>  <span class="hljs-keyword">int</span> listened,connfd;<br>  <span class="hljs-keyword">socklen_t</span> clientlen;<br>  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_storage</span> <span class="hljs-title">clientaddr</span>;</span><br>  <span class="hljs-keyword">if</span>(argc!=<span class="hljs-number">2</span>)&#123;<br>    <span class="hljs-built_in">fprintf</span>(stderr,<span class="hljs-string">&quot;usage:%s &lt;port&gt;\n&quot;</span>,argv[<span class="hljs-number">0</span>]);<br>    <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>  &#125;<br>  <span class="hljs-built_in">Signal</span>(SIGCHLD,sigchld_handler);<br>  listened=<span class="hljs-built_in">Open_listenfd</span>(argv[<span class="hljs-number">1</span>]);<br>  <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>    clientlen=<span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(struct sockaddr_storage);<br>    connfd=<span class="hljs-built_in">Accept</span>(listenfd,(SA *) &amp;clientaddr,&amp;clientlen);<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">Fork</span>() == <span class="hljs-number">0</span>)&#123;<br>      <span class="hljs-built_in">Close</span>(listenfd);<br>      <span class="hljs-built_in">echo</span>(connfd);<br>      <span class="hljs-built_in">Close</span>(connfd);<br>      <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-built_in">Close</span>(connfd);<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>我们需要一个SIGCHLD来回收僵尸子进程</li>
+<li>父进程必须关闭他的已连接描述符</li>
+<li>所有进程的connfd都关闭后到客户端的连接才终止<br>优点是由独立的地址空间，缺点是往往比较慢，开销大     <h3 id="基于I-O多路复用的并发编程"><a href="#基于I-O多路复用的并发编程" class="headerlink" title="基于I/O多路复用的并发编程"></a>基于I/O多路复用的并发编程</h3>对于每一个新的客户端，基于I/O多路复用的并发服务器会创建一个新的状态机，初始化后服务器调用select函数检测不同类型的输入事件，随之作出反应。可以说，I/O多路复用的抽象模型是状态机，具体实现依赖于select函数。相比于其他两种方式，I/O多路复用具有明显的性能优势，现代处理器也是采用I/O多路复用<h3 id="基于线程的并发编程"><a href="#基于线程的并发编程" class="headerlink" title="基于线程的并发编程"></a>基于线程的并发编程</h3>在某一时刻，主线程创建一个对等线程，当主线程执行一个慢速系统调用或被中断，控制就会通过上下文切换传递到对等线程。两个线程并无本质区别。而在任何一个时间点上，线程都是可结合的/分离的。基于线程的并发服务器容易造成内存泄漏，必须小心的释放主线程分配的内存块<blockquote>
+<p>一般而言，无法预测操作系统是否为线程选择了一个正确的顺序</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/CSAPP/2021-10-14%2020-36-40%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload><br>Edsger Dijkstra,提出了经典的解决同步不同执行线程问题的方法，信号量s只能由两种操作处理：</p>
+<ol>
+<li>P(s),若s!=0,p令s-1,若s == 0,就挂起这个线程</li>
+<li>V(s)，v将s+1,如果有线程阻塞在p等待s变为！0,那么v会长期这些线程中的<strong>一个</strong></li>
+</ol>
+<p><strong>其余暂略</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/cs/">cs</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/17/schedule/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">schedule</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/09/%E5%BF%83%E6%83%85/">
+                        <span class="hidden-mobile">心情</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"fb364385aff3688b9b61","clientSecret":"fac44b76c40c3e32297538f963a7c318fd1c7c7e","repo":"heeler-deer.github.io","owner":"heeler-deer","admin":["heeler-deer"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
+          {
+            id: '5b8a94b32146dd7b441afb9862bc6239'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":true,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

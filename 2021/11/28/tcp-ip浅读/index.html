@@ -1,0 +1,951 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="读一读掘金小册 夜间记录，定时更新~ 历史与分层模型tcp&#x2F;ip由美军的ARPANET发展而来，1983年成为其上的标准协议，因此1983年也被称为互联网诞生元年。tcp&#x2F;ip分为：  应用层 传输层 网络互连层 网络访问层  应用层本质上规定了应用程序之间如何传递信息，应用层诸如http，就规定了报文的一些格式；其他协议诸如DNS,SMTP,POP3,NTP(时钟同步协议),NFS也类似 传输层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tcp&#x2F;ip浅读">
+<meta property="og:url" content="http://example.com/2021/11/28/tcp-ip%E6%B5%85%E8%AF%BB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="读一读掘金小册 夜间记录，定时更新~ 历史与分层模型tcp&#x2F;ip由美军的ARPANET发展而来，1983年成为其上的标准协议，因此1983年也被称为互联网诞生元年。tcp&#x2F;ip分为：  应用层 传输层 网络互连层 网络访问层  应用层本质上规定了应用程序之间如何传递信息，应用层诸如http，就规定了报文的一些格式；其他协议诸如DNS,SMTP,POP3,NTP(时钟同步协议),NFS也类似 传输层">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/20/16ad5182f90d0bb5~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/3/16/16985bd53967c3b2~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/9/27/16d702629b61cbcc~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/9/27/16d70264ef144241~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/9/27/16d70265e3ed0a23~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/2/3/1700a73e185162dc~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/2/3/1700a73e54362613~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/26/16b9134ba7385716~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/13/16b518ccedac1b6e~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/13/16b518cd1664fa5d~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/14/16b5693e5d32aef9~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa47403b85491~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/26/16b911c618264239~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/14/16b54c4c5c635f86~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/14/16b54c4be8611658~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/14/16b54c4c5c7ae349~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/22/16b7c9fb02bff057~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/28/16b9dae5efc47de8~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/3/169e2dc0c15f46e5~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa53ee58979c9~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa53ee593eeca~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa53f2008cf8b~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa53f20617a8a~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa53f205214ae~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/14/16b54c4b904314f8~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/19/16b7073dca9493c8~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/2/27/1692f8785971515d~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/5/169ee07dde3c896c~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/3/10/16968005b1f1b27a~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/3/10/16968005b25d3742~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/3/10/16968005b2bd48c6~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/10/16a04a0965069dbd~tplv-t2oaga2asx-watermark.awebp">
+<meta property="article:published_time" content="2021-11-28T15:48:15.000Z">
+<meta property="article:modified_time" content="2021-12-31T16:20:04.415Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="write">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/20/16ad5182f90d0bb5~tplv-t2oaga2asx-watermark.awebp">
+  
+  
+  <title>tcp/ip浅读 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/rainbow.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"GCX7MRb8jHPOvWy5hXP1pLOT-gzGzoHsz","app_key":"81Myp4Kmaagh7J5spTpIoMWi","server_url":"https://gcx7mrb8.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Heeler-deer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/week/">
+                <i class="iconfont icon-link-fill"></i>
+                week
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://github.com/heeler-deer/absorbing/blob/main/png/6.jpg?raw=true') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="tcp/ip浅读">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      John Doe
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-28 23:48" pubdate>
+        2021年11月28日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      102 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">tcp/ip浅读</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年1月1日 凌晨
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>读一读<a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733788681928712">掘金小册</a></p>
+<p>夜间记录，定时更新~</p>
+<h2 id="历史与分层模型"><a href="#历史与分层模型" class="headerlink" title="历史与分层模型"></a>历史与分层模型</h2><p>tcp/ip由美军的ARPANET发展而来，1983年成为其上的标准协议，因此1983年也被称为互联网诞生元年。tcp/ip分为：</p>
+<ul>
+<li>应用层</li>
+<li>传输层</li>
+<li>网络互连层</li>
+<li>网络访问层</li>
+</ul>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p>本质上规定了应用程序之间如何传递信息，应用层诸如http，就规定了报文的一些格式；其他协议诸如DNS,SMTP,POP3,NTP(时钟同步协议),NFS也类似</p>
+<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p>TCP就被称为传输控制协议，规定了诸如端口号的功能，使数据能够正确传到相应的应用程序。为下面的两层提供数据包的重传，流量控制，拥塞控制等。</p>
+<h3 id="网络互连层"><a href="#网络互连层" class="headerlink" title="网络互连层"></a>网络互连层</h3><p>ip协议提供主机到主机的通信，tcp/udp都是采用ip作为网络层协议，其是无连接的——即不管数据是否被发送到目标主机，也不管数据包是否传输错误。</p>
+<h3 id="网络访问层"><a href="#网络访问层" class="headerlink" title="网络访问层"></a>网络访问层</h3><p>提供主机到物理网络需要的硬件和相关协议，诸如蓝牙，wifi就工作在这一层<br><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/20/16ad5182f90d0bb5~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>收到 IP 数据包解析以后，它怎么知道这个分组应该投递到上层的哪一个协议（UDP 还是 TCP）？</li>
+<li>正如上文所述，IP 头中有个字段 protocol 可用来表示上层用的哪个协议，ip协议为上层的协议提供了基础</li>
+</ul>
+<h2 id="TCP概述"><a href="#TCP概述" class="headerlink" title="TCP概述"></a>TCP概述</h2><h3 id="面向连接"><a href="#面向连接" class="headerlink" title="面向连接"></a>面向连接</h3><p>什么叫做面向连接？即在正式发送数据前通过握手建立一个逻辑连接，结束时通过有序的挥手断开连接。无连接的ip则不需要。<br><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/3/16/16985bd53967c3b2~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload alt="1"></p>
+<h3 id="可靠"><a href="#可靠" class="headerlink" title="可靠"></a>可靠</h3><p>tcp之所以是可靠的，原因在于：</p>
+<ul>
+<li>对每一个包提供校验和</li>
+<li>每一个包都有序列号</li>
+<li>超时重传</li>
+<li>流量控制、拥塞控制<br>校验和（checksum）：每个 TCP 包首部中都有两字节用来表示校验和，如果收到一个校验和有差错的报文，TCP 不会发送任何确认直接丢弃它，等待发送端重传。而不是试着纠错或者立即要求重新传送。</li>
+</ul>
+<p>超时重传 TCP 发送数据后会启动一个定时器，等待对端确认收到这个数据包。如果在指定的时间内没有收到 ACK 确认，就会重传数据包，然后等待更长时间，如果还没有收到就再重传，在多次重传仍然失败以后，TCP 会放弃这个包。</p>
+<h3 id="面向字节流"><a href="#面向字节流" class="headerlink" title="面向字节流"></a>面向字节流</h3><p>所谓字节流，指数据像水一般流动，比如有一个1300字节的数据，tcp可能把他以500、800发出，也有可能以1000、300发出，也有可能以1300直接发出。发出的大小自然取决于路径最大传输单元 MTU、发送窗口大小、拥塞窗口大小等。</p>
+<h3 id="全双工"><a href="#全双工" class="headerlink" title="全双工"></a>全双工</h3><blockquote>
+<p>在 TCP 中发送端和接收端可以是客户端/服务端，也可以是服务器/客户端，通信的双方在任意时刻既可以是接收数据也可以是发送数据，每个方向的数据流都独立管理序列号、滑动窗口大小、MSS 等信息。</p>
+</blockquote>
+<h2 id="packetdrill"><a href="#packetdrill" class="headerlink" title="packetdrill"></a>packetdrill</h2><p>我实在kali上安装的，按照步骤来就行，其中test.pkt参考了<a target="_blank" rel="noopener" href="https://blog.schwarzeni.com/2019/10/27/packetdrill%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/">packetdrill入门笔记</a></p>
+<h2 id="tcp的基石——首部字段"><a href="#tcp的基石——首部字段" class="headerlink" title="tcp的基石——首部字段"></a>tcp的基石——首部字段</h2><p>完整的tcp头部如下图所示：</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/9/27/16d702629b61cbcc~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload alt="tcp"></p>
+<p><del>因为我还不会用wireshark或者fiddler抓包，所以直接看小册</del></p>
+<p>tcp的报文里是没有源ip和目标ip的，那是ip协议干的。tcp只有源端口和目标端口，由：</p>
+<ul>
+<li>源ip</li>
+<li>源端口</li>
+<li>目标ip</li>
+<li>目标端口</li>
+</ul>
+<p>构成tcp连接的四元组，唯一的标识了一个连接</p>
+<h3 id="序列号"><a href="#序列号" class="headerlink" title="序列号"></a>序列号</h3><p>由于tcp面向字节流，通过tcp传输的字节流的每一个字节都分配了序列号——本报文段第一个字节的序列号，他往往是一个32位的无符号整数。比较特殊的SYN报文中，序列号用来交换彼此的初始序列号</p>
+<h4 id="初始序列号"><a href="#初始序列号" class="headerlink" title="初始序列号"></a>初始序列号</h4><p>initial sequence number,ISN,在建立连接之初，通信双方各自选择一个序列号，通过SYN报文交换彼此的ISN，<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/9/27/16d70264ef144241~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>2、3步合并，即为传说中的 <code>三次握手</code></p>
+<p>初始序列号通过源地址，目标地址，源端口，目标端口，随机因子这五个因素使用MD5计算，最后通过加上时间因子保证序列号的安全。由于isn不是从0开始，因此要加上一个判断序列号是否回绕的函数。</p>
+<h3 id="ACK"><a href="#ACK" class="headerlink" title="ACK"></a>ACK</h3><p>tcp通过acknowledgement number来告知对方下一个期望接受的序列号，小于此ack的所有字节已经收到。注意：</p>
+<ul>
+<li>不是所有的包都需要确认</li>
+<li>可以延迟确认</li>
+<li>ack本身不需要被确认</li>
+</ul>
+<h3 id="flag"><a href="#flag" class="headerlink" title="flag"></a>flag</h3><p>tcp的标记为一个8位字段，即图中的高亮片段：<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/9/27/16d70265e3ed0a23~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>使用时只需把对应位置为1即可，常见的flag:</p>
+<ul>
+<li>SYN,用于发起连接数据包同步双方的初始序列号</li>
+<li>ACK，确认数据包</li>
+<li>RST,强制断开连接，</li>
+<li>FIN，通知对方我发完了所有数据，准备断开连接不再发数据包</li>
+<li>PSH，告知对方这些数据包要立即交给上层应用</li>
+</ul>
+<h3 id="窗口大小"><a href="#窗口大小" class="headerlink" title="窗口大小"></a>窗口大小</h3><p>最大窗口大小是16位的数值——65535字节（64kb）因为窗口较小，后来引入了tcp窗口缩放作为比例因子，范围是0~14，设原窗口大小为m，缩放比例为n，则新的窗口大小为: $m\times2^{n}$</p>
+<h3 id="可选项"><a href="#可选项" class="headerlink" title="可选项"></a>可选项</h3><p>可选项包括：</p>
+<ul>
+<li>种类</li>
+<li>长度</li>
+<li>值</li>
+</ul>
+<hr>
+<h2 id="数据包大小对网络的影响"><a href="#数据包大小对网络的影响" class="headerlink" title="数据包大小对网络的影响"></a>数据包大小对网络的影响</h2><p>显然，数据链路层传输的帧大小有限制，这个限制叫做最大传输单元—MTU,不同的数据链路层的MTU是不同的，linux机器可以用 <code>netstat -i</code>查看网卡的MTU。</p>
+<p>当一个ip数据包大于MTU时，ip会把数据报文切割为小片段，在ip头部有一个表示分片偏移量的字段来表示该段在原始报文中的位置：</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/2/3/1700a73e185162dc~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>作者ping之后采用wireshark抓了一次包：<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/2/3/1700a73e54362613~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<h3 id="路径MTU"><a href="#路径MTU" class="headerlink" title="路径MTU"></a>路径MTU</h3><p>一个包在传输过程中经历的不同网络的最小的那个MTU被称为Path MTU,</p>
+<h3 id="MSS"><a href="#MSS" class="headerlink" title="MSS"></a>MSS</h3><p>tcp为了避免数据被发送方分片，会自动把数据分割成小段，最大的分段大小为MSS，即MTU-ip header-tcp header.需要注意的是，因为TSO特性的存在（网卡代替CPU实现packet的分段和合并），tcp可以抓到超过MTU的包</p>
+<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><p>在分层结构中，每一层都有一个唯一的标识：<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/26/16b9134ba7385716~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>tcp用两字节整数表示端口，一台主机最多允许65536个端口号。</p>
+<p>端口号被分为：</p>
+<ul>
+<li>well-known port</li>
+<li>registered port</li>
+<li>ephemeral port</li>
+</ul>
+<hr>
+<h3 id="熟知端口号"><a href="#熟知端口号" class="headerlink" title="熟知端口号"></a>熟知端口号</h3><p>linux下监听这些端口需要root权限，其由专门的机构IANA分配和控制，范围为0~1023,使用他们的有https,ssh,ftp等协议</p>
+<h3 id="已登记的端口"><a href="#已登记的端口" class="headerlink" title="已登记的端口"></a>已登记的端口</h3><p>由IANA登记并提供他们的使用情况，范围为1024~49151,MySQL，redis,mongoDB等使用该范围的端口。</p>
+<h3 id="临时端口"><a href="#临时端口" class="headerlink" title="临时端口"></a>临时端口</h3><p>顾名思义，不同的Os会选择不同的范围临时分配端口。</p>
+<h2 id="临时端口号的分配"><a href="#临时端口号的分配" class="headerlink" title="临时端口号的分配"></a>临时端口号的分配</h2><ul>
+<li>bind函数</li>
+<li>connect函数</li>
+</ul>
+<hr>
+<p>在linux内核版本3.10.0下，核心的代码在net/ipv4/inet_hashtables.c中。我们分析一下他的代码（作者删去了一部分）</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">int</span> __inet_hash_connect(struct sock *sk, u32 port_offset) &#123;<br>  <span class="hljs-keyword">int</span> low;  <span class="hljs-comment">// 临时端口号的下界</span><br>  <span class="hljs-keyword">int</span> high; <span class="hljs-comment">// 临时端口号的上界</span><br>  <span class="hljs-keyword">static</span> u32 hint; <span class="hljs-comment">// 使用静态变量保存的递增值，减少 offset 冲突的可能性</span><br>  <span class="hljs-comment">// port_offset 是根据源地址、目的地址、目标端口计算出的哈希值</span><br>  u32 offset = hint + port_offset;<br>  <span class="hljs-keyword">int</span> port;<br><br>  <span class="hljs-comment">// 读取 /proc/sys/net/ipv4/ip_local_port_range 的临时端号的上界和下界</span><br>  inet_get_local_port_range(net, &amp;low, &amp;high);<br><br>  <span class="hljs-comment">// remaining 是临时端口号可分配值的范围</span><br>  <span class="hljs-keyword">int</span> remaining = (high - low) + <span class="hljs-number">1</span>;<br><br>  <span class="hljs-comment">/* By starting with offset being an even number,</span><br><span class="hljs-comment">   * we tend to leave about 50% of ports for other uses,</span><br><span class="hljs-comment">   * like bind(0).</span><br><span class="hljs-comment">   */</span><br>  offset &amp;= ~<span class="hljs-number">1</span>; <span class="hljs-comment">// 将最后一位置为 0</span><br><br>  <span class="hljs-keyword">int</span> i;<br>  <span class="hljs-comment">// 从 0 开始遍历，查找未被占用的端口号</span><br>  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; remaining; i++) &#123;<br>    <span class="hljs-comment">// 保证 port 的范围是在 low~high 之间</span><br>    port = low + (i + offset) % remaining;<br>    <span class="hljs-comment">// 检查端口号是否属于保留端口号</span><br>    <span class="hljs-keyword">if</span> (inet_is_reserved_local_port(port))<br>      <span class="hljs-keyword">continue</span>;<br>    <span class="hljs-comment">// 接下来检查端口是否被占用、等逻辑</span><br>    <span class="hljs-keyword">if</span> (all_ok) &#123;<br>      <span class="hljs-keyword">goto</span> ok;<br>    &#125;<br><br>  &#125;<br>  ok:<br>      <span class="hljs-comment">// 下次 connect 时 hint 递增，减少端口号冲突的概率</span><br>      hint += (i + <span class="hljs-number">2</span>) &amp; ~<span class="hljs-number">1</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>首先是确定上下界(inet_get_local_port_range),之后确定remaining的值，也即端口号的范围；由port_offset计算出offset的值（函数省略了）；之后for循环遍历查找未被占用的端口号检查找到的端口号是否合法一切ok后让hint递增,hint作为一个递增的数字防止出现计算出同样的端口号</p>
+<p><strong>然后作者开始了内核调试😕</strong> 略过</p>
+<p>最后作者尝试更改ip_local_port_range的值，使其只能分配一个端口50001，发起两次连接后，<code>strace nc -4 localhost 22</code>可以看到connect返回了EADDRNOTAVAIL错误。</p>
+<h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/13/16b518ccedac1b6e~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>客户端发送一个SYN报文，SYN报文不携带数据，占用一个序列号，序列号为客户端随机选择的初始序列号（ISN）此时只有SYN段被标记</p>
+<blockquote>
+<p>凡是消耗序列号的TCP报文段，一定要对端确认</p>
+</blockquote>
+</li>
+<li><p>服务端将SYN和ACK段都标记</p>
+</li>
+<li><p>客户端发送握手中最后一个ACK段，不消耗任何序列号</p>
+</li>
+</ol>
+<hr>
+<blockquote>
+<p>除了交换彼此的初始序列号，三次握手的另一个重要作用是交换一些辅助信息，比如最大段大小（MSS）、窗口大小（Win）、窗口缩放因子（WS)、是否支持选择确认（SACK_PERM）等，</p>
+</blockquote>
+<p>三次握手的状态变化：<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/13/16b518cd1664fa5d~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>同时打开的状态变化：<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/14/16b5693e5d32aef9~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<h2 id="tcp自连接"><a href="#tcp自连接" class="headerlink" title="tcp自连接"></a>tcp自连接</h2><blockquote>
+<p>TCP 的自连接是一个比较有意思的现象，甚至很多人认为是 Linux 内核的 bug。我们先来看看 TCP 的自连接是什么。</p>
+</blockquote>
+<p>作者实验后发现，</p>
+<blockquote>
+<p>源 IP、源端口是 <code>127.0.0.1:50000</code>，目标 ip、目标端口也是 <code>127.0.0.1:50000</code></p>
+</blockquote>
+<p>抓包，</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa47403b85491~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>根据作者的描述，似乎一个服务不断尝试重连后就可能出现自连接的情况，但是为啥啊？先挖个坑。。。</p>
+<p>解决自连接问题有两种办法：</p>
+<ul>
+<li>让服务监听端口与客户端随机分配的端口不可能相同即可</li>
+<li>主动关掉自连接</li>
+</ul>
+<hr>
+<h2 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h2><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/26/16b911c618264239~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>客户端调用close方法，发送一个FIN报文给客户端，之后客户端将只能接收数据，即进入FIN-WAIT-1状态。FIN消耗一个序列号</li>
+<li>服务端收到后回复ACK报文，服务端进入CLOSE_WAIT，客户端收到ACK报文后进入FIN-WAIT-2状态</li>
+<li>服务端此时发送一个FIN报文给客户端，进入LAST-ACK状态，也消耗一个序列号</li>
+<li>客户端回复ACK报文，进入TIME_WAIT状态，等待2个MSL后进入CLOSED状态，服务端收到ACK后进入CLOSED状态</li>
+</ul>
+<hr>
+<h2 id="头部时间戳"><a href="#头部时间戳" class="headerlink" title="头部时间戳"></a>头部时间戳</h2><p>所谓的时间戳属于一个选项，他在tcp的头部的位置如下：</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/14/16b54c4c5c635f86~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>TCP的这个Timesstamps Option由四部分构成：</p>
+<ul>
+<li>类别</li>
+<li>长度</li>
+<li>发送方时间戳</li>
+<li>回显时间戳</li>
+</ul>
+<hr>
+<p>总共有10字节的数据，类别kind=8,长度length=10，剩余的时间戳都是四字节：<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/14/16b54c4be8611658~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>时间戳的发送过程：<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/14/16b54c4c5c7ae349~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>采用时间戳之后可以方便的测量RTTM,不会出现由于重传导致的RTT无法测量的情况。</p>
+<p>另一个结果是帮助判断PAWS，内核会为timestamps维护一个ts_recent值，在收到迷途数据包时（即序列号完全相同的两个包）可以快速判断该不该丢弃这个包</p>
+<p>作者补充道：</p>
+<ul>
+<li>timestamps单调递增，两台主机不必进行时钟同步，增加的间隔也可以步调不一致</li>
+<li>timestamps与序列号类似，也会出现溢出回绕</li>
+<li>只要通信双方一方不开启，另一方就不会开启</li>
+</ul>
+<hr>
+<h2 id="TCP11种状态变迁以及模拟重现"><a href="#TCP11种状态变迁以及模拟重现" class="headerlink" title="TCP11种状态变迁以及模拟重现"></a>TCP11种状态变迁以及模拟重现</h2><p>tcp的复杂在于其状态繁多，但正是其11种状态，保证了该协议的安全可靠。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/22/16b7c9fb02bff057~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<h3 id="closed"><a href="#closed" class="headerlink" title="closed"></a>closed</h3><p>是一个假想的状态，无法通过netstat,lsof等工具看到。仅是TCP连接还未开始建立以及连接彻底释放时的状态</p>
+<h3 id="LISTEN"><a href="#LISTEN" class="headerlink" title="LISTEN"></a>LISTEN</h3><p>一端通过bind.listen调用短句进入该状态，等待另一端发送SYN报文三次建立连接</p>
+<h3 id="SYN-SENT"><a href="#SYN-SENT" class="headerlink" title="SYN-SENT"></a>SYN-SENT</h3><p>一端发送SYN报文后等待ACK的过程即为SYN-SENT状态</p>
+<h3 id="SYN-RCVD"><a href="#SYN-RCVD" class="headerlink" title="SYN-RCVD"></a>SYN-RCVD</h3><p>一端回复SYN+ACK后等待对端ACK的状态</p>
+<h3 id="ESTABLISHED"><a href="#ESTABLISHED" class="headerlink" title="ESTABLISHED"></a>ESTABLISHED</h3><p>上面的SYN-SENT和SYN-RCVD收到ACK后进入该状态。即连接建立成功</p>
+<h3 id="FIN-WAIT-1"><a href="#FIN-WAIT-1" class="headerlink" title="FIN-WAIT-1"></a>FIN-WAIT-1</h3><p>主动关闭的一方发送FIN包后等待对端ACK时进入该状态</p>
+<h3 id="FIN-WAIT-2"><a href="#FIN-WAIT-2" class="headerlink" title="FIN-WAIT-2"></a>FIN-WAIT-2</h3><p>FIN-WAIT-2收到ACK后进入该状态</p>
+<h3 id="CLOSE-WAIT"><a href="#CLOSE-WAIT" class="headerlink" title="CLOSE-WAIT"></a>CLOSE-WAIT</h3><p>上述中收到FIN包的一端，在收到时进入CLOSE-WAIT状态</p>
+<h3 id="TIME-WAIT"><a href="#TIME-WAIT" class="headerlink" title="TIME-WAIT"></a>TIME-WAIT</h3><p>发起关闭的一方收到了对方的FIN包，发送ACK给对端，开启定时器，定时器到期进入CLOSED，连接释放。</p>
+<p>作者在这里讲的确实不清不楚，说是以后会补😕</p>
+<h3 id="LAST-ACK"><a href="#LAST-ACK" class="headerlink" title="LAST-ACK"></a>LAST-ACK</h3><p>被动关闭的一方发送FIN包给对端等待ACK的状态。收到ACK后进入CLOSED状态</p>
+<h3 id="CLOSING"><a href="#CLOSING" class="headerlink" title="CLOSING"></a>CLOSING</h3><p>仅在主动关闭一端发送FIN包后还未收到ACK时，收到了对端的FIN包</p>
+<h2 id="全连接队列，半连接队列，backlog"><a href="#全连接队列，半连接队列，backlog" class="headerlink" title="全连接队列，半连接队列，backlog"></a>全连接队列，半连接队列，backlog</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>先看listen函数:</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">listen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sockfd,<span class="hljs-keyword">int</span> backlog)</span></span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>调用listen函数时，TCP的状态从CLOSE变为LISTEN，内核创建两个队列：</p>
+<p>半连接队列，incomplete connection queue,即SYN队列</p>
+<p>全连接队列，completed connection queue,即accept队列</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/28/16b9dae5efc47de8~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>所谓 <code>半连接队列</code>，指的是客户端发送SYN到服务端后，服务端回复自己的ACK和SYN，服务端的TCP从listen到SYN_RCVD，这个连接信息放入服务端的半连接队列，存储所谓的inbound SYN packets</p>
+<p>当服务端收到了客户端的ACK后，就把这个信息加入全连接队列</p>
+<blockquote>
+<p>「全连接队列」包含了服务端所有完成了三次握手，但是还未被应用调用 accept 取走的连接队列。</p>
+</blockquote>
+<p>全连接队列又被称为ACcept队列，如果队列为空，accept通常会阻塞。</p>
+<p>由于本人水平所限，作者在此篇文章中用到的命令暂时略过，以后再补</p>
+<h2 id="SYN-FLOOD攻击原理"><a href="#SYN-FLOOD攻击原理" class="headerlink" title="SYN_FLOOD攻击原理"></a>SYN_FLOOD攻击原理</h2><p><del>当初只是想看一下tcp，这就讲ddos了</del></p>
+<h3 id="scapy"><a href="#scapy" class="headerlink" title="scapy"></a>scapy</h3><p>一个强大的交互式数据包处理程序，如进入scapy后可以使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">send(IP(dst=<span class="hljs-string">&quot;your ip&quot;</span>)/ICMP())<br></code></pre></div></td></tr></table></figure>
+
+<p>就可以发送一个icmp数据包，用tcp发送一段字符串时，就可以使用 <code>/</code>堆叠：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">IP(src=<span class="hljs-string">&quot;ip&quot;</span>,dst=<span class="hljs-string">&quot;ip2&quot;</span>) / TCP(sport=num,dport=num2) / <span class="hljs-string">&quot;hello world&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>DNS查询：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">IP(dst=<span class="hljs-string">&quot;ip&quot;</span>) / UDP() / DNS(rd=<span class="hljs-number">1</span>,qd=DNSQR(qname=<span class="hljs-string">&quot;www.baidu.com&quot;</span>))<br></code></pre></div></td></tr></table></figure>
+
+<p>sr函数可以拿到返回的结果，sr1函数可以只取第一个应答数据包：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">res = sr1(IP(dst=<span class="hljs-string">&quot;ip&quot;</span>)/ICMP())<br>res<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="SYN-FLOOD攻击"><a href="#SYN-FLOOD攻击" class="headerlink" title="SYN FLOOD攻击"></a>SYN FLOOD攻击</h3><p><del>每日一个入狱小技巧</del></p>
+<p>SYN flood是通过造成服务端半连接队列溢出，使其无法处理正常请求的一种攻击。那么怎么简单的施行一次这样的攻击呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">sr1(IP(src=<span class="hljs-string">&quot;23.16.*.*&quot;</span>,dst=<span class="hljs-string">&quot;10.211.55.10&quot;</span>) / TCP(dport=<span class="hljs-number">80</span>,flags=<span class="hljs-string">&quot;S) )</span><br></code></pre></div></td></tr></table></figure>
+
+<p>服务端收到的SYN包的源地址将是23.16网段内的随机ip，这就可以用来攻击了。</p>
+<p>如果服务端回复的SYN+ACK不被回复RST，那么这样一次的恶意的包，经作者测试，会占用一个服务端63s.</p>
+<h3 id="SYN-cookie"><a href="#SYN-cookie" class="headerlink" title="SYN cookie"></a>SYN cookie</h3><p>当然，为了防范这种攻击，1996年提出了syn cookie技术，由/proc/sys/net/ipv4/tcp_syncookies控制，等于1表示连接队列满时启用，等于0禁用，等于2始终启用。计算机通过cookie，可以只在三次握手的最后阶段再分配连接资源，他的原理是这样的：</p>
+<blockquote>
+<p>基于「无状态」的机制，服务端收到 SYN 包以后不马上分配为 <code>Inbound SYN</code>分配内存资源，而是根据这个 SYN 包计算出一个 Cookie 值，作为握手第二步的序列号回复 SYN+ACK，等对方回应 ACK 包时校验回复的 ACK 值是否合法，如果合法才三次握手成功，分配连接资源。</p>
+</blockquote>
+<h2 id="TCP-fast-open"><a href="#TCP-fast-open" class="headerlink" title="TCP fast open"></a>TCP fast open</h2><p>所谓tcpfastopen，就是在tcp连接断开时快速重新建立连接的一种扩展tcp协议，在之前已经建立过连接后，重新建立连接时在发送第一个SYN包时就开始传数据。主要分为两个阶段：</p>
+<ul>
+<li>请求fast open cookie</li>
+<li>真正开始tcp fast open</li>
+</ul>
+<hr>
+<p>对比：<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/3/169e2dc0c15f46e5~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>实质相当于通过一个cookie来快速重新建立tcp连接</p>
+<h2 id="SO-REUSEADDR"><a href="#SO-REUSEADDR" class="headerlink" title="SO_REUSEADDR"></a>SO_REUSEADDR</h2><p>我们假设这样一个情景：客户端与服务器建立连接，突然服务器挂了。这个时候连接会断开，等待两个MSL后最终释放连接。假设最终释放前服务器重启完毕，之前建立连接的那个程序也启动，这时就会出现 <code>address already in use</code></p>
+<p>由于TCP由唯一的四元组确定，而大多数OS会阻止新的监听套接字绑定到已经建立连接的端口上，则bind会调用失败，出现错误。</p>
+<p>而SO_REUSEADDR可以解除这个限制，也允许端口重复</p>
+<h2 id="SO-REUSEPORT"><a href="#SO-REUSEPORT" class="headerlink" title="SO_REUSEPORT"></a>SO_REUSEPORT</h2><p>为了多进程的处理网络请求，一般有两种方式：</p>
+<ul>
+<li>主进程+多个子进程</li>
+<li>多进程+reuseport</li>
+</ul>
+<hr>
+<p>比如nginx就采用第一种方式，通过同一个套接字来处理。但这会带来一个问题——惊群问题。即多进程监听同一个套接字时，一旦有网络时间发生，所有进程都被唤醒，但只有一个进程会处理此事。作者给了一个很形象的图：</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa53ee58979c9~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>惊群问题显然会带来CPU资源的浪费。linux上分为accept惊群和epoll惊群。</p>
+<p>linux2.6版本后解决了该问题</p>
+<h3 id="epoll惊群"><a href="#epoll惊群" class="headerlink" title="epoll惊群"></a>epoll惊群</h3><p>linux为了表示打开文件，其内核会维护三种数据结构：</p>
+<ol>
+<li>为每一个进程维护了一个打开文件的描述符表，比如fd为0的stdin就属于此</li>
+<li>内核为所有打开文件维护了一个系统级的打开文件表，这个表存储了当前文件的偏移量等信息。而父子进程的fd可以指向同一个打开文件表</li>
+<li>文件系统的inode表</li>
+</ol>
+<hr>
+<p>作者提供了一个具体的图：<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa53ee593eeca~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>目前linux内核没有提供epoll惊群的解决办法</p>
+<p>相比于之前的SO_REUSEADDR，SO_REUSEPORT的实现要复杂得多。</p>
+<p>内核会为处于listen状态的socket分配一个hash,监听的端口号会经过hash打散到这些hash桶中，采用拉链法（类似于邻接表）解决冲突。在收到syn报文后，内核根据目标端口号算出链表，遍历此链表寻找最匹配、得分最高的socket。如果多个socket得分最高，则会随机选择一个。</p>
+<p>作者举例到，假设有下图所示的socket被监听：<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa53f2008cf8b~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>当圈到的套接字的syn到来时，会通过二次哈希找到对应的 <code>SO_REUSEPORT group</code>,从中随机选择一个：</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa53f20617a8a~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>SO_REUSE_PORT带来的好处自然是内核级的负载均衡，另一个好处是负载均衡，什么叫负载均衡？</p>
+<blockquote>
+<ol>
+<li>新启动一个新版本 v2 ，监听同一个端口，与 v1 旧版本一起处理请求。</li>
+<li>发送信号给 v1 版本的进程，让它不再接受新的请求</li>
+<li>等待一段时间，等 v1 版本的用户请求都已经处理完毕时，v1 版本的进程退出，留下 v2 版本继续服务</li>
+</ol>
+</blockquote>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/1/31/16ffa53f205214ae~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<h2 id="SO-LINER"><a href="#SO-LINER" class="headerlink" title="SO_LINER"></a>SO_LINER</h2><p>两种方式关闭TCP连接：</p>
+<ul>
+<li>FIN包，表示自己这端的所有数据都已发出去</li>
+<li>RST,强制关闭</li>
+</ul>
+<hr>
+<p>所谓的SO_LINGER是一个linger结构体，</p>
+<figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">linger</span>&#123;</span><br><span class="hljs-keyword">int</span> l_onoff;<br><span class="hljs-keyword">int</span> l_linger;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+
+<p>两个参数的作用很明显，一个用来表示是否开关，另一个用来表示等待的时间。根据l_linger表示的时间长短，总共有三种情况，这三种情况作者都做了实验。</p>
+<ol>
+<li>socket.setSoLinger(false,0)<br>即默认的行为，正常执行</li>
+<li>socket.setSolinger(true,0)<br>理论上讲，close函数应该立刻返回并丢掉缓冲区的内容。实际作者在发生30kb的数据后，最终只收到14kb数据</li>
+<li>socket.setSolinger(true,1)<br>超过所需要的时间，可以完成正常操作</li>
+</ol>
+<hr>
+<h2 id="time-wait"><a href="#time-wait" class="headerlink" title="time_wait"></a>time_wait</h2><p><strong>只有主动断开连接的哪一方会进入time_wait</strong></p>
+<p>在tcp协议中,MSL为报文在网络中的最大生存时间，与ip报文中的ttl字段有密切的关系。在ip协议中,ttl是用来表示一个报文最大可以经过的路由数，<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/14/16b54c4b904314f8~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>我们假设最大跳数的报文在网络中的存活时间不可能超过msl秒，那么tcp中的time_wait将持续2*msl秒。</p>
+<h3 id="time-wait存在的原因"><a href="#time-wait存在的原因" class="headerlink" title="time_wait存在的原因"></a>time_wait存在的原因</h3><ul>
+<li>等待老的重复报文在网络中过期失效。这样可以避免同样的tcp四元组在新连接收到旧连接的数据</li>
+<li>确保tcp的全双工可靠。由于主动关闭的一方发送ack后需要被动方发送fin，如果主动关闭方发送的Ack丢失，而主动关闭方直接closed,则无法重传丢失的ack，被动关闭方不能及时可靠释放。</li>
+</ul>
+<hr>
+<h3 id="time-wait产生的问题"><a href="#time-wait产生的问题" class="headerlink" title="time_wait产生的问题"></a>time_wait产生的问题</h3><p>大量的time_wait状态会造成两个问题，</p>
+<ol>
+<li>连接表无法复用<br>显然，在time_wait状态，相同的tcp四元组无法被复用</li>
+<li>socket结构体内存占用</li>
+</ol>
+<hr>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>开启时间戳后，可以用tcp_tw_resue,开启后可以重用出于浪费状态的连接，有两种情况：</p>
+<ol>
+<li>旧连接ack包未丢失，此时由时间戳可以判断是否应该丢弃数据</li>
+<li>旧的ack包丢失，被动方出于last-ack状态，持续重传fin+ack；主动方收到被动方的fin后回一个rst，被动方关闭。主动方由于未收到syn的ack，会继续重传，此后正常进行。</li>
+</ol>
+<hr>
+<p>tcp_tw_recycle，系统缓存 <code>每台主机（ip）的最新时间戳</code>，通过时间戳比较确定该丢弃的数据包。他会带来一个问题，在客户端和服务端一对一的情况下还好，假设客户端经过了nat或负载均衡，就会造成服务端误以为在和一台主机通信，仅会接受最新时间戳的连接。</p>
+<h3 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h3><p>所谓nat,就是为了缓解ipv4地址耗尽的方案，nat设备负责维护局域网私有ip和端口到外网ip和端口的映射规则，其优点在于通过一个公网ip让许多机器连接网络，让其隐藏真实ip，缺点在于一些协议无法通过NAT。</p>
+<h2 id="RST"><a href="#RST" class="headerlink" title="RST"></a>RST</h2><p>rst用来表示异常的关闭连接。比如客户端发送syn包到指定端口，服务端未开启这个端口，则会回复rst。或者在建立连接后，一方突然断电，另一方在发送数据后就会收到断电方回复的rst。总之就是表示一个异常的关闭。如果传输数据时，一方的rst包丢失，另一方未收到，则会一直传输直到收到rst包或者达到一定次数后放弃</p>
+<h3 id="brocken-pipe-和connection-reset-by-peer"><a href="#brocken-pipe-和connection-reset-by-peer" class="headerlink" title="brocken_pipe 和connection reset by peer"></a>brocken_pipe 和connection reset by peer</h3><p>所谓brocken pipe，就是<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/19/16b7073dca9493c8~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>即向rst中执行写操作的错误。connection reset by peer则是执行读操作</p>
+<h2 id="重传"><a href="#重传" class="headerlink" title="重传"></a>重传</h2><p>我们假设一个这样的情景，服务端想客户端发送5000个字节的数据包，由于MSS的限制而每次传输1000个字节，即1：1001，1001：2001，2001：3001，3001：4001，4001：5001.假设第二个数据包丢失，在服务端重传第二个数据包之前第三，四，五个数据包已经到达，但由于第二个数据包未收到，因此服务端无法收到客户端的第二个数据包的ack，客户端也无法回复第三，四，五数据包的ack。在第二个数据包到达后客户端才会回复ack5。在网络中，要等几百毫秒才能重传，这显然是过慢的。于是有了快速重传机制，SACK。</p>
+<h3 id="快速重传与SACK"><a href="#快速重传与SACK" class="headerlink" title="快速重传与SACK"></a>快速重传与SACK</h3><p>快速重传是什么？——在上面的例子中，客户端收到3，4，5包后回复的还是ack1,服务端收到重复的ack1后可以确定2包丢失而不必等待网络重传，这就是快速重传</p>
+<p>SACK是什么？——在之前的例子中，客户端只能回复ack1，那么SACK就是在客户端收到3的时候在ack中回复自己收到的包，<code>[1:1001]、[2001:3001] 区间的包我也收到了</code>,之后的4.5包也一样。这样服务端清楚的知道到底哪一个包需要重传了</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/2/27/1692f8785971515d~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>发送端收到三次重复ack后自动触发快速重传</p>
+<h2 id="重传的间隔确定"><a href="#重传的间隔确定" class="headerlink" title="重传的间隔确定"></a>重传的间隔确定</h2><p>间隔多久才能重传显然要根据网络情况进行一个动态的调整，<code>超时重传的时间</code>叫做RTO，计算的方法有两种：</p>
+<ol>
+<li>经典方法，计算平均值</li>
+<li>标准方法</li>
+</ol>
+<hr>
+<p>除此之外，还要兼顾一下在重传的情况下如何确定RTT。下面分别<del>摘抄一下</del></p>
+<h3 id="经典算法"><a href="#经典算法" class="headerlink" title="经典算法"></a>经典算法</h3><p>适用于RTT波动较小的情况，其实就是引入了一个计算平均值的方法。</p>
+<p>在经典算法中，引入了平滑往返时间SRTT的概念，即每测量一次RTT，就更新一次SRTT,$SRTT = ( \alpha \times SRTT ) + ((1-\alpha) \times RTT)$作者提了一个很<del>魔鬼</del>有趣的比喻，假设平滑因子$\alpha=0.8$,那么SRTT就相当于一个低通滤波器。</p>
+<p>显然，$\alpha$趋近于1时对短暂的实验变化不敏感，趋近于0时则对时延变化十分敏感而在经典算法的基础上，计算RTO的公式则是:$RTO= min(ubound,max(lbound,\beta \times SRTT))$，其中$\beta$为加权化因子，推荐值为1.3<del>2.0，![](<a target="_blank" rel="noopener" href="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/5/169ee07dda466279">https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/5/169ee07dda466279</a></del>tplv-t2oaga2asx-watermark.awebp)</p>
+<p>经典算法在稳定的RTT环境下表现良好，在网络不稳定的情况下则效果极差</p>
+<h3 id="标准方法，jacobson-karels算法"><a href="#标准方法，jacobson-karels算法" class="headerlink" title="标准方法，jacobson/karels算法"></a>标准方法，jacobson/karels算法</h3><p>经典算法的问题在于$\alpha$对效果影响很大，而即便能够实时更新$\alpha$，其线性表达式仍不够好。jacobson/karels算法如下：</p>
+<p>$SRTT=(1-\alpha) \times SRTT + \alpha \times RTT$</p>
+<p>$RTTVAR=(1- \beta)\times RTTVAR+\beta \times (| RTT-SRTT |)$</p>
+<p>$RTO=\mu \times SRTT + \partial \times RTTVar$</p>
+<p>第一个公式就是经典的计算公式，第二个公式就是计算RTTVar,<strong>已平滑的RTT平均偏差估计器</strong>，第三个公式则计算最终的RTO值。上述公式中，$\alpha$建议0.125，$\beta$建议0.25，$\mu$建议1，$\partial$建议4</p>
+<h3 id="重传与karn-partridge算法"><a href="#重传与karn-partridge算法" class="headerlink" title="重传与karn/partridge算法"></a>重传与karn/partridge算法</h3><p>一个最基本的问题是，如何在重传情况下计算RTT.</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/5/169ee07dde3c896c~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>上图中指明了重传二义性，</p>
+<blockquote>
+<ul>
+<li>如果用第一次发送数据的时间和收到 ACK 的时间来算 RTT，就会出现图 1 和图 2 中的问题，RTT 时间明显是大于实际值</li>
+<li>如果用第二次发送数据的时间和收到 ACK 的时间差值来算 RTT，就会出现图 3 中的问题，RTT 时间明显小于实际值</li>
+</ul>
+</blockquote>
+<p>karn/partridge算法是怎么解决重传二义性的？<em>不解决它</em>。</p>
+<p>即这次重传的RTT不会被用来更新SRTT以及RTO.当然，如果网络出现大规模抖动，忽略是不行的，这是karn采用了将RTO翻倍的暴力方法，产生一个指数级退避，粗暴但是有效</p>
+<h2 id="流量控制——滑动窗口"><a href="#流量控制——滑动窗口" class="headerlink" title="流量控制——滑动窗口"></a>流量控制——滑动窗口</h2><p>众所周知，tcp协议要求把发送的数据放入发送缓冲区，接收的数据放入接受缓冲区。流量控制要做的，就是管理发送端的发送速率，防止在接收缓冲区已满的情况下发送端还会再发送数据。tcp要求再收到数据包后回复的ack包里携带自己接收窗口的大小。</p>
+<p>tcp把数据包的状态分为四种:<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/3/10/16968005b1f1b27a~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p><strong>发送窗口</strong>表示发送端被允许发送的最大数据包大小，即在某一个时刻能拥有的最大未确认的数据包大小，为2和3的大小总和</p>
+<p><strong>可用窗口</strong>是发送端还能发送的最大数据包大小，即3的大小</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/3/10/16968005b25d3742~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>当可用窗口的6个字节发送出去后，可用窗口减小到0，除非收到对端的ack，否则发送端不能发送数据</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/3/10/16968005b2bd48c6~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<h3 id="TCP-Zero-Window"><a href="#TCP-Zero-Window" class="headerlink" title="TCP Zero Window"></a>TCP Zero Window</h3><p>假设一个高负载的网络状况，接受方没有快速处理缓冲队列中的数据，那么他的接收端窗口将变小，发送端的滑动窗口也将变小。当发送端的滑动窗口变为0时，由于网络高负载，发送端不知道接收端已经可以处理更多的数据包，那就只能一直等待接收端发送新的ack。这不行。</p>
+<p>tcp设计了零窗口探测机制用于探测接收端的接收窗口。零窗口探测包就是一个0字节的ack，seq为当前seq最大值减1，发送端将一直发送这个包直到得到回应。</p>
+<h4 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h4><blockquote>
+<p>与之前介绍的 Syn Flood 攻击类似，上面的零窗口探测也会成为攻击的对象。试想一下，一个客户端利用服务器上现有的大文件，向服务器发起下载文件的请求，在接收少量几个字节以后把自己的 window 设置为 0，不再接收文件，服务端就会开始漫长的十几分钟时间的零窗口探测，如果有大量的客户端对服务端执行这种攻击操作，那么服务端资源很快就被消耗殆尽。</p>
+</blockquote>
+<h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><p>拥塞控制主要考虑整个网络的通信状况，涉及到慢启动，拥塞避免，快速重传，快速恢复。tcp的每一条连接都有两个核心状态：</p>
+<ul>
+<li>拥塞窗口cwnd</li>
+<li>慢启动阈值ssthresh</li>
+</ul>
+<hr>
+<h3 id="拥塞窗口cwnd"><a href="#拥塞窗口cwnd" class="headerlink" title="拥塞窗口cwnd"></a>拥塞窗口cwnd</h3><p>指在收到对端ack之前自己还能传输的最大MSS段数</p>
+<p>真正的发送窗口大小=min(接收端窗口，发送端拥塞窗口)</p>
+<h3 id="一、慢启动"><a href="#一、慢启动" class="headerlink" title="一、慢启动"></a>一、慢启动</h3><p>网络拥堵时，会造成丢包严重，如果这个时候发送数据因丢包加多，会造成更大的网络延迟，基于整个网络考虑，1988年提出了慢启动算法。</p>
+<p>这个算法的过程如下：</p>
+<ul>
+<li>第一步，三次握手以后，双方通过 ACK 告诉了对方自己的接收窗口（rwnd）的大小，之后就可以互相发数据了</li>
+<li>第二步，通信双方各自初始化自己的「拥塞窗口」（Congestion Window，cwnd）大小。</li>
+<li>第三步，cwnd 初始值较小时，每收到一个 ACK，cwnd + 1，每经过一个 RTT，cwnd 变为之前的两倍。</li>
+</ul>
+<hr>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/10/16a04a0965069dbd~tplv-t2oaga2asx-watermark.awebp" srcset="/img/loading.gif" lazyload></p>
+<p>慢启动拥塞窗口有一个阈值，ssthresh,当cwnd&lt;ssthresh时慢启，cwnd&gt;ssthresh时拥塞窗口线性增长，这个阶段叫做拥塞避免，每经过一个RTT才增加拥塞窗口的值</p>
+<h3 id="二、快速恢复"><a href="#二、快速恢复" class="headerlink" title="二、快速恢复"></a>二、快速恢复</h3><p>之前介绍过快速重传，当收到三次重复ack时，进入快速恢复阶段，表现为网络轻度拥塞，此时ssthresh=cwnd/2,cwnd=ssthresh,拥塞窗口线性增加</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/cs/">cs</a>
+                    
+                      <a class="hover-with-bg" href="/tags/write/">write</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/05/%E5%91%A8%E8%AE%B03/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">周记3</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/13/vps/">
+                        <span class="hidden-mobile">vps</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"fb364385aff3688b9b61","clientSecret":"fac44b76c40c3e32297538f963a7c318fd1c7c7e","repo":"heeler-deer.github.io","owner":"heeler-deer","admin":["heeler-deer"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
+          {
+            id: '78d229bc5c39e878729445a5fdc7ebcf'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":true,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

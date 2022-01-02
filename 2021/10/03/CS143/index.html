@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="声明本compile所有代码均来自Kipery,在抄代码中学习，虽然kp也是这样值得一提的是，我并没有在standford官网上找到对应的programming assignments，而是在github、edx这些网站上找到的编程模板，这些模板留给读到本md的同学自己寻找。除此之外，standford的writing assignments在其官网上仍有handout和solutions，我认为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS143">
+<meta property="og:url" content="http://example.com/2021/10/03/CS143/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="声明本compile所有代码均来自Kipery,在抄代码中学习，虽然kp也是这样值得一提的是，我并没有在standford官网上找到对应的programming assignments，而是在github、edx这些网站上找到的编程模板，这些模板留给读到本md的同学自己寻找。除此之外，standford的writing assignments在其官网上仍有handout和solutions，我认为">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/compile/cs143-png/2021-09-28%2019-51-46%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/compile/cs143-png/2021-10-01%2011-24-54%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="article:published_time" content="2021-10-03T09:09:29.000Z">
+<meta property="article:modified_time" content="2021-12-31T16:20:04.415Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="cs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heeler-deer/Molder/main/compile/cs143-png/2021-09-28%2019-51-46%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+  
+  
+  <title>CS143 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/rainbow.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"GCX7MRb8jHPOvWy5hXP1pLOT-gzGzoHsz","app_key":"81Myp4Kmaagh7J5spTpIoMWi","server_url":"https://gcx7mrb8.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Heeler-deer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/week/">
+                <i class="iconfont icon-link-fill"></i>
+                week
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://github.com/heeler-deer/absorbing/blob/main/png/6.jpg?raw=true') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="CS143">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      John Doe
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-03 17:09" pubdate>
+        2021年10月3日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      69 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CS143</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年1月1日 凌晨
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p>本compile所有代码均来自<a target="_blank" rel="noopener" href="https://github.com/Kiprey/Skr_Learning/tree/master/week3-6">Kipery</a>,在抄代码中学习，<del>虽然kp也是这样</del><br>值得一提的是，我并没有在standford官网上找到对应的programming assignments，而是在github、edx这些网站上找到的编程模板，这些模板留给读到本md的同学自己寻找。除此之外，standford的writing assignments在其官网上仍有handout和solutions，我认为这些习题也应完成：<a target="_blank" rel="noopener" href="http://web.stanford.edu/class/cs143/">cs143</a><br>当然，在官网和edx给出的programming assignments中我并没有找到kp仓库中似乎是自带的grading系统，不知道怎么来的。。。。。也许是来自sakura?<br>本md仅包含一些<strong>细枝末节</strong>，对于一些记录比较麻烦的知识，本md并未记载，建议看视频。<br>github不支持mermaid,就在我<a target="_blank" rel="noopener" href="https://heeler-deer.github.io/">博客</a>看吧</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这篇md只是一些个人向笔记，因此如果没有学过cs143/企图看本博客掌握cs143，请另寻高就</p>
+<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><p>front-end:</p>
+<ul>
+<li>lexical analysis</li>
+<li>parsing</li>
+<li>semantic analysis</li>
+</ul>
+<p>back-end:</p>
+<ul>
+<li>optimization</li>
+<li>code generation</li>
+</ul>
+<h2 id="lexcial"><a href="#lexcial" class="headerlink" title="lexcial"></a>lexcial</h2><h3 id="dfa-nfa"><a href="#dfa-nfa" class="headerlink" title="dfa,nfa"></a>dfa,nfa</h3><p>dfa往往更快，nfa则往往更小，确定性有穷自动机（dfa）与非确定性有穷自动机(nfa)在编译原理中的作用往往相似    </p>
+
+<pre>
+<code class="mermaid" type>
+graph LR
+  e(lexcial specification)-->regfular
+  regfular-->w
+  w(nfa)-->dfa
+  w-.不常用.->x
+  dfa-->x(table-driven implementation of dfa)
+</code>
+</pre>
+<p>具体转换方式参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40294512/article/details/89004777">nfa到dfa的转化、dfa的简化</a><br>要加深了解请认真完成writing assignments,期中考试和期末考试还是很值得自己做的。</p>
+<h3 id="PA2"><a href="#PA2" class="headerlink" title="PA2"></a>PA2</h3><p>该部分主要需要完成正则表达式的编写。<br>通过正则表达式，我们要完成对于names的定义，其中包括class、if、id等关键字的正则表达；      除此之外，我们还要完成对于程序语法的分析，判断其是否存在诸如：</p>
+<ol>
+<li>括号、引号未闭合</li>
+<li>转义字符不规范</li>
+<li>字符串过长等错误<br>由于之后进行的词法解析需要dfa、nfa来完成，因此我们在flex中需要确定状态的start condition,并等待状态匹配完成或者出错时结束，并确定act动作</li>
+</ol>
+<h2 id="parsing"><a href="#parsing" class="headerlink" title="parsing"></a>parsing</h2><p>解析的原因是</p>
+<blockquote>
+<p>lots of structure in programming languages constructs and those cannot be handled by regular expressions.</p>
+</blockquote>
+<blockquote>
+<p>FA不能识别到达recepet状态多少次</p>
+</blockquote>
+
+<pre>
+<code class="mermaid" type>
+graph LR
+  e(string of tokens)--parse-->s(parse tree)
+  c(string of characters)--lexer-->e
+</code>
+</pre>
+<p>果然还是要网上搜一搜才知道是什么东西。。。。     </p>
+<h3 id="cfg"><a href="#cfg" class="headerlink" title="cfg:"></a>cfg:</h3><p>CFG：context free grammar,与上下文无关的文法，可以单独拿出一个词语进行分析，解释，包括：    </p>
+<blockquote>
+<p>一组非终结符（VN）、一组终结符号（VT）、一组产生式（P）、一个开始符号（S）。</p>
+</blockquote>
+<p>此处建议作课堂习题     </p>
+<h3 id="a-derivation"><a href="#a-derivation" class="headerlink" title="a derivation"></a>a derivation</h3><p>derivation可以画作一棵树，树要满足两点：</p>
+<ol>
+<li>terminals at the leaves</li>
+<li>non-terminals at the interior nodes<br>我们关注的是这棵parse tree的left-most and right-most，也即替换的那些字符而不是树中间的运算符号。    同时这引出了语言的模糊性：   <blockquote>
+<p>if a grammar has more than one parse tree for some string,it’s ambiguous.</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="error"><a href="#error" class="headerlink" title="error"></a>error</h3><p>消除歧义要么重写grammar，要么确定中间符号的优先级</p>
+<ol>
+<li>panic mode</li>
+<li>error productions<h3 id="recursive-descent-parsing-递归下降分析"><a href="#recursive-descent-parsing-递归下降分析" class="headerlink" title="recursive descent parsing(递归下降分析)"></a>recursive descent parsing(递归下降分析)</h3>即top-down parsing,recursive descent algorithm(RDA)可以解释任何语法<blockquote>
+<p>Make sure you aren’t being smarter than a recursive descent parser–it will try every production even when it is “obvious” a production will lead to a dead end.</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="PA3"><a href="#PA3" class="headerlink" title="PA3"></a>PA3</h3><p>写一些cool-parse.cc的代码分析，</p>
+<blockquote>
+<p>在CV中学习 &emsp;&emsp;&emsp;&emsp;–Kipery</p>
+</blockquote>
+<ul>
+<li>yytranslate</li>
+<li>yydefact</li>
+<li>yydefgoto</li>
+<li>yyr1&amp;yyr2</li>
+<li>yytable</li>
+<li>yypgoto</li>
+<li>yypact</li>
+<li>yycheck</li>
+<li>yyparse<h5 id="yytranslate"><a href="#yytranslate" class="headerlink" title="yytranslate"></a>yytranslate</h5>用一个symbol number代表token-num<h5 id="yydefact"><a href="#yydefact" class="headerlink" title="yydefact"></a>yydefact</h5>存储每个状态下产生式规则的序号，当定义的rule索引为0时报错（默认rule的存在）<h5 id="yydefgoto"><a href="#yydefgoto" class="headerlink" title="yydefgoto"></a>yydefgoto</h5>传入一个nterm-num,作为一个跳转表，其值代表要跳转到的State<h5 id="yyr1-amp-yyr2"><a href="#yyr1-amp-yyr2" class="headerlink" title="yyr1&amp;yyr2"></a>yyr1&amp;yyr2</h5>左右部的symbol number<h5 id="yytable"><a href="#yytable" class="headerlink" title="yytable"></a>yytable</h5>对于当前的状态，有两种act:放入parse stack,归约（符合rule）。正数表示移入，负数表示归约。<h5 id="yypgoto"><a href="#yypgoto" class="headerlink" title="yypgoto"></a>yypgoto</h5>通过yycheck判断执行默认的yydefgoto还是yypgoto，yypgoto用来处理不同的goto情况<h5 id="yypact"><a href="#yypact" class="headerlink" title="yypact"></a>yypact</h5>定义初始状态下的部分yytable<h5 id="yycheck"><a href="#yycheck" class="headerlink" title="yycheck"></a>yycheck</h5>判断归约还是移入，选择跳转表<h5 id="yyparse"><a href="#yyparse" class="headerlink" title="yyparse"></a>yyparse</h5>parse<h2 id="week4-parsing"><a href="#week4-parsing" class="headerlink" title="week4 parsing"></a>week4 parsing</h2>bottom-up parsing<br>相比于recursive-descent,它对语法要求更为严格，接受LL（K）语法，which means left-to-right and working on left-most non-terminal in the parse tree.并且向前看k个tokens      </li>
+<li>predictive parsing需要一个stack记录解析树的frontier，</li>
+<li>choose the state shown at[S,a];</li>
+<li>stack的顶端是最左端未定(pending)的terminal或者no-terminal</li>
+<li>reject on reaching error state</li>
+<li>accept on end of input and empty stack<br><a target="_blank" rel="noopener" href="https://learning.edx.org/course/course-v1:StanfordOnline+SOE.YCSCS1+2T2020/block-v1:StanfordOnline+SOE.YCSCS1+2T2020+type@sequential+block@ef138cf5008e44cf81f1f6c22cb67f6d/block-v1:StanfordOnline+SOE.YCSCS1+2T2020+type@vertical+block@ecd23fda0e88420a9b49de26008295d4">这节课讲的着实不错，详细描述了一个parsing table生产一个parsing tree的过程</a><h3 id="first-sets"><a href="#first-sets" class="headerlink" title="first sets"></a>first sets</h3>first(x)<blockquote>
+<p>all the terminals that can be derived in the first position will be in the first of X .x can go to epsilon  with zero or more steps,then epsilon is in the first of x</p>
+</blockquote>
+</li>
+</ul>
+<p>definition:</p>
+<p>$$First(x)= {t|X \rightarrow t \alpha } \cup {\varepsilon |X\rightarrow *\varepsilon } $$</p>
+<p>$$Follow(x)={t|S \rightarrow ^{*} \beta Xt \delta }$$</p>
+<p>视频中的解释已经足够理解了。</p>
+<h3 id="bottom-up-parsing"><a href="#bottom-up-parsing" class="headerlink" title="bottom-up parsing"></a>bottom-up parsing</h3><p>each step performing a <strong>reduction</strong></p>
+<h3 id="shift-reduce-parsing"><a href="#shift-reduce-parsing" class="headerlink" title="shift-reduce parsing"></a>shift-reduce parsing</h3><p><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/compile/cs143-png/2021-09-28%2019-51-46%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload alt="photo"></p>
+<h2 id="handles"><a href="#handles" class="headerlink" title="handles"></a>handles</h2><blockquote>
+<p>a handle is a reduction that allows further reductions back to the start symbol</p>
+</blockquote>
+<p>因为先做了PA3,所以这一部分就不写了</p>
+<h3 id="SLR-parsing"><a href="#SLR-parsing" class="headerlink" title="SLR parsing"></a>SLR parsing</h3><p>simple LR parsing,precedence declaration可以define conflict resolutions<br>要优化，就要空间换时间，change stack to conain pairs&lt;symbol,dfa state&gt;         </p>
+<ul>
+<li>goto[i,a]=j if state i —&gt;a state j,也就是说，goto is the transition function of the dfa</li>
+</ul>
+<h2 id="semantic-analysis"><a href="#semantic-analysis" class="headerlink" title="semantic analysis"></a>semantic analysis</h2><h3 id="scope-amp-simple-tables-amp-types"><a href="#scope-amp-simple-tables-amp-types" class="headerlink" title="scope &amp; simple tables &amp; types"></a>scope &amp; simple tables &amp; types</h3><p>type包含static typing,dynamic  typing and none typing.</p>
+<ul>
+<li>type checking is the process of verifying fully typed programs</li>
+<li>type inference is the process of filling in missing type information</li>
+<li>a type environment gives types for free variables
+<pre>
+<code class="mermaid" type>
+flowchart TD
+  r(root)-->|type environment| l(leaves)
+  l-->|types| r
+</code>
+</pre></li>
+</ul>
+<h3 id="static-vs-dynamic-typing"><a href="#static-vs-dynamic-typing" class="headerlink" title="static vs. dynamic typing"></a>static vs. dynamic typing</h3><p>static:</p>
+<ul>
+<li>detece common errors</li>
+<li>so some are disallowed</li>
+<li>self type increases the expressive power of the type system<br>dynamic:</li>
+<li>flexible</li>
+</ul>
+<h2 id="optimization"><a href="#optimization" class="headerlink" title="optimization"></a>optimization</h2><ul>
+<li>activation tree depends on run-time behavior and a stack can track it currently</li>
+<li>if f calls g,g’s AR(activation records) contains complete execution of g and resume execution of f<h3 id="globals-and-heap"><a href="#globals-and-heap" class="headerlink" title="globals and heap"></a>globals and heap</h3></li>
+<li>all references to a global variable point to the same object &amp; globals are assigned a fixed address </li>
+<li>languages with dynamically allocated data use a heap to store dynamic data <h3 id="alignment"><a href="#alignment" class="headerlink" title="alignment"></a>alignment</h3></li>
+<li>most machines need it,for example,”hello” may have 3 “padding” characters to word align next word</li>
+<li>we can optimize it<h3 id="stack-machine"><a href="#stack-machine" class="headerlink" title="stack machine"></a>stack machine</h3>建议看视频<h2 id="code-generation"><a href="#code-generation" class="headerlink" title="code generation"></a>code generation</h2></li>
+<li>frame pointer(帧指针):points to the return address on the stack &amp; it can be used to find the variables<br><img src="https://raw.githubusercontent.com/heeler-deer/Molder/main/compile/cs143-png/2021-10-01%2011-24-54%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" lazyload>    </li>
+<li>code generation must know how many temporaries are in use at each point</li>
+<li>layout table表示dispatch<h2 id="operational-semantics"><a href="#operational-semantics" class="headerlink" title="operational semantics"></a>operational semantics</h2>我们通过：</li>
+<li>an environment where in memory a variable is</li>
+<li>a store what is in the memory<br>来跟踪variables and their values.<br>视频为主  <h2 id="intermediate-code-amp-optimization"><a href="#intermediate-code-amp-optimization" class="headerlink" title="intermediate code &amp; optimization"></a>intermediate code &amp; optimization</h2>the first is a language between the source and the target<br>the second needs to optimize:</li>
+<li>execution time</li>
+<li>code size</li>
+<li>network nessahes sent<br>对于一个优化，通常有三个方面要做：</li>
+<li>local optimizations apply to a basic block in isolation</li>
+<li>global optimizations apply to a control-flow graph in isolation</li>
+<li>inter-procedural optimizations apply across method boundaties<h3 id="local-optimization"><a href="#local-optimization" class="headerlink" title="local optimization"></a>local optimization</h3></li>
+<li>delete/simplify some statements</li>
+<li>compute constants at compile time ,not at run time</li>
+<li>remove unreachable basic blocks/code<h3 id="peephole-optimization"><a href="#peephole-optimization" class="headerlink" title="peephole optimization"></a>peephole optimization</h3>peephole:窥视孔,replaces the sequence with another equivalent one which is faster<h2 id="dataflow-analysis"><a href="#dataflow-analysis" class="headerlink" title="dataflow analysis"></a>dataflow analysis</h2><h3 id="Constant-Propagation"><a href="#Constant-Propagation" class="headerlink" title="Constant Propagation"></a>Constant Propagation</h3></li>
+<li>rule1:if C(pi,x,out)=T, for any i,then C(s,x,in)=T;</li>
+<li>rule2:if C(pi,x,out)=c&amp;C(pj,x,out)=d&amp;d&lt;&gt;c then C(s,x,in)=T</li>
+<li>rule3:if C(pi,x,out)=c/bottom for all i,then C(s,x,in)=c</li>
+<li>rule4:if C(pi,x,out)=bottom for all i,then C(s,x,in)=bottom</li>
+<li>rule5:C(s,x,out)=bottom if C(s,x,in)=bottom</li>
+<li>rule6:C(x:=c,x,out)=c if c is a constant</li>
+<li>rule7:C(x:=f(…),x,out)=T</li>
+<li>rule8:C(y:=…,x,out)=C(y:=…,x,in) if x&lt;&gt;y<br>而对应的算法是：</li>
+</ul>
+<ol>
+<li>set every entry s to C(s,x,in)=T</li>
+<li>set C(s,x,in)=C(s,x,out)=bottom </li>
+<li>repeat until all points satisfy 1-8:pick s not satisfying 1-8 and update using the appropriate rule<h3 id="liveness"><a href="#liveness" class="headerlink" title="liveness"></a>liveness</h3>a variable x is live at statements s if:</li>
+</ol>
+<ul>
+<li>there exists a statement s’ that uses x</li>
+<li>there is a path from s to s’</li>
+<li>that path has no intervening assignment to x<br>otherwise x is dead<br>dead statements should be deleted from the program<br>自己看rule<br>算法：</li>
+</ul>
+<ol>
+<li>let all L(…)=false initially</li>
+<li>repeat until all statements s satisfy rules 1-4:pick s where one of 1-4 does not hold and update using the appropriate rule<h2 id="Register-Allocation寄存器分配"><a href="#Register-Allocation寄存器分配" class="headerlink" title="Register Allocation寄存器分配"></a>Register Allocation寄存器分配</h2>many to one: t1 and t2 can share the same register if at any point in the program at most one of them live.<br>建图染色判断即可(RIG)<br>cache optimization没有讲多少。。。<h2 id="automatic-memory-management"><a href="#automatic-memory-management" class="headerlink" title="automatic memory management"></a>automatic memory management</h2>scheme:</li>
+<li>allocate space as needed for new objects</li>
+<li>when space runs out:a)compute what objects might be used again b)free the space used by objects not found in a<h3 id="mark-and-sweep"><a href="#mark-and-sweep" class="headerlink" title="mark and sweep"></a>mark and sweep</h3>mark标记之后就可以把标记为0的放入free list中<br>这些都是很容易理解的，所以下面是PA4,PA5的分析。<h2 id="PA4"><a href="#PA4" class="headerlink" title="PA4"></a>PA4</h2><blockquote>
+<p>In this assignment, you will implement a code generator for Cool. When successfully completed, you will have a fully functional Cool compiler!</p>
+</blockquote>
+</li>
+</ol>
+<p>引用<strong>kp</strong>的话：</p>
+<blockquote>
+<p>以cool语言为例，在生成目标代码前，需要先读入AST树的相关信息，重建继承图，并自上而下的初始化相关的映射表格在该初始化过程中，每个类会遍历其中的feature，并将其相关信息添加至对应的SymbolTable中如果该feature是method，则还会额外自顶向下计算所需要的最小临时变量数量，并将其添加进表格中。</p>
+</blockquote>
+<p>下面<strong>分析</strong>semant.c semant.h cool-tree.handcode.h</p>
+<h3 id="cool-tree-handcode-h"><a href="#cool-tree-handcode-h" class="headerlink" title="cool-tree.handcode.h"></a>cool-tree.handcode.h</h3><p>继承来自PA2/3的AST,包含cool的AST的所有extensions,这些扩展主要包含以下内容：    </p>
+<ul>
+<li>program</li>
+<li>class</li>
+<li>feature</li>
+<li>formal</li>
+<li>expression</li>
+<li>case</li>
+<li>list_node</li>
+<li>symtables</li>
+<li>inheritancenode</li>
+<li>environment</li>
+<li>calctemp</li>
+<li>cgennode/environment/classlevel<h3 id="semant-h"><a href="#semant-h" class="headerlink" title="semant.h"></a>semant.h</h3>这个文件主要是声明、定义在semant.cc中要用到的cross-reference,包含三个class:environment(一个描述着method/属性/all classes/self_type的symbol table)，inheritancenode(类比于数据结构中图节点的属性)，classtable(完成type checker的构建)<h3 id="semant-c"><a href="#semant-c" class="headerlink" title="semant.c"></a>semant.c</h3>这个文件完成cool的semantic check（千行代码有点长。。。）首先定义、声明了一些必要的symbol。之后完成environment function:</li>
+</ul>
+<ol>
+<li>a mapping from method names to method definitions for X</li>
+<li>a mapping from variable (local and attribute) names to definitions in X</li>
+<li>a mapping from method names and class names to defintions</li>
+<li>the self class (X)<br>如add/lookup/probe的实现：<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Environment::method_add</span><span class="hljs-params">(Symbol s, method_class *m)</span> </span><br><span class="hljs-function"></span>&#123; method_table.addid(s,m); &#125;<br><br><span class="hljs-function">method_class *<span class="hljs-title">Environment::method_lookup</span><span class="hljs-params">(Symbol s)</span> </span><br><span class="hljs-function"></span>&#123; <span class="hljs-keyword">return</span> method_table.lookup(s); &#125;<br><br><span class="hljs-function">method_class *<span class="hljs-title">Environment::method_probe</span><span class="hljs-params">(Symbol s)</span> </span><br><span class="hljs-function"></span>&#123; <span class="hljs-keyword">return</span> method_table.probe(s); &#125;<br><br></code></pre></div></td></tr></table></figure>
+接下来是classtable（initializes a symbol table mapping<br>// class names to inheritance graph nodes）,最后是features，在这里实现对environment的信息进行添加（代码量极大）<h2 id="PA5"><a href="#PA5" class="headerlink" title="PA5"></a>PA5</h2>我们需要在这里实现对编译器的优化。这里我们分析cgen.h/cgen.cc,先来看看他们的组成 <h3 id="cgen-h"><a href="#cgen-h" class="headerlink" title="cgen.h"></a>cgen.h</h3>包含cgenclasstable，把class映射到tag，同时包含把code与constants/global declarations对应起来的method，如：<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_global_data</span><span class="hljs-params">()</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_global_text</span><span class="hljs-params">()</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_bools</span><span class="hljs-params">()</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_select_gc</span><span class="hljs-params">()</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_constants</span><span class="hljs-params">()</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_strings</span><span class="hljs-params">()</span></span>;          <span class="hljs-comment">/*##*/</span> <span class="hljs-comment">// 无用，无函数定义</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_ints</span><span class="hljs-params">()</span></span>;             <span class="hljs-comment">/*##*/</span> <span class="hljs-comment">// 无用，无函数定义</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_class_table</span><span class="hljs-params">()</span></span>;      <span class="hljs-comment">/*##*/</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_object_table</span><span class="hljs-params">()</span></span>;     <span class="hljs-comment">/*##*/</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_class_features</span><span class="hljs-params">()</span></span>;   <span class="hljs-comment">/*##*/</span><br></code></pre></div></td></tr></table></figure>
+在cgenclasstable中，还create an inheritance graph from a list of classes.之后就是一些叫做binding的class,包含对self/属性/local variables的binding<h3 id="cgen-c"><a href="#cgen-c" class="headerlink" title="cgen.c"></a>cgen.c</h3>主要做了定义method/emit procedure以及视频课程中从register开始后的工作，优化也体现在这一部分</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/cs/">cs</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A1%A5%E5%85%85/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">编译原理补充</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/02/zip%E5%8A%A0%E5%AF%86/">
+                        <span class="hidden-mobile">zip加密</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"fb364385aff3688b9b61","clientSecret":"fac44b76c40c3e32297538f963a7c318fd1c7c7e","repo":"heeler-deer.github.io","owner":"heeler-deer","admin":["heeler-deer"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
+          {
+            id: 'b5b42c6d5d9759a357ee8c587e3c154b'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":true,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
