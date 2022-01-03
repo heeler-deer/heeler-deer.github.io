@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcon.png">
+  <link rel="icon" href="/img/favcon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -16,12 +16,12 @@
   <meta name="author" content="Heeler-Deer">
   <meta name="keywords" content="">
   
-    <meta name="description" content="声明本人的代码优化还是跟着kp学习的。步前人后尘所有资料来源于skr_learning of kp,课件pdf来源于toronto,edx等处没有找到对应视频      前言个人向笔记，仅作为cs143的补充 笔记基础知识作者认为，编译器可以从以下方面改善：  最小化操作数 用时间代价小的操作代替时间操作大的操作 减少缓存缺失 多线程工作  而在kp的md中，记录了代码优化的具体方法：  删除公共">
+    <meta name="description" content="声明 本人的代码优化还是跟着kp学习的。步前人后尘 所有资料来源于skr_learning of kp,课件pdf来源于toronto,edx等处没有找到对应视频 # 前言 个人向笔记，仅作为cs143的补充 # 笔记 ## 基础知识 作者认为，编译器可以从以下方面改善： - 最小化操作数 - 用时间代价小的操作代替时间操作大的操作 - 减少缓存缺失 - 多线程工作 而在kp的md中，记录了代码优">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编译原理补充">
 <meta property="og:url" content="https://heeler-deer.github.io/2021/10/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A1%A5%E5%85%85/index.html">
 <meta property="og:site_name" content="Heeler-Deer">
-<meta property="og:description" content="声明本人的代码优化还是跟着kp学习的。步前人后尘所有资料来源于skr_learning of kp,课件pdf来源于toronto,edx等处没有找到对应视频      前言个人向笔记，仅作为cs143的补充 笔记基础知识作者认为，编译器可以从以下方面改善：  最小化操作数 用时间代价小的操作代替时间操作大的操作 减少缓存缺失 多线程工作  而在kp的md中，记录了代码优化的具体方法：  删除公共">
+<meta property="og:description" content="声明 本人的代码优化还是跟着kp学习的。步前人后尘 所有资料来源于skr_learning of kp,课件pdf来源于toronto,edx等处没有找到对应视频 # 前言 个人向笔记，仅作为cs143的补充 # 笔记 ## 基础知识 作者认为，编译器可以从以下方面改善： - 最小化操作数 - 用时间代价小的操作代替时间操作大的操作 - 减少缓存缺失 - 多线程工作 而在kp的md中，记录了代码优">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-04T07:12:18.000Z">
 <meta property="article:modified_time" content="2021-12-31T16:20:04.415Z">
@@ -75,7 +75,11 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 6.0.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head>
 
 
 <body>
@@ -230,7 +234,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      1.7k 字
     </span>
   
 
@@ -239,7 +243,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14 分钟
+      15 分钟
     </span>
   
 
@@ -289,53 +293,18 @@
               </p>
             
             <div class="markdown-body">
-              <h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p>本人的代码优化还是跟着<a target="_blank" rel="noopener" href="https://kiprey.github.io/2020/06/LLVM-IR-pass/">kp</a>学习的。<del>步前人后尘</del><br>所有资料来源于<a target="_blank" rel="noopener" href="https://github.com/Kiprey/Skr_Learning/tree/master/week7-8">skr_learning of kp</a>,课件pdf来源于<a target="_blank" rel="noopener" href="http://www.cs.toronto.edu/~pekhimenko/courses/cscd70-w20/index.html">toronto</a>,edx等处没有找到对应视频     </p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>个人向笔记，仅作为cs143的补充</p>
-<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>作者认为，编译器可以从以下方面改善：</p>
-<ul>
-<li>最小化操作数</li>
-<li>用时间代价小的操作代替时间操作大的操作</li>
-<li>减少缓存缺失</li>
-<li>多线程工作</li>
-</ul>
-<p>而在kp的md中，记录了代码优化的具体方法：</p>
-<ul>
-<li>删除公共子表达式：若x op y之前已被计算，且第二次出现时x op y的变量值没有改变，则x op y称为公共子表达式</li>
-<li>删除无用代码</li>
-<li>用常量代替某一个表达式值（推导出该表达式值为常量）</li>
-<li>代码移动：对不管循环多少次都得到相同结果的表达式在进入循环之前就求值</li>
-<li>用时间代价小的操作代替时间操作大的操作</li>
-<li>删除同步变化的归纳变量<br>基础知识：<br>basic block:一个3个地址的序列，他满足：</li>
-<li>只能从第一个statement开始执行</li>
-<li>连续执行到最后一个<br>对basic block的优化是local optimization<br>flow graph:<br>由basic block作为node,若follow(bi)=bj,则建边bi–&gt;bj<br>在对basic block建图之后，就可以基于DAG去除无用代码               </li>
-</ul>
-<p>定义：</p>
-<ul>
-<li>value numbering:每一个“value”都有一个自己的“number”,之前提到的公共子表达式有着相同的”number”,他的作用是对程序中的value/time更敏感<br>examples:<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Assign</span>: a-&gt;r<span class="hljs-number">1</span>,b-&gt;r<span class="hljs-number">2</span>,c-&gt;r<span class="hljs-number">3</span>,d-&gt;r<span class="hljs-number">4</span><br><span class="hljs-attribute">a</span> = b+c;     ADD t<span class="hljs-number">1</span> = r<span class="hljs-number">2</span>,r<span class="hljs-number">3</span><br>             <span class="hljs-attribute">CPY</span> r<span class="hljs-number">1</span> = t<span class="hljs-number">1</span>   //(a = t<span class="hljs-number">1</span>)<br><span class="hljs-attribute">b</span> = a-d;     SUB t<span class="hljs-number">2</span> = r<span class="hljs-number">1</span>,r<span class="hljs-number">4</span><br>             <span class="hljs-attribute">CPY</span> r<span class="hljs-number">2</span> = t<span class="hljs-number">2</span>   //(b = t<span class="hljs-number">2</span>) <br><span class="hljs-attribute">c</span> = b+c;     ADD t<span class="hljs-number">3</span> = r<span class="hljs-number">2</span>,r<span class="hljs-number">3</span><br>             <span class="hljs-attribute">CPY</span> r<span class="hljs-number">3</span> = t<span class="hljs-number">3</span>   //(c = t<span class="hljs-number">3</span>)<br><span class="hljs-attribute">d</span> = a-d;     CPY r<span class="hljs-number">2</span> = t<span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure></li>
-<li>data flow analysis:<br>作用是分析每一个基本块的effect（1）,组合基本块的效果以在基本块边界派生信息（2），从基本块边界，应用局部技术生成指令信息（3）</li>
-</ul>
-<ol>
-<li>对于变量x以及程序语句点p，如果在流程图中沿着从p开始的某条路径会引用x在p的值，则称x在p是活跃的。显然对于每一个flow graph我们都可以判断活跃变量。</li>
-<li>关于生成与杀死：<blockquote>
-<p>杀死：指的是在后续中如果需要计算x op y，则原先的计算结果不可使用，原因是x或y 可能 在这两个过程中间进行了定值操作      </p>
-</blockquote>
-</li>
-</ol>
+              <h1 id="声明">声明</h1>
+<p>本人的代码优化还是跟着<a target="_blank" rel="noopener" href="https://kiprey.github.io/2020/06/LLVM-IR-pass/">kp</a>学习的。<del>步前人后尘</del><br />
+所有资料来源于<a target="_blank" rel="noopener" href="https://github.com/Kiprey/Skr_Learning/tree/master/week7-8">skr_learning of kp</a>,课件pdf来源于<a target="_blank" rel="noopener" href="http://www.cs.toronto.edu/~pekhimenko/courses/cscd70-w20/index.html">toronto</a>,edx等处没有找到对应视频<br />
+# 前言 个人向笔记，仅作为cs143的补充 # 笔记 ## 基础知识 作者认为，编译器可以从以下方面改善： - 最小化操作数 - 用时间代价小的操作代替时间操作大的操作 - 减少缓存缺失 - 多线程工作</p>
+<p>而在kp的md中，记录了代码优化的具体方法： - 删除公共子表达式：若x op y之前已被计算，且第二次出现时x op y的变量值没有改变，则x op y称为公共子表达式 - 删除无用代码 - 用常量代替某一个表达式值（推导出该表达式值为常量） - 代码移动：对不管循环多少次都得到相同结果的表达式在进入循环之前就求值 - 用时间代价小的操作代替时间操作大的操作 - 删除同步变化的归纳变量 基础知识： basic block:一个3个地址的序列，他满足： - 只能从第一个statement开始执行 - 连续执行到最后一个 对basic block的优化是local optimization<br />
+flow graph: 由basic block作为node,若follow(bi)=bj,则建边bi--&gt;bj<br />
+在对basic block建图之后，就可以基于DAG去除无用代码</p>
+<p>定义： - value numbering:每一个“value”都有一个自己的“number”,之前提到的公共子表达式有着相同的"number",他的作用是对程序中的value/time更敏感 examples: <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Assign</span>: a-&gt;r<span class="hljs-number">1</span>,b-&gt;r<span class="hljs-number">2</span>,c-&gt;r<span class="hljs-number">3</span>,d-&gt;r<span class="hljs-number">4</span><br><span class="hljs-attribute">a</span> = b+c;     ADD t<span class="hljs-number">1</span> = r<span class="hljs-number">2</span>,r<span class="hljs-number">3</span><br>             <span class="hljs-attribute">CPY</span> r<span class="hljs-number">1</span> = t<span class="hljs-number">1</span>   //(a = t<span class="hljs-number">1</span>)<br><span class="hljs-attribute">b</span> = a-d;     SUB t<span class="hljs-number">2</span> = r<span class="hljs-number">1</span>,r<span class="hljs-number">4</span><br>             <span class="hljs-attribute">CPY</span> r<span class="hljs-number">2</span> = t<span class="hljs-number">2</span>   //(b = t<span class="hljs-number">2</span>) <br><span class="hljs-attribute">c</span> = b+c;     ADD t<span class="hljs-number">3</span> = r<span class="hljs-number">2</span>,r<span class="hljs-number">3</span><br>             <span class="hljs-attribute">CPY</span> r<span class="hljs-number">3</span> = t<span class="hljs-number">3</span>   //(c = t<span class="hljs-number">3</span>)<br><span class="hljs-attribute">d</span> = a-d;     CPY r<span class="hljs-number">2</span> = t<span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure> - data flow analysis: 作用是分析每一个基本块的effect（1）,组合基本块的效果以在基本块边界派生信息（2），从基本块边界，应用局部技术生成指令信息（3） 1. 对于变量x以及程序语句点p，如果在流程图中沿着从p开始的某条路径会引用x在p的值，则称x在p是活跃的。显然对于每一个flow graph我们都可以判断活跃变量。 2. 关于生成与杀死： &gt;杀死：指的是在后续中如果需要计算x op y，则原先的计算结果不可使用，原因是x或y 可能 在这两个过程中间进行了定值操作</p>
 <blockquote>
 <p>生成：指的是在后续中如果需要计算x op y，则原先的计算结果可以之间使用。</p>
 </blockquote>
-<p>examples:</p>
-<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">a = b + c <span class="hljs-comment">// 生成表达式 b + c</span><br>d = e + f<br>g = b + c <span class="hljs-comment">// 代码优化时，由于 b+c没有被杀死，所以这一步可以优化为 g = a</span><br>b = d     <span class="hljs-comment">// 注意：b被重新定值，与之相关的表达式 b + c被杀死</span><br>f = b + c <span class="hljs-comment">// 由于b+c被杀死，所以代码优化时就  不能！ 优化为f = a</span><br></code></pre></div></td></tr></table></figure>
-<ol start="3">
-<li>SSA 静态单一赋值<br>与VN相似，SSA使每一个变量都有唯一的定义，假设程序对同一个变量有不相关的若干次使用，在SSA中会转变成对不同变量的使用<h2 id="具体内容"><a href="#具体内容" class="headerlink" title="具体内容"></a>具体内容</h2><h3 id="消除无用控制流"><a href="#消除无用控制流" class="headerlink" title="消除无用控制流"></a>消除无用控制流</h3>该算法使用以下四个顺序变化：</li>
-<li>合并冗余分支，如某分支的两个目标是同一个程序块，则替换为跳转语句</li>
-<li>删除空程序块</li>
-<li>合并程序块，</li>
-<li>提升分支指令，若bi跳转到一个空程序块bj而bj以分支结束，则将bi的跳转替换为bj中分支指令的副本<h3 id="消除冗余"><a href="#消除冗余" class="headerlink" title="消除冗余"></a>消除冗余</h3>使用VN消除冗余<h3 id="缓式代码移动"><a href="#缓式代码移动" class="headerlink" title="缓式代码移动"></a>缓式代码移动</h3><blockquote>
-<p>1 计算可用表达式。LCM需要程序块末尾处的可用信息；2 为捕获可用于判断表达式反向移动的信息，LCM需要计算可预测性。3 如果给出了可用性和可预测性的解，对于每个表达式，编译器都可以判断在程序中最早于何处可以对该表达式进行求值。4 LCM中最后一个数据流问题用于判断何时一个最早置放能被推迟到CFG中稍后的一个位置，而仍然能够实现相同的结果。延迟分析表述为CFG上的一个前向数据流问题，其目标在于每个结点n关联的一个集合LaterIn(n)，为每条边(i, j)关联一个集合Later(i, j)。5 利用从数据流计算推导出的知识重写代码。</p>
-</blockquote>
-</li>
-</ol>
+<p>examples: <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">a = b + c <span class="hljs-comment">// 生成表达式 b + c</span><br>d = e + f<br>g = b + c <span class="hljs-comment">// 代码优化时，由于 b+c没有被杀死，所以这一步可以优化为 g = a</span><br>b = d     <span class="hljs-comment">// 注意：b被重新定值，与之相关的表达式 b + c被杀死</span><br>f = b + c <span class="hljs-comment">// 由于b+c被杀死，所以代码优化时就  不能！ 优化为f = a</span><br></code></pre></div></td></tr></table></figure> 3. SSA 静态单一赋值 与VN相似，SSA使每一个变量都有唯一的定义，假设程序对同一个变量有不相关的若干次使用，在SSA中会转变成对不同变量的使用 ## 具体内容 ### 消除无用控制流 该算法使用以下四个顺序变化： 1. 合并冗余分支，如某分支的两个目标是同一个程序块，则替换为跳转语句 2. 删除空程序块 3. 合并程序块， 4. 提升分支指令，若bi跳转到一个空程序块bj而bj以分支结束，则将bi的跳转替换为bj中分支指令的副本 ### 消除冗余 使用VN消除冗余 ### 缓式代码移动 &gt;1 计算可用表达式。LCM需要程序块末尾处的可用信息；2 为捕获可用于判断表达式反向移动的信息，LCM需要计算可预测性。3 如果给出了可用性和可预测性的解，对于每个表达式，编译器都可以判断在程序中最早于何处可以对该表达式进行求值。4 LCM中最后一个数据流问题用于判断何时一个最早置放能被推迟到CFG中稍后的一个位置，而仍然能够实现相同的结果。延迟分析表述为CFG上的一个前向数据流问题，其目标在于每个结点n关联的一个集合LaterIn(n)，为每条边(i, j)关联一个集合Later(i, j)。5 利用从数据流计算推导出的知识重写代码。</p>
 
             </div>
             <hr>

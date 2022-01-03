@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcon.png">
+  <link rel="icon" href="/img/favcon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -55,7 +55,123 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 6.0.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 
 <body>
@@ -227,7 +343,7 @@
       <p class="index-excerpt">
         <a href="/2021/10/05/%E5%91%A8%E8%AE%B01/" target="_self">
           
-          CTf相关stegsolve.jar用于逐帧查看.gifforemost用于分解文件， 1.&#x2F;foremost file winhex用于查看16进制数据，zip伪加密破解等ida逆向exe在搜索栏里加上?file&#x3D;source.php可跳转至source.php文件简单sql注入： 12&amp;#x27; or 1&#x3D;1#密码随便  我们分析下语义，在SQL语法中 # 是注释符，所以后面的语句都会杯注释
+          CTf相关 stegsolve.jar用于逐帧查看.gif foremost用于分解文件， 1.&#x2F;foremost file winhex用于查看16进制数据，zip伪加密破解等 ida逆向exe 在搜索栏里加上?file&#x3D;source.php可跳转至source.php文件 简单sql注入： 12&amp;#x27; or 1&#x3D;1#密码随便 &gt;我们分析下语义，在SQL语法中 # 是注释符，所以后面
         </a>
       </p>
 
@@ -260,7 +376,7 @@
       <p class="index-excerpt">
         <a href="/2021/10/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A1%A5%E5%85%85/" target="_self">
           
-          声明本人的代码优化还是跟着kp学习的。步前人后尘所有资料来源于skr_learning of kp,课件pdf来源于toronto,edx等处没有找到对应视频      前言个人向笔记，仅作为cs143的补充 笔记基础知识作者认为，编译器可以从以下方面改善：  最小化操作数 用时间代价小的操作代替时间操作大的操作 减少缓存缺失 多线程工作  而在kp的md中，记录了代码优化的具体方法：  删除公共
+          声明 本人的代码优化还是跟着kp学习的。步前人后尘 所有资料来源于skr_learning of kp,课件pdf来源于toronto,edx等处没有找到对应视频 # 前言 个人向笔记，仅作为cs143的补充 # 笔记 ## 基础知识 作者认为，编译器可以从以下方面改善： - 最小化操作数 - 用时间代价小的操作代替时间操作大的操作 - 减少缓存缺失 - 多线程工作 而在kp的md中，记录了代码优
         </a>
       </p>
 
@@ -307,7 +423,7 @@
       <p class="index-excerpt">
         <a href="/2021/10/03/CS143/" target="_self">
           
-          声明本compile所有代码均来自Kipery,在抄代码中学习，虽然kp也是这样值得一提的是，我并没有在standford官网上找到对应的programming assignments，而是在github、edx这些网站上找到的编程模板，这些模板留给读到本md的同学自己寻找。除此之外，standford的writing assignments在其官网上仍有handout和solutions，我认为
+          声明 本compile所有代码均来自Kipery,在抄代码中学习，虽然kp也是这样 值得一提的是，我并没有在standford官网上找到对应的programming assignments，而是在github、edx这些网站上找到的编程模板，这些模板留给读到本md的同学自己寻找。除此之外，standford的writing assignments在其官网上仍有handout和solutions，我
         </a>
       </p>
 
@@ -354,7 +470,7 @@
       <p class="index-excerpt">
         <a href="/2021/10/02/zip%E5%8A%A0%E5%AF%86/" target="_self">
           
-          参考一个zip文件由三部分组成：压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志。在winhex里面搜索16进制数据即可。而zip伪加密是在文件头的加密标志位做修改，进而再打开文件时识被别为加密压缩包。 无加密压缩源文件数据区的全局加密应当为00 00  （504B0304两个bytes之后）且压缩源文件目录区的全局方式位标记应当为00 00（504B0304四个bytes之后） 假加密
+          参考 一个zip文件由三部分组成：压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志。 在winhex里面搜索16进制数据即可。而zip伪加密是在文件头的加密标志位做修改，进而再打开文件时识被别为加密压缩包。 ## 无加密 压缩源文件数据区的全局加密应当为00 00 （504B0304两个bytes之后） 且压缩源文件目录区的全局方式位标记应当为00 00（504B0304四个bytes之
         </a>
       </p>
 
@@ -401,7 +517,7 @@
       <p class="index-excerpt">
         <a href="/2021/09/13/%E8%BF%98%E6%98%AF%E9%82%A3%E6%9C%AC%E4%B9%A6/" target="_self">
           
-          更新好久没有写过博客了，这几天比较忙。。。第一次选修课上写东西       正文话说我上次写的第几章来着？（反正是自娱自乐）看到第十章才写到第三章那剩下的就别写了      良好的坏习惯&amp;emsp;&amp;emsp;作者认为丑陋的做法与聪明的做法存在一种连续性的渐变，在英文中,black prose是指平庸陈腐的文章 black the problem则是漂亮的解决了一道题。hacker往往出于好奇心而
+          更新 好久没有写过博客了，这几天比较忙。。。第一次选修课上写东西 # 正文 话说我上次写的第几章来着？（反正是自娱自乐） 看到第十章才写到第三章那剩下的就别写了 ## 良好的坏习惯   作者认为丑陋的做法与聪明的做法存在一种连续性的渐变，在英文中,black prose是指平庸陈腐的文章 black the problem则是漂亮的解决了一道题。hacker往往出于好奇心而入侵计算机等，尽管这有时
         </a>
       </p>
 
@@ -448,7 +564,7 @@
       <p class="index-excerpt">
         <a href="/2021/09/12/%E9%A2%84%E6%B5%8B/" target="_self">
           
-          嗯来一波下周考试预测。一二题应该是hash,前后缀，差分这些，可能会有快速幂？应该就是基础的算法。第三题不会是打磨你（大模拟）吧QaQ,不想要大模拟。第四题是dp?连着两次了。。。。继续出吗？第五题盲猜AC自动机
+          嗯 来一波下周考试预测。 一二题应该是hash,前后缀，差分这些，可能会有快速幂？应该就是基础的算法。第三题不会是打磨你（大模拟）吧QaQ,不想要大模拟。第四题是dp?连着两次了。。。。继续出吗？第五题盲猜AC自动机
         </a>
       </p>
 
@@ -495,7 +611,7 @@
       <p class="index-excerpt">
         <a href="/2021/09/07/%E8%8A%B1%E9%92%B1%E4%B9%B0%E4%B8%AA%E6%95%99%E8%AE%AD/" target="_self">
           
-          买了个萘丸，收到货后才看见这个，老爸评测兰花牌樟脑丸，京东一搜就搜到它了，萘在我国已经禁止添加到樟脑丸中了含萘量达72.8633%!!!!!
+          买了个萘丸，收到货后才看见这个， 老爸评测 兰花牌樟脑丸，京东一搜就搜到它了，萘在我国已经禁止添加到樟脑丸中了 含萘量达72.8633%!!!!!
         </a>
       </p>
 
@@ -542,7 +658,7 @@
       <p class="index-excerpt">
         <a href="/2021/09/06/%E4%B8%8D%E8%83%BD%E8%AF%B4%E7%9A%84%E8%AF%9D/" target="_self">
           
-          流行的道德观念&amp;emsp;&amp;emsp;是的，我没有说错。作者在这一章提出了这样听起来有些骇人的观点，他以流行的衣服为例，认为流行的道德观念正如流行的衣服一样是丑，不是善而是恶。布鲁诺不承认教廷施加的罪，于是被下令烧死；比干被挖出心脏，至今仍有人认为岳飞是愚忠。似乎任何一个年代的人们都有一些深信不疑、不可触犯的内容。那我们这个年代又如何呢？ 随大流&amp;emsp;&amp;emsp;作者接下来问道：你是一个随大
+          流行的道德观念   是的，我没有说错。作者在这一章提出了这样听起来有些骇人的观点，他以流行的衣服为例，认为流行的道德观念正如流行的衣服一样是丑，不是善而是恶。布鲁诺不承认教廷施加的罪，于是被下令烧死；比干被挖出心脏，至今仍有人认为岳飞是愚忠。似乎任何一个年代的人们都有一些深信不疑、不可触犯的内容。那我们这个年代又如何呢？ ## 随大流   作者接下来问道：你是一个随大流的人吗？或者说，你的观点是否
         </a>
       </p>
 
@@ -589,7 +705,7 @@
       <p class="index-excerpt">
         <a href="/2021/09/05/%E9%BB%91%E5%AE%A2%E4%B8%8E%E7%94%BB%E5%AE%B6/" target="_self">
           
-          &amp;emsp;&amp;emsp;唯一有效的外部考核就是时间。&amp;emsp;&amp;emsp;作者认为，黑客与画家最像。因为他们都是创作者，他们本质上都是在试图创造出优秀的作品，计算机和画笔只是一种媒介。外人往往喜欢为了行政管理的方便而把不同类型的工作捆绑到一起，作者认为“计算机科学”两头的数学家和黑客并不能称之为与中间一样的计算机科学。 露西，这下够你解释的了科研和创作的区别 科学研究必须是能够产生大囊成果的，而
+          唯一有效的外部考核就是时间。   作者认为，黑客与画家最像。因为他们都是创作者，他们本质上都是在试图创造出优秀的作品，计算机和画笔只是一种媒介。外人往往喜欢为了行政管理的方便而把不同类型的工作捆绑到一起，作者认为“计算机科学”两头的数学家和黑客并不能称之为与中间一样的计算机科学。 # 露西，这下够你解释的了 ## 科研和创作的区别 &gt;科学研究必须是能够产生大囊成果的，而那些不成熟的、障碍
         </a>
       </p>
 
@@ -636,7 +752,7 @@
       <p class="index-excerpt">
         <a href="/2021/08/30/mac/" target="_self">
           
-          闲&amp;emsp;&amp;emsp;嗯，今天很闲。mac的ui确实不错，mydock这个软件可以让你在win上使用mac风格的桌面，效果图如下：&amp;emsp;&amp;emsp;搭配着wallpaper是真心舒服 老故事&amp;emsp;&amp;emsp;众所周知，QQ之前被爆出来过读取用户浏览器记录；而如果我们使用火绒自定义规则从此之后不需要担心，只需要写一个脚本，之后将自定义规则添加上去就行。下面是隐私防护.json的代码：
+          闲   嗯，今天很闲。mac的ui确实不错，mydock这个软件可以让你在win上使用mac风格的桌面，效果图如下：    搭配着wallpaper是真心舒服 # 老故事   众所周知，QQ之前被爆出来过读取用户浏览器记录；而如果我们使用火绒自定义规则从此之后不需要担心，只需要写一个脚本，之后将自定义规则添加上去就行。下面是隐私防护.json的代码： 12345678910111213141516
         </a>
       </p>
 

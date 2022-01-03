@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcon.png">
+  <link rel="icon" href="/img/favcon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -16,12 +16,12 @@
   <meta name="author" content="Heeler-Deer">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CTf相关stegsolve.jar用于逐帧查看.gifforemost用于分解文件， 1.&#x2F;foremost file winhex用于查看16进制数据，zip伪加密破解等ida逆向exe在搜索栏里加上?file&#x3D;source.php可跳转至source.php文件简单sql注入： 12&amp;#x27; or 1&#x3D;1#密码随便  我们分析下语义，在SQL语法中 # 是注释符，所以后面的语句都会杯注释">
+    <meta name="description" content="CTf相关 stegsolve.jar用于逐帧查看.gif foremost用于分解文件， 1.&#x2F;foremost file winhex用于查看16进制数据，zip伪加密破解等 ida逆向exe 在搜索栏里加上?file&#x3D;source.php可跳转至source.php文件 简单sql注入： 12&amp;#x27; or 1&#x3D;1#密码随便 &gt;我们分析下语义，在SQL语法中 # 是注释符，所以后面">
 <meta property="og:type" content="article">
 <meta property="og:title" content="周记1">
 <meta property="og:url" content="https://heeler-deer.github.io/2021/10/05/%E5%91%A8%E8%AE%B01/index.html">
 <meta property="og:site_name" content="Heeler-Deer">
-<meta property="og:description" content="CTf相关stegsolve.jar用于逐帧查看.gifforemost用于分解文件， 1.&#x2F;foremost file winhex用于查看16进制数据，zip伪加密破解等ida逆向exe在搜索栏里加上?file&#x3D;source.php可跳转至source.php文件简单sql注入： 12&amp;#x27; or 1&#x3D;1#密码随便  我们分析下语义，在SQL语法中 # 是注释符，所以后面的语句都会杯注释">
+<meta property="og:description" content="CTf相关 stegsolve.jar用于逐帧查看.gif foremost用于分解文件， 1.&#x2F;foremost file winhex用于查看16进制数据，zip伪加密破解等 ida逆向exe 在搜索栏里加上?file&#x3D;source.php可跳转至source.php文件 简单sql注入： 12&amp;#x27; or 1&#x3D;1#密码随便 &gt;我们分析下语义，在SQL语法中 # 是注释符，所以后面">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-05T12:27:02.000Z">
 <meta property="article:modified_time" content="2021-12-31T16:20:04.415Z">
@@ -74,7 +74,11 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 6.0.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head>
 
 
 <body>
@@ -229,7 +233,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      672 字
+      681 字
     </span>
   
 
@@ -288,24 +292,20 @@
               </p>
             
             <div class="markdown-body">
-              <h1 id="CTf相关"><a href="#CTf相关" class="headerlink" title="CTf相关"></a>CTf相关</h1><p>stegsolve.jar用于逐帧查看.gif<br>foremost用于分解文件，</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">./foremost file<br></code></pre></div></td></tr></table></figure>
-<p>winhex用于查看16进制数据，zip伪加密破解等<br>ida逆向exe<br>在搜索栏里加上?file=source.php可跳转至source.php文件<br>简单sql注入：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">&#x27; or 1=1#<br>密码随便<br></code></pre></div></td></tr></table></figure>
-<blockquote>
-<p>我们分析下语义，在SQL语法中 # 是注释符，所以后面的语句都会杯注释掉。</p>
-</blockquote>
-<p>robots协议：</p>
-<blockquote>
-<p>Robots协议（也称为爬虫协议、机器人协议等）的全称是“网络爬虫排除标准”（Robots ExclusionProtocol），网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取.</p>
-</blockquote>
-<p>常见的备份文件后缀：.git .svn .swp .svn .~ .bak .bash_history<br>如xctf的backup(新手web区)访问url/index.php.bak<br>127.0.0.1是本地地址<br>burpsuite每次启动都要破解。。。。。</p>
-<h1 id="算法相关"><a href="#算法相关" class="headerlink" title="算法相关"></a>算法相关</h1><h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>昨晚python运行时链接器报错：</p>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">glibcxx_3</span>.<span class="hljs-number">4</span>.<span class="hljs-number">26</span> not found<br></code></pre></div></td></tr></table></figure>
-<p>然而系统找的到这个glibxx3.4.26,位于我的/usr/lib/x86_64-linux-gnu/libstdc++.so.6中，然而一直报错说没有。。。。</p>
-<p>最终解决办法参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43399156/article/details/103146323">博客</a>，采用cp命令，执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /home/user name你的账户名/miniconda(你的可能叫miniconda3)/lib<br></code></pre></div></td></tr></table></figure>
-<p>路径修改成自己的即可</p>
+              <h1 id="ctf相关">CTf相关</h1>
+<p>stegsolve.jar用于逐帧查看.gif<br />
+foremost用于分解文件， <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">./foremost file<br></code></pre></div></td></tr></table></figure> winhex用于查看16进制数据，zip伪加密破解等<br />
+ida逆向exe<br />
+在搜索栏里加上?file=source.php可跳转至source.php文件<br />
+简单sql注入： <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">&#x27; or 1=1#<br>密码随便<br></code></pre></div></td></tr></table></figure> &gt;我们分析下语义，在SQL语法中 # 是注释符，所以后面的语句都会杯注释掉。</p>
+<p>robots协议： &gt;Robots协议（也称为爬虫协议、机器人协议等）的全称是“网络爬虫排除标准”（Robots ExclusionProtocol），网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取.</p>
+<p>常见的备份文件后缀：.git .svn .swp .svn .~ .bak .bash_history<br />
+如xctf的backup(新手web区)访问url/index.php.bak<br />
+127.0.0.1是本地地址<br />
+burpsuite每次启动都要破解。。。。。 # 算法相关</p>
+<h1 id="其他">其他</h1>
+<p>昨晚python运行时链接器报错： <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">glibcxx_3</span>.<span class="hljs-number">4</span>.<span class="hljs-number">26</span> not found<br></code></pre></div></td></tr></table></figure> 然而系统找的到这个glibxx3.4.26,位于我的/usr/lib/x86_64-linux-gnu/libstdc++.so.6中，然而一直报错说没有。。。。</p>
+<p>最终解决办法参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43399156/article/details/103146323">博客</a>，采用cp命令，执行： <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /home/user name你的账户名/miniconda(你的可能叫miniconda3)/lib<br></code></pre></div></td></tr></table></figure> 路径修改成自己的即可</p>
 
             </div>
             <hr>

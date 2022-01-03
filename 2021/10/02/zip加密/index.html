@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcon.png">
+  <link rel="icon" href="/img/favcon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -16,12 +16,12 @@
   <meta name="author" content="Heeler-Deer">
   <meta name="keywords" content="">
   
-    <meta name="description" content="参考一个zip文件由三部分组成：压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志。在winhex里面搜索16进制数据即可。而zip伪加密是在文件头的加密标志位做修改，进而再打开文件时识被别为加密压缩包。 无加密压缩源文件数据区的全局加密应当为00 00  （504B0304两个bytes之后）且压缩源文件目录区的全局方式位标记应当为00 00（504B0304四个bytes之后） 假加密">
+    <meta name="description" content="参考 一个zip文件由三部分组成：压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志。 在winhex里面搜索16进制数据即可。而zip伪加密是在文件头的加密标志位做修改，进而再打开文件时识被别为加密压缩包。 ## 无加密 压缩源文件数据区的全局加密应当为00 00 （504B0304两个bytes之后） 且压缩源文件目录区的全局方式位标记应当为00 00（504B0304四个bytes之">
 <meta property="og:type" content="article">
 <meta property="og:title" content="zip加密">
 <meta property="og:url" content="https://heeler-deer.github.io/2021/10/02/zip%E5%8A%A0%E5%AF%86/index.html">
 <meta property="og:site_name" content="Heeler-Deer">
-<meta property="og:description" content="参考一个zip文件由三部分组成：压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志。在winhex里面搜索16进制数据即可。而zip伪加密是在文件头的加密标志位做修改，进而再打开文件时识被别为加密压缩包。 无加密压缩源文件数据区的全局加密应当为00 00  （504B0304两个bytes之后）且压缩源文件目录区的全局方式位标记应当为00 00（504B0304四个bytes之后） 假加密">
+<meta property="og:description" content="参考 一个zip文件由三部分组成：压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志。 在winhex里面搜索16进制数据即可。而zip伪加密是在文件头的加密标志位做修改，进而再打开文件时识被别为加密压缩包。 ## 无加密 压缩源文件数据区的全局加密应当为00 00 （504B0304两个bytes之后） 且压缩源文件目录区的全局方式位标记应当为00 00（504B0304四个bytes之">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-02T11:52:49.000Z">
 <meta property="article:modified_time" content="2021-12-31T16:20:04.415Z">
@@ -75,7 +75,11 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 6.0.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head>
 
 
 <body>
@@ -289,13 +293,51 @@
               </p>
             
             <div class="markdown-body">
-              <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011377996/article/details/79286958">参考</a><br>一个zip文件由三部分组成：压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志。<br>在winhex里面搜索16进制数据即可。而zip伪加密是在文件头的加密标志位做修改，进而再打开文件时识被别为加密压缩包。</p>
-<h2 id="无加密"><a href="#无加密" class="headerlink" title="无加密"></a>无加密</h2><p>压缩源文件数据区的全局加密应当为00 00  （504B0304两个bytes之后）<br>且压缩源文件目录区的全局方式位标记应当为00 00（504B0304四个bytes之后）</p>
-<h2 id="假加密"><a href="#假加密" class="headerlink" title="假加密"></a>假加密</h2><p>压缩源文件数据区的全局加密应当为00 00<br>且压缩源文件目录区的全局方式位标记应当为09 00</p>
-<h2 id="真加密"><a href="#真加密" class="headerlink" title="真加密"></a>真加密</h2><p>压缩源文件数据区的全局加密应当为09 00<br>且压缩源文件目录区的全局方式位标记应当为09 00 </p>
-<blockquote>
-<p>压缩源文件数据区：<br>50 4B 03 04：这是头文件标记（0x04034b50）<br>14 00：解压文件所需 pkware 版本<br>00 00：全局方式位标记（有无加密）<br>08 00：压缩方式<br>5A 7E：最后修改文件时间<br>F7 46：最后修改文件日期<br>16 B5 80 14：CRC-32校验（1480B516）<br>19 00 00 00：压缩后尺寸（25）<br>17 00 00 00：未压缩尺寸（23）<br>07 00：文件名长度<br>00 00：扩展记录长度<br>6B65792E7478740BCECC750E71ABCE48CDC9C95728CECC2DC849AD284DAD0500<br>压缩源文件目录区：<br>50 4B 01 02：目录中文件文件头标记(0x02014b50)<br>3F 00：压缩使用的 pkware 版本<br>14 00：解压文件所需 pkware 版本<br>00 00：全局方式位标记（有无加密，这个更改这里进行伪加密，改为09 00打开就会提示有密码了）<br>08 00：压缩方式<br>5A 7E：最后修改文件时间<br>F7 46：最后修改文件日期<br>16 B5 80 14：CRC-32校验（1480B516）<br>19 00 00 00：压缩后尺寸（25）<br>17 00 00 00：未压缩尺寸（23）<br>07 00：文件名长度<br>24 00：扩展字段长度<br>00 00：文件注释长度<br>00 00：磁盘开始号<br>00 00：内部文件属性<br>20 00 00 00：外部文件属性<br>00 00 00 00：局部头部偏移量<br>6B65792E7478740A00200000000000010018006558F04A1CC5D001BDEBDD3B1CC5D001BDEBDD3B1CC5D001<br>压缩源文件目录结束标志：<br>50 4B 05 06：目录结束标记<br>00 00：当前磁盘编号<br>00 00：目录区开始磁盘编号<br>01 00：本磁盘上纪录总数<br>01 00：目录区中纪录总数<br>59 00 00 00：目录区尺寸大小<br>3E 00 00 00：目录区对第一张磁盘的偏移量<br>00 00：ZIP 文件注释长度     </p>
-</blockquote>
+              <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011377996/article/details/79286958">参考</a> 一个zip文件由三部分组成：压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志。<br />
+在winhex里面搜索16进制数据即可。而zip伪加密是在文件头的加密标志位做修改，进而再打开文件时识被别为加密压缩包。 ## 无加密 压缩源文件数据区的全局加密应当为00 00 （504B0304两个bytes之后） 且压缩源文件目录区的全局方式位标记应当为00 00（504B0304四个bytes之后）</p>
+<h2 id="假加密">假加密</h2>
+<p>压缩源文件数据区的全局加密应当为00 00 且压缩源文件目录区的全局方式位标记应当为09 00</p>
+<h2 id="真加密">真加密</h2>
+<p>压缩源文件数据区的全局加密应当为09 00 且压缩源文件目录区的全局方式位标记应当为09 00 &gt;压缩源文件数据区： 50 4B 03 04：这是头文件标记（0x04034b50）<br />
+14 00：解压文件所需 pkware 版本<br />
+00 00：全局方式位标记（有无加密）<br />
+08 00：压缩方式<br />
+5A 7E：最后修改文件时间<br />
+F7 46：最后修改文件日期<br />
+16 B5 80 14：CRC-32校验（1480B516）<br />
+19 00 00 00：压缩后尺寸（25）<br />
+17 00 00 00：未压缩尺寸（23）<br />
+07 00：文件名长度<br />
+00 00：扩展记录长度<br />
+6B65792E7478740BCECC750E71ABCE48CDC9C95728CECC2DC849AD284DAD0500<br />
+压缩源文件目录区：<br />
+50 4B 01 02：目录中文件文件头标记(0x02014b50)<br />
+3F 00：压缩使用的 pkware 版本<br />
+14 00：解压文件所需 pkware 版本<br />
+00 00：全局方式位标记（有无加密，这个更改这里进行伪加密，改为09 00打开就会提示有密码了）<br />
+08 00：压缩方式<br />
+5A 7E：最后修改文件时间<br />
+F7 46：最后修改文件日期<br />
+16 B5 80 14：CRC-32校验（1480B516）<br />
+19 00 00 00：压缩后尺寸（25）<br />
+17 00 00 00：未压缩尺寸（23）<br />
+07 00：文件名长度<br />
+24 00：扩展字段长度<br />
+00 00：文件注释长度<br />
+00 00：磁盘开始号<br />
+00 00：内部文件属性<br />
+20 00 00 00：外部文件属性<br />
+00 00 00 00：局部头部偏移量<br />
+6B65792E7478740A00200000000000010018006558F04A1CC5D001BDEBDD3B1CC5D001BDEBDD3B1CC5D001<br />
+压缩源文件目录结束标志：<br />
+50 4B 05 06：目录结束标记<br />
+00 00：当前磁盘编号<br />
+00 00：目录区开始磁盘编号<br />
+01 00：本磁盘上纪录总数<br />
+01 00：目录区中纪录总数<br />
+59 00 00 00：目录区尺寸大小<br />
+3E 00 00 00：目录区对第一张磁盘的偏移量<br />
+00 00：ZIP 文件注释长度</p>
 <p>注意504B0304\504B0102\504B0506</p>
 
             </div>
