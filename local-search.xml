@@ -606,7 +606,7 @@
     <link href="/"/>
     <url>/</url>
     
-    <content type="html"><![CDATA[<div class="markdown-body"><h1>我的周记</h1></div>&lt;!DOCTYPE html&gt;<html><head><style>.city {  background-color:     SlateBlue;  color:    Cyan;  border: 2px solid black;  margin: 20px;  padding: 20px;}</style></head><body><div class="city"><h2>第一周</h2><h5>1.1~1.3</h5><p>这一周主要是换了电脑的操作系统，由windows换到了ubuntu，麻烦事挺多的。<ul style="color:   MediumSpringGreen"><li>博客迁移，重新布置了数学公式插件以及图标</li><li>数据备份以及其他必要的操作</li></ul>之后就是验收CPU，赶实验报告，说好的复习也没有复习</p></div></body></html>]]></content>
+    <content type="html"><![CDATA[<div class="markdown-body"><h1>我的周记</h1></div><html><head><style>.city {  background-color:     SlateBlue;  color:    Cyan;  border: 2px solid black;  margin: 20px;  padding: 20px;}</style></head><body><div class="city"><h2>第一周</h2><h5>1.1~1.3</h5><p>这一周主要是换了电脑的操作系统，由windows换到了ubuntu，麻烦事挺多的。<ul style="color:   MediumSpringGreen"><li>博客迁移，重新布置了数学公式插件以及图标</li><li>数据备份以及其他必要的操作</li></ul>之后就是验收CPU，赶实验报告，说好的复习也没有复习</p></div></body></html>]]></content>
     
   </entry>
   
