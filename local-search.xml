@@ -17,19 +17,6 @@
   
   
   <entry>
-    <title>周记3</title>
-    <link href="/2021/12/05/%E5%91%A8%E8%AE%B03/"/>
-    <url>/2021/12/05/%E5%91%A8%E8%AE%B03/</url>
-    
-    <content type="html"><![CDATA[<p>唉，</p><p>感觉自己是个废物。。。。。</p><p>停了吧。。。</p><p>截至2021-12-25，tcp读了32%，kaggle的panda完成了3/7,cf不打了，课退了。</p><p>那些想读的书没一本读完的。</p><p>得。</p><p>其实我发现挺简单的，没必要都停了🎉️</p><p>体育会不会挂啊</p><p>最近好烦啊</p><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> sudo <span class="hljs-built_in">echo</span> 3 &gt; brightness</span><br>An error occurred while redirecting file &#x27;brightness&#x27;<br>open: Permission denied<br><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">echo</span> 3 | sudo tee brightness</span><br></code></pre></div></td></tr></table></figure><p>2021-12-25，学校把ipv6给ban了，不让走ipv6的socks流量转发了，</p><p>我好不容易免流一次，你却让我输的这么彻底，焯！ 现在可以免流了</p>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>tcp/ip浅读</title>
     <link href="/2021/11/28/tcp-ip%E6%B5%85%E8%AF%BB/"/>
     <url>/2021/11/28/tcp-ip%E6%B5%85%E8%AF%BB/</url>
@@ -136,19 +123,6 @@
   
   
   <entry>
-    <title>周记2</title>
-    <link href="/2021/10/18/%E5%91%A8%E8%AE%B02/"/>
-    <url>/2021/10/18/%E5%91%A8%E8%AE%B02/</url>
-    
-    <content type="html"><![CDATA[<p>以后算法题放在牛客上了<br />鸽了好久，这一周都没有空做CSAPP的lab，做了3个ppt，忙死了。<br />这周备考期中，暂停一切与期中无关的东西。<br />艹，受刺激了，开学！</p><h1 id="excel">excel</h1><ol type="1"><li>? 任意单个字符</li><li><ul><li>任意多个字符</li></ul></li><li>~ 转义 vlookup<br />offset<br />index<br />match<br />方方格子，excel汇总大师<br />感觉自己好菜啊，上次交codeforces还是一个月前，div2只能做出两道题目。</li></ol>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>心情</title>
     <link href="/2021/10/09/%E5%BF%83%E6%83%85/"/>
     <url>/2021/10/09/%E5%BF%83%E6%83%85/</url>
@@ -168,19 +142,6 @@
       <tag>cs</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>周记1</title>
-    <link href="/2021/10/05/%E5%91%A8%E8%AE%B01/"/>
-    <url>/2021/10/05/%E5%91%A8%E8%AE%B01/</url>
-    
-    <content type="html"><![CDATA[<h1 id="ctf相关">CTf相关</h1><p>stegsolve.jar用于逐帧查看.gif<br />foremost用于分解文件， <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">./foremost file<br></code></pre></div></td></tr></table></figure> winhex用于查看16进制数据，zip伪加密破解等<br />ida逆向exe<br />在搜索栏里加上?file=source.php可跳转至source.php文件<br />简单sql注入： <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">&#x27; or 1=1#<br>密码随便<br></code></pre></div></td></tr></table></figure> &gt;我们分析下语义，在SQL语法中 # 是注释符，所以后面的语句都会杯注释掉。</p><p>robots协议： &gt;Robots协议（也称为爬虫协议、机器人协议等）的全称是“网络爬虫排除标准”（Robots ExclusionProtocol），网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取.</p><p>常见的备份文件后缀：.git .svn .swp .svn .~ .bak .bash_history<br />如xctf的backup(新手web区)访问url/index.php.bak<br />127.0.0.1是本地地址<br />burpsuite每次启动都要破解。。。。。 # 算法相关</p><h1 id="其他">其他</h1><p>昨晚python运行时链接器报错： <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">glibcxx_3</span>.<span class="hljs-number">4</span>.<span class="hljs-number">26</span> not found<br></code></pre></div></td></tr></table></figure> 然而系统找的到这个glibxx3.4.26,位于我的/usr/lib/x86_64-linux-gnu/libstdc++.so.6中，然而一直报错说没有。。。。</p><p>最终解决办法参考<a href="https://blog.csdn.net/weixin_43399156/article/details/103146323">博客</a>，采用cp命令，执行： <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /home/user name你的账户名/miniconda(你的可能叫miniconda3)/lib<br></code></pre></div></td></tr></table></figure> 路径修改成自己的即可</p>]]></content>
-    
-    
     
   </entry>
   
@@ -212,111 +173,11 @@
   
   
   <entry>
-    <title>zip加密</title>
-    <link href="/2021/10/02/zip%E5%8A%A0%E5%AF%86/"/>
-    <url>/2021/10/02/zip%E5%8A%A0%E5%AF%86/</url>
-    
-    <content type="html"><![CDATA[<p><a href="https://blog.csdn.net/u011377996/article/details/79286958">参考</a> 一个zip文件由三部分组成：压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志。<br />在winhex里面搜索16进制数据即可。而zip伪加密是在文件头的加密标志位做修改，进而再打开文件时识被别为加密压缩包。 ## 无加密 压缩源文件数据区的全局加密应当为00 00 （504B0304两个bytes之后） 且压缩源文件目录区的全局方式位标记应当为00 00（504B0304四个bytes之后）</p><h2 id="假加密">假加密</h2><p>压缩源文件数据区的全局加密应当为00 00 且压缩源文件目录区的全局方式位标记应当为09 00</p><h2 id="真加密">真加密</h2><p>压缩源文件数据区的全局加密应当为09 00 且压缩源文件目录区的全局方式位标记应当为09 00 &gt;压缩源文件数据区： 50 4B 03 04：这是头文件标记（0x04034b50）<br />14 00：解压文件所需 pkware 版本<br />00 00：全局方式位标记（有无加密）<br />08 00：压缩方式<br />5A 7E：最后修改文件时间<br />F7 46：最后修改文件日期<br />16 B5 80 14：CRC-32校验（1480B516）<br />19 00 00 00：压缩后尺寸（25）<br />17 00 00 00：未压缩尺寸（23）<br />07 00：文件名长度<br />00 00：扩展记录长度<br />6B65792E7478740BCECC750E71ABCE48CDC9C95728CECC2DC849AD284DAD0500<br />压缩源文件目录区：<br />50 4B 01 02：目录中文件文件头标记(0x02014b50)<br />3F 00：压缩使用的 pkware 版本<br />14 00：解压文件所需 pkware 版本<br />00 00：全局方式位标记（有无加密，这个更改这里进行伪加密，改为09 00打开就会提示有密码了）<br />08 00：压缩方式<br />5A 7E：最后修改文件时间<br />F7 46：最后修改文件日期<br />16 B5 80 14：CRC-32校验（1480B516）<br />19 00 00 00：压缩后尺寸（25）<br />17 00 00 00：未压缩尺寸（23）<br />07 00：文件名长度<br />24 00：扩展字段长度<br />00 00：文件注释长度<br />00 00：磁盘开始号<br />00 00：内部文件属性<br />20 00 00 00：外部文件属性<br />00 00 00 00：局部头部偏移量<br />6B65792E7478740A00200000000000010018006558F04A1CC5D001BDEBDD3B1CC5D001BDEBDD3B1CC5D001<br />压缩源文件目录结束标志：<br />50 4B 05 06：目录结束标记<br />00 00：当前磁盘编号<br />00 00：目录区开始磁盘编号<br />01 00：本磁盘上纪录总数<br />01 00：目录区中纪录总数<br />59 00 00 00：目录区尺寸大小<br />3E 00 00 00：目录区对第一张磁盘的偏移量<br />00 00：ZIP 文件注释长度</p><p>注意504B0304\504B0102\504B0506</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>瞎搞</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>ctf</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>还是那本书</title>
     <link href="/2021/09/13/%E8%BF%98%E6%98%AF%E9%82%A3%E6%9C%AC%E4%B9%A6/"/>
     <url>/2021/09/13/%E8%BF%98%E6%98%AF%E9%82%A3%E6%9C%AC%E4%B9%A6/</url>
     
     <content type="html"><![CDATA[<h1 id="更新">更新</h1><p>好久没有写过博客了，这几天比较忙。。。<del>第一次选修课上写东西</del><br># 正文 话说我上次写的第几章来着？（<del>反正是自娱自乐</del>）<br><del>看到第十章才写到第三章那剩下的就别写了</del><br>## 良好的坏习惯   作者认为丑陋的做法与聪明的做法存在一种连续性的渐变，在英文中,black prose是指平庸陈腐的文章 black the problem则是漂亮的解决了一道题。hacker往往出于好奇心而入侵计算机等，尽管这有时并不为人们所允许。在他们眼里，有些公司出于某种目的而为他们的产品加密，这等同于交给一个开锁匠一把锁，黑客的第一反应是---如何打开它。举个例子，第二代电脑不是诞生于IBM实验室，而是诞生于旧金山的一个仓库---hacker只有深入了解最新技术，才能开发出新的技术，而那些新的技术往往并不诞生于他们“本应”出现的公司。作者在此章最后写道： &gt;那些占据高位、 本能地想要约束黑客、 强迫黑客服从的人们， 请小心你们的要求，因为你们真有可能成为千古罪人。</p><h2 id="另一条路">另一条路</h2><p>  作者在此章认为网页版软件正在成为一个新型的趋势，在电脑上下载并安装软件正在成为过去式。对此，我认为互联网软件确实有其优点，比如overleaf，各种在线笔译平台，这都是很受欢迎的软件。不久前微软发布的web版vscode则更为惊艳。虽然刚刚发布就撤回了，但也足以说明问题。从另一个角度讲，智能手机的发展似乎在限制web版应用的发展。很多人只是需要一个手机就足以完成他们大多时候的需求，（至少在中国是这样）他们唯一与电脑的接触恐怕就是office这类办公软件，他们甚至只装了360和一些必要的办公软件。至少web版的软件不会影响到这些人--那些仅仅把电脑当作一时的工具来使用的人，毕竟对他们来讲，现有的office已经足够了。<br>  第六章第七章谈论的是创业以及贫富差距的事情，我不想多谈论这些。作者最后提出一个值得探讨的问题：“你要避免的是绝对贫穷，而不是相对贫穷”。对此，我暂时没有一个具体的想法。<br>## 防止垃圾邮件 &gt; 如果我们能够写出可以从内容上识别出垃圾邮件的软件，那么他们就无法逃脱了。</p><blockquote><p>就好像治疗粉刺的药物却有致人死亡的危险一样。</p></blockquote><h2 id="设计者的品味">设计者的品味</h2><blockquote><p>美感是第一道关卡。丑陋的数学在世界上无法生存。--《一个数学家的道歉》</p></blockquote><p>作者认为，品味并不是个人的偏好，否则那些流传下来的名画难道都能符合大众的口味吗？一个好的设计，应该遵循一些原则： 1. 简单 2. 永不过时，时间会证明一切 3. 解决主要问题，此处不单指艺术品 4. 启发性 5. 趣味性 6. 艰苦的设计 7. 看似容易的设计 8. 对称 9. 模仿大自然 10. 再设计 11. 能够复制 12. 奇特 13. 成批出现的设计 14. 大胆</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>读书</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>黑客与画家</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>预测</title>
-    <link href="/2021/09/12/%E9%A2%84%E6%B5%8B/"/>
-    <url>/2021/09/12/%E9%A2%84%E6%B5%8B/</url>
-    
-    <content type="html"><![CDATA[<h1 id="嗯">嗯</h1><p>来一波下周考试预测。<br />一二题应该是hash,前后缀，差分这些，可能会有快速幂？应该就是基础的算法。第三题不会是打磨你（大模拟）吧QaQ,不想要大模拟。第四题是dp?连着两次了。。。。继续出吗？第五题盲猜AC自动机</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>blog</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>花里胡哨</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>花钱买个教训</title>
-    <link href="/2021/09/07/%E8%8A%B1%E9%92%B1%E4%B9%B0%E4%B8%AA%E6%95%99%E8%AE%AD/"/>
-    <url>/2021/09/07/%E8%8A%B1%E9%92%B1%E4%B9%B0%E4%B8%AA%E6%95%99%E8%AE%AD/</url>
-    
-    <content type="html"><![CDATA[<p>买了个萘丸，收到货后才看见这个，<br /><a href="https://www.bilibili.com/read/cv7597941/">老爸评测</a><br />兰花牌樟脑丸，京东一搜就搜到它了，萘在我国已经禁止添加到樟脑丸中了 含萘量达72.8633%!!!!!</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>blog</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>花里胡哨</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>不能说的话</title>
-    <link href="/2021/09/06/%E4%B8%8D%E8%83%BD%E8%AF%B4%E7%9A%84%E8%AF%9D/"/>
-    <url>/2021/09/06/%E4%B8%8D%E8%83%BD%E8%AF%B4%E7%9A%84%E8%AF%9D/</url>
-    
-    <content type="html"><![CDATA[<h1 id="流行的道德观念">流行的道德观念</h1><p>  是的，我没有说错。作者在这一章提出了这样听起来有些骇人的观点，他以流行的衣服为例，认为流行的道德观念正如流行的衣服一样是丑，<strong>不是善而是恶</strong>。布鲁诺不承认教廷施加的罪，于是被下令烧死；比干被挖出心脏，至今仍有人认为岳飞是<em>愚忠</em>。似乎任何一个年代的人们都有一些深信不疑、不可触犯的内容。那我们这个年代又如何呢？ ## 随大流   作者接下来问道：你是一个随大流的人吗？或者说，你的观点是否大多来自于他人？ &gt; 如果你是南北战争前的南方庄园主，你会与北方开战；如果你是20世纪30年代的德国人，你会相信希特勒。</p><p>  同时，作者认为，那些激怒人的 言论是那些令人可能相信的言论，如果伽利略说他身高三米，那么没有人会在意，但如果伽利略说地球绕太阳转，他就面临和布鲁诺一样的风险。 ## 判断真伪   我们不能通晓未来，却可以知晓过去。   试想，对于物理这种硬科学，我们可以根据知识去判断真伪，但如果是社会学这种学科，该如何判断一项具体措施的好坏？流行的道德观念往往是刻意为之，任何斗争都伴随着思想斗争。我认为这一点在作者所处的美国更为明显。哪一个团体势力强大而又高度紧张，就会散布舆论，操弄道德。那我们该如何判断道德的<strong><em>真伪</em></strong>？   方法有很多： 1. 怀疑其真实性 2. 看看人们怎么称呼那些他们不赞成但又不算错的观点 3. 以史为鉴 4. 听到一个人的话时，分析其成长环境，一个只生活在大house的人即使认为自己见多识广，其见识往往比不过航海家 5. 观察禁忌是如何产生的 ## 为什么要找出<strong>不能说的话</strong>   一个是黑客与生俱来的好奇心，既然明知那里有挡住去路的石头，就要把他们翻过来看个究竟。另一个，如果我们现在所作的事情在将来被认为是荒谬可笑的，你难道不想知道是那些事情吗？我和作者一样，都不希望这样。更何况，这样能帮助我们<strong>远远地</strong>跳出传统思维，这样不好吗？ ## 只打那些值得打的仗   记住，自由思考永远比畅所欲言更重要。 &gt; 如果你的数学不好，那么你自己会知道，因为考试的时候你得不出正确答案。但是，如果你的思想很保守，你自己不会知道，而且你很可能还会持有相反的看法。</p><p>准则就是，守口如瓶，笑脸相迎。毕竟，<em>我还没想好</em>。</p>]]></content>
     
     
     <categories>
@@ -354,33 +215,6 @@
     <tags>
       
       <tag>黑客与画家</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>mac</title>
-    <link href="/2021/08/30/mac/"/>
-    <url>/2021/08/30/mac/</url>
-    
-    <content type="html"><![CDATA[<h1 id="闲">闲</h1><p>  嗯，今天很闲。mac的ui确实不错，mydock这个软件可以让你在win上使用mac风格的桌面，效果图如下：<br /><img src="https://github.com/heeler-deer/absorbing/blob/main/png/Camera%20Roll/2.png?raw=true" srcset="/img/loading.gif" lazyload />   搭配着wallpaper是真心舒服 # 老故事   众所周知，QQ之前被爆出来过读取用户浏览器记录；而如果我们使用火绒自定义规则从此之后不需要担心，只需要写一个脚本，之后将自定义规则添加上去就行。下面是隐私防护.json的代码： <figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"><br><br>&#123;<br>    <span class="hljs-attr">&quot;ver&quot;</span>:<span class="hljs-string">&quot;5.0&quot;</span>,<br>    <span class="hljs-attr">&quot;tag&quot;</span>:<span class="hljs-string">&quot;hipsuser&quot;</span>,<br>    <span class="hljs-attr">&quot;data&quot;</span>:[<br>        &#123;<br>            <span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-number">1</span>,<br>            <span class="hljs-attr">&quot;power&quot;</span>:<span class="hljs-number">1</span>,<br>            <span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;Chromium-Based Protection&quot;</span>,<br>            <span class="hljs-attr">&quot;procname&quot;</span>:<span class="hljs-string">&quot;*&quot;</span>,<br>            <span class="hljs-attr">&quot;treatment&quot;</span>:<span class="hljs-number">1</span>,<br>            <span class="hljs-attr">&quot;policies&quot;</span>:[<br>                &#123;<br>                    <span class="hljs-attr">&quot;montype&quot;</span>:<span class="hljs-number">1</span>,<br>                    <span class="hljs-attr">&quot;action_type&quot;</span>:<span class="hljs-number">6</span>,<br>                    <span class="hljs-attr">&quot;res_path&quot;</span>:<span class="hljs-string">&quot;?:\\Users\\*\\AppData\\Local\\*\\User Data\\Default\\*&quot;</span><br>                &#125;<br>            ]<br>        &#125;,<br>        &#123;<br>            <span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-number">2</span>,<br>            <span class="hljs-attr">&quot;power&quot;</span>:<span class="hljs-number">1</span>,<br>            <span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;Firefox Protection&quot;</span>,<br>            <span class="hljs-attr">&quot;procname&quot;</span>:<span class="hljs-string">&quot;*&quot;</span>,<br>            <span class="hljs-attr">&quot;treatment&quot;</span>:<span class="hljs-number">1</span>,<br>            <span class="hljs-attr">&quot;policies&quot;</span>:[<br>                &#123;<br>                    <span class="hljs-attr">&quot;montype&quot;</span>:<span class="hljs-number">1</span>,<br>                    <span class="hljs-attr">&quot;action_type&quot;</span>:<span class="hljs-number">6</span>,<br>                    <span class="hljs-attr">&quot;res_path&quot;</span>:<span class="hljs-string">&quot;?:\\Users\\*\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\*&quot;</span><br>                &#125;<br>            ]<br>        &#125;,<br>        &#123;<br>            <span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-number">3</span>,<br>            <span class="hljs-attr">&quot;power&quot;</span>:<span class="hljs-number">1</span>,<br>            <span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;IE Protection&quot;</span>,<br>            <span class="hljs-attr">&quot;procname&quot;</span>:<span class="hljs-string">&quot;*&quot;</span>,<br>            <span class="hljs-attr">&quot;treatment&quot;</span>:<span class="hljs-number">1</span>,<br>            <span class="hljs-attr">&quot;policies&quot;</span>:[<br>                &#123;<br>                    <span class="hljs-attr">&quot;montype&quot;</span>:<span class="hljs-number">1</span>,<br>                    <span class="hljs-attr">&quot;action_type&quot;</span>:<span class="hljs-number">6</span>,<br>                    <span class="hljs-attr">&quot;res_path&quot;</span>:<span class="hljs-string">&quot;?:\\Users\\*\\AppData\\Local\\Packages\\Microsoft.MicrosoftEdge_*\\AC\\MicrosoftEdge\\User\\Default\\*&quot;</span><br>                &#125;,<br>                &#123;<br>                    <span class="hljs-attr">&quot;montype&quot;</span>:<span class="hljs-number">1</span>,<br>                    <span class="hljs-attr">&quot;action_type&quot;</span>:<span class="hljs-number">6</span>,<br>                    <span class="hljs-attr">&quot;res_path&quot;</span>:<span class="hljs-string">&quot;?:\\Users\\*\\AppData\\Local\\Microsoft\\Windows\\WebCache\\*&quot;</span><br>                &#125;,<br>                &#123;<br>                    <span class="hljs-attr">&quot;montype&quot;</span>:<span class="hljs-number">1</span>,<br>                    <span class="hljs-attr">&quot;action_type&quot;</span>:<span class="hljs-number">6</span>,<br>                    <span class="hljs-attr">&quot;res_path&quot;</span>:<span class="hljs-string">&quot;?:\\Users\\*\\AppData\\Local\\Microsoft\\Windows\\History\\*&quot;</span><br>                &#125;,<br>                &#123;<br>                    <span class="hljs-attr">&quot;montype&quot;</span>:<span class="hljs-number">1</span>,<br>                    <span class="hljs-attr">&quot;action_type&quot;</span>:<span class="hljs-number">6</span>,<br>                    <span class="hljs-attr">&quot;res_path&quot;</span>:<span class="hljs-string">&quot;?:\\Users\\*\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\*&quot;</span><br>                &#125;<br>            ]<br>        &#125;<br>    ]<br>&#125;<br></code></pre></div></td></tr></table></figure>   没错这是个水贴。:kissing:</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>blog</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>wallpaper</tag>
-      
-      <tag>花里胡哨</tag>
       
     </tags>
     
@@ -431,31 +265,6 @@
     <tags>
       
       <tag>黑客与画家</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>wallpaper</title>
-    <link href="/2021/08/18/wallpaper/"/>
-    <url>/2021/08/18/wallpaper/</url>
-    
-    <content type="html"><![CDATA[<h1 id="wallpaper真不错">wallpaper真不错！</h1><p>  之前早就听说过wallpaper的大名，但一直因为自己的静态壁纸好看所以没试过。昨天因为买票所以有钱了:blush:。于是买了wallpaper试试，果然不错:satisfied:：<br /><img src="https://github.com/heeler-deer/absorbing/blob/main/png/14.png?raw=true" srcset="/img/loading.gif" lazyload alt="heeler-deer" />   当然wallpaper不止是因为R18出名，他的顶流壁纸也确实设计得巧妙，更别说一些unity开发的游戏可以当作壁纸，方便摸鱼了。 # 华容道壁纸   鉴于wallpaper如此强大的功能（其壁纸类型可以为html,mp4,图片,unity程序），我不由自主的想到了以前玩过的华容道游戏。该游戏：<br />&gt;以其变化多端、百玩不厌的特点与魔方、独立钻石棋一起被国外智力专家并称为“智力游戏界的三个不可思议”。它与七巧板、九连环等中国传统益智玩具还有个代名词叫作“中国的难题”。据《资治通鉴》注释中说“从此道可至华容也”。华容道原是中国古代的一个地名，相传当年曹操曾经败走此地。由于当时的华容道是一片沼泽，所以曹操大军要割草填地，不少士兵更惨被活埋，惨烈非常。 <img src="https://bkimg.cdn.bcebos.com/pic/c8ea15ce36d3d539be5968863a87e950352ab00a?x-bce-process=image/resize,m_lfit,w_220,limit_1/format,f_auto" srcset="/img/loading.gif" lazyload /></p><p>  于是我就采用html等语言做了这个算得上壁纸的小游戏，怎么说，感觉还是挺简洁的。:thumbsup: <img src="https://github.com/heeler-deer/wallpaper-huarongdao/raw/main/%E6%97%A0%E6%A0%87%E9%A2%98.png" srcset="/img/loading.gif" lazyload /></p><p>今天出安卓版了！</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>blog</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>wallpaper</tag>
       
     </tags>
     
