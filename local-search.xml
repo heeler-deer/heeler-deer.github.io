@@ -297,6 +297,31 @@
   
   
   
+  <entry>
+    <title>记录一次安装</title>
+    <link href="/2021/07/24/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%AE%89%E8%A3%85/"/>
+    <url>/2021/07/24/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%AE%89%E8%A3%85/</url>
+    
+    <content type="html"><![CDATA[<h1 id="记录一次kali安装">记录一次kali安装</h1><p>博文什么的大家网上一搜就能找到，这里只给大家说一个坑：<br />尽量不要用国外的镜像，用国内的就好。<br />问就是我国外的镜像装了一天没好，国内的5min就好了。。。。。<br /><a href="https://mirrors.aliyun.com/kali-images/?spm=a2c6h.13651104.0.0.6c0a1447YFKyhF">阿里的</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>kali</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>kali</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
   
   
