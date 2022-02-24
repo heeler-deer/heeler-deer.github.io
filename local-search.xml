@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>os</title>
+    <link href="/2022/02/24/os/"/>
+    <url>/2022/02/24/os/</url>
+    
+    <content type="html"><![CDATA[<p>今晚我的一个朋友喊我写操作系统，然而我什么都不会。。。 这篇博客一是列出为了写一个小型os我们的学习历程，而是记录我阅读<a href="https://zh.u1lib.org/book/16404075/f41379">操作系统：精髓与设计原理</a>的笔记。 # 知识补全计划 目前打算按以下顺序补完： <a href="https://zh.u1lib.org/book/16404075/f41379">操作系统：精髓与设计原理</a></p><p><a href="https://zh.u1lib.org/book/16895034/121667">x86汇编</a></p><p><a href="https://pdos.csail.mit.edu/6.828/2011/">mit6.828</a></p><p><a href="https://zh.u1lib.org/book/5645657/616c8e">深入理解linux内核</a></p><p><a href="https://zh.u1lib.org/book/16403051/18a092">x86/x64体系i探索以及编程</a> <strong>相关网站：</strong> <a href="https://wiki.osdev.org/Main_Page">osdev main page</a></p><p><a href="https://forum.osdev.org/">osdev index page</a> # 操作系统：精髓与设计原理 由于本人已经学过其他教材讲解的操作系统，这里仅记录那些我认为重要的点</p><p>作者认为的与操作系统有关的各种知识分布图：</p><figure><img src="img/image-20220224195820977.png" srcset="/img/loading.gif" lazyload alt="image-20220224195820977"><figcaption aria-hidden="true">image-20220224195820977</figcaption></figure><h2 id="背景知识">背景知识</h2><h2 id="进程">进程</h2><h2 id="内存">内存</h2><h2 id="调度">调度</h2><h2 id="io">I/O</h2><h2 id="嵌入式">嵌入式</h2><h2 id="online">online</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>读书</category>
+      
+      <category>瞎搞</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>cs</tag>
+      
+      <tag>os</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2022/01/01/hello-world/"/>
     <url>/2022/01/01/hello-world/</url>
