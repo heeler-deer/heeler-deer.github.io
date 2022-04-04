@@ -87,7 +87,7 @@
     <link href="/2022/01/01/hello-world/"/>
     <url>/2022/01/01/hello-world/</url>
     
-    <content type="html"><![CDATA[<p>你好，我的朋友！</p>]]></content>
+    <content type="html"><![CDATA[<p>你好，我的朋友！</p><h1 id="日历热力图">日历热力图</h1><p>来自 $ GitHub $ の 热力图</p><p><img src="https://ghchart.rshah.org/heeler-deer" srcset="/img/loading.gif" lazyload alt="Heeler-Deer's Github chart" /></p>]]></content>
     
     
     
@@ -409,7 +409,7 @@
     <link href="/"/>
     <url>/</url>
     
-    <content type="html"><![CDATA[<h1 id="look-here">Look here!</h1><p>Hi,我是博客的创建者:smirk:,如果你想联系我，欢迎使用邮箱等方式。</p><h3 id="google邮箱">google邮箱：</h3><p>heelerdeer@gmail.com</p><p>#日历热力图</p><p><span class="math inline">\(GitHub\)</span></p><p><img src="https://ghchart.rshah.org/heeler-deer" alt="heeler-deer's Github chart" /></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="look-here">Look here!</h1><p>Hi,我是博客的创建者 :smirk: ,如果你想联系我，欢迎使用邮箱等方式。</p><h3 id="google邮箱">google邮箱：</h3><p>heelerdeer@gmail.com</p>]]></content>
     
   </entry>
   
