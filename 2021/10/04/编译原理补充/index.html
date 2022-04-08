@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/faviconn.png">
+  <link rel="icon" href="/img/faviconn.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -24,7 +24,7 @@
 <meta property="og:description" content="声明 本人的代码优化还是跟着kp学习的。步前人后尘 所有资料来源于skr_learning of kp,课件pdf来源于toronto,edx等处没有找到对应视频 # 前言 个人向笔记，仅作为cs143的补充 # 笔记 ## 基础知识 作者认为，编译器可以从以下方面改善： - 最小化操作数 - 用时间代价小的操作代替时间操作大的操作 - 减少缓存缺失 - 多线程工作 而在kp的md中，记录了代码优">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-04T07:12:18.000Z">
-<meta property="article:modified_time" content="2021-12-31T16:20:04.415Z">
+<meta property="article:modified_time" content="2022-04-07T15:37:45.439Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta name="twitter:card" content="summary_large_image">
@@ -72,7 +72,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"heeler-deer.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"GCX7MRb8jHPOvWy5hXP1pLOT-gzGzoHsz","app_key":"81Myp4Kmaagh7J5spTpIoMWi","server_url":"https://gcx7mrb8.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"heeler-deer.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"GCX7MRb8jHPOvWy5hXP1pLOT-gzGzoHsz","app_key":"81Myp4Kmaagh7J5spTpIoMWi","server_url":"https://gcx7mrb8.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -211,6 +211,8 @@
           <div class="page-header text-center fade-in-up">
             <span class="h2" id="subtitle" title="编译原理补充">
               
+                编译原理补充
+              
             </span>
 
             
@@ -235,7 +237,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      1.7k 字
     </span>
   
 
@@ -289,7 +291,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年1月1日 凌晨
+                  本文最后更新于：2022年4月7日 晚上
                 
               </p>
             
@@ -306,7 +308,6 @@ flow graph: 由basic block作为node,若follow(bi)=bj,则建边bi--&gt;bj<br />
 <p>生成：指的是在后续中如果需要计算x op y，则原先的计算结果可以之间使用。</p>
 </blockquote>
 <p>examples: <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">a = b + c <span class="hljs-comment">// 生成表达式 b + c</span><br>d = e + f<br>g = b + c <span class="hljs-comment">// 代码优化时，由于 b+c没有被杀死，所以这一步可以优化为 g = a</span><br>b = d     <span class="hljs-comment">// 注意：b被重新定值，与之相关的表达式 b + c被杀死</span><br>f = b + c <span class="hljs-comment">// 由于b+c被杀死，所以代码优化时就  不能！ 优化为f = a</span><br></code></pre></div></td></tr></table></figure> 3. SSA 静态单一赋值 与VN相似，SSA使每一个变量都有唯一的定义，假设程序对同一个变量有不相关的若干次使用，在SSA中会转变成对不同变量的使用 ## 具体内容 ### 消除无用控制流 该算法使用以下四个顺序变化： 1. 合并冗余分支，如某分支的两个目标是同一个程序块，则替换为跳转语句 2. 删除空程序块 3. 合并程序块， 4. 提升分支指令，若bi跳转到一个空程序块bj而bj以分支结束，则将bi的跳转替换为bj中分支指令的副本 ### 消除冗余 使用VN消除冗余 ### 缓式代码移动 &gt;1 计算可用表达式。LCM需要程序块末尾处的可用信息；2 为捕获可用于判断表达式反向移动的信息，LCM需要计算可预测性。3 如果给出了可用性和可预测性的解，对于每个表达式，编译器都可以判断在程序中最早于何处可以对该表达式进行求值。4 LCM中最后一个数据流问题用于判断何时一个最早置放能被推迟到CFG中稍后的一个位置，而仍然能够实现相同的结果。延迟分析表述为CFG上的一个前向数据流问题，其目标在于每个结点n关联的一个集合LaterIn(n)，为每条边(i, j)关联一个集合Later(i, j)。5 利用从数据流计算推导出的知识重写代码。</p>
-<p>转载请注明出处,原文地址： <a href="https://heeler-deer.github.io/2021/10/04/编译原理补充/">https://heeler-deer.github.io/2021/10/04/编译原理补充/</a> by Heeler-Deer</p>
 
             </div>
             <hr>
@@ -329,13 +330,12 @@ flow graph: 由basic block作为node,若follow(bi)=bj,则建边bi--&gt;bj<br />
                   </div>
                 
               </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">Heeler-Deer</a> <br>
+                <strong>本文链接: </strong><a href="https://heeler-deer.github.io/2021/10/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A1%A5%E5%85%85/">https://heeler-deer.github.io/2021/10/04/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A1%A5%E5%85%85/</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                 </p>
-              
+                
               
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
@@ -451,22 +451,196 @@ flow graph: 由basic block作为node,若follow(bi)=bj,则建边bi--&gt;bj<br />
   </main>
 
   <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
-  </div>
+  <font size="3" face="Georgia">
+    <div class="translate-style">
+      繁/简：<a id="translateLink" href="javascript:translatePage();">繁体
+      </a>
+    </div>
+    <script type="text/javascript" src="/js/tw_cn.js"></script>
+    <script type="text/javascript">
+      var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+      var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+      var cookieDomain = "https://heeler-deer.github.io/"; //Cookie地址, 一定要设定, 通常为你的网址
+      var msgToTraditionalChinese = "繁体"; //此处可以更改为你想要显示的文字
+      var msgToSimplifiedChinese = "简体"; //同上，但两处均不建议更改
+      var translateButtonId = "translateLink"; //默认互换id
+      translateInitilization();
+    </script>
   
+    
   <div class="statistics">
     
     
 
     
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            ✨&nbsp 
+            <span id="leancloud-site-pv"></span>
+             times
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            💫&nbsp 
+            <span id="leancloud-site-uv"></span>
+             nums
+          </span>
+      
+
+    
   </div>
 
 
+    
+
+  
+  
+    
+  
+  
+    <div>
+      <span class="post-count">24.3k&nbsp words</span>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+        var now = new Date();
+        function createtime(){
+          var grt= new Date("07/24/2021 21:02:06");//此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+            hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+            mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+            snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "🚀 &nbsp for &nbsp"+dnum+"&nbspdays";  //此次自定义显示内容
+          document.getElementById("times").innerHTML = hnum + "&nbsphr&nbsp" + mnum + "&nbspmin&nbsp" + snum + "&nbspsec";
+        }  //此次自定义显示内容
+        setInterval("createtime()",250);
+      </script>
+    </div>
+  
+  
+    <!--<div class="text-center py-1">
+      <div>
+        <span>Copyright © 2020</span></a>
+        <a href="https://yousazoe.top/" target="_blank" rel="nofollow noopener">
+          <span>Fl0w3r</span></a>    <br>
+      </div>-->
+  
+  </footer>
+  
+  
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":true,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
   
-</footer>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/star.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/boom.js"></script>
+<script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
   <!-- SCRIPTS -->
@@ -527,17 +701,6 @@ flow graph: 由basic block作为node,若follow(bi)=bj,则建边bi--&gt;bj<br />
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-        typing(title);
-      
-    })(window, document);
-  </script>
-
 
 
 
@@ -569,6 +732,8 @@ flow graph: 由basic block作为node,若follow(bi)=bj,则建边bi--&gt;bj<br />
 <script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/star.min.js"></script>
 <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
 <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/boom.js"></script>
+<script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
 
 
 
