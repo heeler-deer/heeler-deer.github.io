@@ -83,7 +83,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><style>mjx-container[jax="SVG"] {
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -352,7 +354,7 @@ mjx-container[display="true"] + br {
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.2k 字
+      8.1k 字
     </span>
   
 
@@ -361,7 +363,7 @@ mjx-container[display="true"] + br {
       <i class="iconfont icon-clock-fill"></i>
       
       
-      69 分钟
+      68 分钟
     </span>
   
 
@@ -435,8 +437,7 @@ github不支持mermaid,就在我<a href="https://heeler-deer.github.io/">博客<
 <h3 id="dfanfa">dfa,nfa</h3>
 <p>dfa往往更快，nfa则往往更小，确定性有穷自动机（dfa）与非确定性有穷自动机(nfa)在编译原理中的作用往往相似<br>
 
-<pre>
-<code class="mermaid" type="">
+</p><pre><code class="mermaid" type="">
 graph LR
   e(lexcial specification)--&gt;regfular
   regfular--&gt;w
@@ -445,7 +446,7 @@ graph LR
   dfa--&gt;x(table-driven implementation of dfa)
 </code>
 </pre> 具体转换方式参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40294512/article/details/89004777">nfa到dfa的转化、dfa的简化</a><br>
-要加深了解请认真完成writing assignments,期中考试和期末考试还是很值得自己做的。</p>
+要加深了解请认真完成writing assignments,期中考试和期末考试还是很值得自己做的。<p></p>
 <h3 id="pa2">PA2</h3>
 <p>该部分主要需要完成正则表达式的编写。<br>
 通过正则表达式，我们要完成对于names的定义，其中包括class、if、id等关键字的正则表达； 除此之外，我们还要完成对于程序语法的分析，判断其是否存在诸如：</p>
@@ -463,8 +464,7 @@ graph LR
 <p>FA不能识别到达recepet状态多少次</p>
 </blockquote>
 
-<pre>
-<code class="mermaid" type="">
+<pre><code class="mermaid" type="">
 graph LR
   e(string of tokens)--parse--&gt;s(parse tree)
   c(string of characters)--lexer--&gt;e
@@ -573,8 +573,7 @@ graph LR
 <li>type checking is the process of verifying fully typed programs</li>
 <li>type inference is the process of filling in missing type information</li>
 <li>a type environment gives types for free variables 
-<pre>
-<code class="mermaid" type="">
+<pre><code class="mermaid" type="">
 flowchart TD
 r(root)--&gt;|type environment| l(leaves)
 l--&gt;|types| r
@@ -701,11 +700,11 @@ cache optimization没有讲多少。。。</p>
 <li><p>a mapping from variable (local and attribute) names to definitions in X</p></li>
 <li><p>a mapping from method names and class names to defintions</p></li>
 <li><p>the self class (X) 如add/lookup/probe的实现：</p>
-<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Environment::method_add</span><span class="hljs-params">(Symbol s, method_class *m)</span> </span><br><span class="hljs-function"></span>{ method_table.addid(s,m); }<br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Environment::method_add</span><span class="hljs-params">(Symbol s, method_class *m)</span> </span><br><span class="hljs-function"></span>{ method_table.addid(s,m); }<br></code></pre></div></td></tr></tbody></table></figure></li>
 </ol>
 <p>method_class *Environment::method_lookup(Symbol s) { return method_table.lookup(s); }</p>
 <p>method_class *Environment::method_probe(Symbol s) { return method_table.probe(s); }</p>
-<figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp">接下来是classtable（initializes a symbol table mapping<br><span class="hljs-comment">// class names to inheritance graph nodes）,最后是features，在这里实现对environment的信息进行添加（代码量极大）</span><br>## PA5<br>我们需要在这里实现对编译器的优化。这里我们分析cgen.h/cgen.cc,先来看看他们的组成 <br>##<span class="hljs-meta"># cgen.h</span><br>包含cgenclasstable，把<span class="hljs-class"><span class="hljs-keyword">class</span>映射到<span class="hljs-title">tag</span>，同时包含把<span class="hljs-title">code</span>与<span class="hljs-title">constants</span>/<span class="hljs-title">global</span> <span class="hljs-title">declarations</span>对应起来的<span class="hljs-title">method</span>，如：</span><br><span class="hljs-class">```<span class="hljs-title">c</span></span><br><span class="hljs-class">   <span class="hljs-title">void</span> <span class="hljs-title">code_global_data</span>();</span><br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_global_text</span><span class="hljs-params">()</span></span>;<br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_bools</span><span class="hljs-params">()</span></span>;<br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_select_gc</span><span class="hljs-params">()</span></span>;<br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_constants</span><span class="hljs-params">()</span></span>;<br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_strings</span><span class="hljs-params">()</span></span>;          <span class="hljs-comment">/*##*/</span> <span class="hljs-comment">// 无用，无函数定义</span><br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_ints</span><span class="hljs-params">()</span></span>;             <span class="hljs-comment">/*##*/</span> <span class="hljs-comment">// 无用，无函数定义</span><br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_class_table</span><span class="hljs-params">()</span></span>;      <span class="hljs-comment">/*##*/</span><br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_object_table</span><span class="hljs-params">()</span></span>;     <span class="hljs-comment">/*##*/</span><br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_class_features</span><span class="hljs-params">()</span></span>;   <span class="hljs-comment">/*##*/</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp">接下来是classtable（initializes a symbol table mapping<br><span class="hljs-comment">// class names to inheritance graph nodes）,最后是features，在这里实现对environment的信息进行添加（代码量极大）</span><br>## PA5<br>我们需要在这里实现对编译器的优化。这里我们分析cgen.h/cgen.cc,先来看看他们的组成 <br>##<span class="hljs-meta"># cgen.h</span><br>包含cgenclasstable，把<span class="hljs-class"><span class="hljs-keyword">class</span>映射到<span class="hljs-title">tag</span>，同时包含把<span class="hljs-title">code</span>与<span class="hljs-title">constants</span>/<span class="hljs-title">global</span> <span class="hljs-title">declarations</span>对应起来的<span class="hljs-title">method</span>，如：</span><br><span class="hljs-class">```<span class="hljs-title">c</span></span><br><span class="hljs-class">   <span class="hljs-title">void</span> <span class="hljs-title">code_global_data</span>();</span><br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_global_text</span><span class="hljs-params">()</span></span>;<br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_bools</span><span class="hljs-params">()</span></span>;<br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_select_gc</span><span class="hljs-params">()</span></span>;<br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_constants</span><span class="hljs-params">()</span></span>;<br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_strings</span><span class="hljs-params">()</span></span>;          <span class="hljs-comment">/*##*/</span> <span class="hljs-comment">// 无用，无函数定义</span><br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_ints</span><span class="hljs-params">()</span></span>;             <span class="hljs-comment">/*##*/</span> <span class="hljs-comment">// 无用，无函数定义</span><br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_class_table</span><span class="hljs-params">()</span></span>;      <span class="hljs-comment">/*##*/</span><br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_object_table</span><span class="hljs-params">()</span></span>;     <span class="hljs-comment">/*##*/</span><br>   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">code_class_features</span><span class="hljs-params">()</span></span>;   <span class="hljs-comment">/*##*/</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>在cgenclasstable中，还create an inheritance graph from a list of classes.之后就是一些叫做binding的class,包含对self/属性/local variables的binding</p>
 <h3 id="cgen.c">cgen.c</h3>
 <p>主要做了定义method/emit procedure以及视频课程中从register开始后的工作，优化也体现在这一部分</p>

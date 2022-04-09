@@ -80,7 +80,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><style>mjx-container[jax="SVG"] {
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -349,7 +351,7 @@ mjx-container[display="true"] + br {
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      434 字
+      414 字
     </span>
   
 
@@ -412,13 +414,13 @@ mjx-container[display="true"] + br {
 <p>之前阅读<a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733788681928712/section/6844733788795174920">掘金小册</a>时一直没实战，这里就补一下</p>
 <h2 id="packetdrill">packetdrill</h2>
 <p>安装：<a href="https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fgoogle%2Fpacketdrill">github</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> gtests/net/packetdrill<br>sudo apt-get install -y bison flex<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> gtests/net/packetdrill<br>sudo apt-get install -y bison flex<br></code></pre></div></td></tr></tbody></table></figure>
 <p>为避免 offload 机制对包大小的影响，修改 netdev.c 注释掉 set_device_offload_flags 函数所有内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./configure<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./configure<br></code></pre></div></td></tr></tbody></table></figure>
 <p>修改 Makefile，去掉第一行的末尾的 -static 执行 make 命令编译 可以在目录下尝试packetdrill是否正常生成 加入环境变量：</p>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sudo vim <span class="hljs-regexp">/etc/</span>profile<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sudo vim <span class="hljs-regexp">/etc/</span>profile<br></code></pre></div></td></tr></tbody></table></figure>
 <p>加入你的路径即可。之后任意打开一个命令行。<code>packetdrill</code>查看是否成功 由于packetdrill需要sudo权限，因此需要更改/.zshrc (我用的zsh解释器)，在里面加入</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">alias sudo='sudo env PATH="$PATH"'<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">alias sudo='sudo env PATH="$PATH"'<br></code></pre></div></td></tr></tbody></table></figure>
 <p>之后保存， <code>source /.zshrc</code> 即可</p>
 
             </div>
