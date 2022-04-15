@@ -32,8 +32,11 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202202261345590.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202203062005301.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202203062039366.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204151018890.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204151020881.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204151030840.png">
 <meta property="article:published_time" content="2022-02-24T11:41:45.000Z">
-<meta property="article:modified_time" content="2022-04-07T15:37:45.423Z">
+<meta property="article:modified_time" content="2022-04-15T03:27:30.070Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="os">
@@ -362,7 +365,7 @@ mjx-container[display="true"] + br {
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      3.1k 字
     </span>
   
 
@@ -371,7 +374,7 @@ mjx-container[display="true"] + br {
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20 分钟
+      27 分钟
     </span>
   
 
@@ -416,7 +419,7 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年4月7日 晚上
+                  本文最后更新于：2022年4月15日 上午
                 
               </p>
             
@@ -471,10 +474,16 @@ mjx-container[display="true"] + br {
 <p>pc存储指令的地址，存储器相应地址的数值被存放到ir,ir解码把地址940的数据0003放入寄存器ac；之后pc自加1,301的5941被ir解码，使ac的数值与941地址的数值相加；302的2941被ir解码,ac的数被放入地址941中。</p>
 <h2 id="中断">中断</h2>
 <p>在csapp中，一个令人印象深刻的标题叫做“信息就是位+上下文”，os通过执行上下文切换来提供“进程”这一虚拟概念，<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202202242126552.png" srcset="/img/loading.gif" lazyload alt="image-20220224212615438"></p>
-<p>同时,由于cpu主频远超i/o bus的主频，cpu在进行需要大量传输数据的工作时必然会处于空闲状态，因此如何在i/o阻塞时让cpu执行其他工作被叫做“中断”.本书给出了有中断和没有中断的效率对比:<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202202242131539.png" srcset="/img/loading.gif" lazyload alt="image-20220224213112163"></p>
+<p>同时,由于cpu主频远超i/o bus的主频，cpu在进行需要大量传输数据的工作时必然会处于空闲状态，因此如何在i/o阻塞时让cpu执行其他工作被叫做“中断”.本书给出了有中断和没有中断的效率对比:</p>
+<figure>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202202242131539.png" srcset="/img/loading.gif" lazyload alt="image-20220224213112163"><figcaption aria-hidden="true">image-20220224213112163</figcaption>
+</figure>
 <p>简单的中断通过把必要的上下文压入栈来实现。多个中断通过定义中断优先级来实现。</p>
 <h2 id="存储">存储</h2>
-<p>现代存储器出于cpu对不同区域数据的访问频率不同开发出了不同访问速度的硬件：<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202202242138347.png" srcset="/img/loading.gif" lazyload alt="image-20220224213852488"></p>
+<p>现代存储器出于cpu对不同区域数据的访问频率不同开发出了不同访问速度的硬件：</p>
+<figure>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202202242138347.png" srcset="/img/loading.gif" lazyload alt="image-20220224213852488"><figcaption aria-hidden="true">image-20220224213852488</figcaption>
+</figure>
 <h2 id="io">i/o</h2>
 <p>可编程i/o不具有与处理器的协同工作能力， 不具有中断能力，而且处理器只能等待programmed i/o完成；中断驱动i/o显然具有与处理器协同工作的能力，且具有中断能力;DMA直接内存存取则是通过处理器对数据直接读写（通过使用dma模块）来高效完成多字i/o处理。</p>
 <h2 id="结构">结构</h2>
@@ -515,6 +524,41 @@ mjx-container[display="true"] + br {
 <li>新建态：os尚未把他加入可执行进程组</li>
 <li>退出态：os从可执行进程组中释放出的进程</li>
 </ol>
+<h3 id="挂起">挂起</h3>
+<p>对于五状态模型，我们可以按照多级队列、设置进程优先级等方式提高cpu的利用率。</p>
+<p>但是还存在这样一种情况：内存中的所有进程都在等待i/o,此时cpu未进行对进程的任何处理，直至i/o完成才能继续。</p>
+<p>为了更高效率的使用cpu,我们需要把等待i/o的一些进程 <strong>挂起</strong> 到内存之外，使cpu此时可以处理其他不需要i/o的进程。</p>
+<p>这种 <code>交换技术</code> 是把内存中某个进程的一部分转移到磁盘中。</p>
+<p>我们加入挂起状态后的模型如下：</p>
+<ul>
+<li>就绪态</li>
+<li>阻塞态</li>
+<li>阻塞/挂起态</li>
+<li>就绪/挂起态</li>
+<li>新建态</li>
+<li>运行态</li>
+<li>退出态</li>
+</ul>
+<figure>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204151018890.png" srcset="/img/loading.gif" lazyload alt="image-20220415101815459"><figcaption aria-hidden="true">image-20220415101815459</figcaption>
+</figure>
+<p><strong>操作系统控制表的通用结构：</strong></p>
+<figure>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204151020881.png" srcset="/img/loading.gif" lazyload alt="image-20220415102050632"><figcaption aria-hidden="true">image-20220415102050632</figcaption>
+</figure>
+<p><strong>进程控制块的元素：</strong></p>
+<figure>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204151030840.png" srcset="/img/loading.gif" lazyload alt="image-20220415103001860"><figcaption aria-hidden="true">image-20220415103001860</figcaption>
+</figure>
+<p>上图从上到下分别是进程标识信息，进程状态信息，进程控制信息</p>
+<h3 id="进程控制">进程控制</h3>
+<p>进程分为用户模式和内核模式。</p>
+<p>在64位IA-64结构的intel itanium处理器中，就包含了一个current privilege level的2位字段去指示当前进程的特权级别。</p>
+<p>在进程创建的时候，每一个进程都会有一个唯一的标识符，一些空间，os会初始化进程控制块，并做一些其他的操作。</p>
+<p>那么进程之间如何切换呢？</p>
+<p>进程切换即把控制权交给os,在由os进行处理，可以是中断（来自当前执行进程的外部）、陷阱（当前进程相关）以及系统的显式调用。对于普通中断，控制权会先被移交给中断处理器，中断处理器进行一些工作后在将控制权移交给相关的os例程。对于陷阱，os会先判断是否致命。系统调用则发生在如进程i/o时对用户态的处理。</p>
+<p>由此分为模式切换以及进程切换两种切换模式。对于 <code>模式切换</code> ，在发生中断时，pc被置为中欧你那个段处理程序的开始地址，从用户模式切换到内核模式，之后的做法取决于之后的信息。模式切换可以不改变进程的状态。对于进程切换，往往需要比模式切换更多的开销，os必须使进程的环境发生实质性变换。</p>
+<h2 id="线程">线程</h2>
 <h1 id="内存">内存</h1>
 <h1 id="调度">调度</h1>
 <h1 id="io-1">I/O</h1>
@@ -718,7 +762,7 @@ mjx-container[display="true"] + br {
   
   
     <div>
-      <span class="post-count">24.3k&nbsp words</span>
+      <span class="post-count">24.9k&nbsp words</span>
       <span id="timeDate">载入天数...</span>
       <span id="times">载入时分秒...</span>
       <script>
