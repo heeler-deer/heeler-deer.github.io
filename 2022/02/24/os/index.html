@@ -35,8 +35,11 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204151018890.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204151020881.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204151030840.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204172131830.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204172133561.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204172141437.png">
 <meta property="article:published_time" content="2022-02-24T11:41:45.000Z">
-<meta property="article:modified_time" content="2022-04-15T03:27:30.070Z">
+<meta property="article:modified_time" content="2022-04-17T13:41:50.094Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="os">
@@ -208,6 +211,7 @@ mjx-container[display="true"] + br {
 }
 </style>
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
 </head>
 
 
@@ -365,7 +369,7 @@ mjx-container[display="true"] + br {
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.1k 字
+      3.6k 字
     </span>
   
 
@@ -374,7 +378,7 @@ mjx-container[display="true"] + br {
       <i class="iconfont icon-clock-fill"></i>
       
       
-      27 分钟
+      30 分钟
     </span>
   
 
@@ -419,7 +423,7 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年4月15日 上午
+                  本文最后更新于：2022年4月17日 晚上
                 
               </p>
             
@@ -559,6 +563,26 @@ mjx-container[display="true"] + br {
 <p>进程切换即把控制权交给os,在由os进行处理，可以是中断（来自当前执行进程的外部）、陷阱（当前进程相关）以及系统的显式调用。对于普通中断，控制权会先被移交给中断处理器，中断处理器进行一些工作后在将控制权移交给相关的os例程。对于陷阱，os会先判断是否致命。系统调用则发生在如进程i/o时对用户态的处理。</p>
 <p>由此分为模式切换以及进程切换两种切换模式。对于 <code>模式切换</code> ，在发生中断时，pc被置为中欧你那个段处理程序的开始地址，从用户模式切换到内核模式，之后的做法取决于之后的信息。模式切换可以不改变进程的状态。对于进程切换，往往需要比模式切换更多的开销，os必须使进程的环境发生实质性变换。</p>
 <h2 id="线程">线程</h2>
+<p>在之前的讨论中，进程的两个特点是资源所有权以及调度/执行权利，但在实际上，这两个特点是独立的，操作系统为了区分他们，通常将调度/执行权称为线程/轻量级进程，将资源所有权称为进程。所谓多线程，指的是os在<code>单个进程</code>内支持多个并发执行路径的能力。</p>
+<figure>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204172131830.png" srcset="/img/loading.gif" lazyload alt="image-20220417213141207"><figcaption aria-hidden="true">image-20220417213141207</figcaption>
+</figure>
+<p>在多线程环境中，进程被定义为一个资源分配单位以及一个保护单位，进程中的所有线程共享该进程的状态和资源。</p>
+<figure>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204172133561.png" srcset="/img/loading.gif" lazyload alt="image-20220417213330994"><figcaption aria-hidden="true">image-20220417213330994</figcaption>
+</figure>
+<p>书中举了这样一个例子，文件服务器对每一个新的文件请求都会创建一个新线程，实质上加快了系统处理的能力。</p>
+<p>改变线程状态的四种基本操作是：</p>
+<ul>
+<li>派生，新建进程时会为该进程派生一个线程，线程可以派生另一个线程，并提供相关指针，新线程存放在就绪队列中。实质上我觉得是一种虚拟化技术，通过派生把进程线程统一起来。</li>
+<li>阻塞，和进程类似</li>
+<li>解除阻塞</li>
+<li>结束，线程结束时释放寄存器上下文以及栈</li>
+</ul>
+<p>有一个叫RPC的以前没听过：</p>
+<figure>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204172141437.png" srcset="/img/loading.gif" lazyload alt="image-20220417214146033"><figcaption aria-hidden="true">image-20220417214146033</figcaption>
+</figure>
 <h1 id="内存">内存</h1>
 <h1 id="调度">调度</h1>
 <h1 id="io-1">I/O</h1>
@@ -762,7 +786,7 @@ mjx-container[display="true"] + br {
   
   
     <div>
-      <span class="post-count">27.8k&nbsp words</span>
+      <span class="post-count">28.1k&nbsp words</span>
       <span id="timeDate">载入天数...</span>
       <span id="times">载入时分秒...</span>
       <script>
