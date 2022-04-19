@@ -23,6 +23,14 @@
 <meta property="og:site_name" content="Heeler-Deer">
 <meta property="og:description" content="RT  官方文档：gitbook 的github地址:github 准备工作：下载ucorelab在的master分支（注意不是main分支）,需要用到的资料以及答案都在里面。 实验环境： 及更高版本 准备工作：  安装gcc: 1sudo apt-get install build-essential 安装qemu: 1sudo apt-get install qemu-system  涉及到的">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204191822060.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192130713.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192158253.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192202995.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192216709.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192223617.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192230246.png">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f914.png?v8">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161708193.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161740543.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161745960.png">
@@ -35,12 +43,12 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204162235049.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204171130119.png">
 <meta property="article:published_time" content="2022-04-16T07:37:55.000Z">
-<meta property="article:modified_time" content="2022-04-17T03:32:53.036Z">
+<meta property="article:modified_time" content="2022-04-19T14:35:03.780Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="ucore">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161708193.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204191822060.png">
   
   
   <title>ucore_lab1 - Heeler-Deer</title>
@@ -92,7 +100,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><style>mjx-container[jax="SVG"] {
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -204,9 +214,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style>
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
+</style><link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
 </head>
 
 
@@ -376,7 +384,7 @@ mjx-container[display="true"] + br {
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      9.2k 字
+      11k 字
     </span>
   
 
@@ -385,7 +393,7 @@ mjx-container[display="true"] + br {
       <i class="iconfont icon-clock-fill"></i>
       
       
-      77 分钟
+      92 分钟
     </span>
   
 
@@ -430,7 +438,7 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年4月17日 中午
+                  本文最后更新于：2022年4月19日 晚上
                 
               </p>
             
@@ -457,7 +465,62 @@ mjx-container[display="true"] + br {
 <p>详细请参考ucorelab的<a target="_blank" rel="noopener" href="https://chyyuu.gitbooks.io/ucore_os_docs/content/lab0/lab0_ref_ucore-tools.html">官方文档</a></p>
 <p>强烈建议在<strong>学堂在线</strong>看thu的ucore课程</p>
 <h1 id="知识点">知识点</h1>
-<p>待补充</p>
+<p>先定一个小目标，学一学doxygen以及binutils的相关工具</p>
+<h3 id="meld">meld</h3>
+<p>先<code>sudo apt-get  install meld</code>，然后就可以用了</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204191822060.png" srcset="/img/loading.gif" lazyload></p>
+<p>这是meld官网：<a target="_blank" rel="noopener" href="https://meldmerge.org/help/index.html#advanced">usage</a></p>
+<h3 id="doxygen">doxygen</h3>
+<p>参考<a target="_blank" rel="noopener" href="https://cedar-renjun.github.io/2014/03/21/learn-doxygen-in-10-minutes/">博客</a></p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192130713.png" srcset="/img/loading.gif" lazyload></p>
+<p>doxygen能生成latex，通过规范注释来解释项目结构。</p>
+<p>常用命令：</p>
+<figure class="highlight nginx"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">doxygen</span> -g <span class="hljs-comment">#生成Doxygenfile</span><br></code></pre></div></td></tr></tbody></table></figure>
+<figure class="highlight jboss-cli"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli">doxygen <span class="hljs-string">./Doxyfile</span> <span class="hljs-comment">#生成文档</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>注释规范：</p>
+<figure class="highlight actionscript"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs actionscript"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * 正常注释</span><br><span class="hljs-comment"> */</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 要输出成文档的注释</span><br><span class="hljs-comment"> */</span><br><br> 或者<br><br><span class="hljs-comment">/*!</span><br><span class="hljs-comment"> * 要输出成文档的注释</span><br><span class="hljs-comment"> */</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>或者是：</p>
+<figure class="highlight markdown"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs markdown">//<span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**<span class="hljs-emphasis">*</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! \brief  Print Int number to terimal device.</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//!</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! \param  [in] number is the data you want to print.</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! \retval the number of print information, in bytes. return zero indicate print error !.</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//!</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! \note</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! *</span> Be sure you have called \ref Dev<span class="hljs-emphasis">_Init function before call this fuction.</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! * Remember to check return value.</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//<span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**<span class="hljs-emphasis">*</span></span></span></span><br><span class="hljs-emphasis"><span class="hljs-strong"><span class="hljs-emphasis"><span class="hljs-strong">extern int Dev_PrintInt(int number);</span></span></span></span><br></code></pre></div></td></tr></tbody></table></figure>
+<h3 id="binutils">binutils</h3>
+<p>binutils包含很多命令，不详细介绍了，列举一下：</p>
+<ul>
+<li><p><strong>ld</strong> - the GNU linker.</p></li>
+<li><p><strong>as</strong> - the GNU assembler.</p></li>
+<li><p><strong>addr2line</strong> - Converts addresses into filenames and line numbers.</p></li>
+<li><p><strong>ar</strong> - A utility for creating, modifying and extracting from archives.</p></li>
+<li><p><strong>c++filt</strong> - Filter to demangle encoded C++ symbols.</p></li>
+<li><p><strong>dlltool</strong> - Creates files for building and using DLLs.</p></li>
+<li><p><strong>gold</strong> - A new, faster, ELF only linker, still in beta test.</p></li>
+<li><p><strong>gprof</strong> - Displays profiling information.</p></li>
+<li><p><strong>nlmconv</strong> - Converts object code into an NLM.</p></li>
+<li><p><strong>nm</strong> - Lists symbols from object files.</p></li>
+<li><p><strong>objcopy</strong> - Copies and translates object files.</p></li>
+<li><p><strong>objdump</strong> - Displays information from object files.</p></li>
+<li><p><strong>ranlib</strong> - Generates an index to the contents of an archive.</p></li>
+<li><p><strong>readelf</strong> - Displays information from any ELF format object file.</p></li>
+<li><p><strong>size</strong> - Lists the section sizes of an object or archive file.</p></li>
+<li><p><strong>strings</strong> - Lists printable strings from files.</p></li>
+<li><p><strong>strip</strong> - Discards symbols.</p></li>
+<li><p><strong>windmc</strong> - A Windows compatible message compiler.</p></li>
+<li><p><strong>windres</strong> - A compiler for Windows resource files.</p></li>
+</ul>
+<h2 id="系统启动及中断">系统启动及中断</h2>
+<p>bios提供了基本的i/o功能</p>
+<p>cpu加电后执行ROM里的初始化代码：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192158253.png" srcset="/img/loading.gif" lazyload></p>
+<p>从硬盘/网络启动是由bios决定，bios加载程序到磁盘的引导扇区，跳转到cs:ip=0000:7c00,读取加载程序，用加载程序识别文件系统，识别文件系统之后就可以读取os的内核代码，在把控制权转给os:</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192202995.png" srcset="/img/loading.gif" lazyload></p>
+<p>bios和uefi的区别：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192216709.png" srcset="/img/loading.gif" lazyload></p>
+<p>中断（来自硬件）、异常（非法指令等）、系统调用（应用程序主动向os发的请求）：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192223617.png" srcset="/img/loading.gif" lazyload></p>
+<p>计算机对上述三种情况采用的中断处理机制：</p>
+<ol type="1">
+<li><p>cpu初始化时设置中断使能，设置中断标志，根据中断向量调用相关中断服务例程</p></li>
+<li><p>软件处理：</p></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192230246.png" srcset="/img/loading.gif" lazyload></p>
+<p>中断是可以嵌套的，也就是异常里可以出现异常 <span class="github-emoji"><span>🤔</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f914.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
 <h1 id="ucore_lab1">ucore_lab1</h1>
 <p><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="13.492ex" height="1.756ex" role="img" focusable="false" viewBox="0 -694 5963.4 776"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D448" d="M107 637Q73 637 71 641Q70 643 70 649Q70 673 81 682Q83 683 98 683Q139 681 234 681Q268 681 297 681T342 682T362 682Q378 682 378 672Q378 670 376 658Q371 641 366 638H364Q362 638 359 638T352 638T343 637T334 637Q295 636 284 634T266 623Q265 621 238 518T184 302T154 169Q152 155 152 140Q152 86 183 55T269 24Q336 24 403 69T501 205L552 406Q599 598 599 606Q599 633 535 637Q511 637 511 648Q511 650 513 660Q517 676 519 679T529 683Q532 683 561 682T645 680Q696 680 723 681T752 682Q767 682 767 672Q767 650 759 642Q756 637 737 637Q666 633 648 597Q646 592 598 404Q557 235 548 205Q515 105 433 42T263 -22Q171 -22 116 34T60 167V183Q60 201 115 421Q164 622 164 628Q164 635 107 637Z"></path></g><g data-mml-node="mi" transform="translate(767,0)"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g><g data-mml-node="mi" transform="translate(1200,0)"><path data-c="1D45C" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"></path></g><g data-mml-node="mi" transform="translate(1685,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(2136,0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mo" transform="translate(2824.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(3824.4,0)"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mi" transform="translate(4505.4,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(5034.4,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><g data-mml-node="mn" transform="translate(5463.4,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></svg></mjx-container></span>没什么需要做的，主要是为了后面的内容，需要点一下相关知识点。</p>
 <h2 id="练习1">练习1</h2>
@@ -778,7 +841,7 @@ graph LR
   
   
     <div>
-      <span class="post-count">27.9k&nbsp words</span>
+      <span class="post-count">28.4k&nbsp words</span>
       <span id="timeDate">载入天数...</span>
       <span id="times">载入时分秒...</span>
       <script>
