@@ -135,7 +135,7 @@ Fluid.plugins = {
 
     var copyHtml = '';
     copyHtml += '<button class="copy-btn" data-clipboard-snippet="">';
-    copyHtml += '<i class="iconfont icon-copy"></i><span>Copy</span>';
+    copyHtml += '<i class="iconfont icon-copy"></i><span>Double click to copy</span>';
     copyHtml += '</button>';
     var blockElement = jQuery('.markdown-body pre');
     blockElement.each(function() {
