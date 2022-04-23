@@ -157,7 +157,7 @@ Fluid.plugins = {
     clipboard.on('success', function(e) {
       e.clearSelection();
       var tmp = e.trigger.outerHTML;
-      e.trigger.innerHTML = 'Success';
+      e.trigger.innerHTML = '';
       setTimeout(function() {
         e.trigger.outerHTML = tmp;
       }, 2000);
