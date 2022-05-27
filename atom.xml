@@ -6,7 +6,7 @@
   <link href="https://heeler-deer.github.io/atom.xml" rel="self"/>
   
   <link href="https://heeler-deer.github.io/"/>
-  <updated>2022-05-21T07:43:40.222Z</updated>
+  <updated>2022-05-27T13:12:52.896Z</updated>
   <id>https://heeler-deer.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ucore-lab8</title>
+    <link href="https://heeler-deer.github.io/2022/05/27/ucore-lab8/"/>
+    <id>https://heeler-deer.github.io/2022/05/27/ucore-lab8/</id>
+    <published>2022-05-27T13:12:52.000Z</published>
+    <updated>2022-05-27T13:12:52.896Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ucore-lab7</title>
+    <link href="https://heeler-deer.github.io/2022/05/27/ucore-lab7/"/>
+    <id>https://heeler-deer.github.io/2022/05/27/ucore-lab7/</id>
+    <published>2022-05-27T13:12:49.000Z</published>
+    <updated>2022-05-27T13:12:49.576Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>ucore-lab6</title>
