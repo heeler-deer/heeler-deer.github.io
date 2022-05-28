@@ -51,11 +51,28 @@
     <link href="https://heeler-deer.github.io/2022/05/27/%E8%AF%AD%E9%9F%B3-%E6%8C%AF%E5%8A%A8%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E5%8F%8ACNN%E7%82%BC%E4%B8%B9/"/>
     <id>https://heeler-deer.github.io/2022/05/27/%E8%AF%AD%E9%9F%B3-%E6%8C%AF%E5%8A%A8%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E5%8F%8ACNN%E7%82%BC%E4%B8%B9/</id>
     <published>2022-05-27T13:34:15.000Z</published>
-    <updated>2022-05-27T13:34:15.324Z</updated>
+    <updated>2022-05-28T11:51:28.202Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="摘要">摘要</h1><p>本文实际上只是一些<strong>零碎</strong>的东西。</p><p>信息密度比较低，随便写写。</p><h1 id="正文">正文</h1><p>语音/振动信号用于识别人的身份近几年才兴起。大概是2017年，出现了通过振动信号识别身份的论文,之后迅速出现了振动信号处理在其他方面的应用。我记得有人通过手指触摸物体产生的振动去识别物体的种类。当然物体种类是预先准备好的，可以看出这时已经可以粗略的利用振动信号处理识别相关的问题了。</p><p>之后出现了更多的应用，诸如通过佩戴手环，可以识别敲击位置，进而模拟键盘：</p><p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205281937178.png" srcset="/img/loading.gif" lazyload></p><p>手机作为一个传感器完备的设备，自然也出现了通过振动识别身份的应用。有几篇就是通过振动信号的处理分析识别身份的。然而目前止步于此，没有人做出来多模式或者设备的振动信号识别，毕竟振动/声音和介质息息相关，换一个介质，振动下的生物信息就会改变，至于改变成什么样子，似乎完全和设备有关，还没有能够找到规律。</p><p>我做了一段时间的语音信号处理了，简述一下流程吧。</p><p>首先是信号采集，振动信号我用的sensor stream,典型的c/s形式，开源，可以采样到加速度计，声音等几乎所有可以采集的数据，可以自定义采样频率。github就能找到。</p><p>电脑端采集声音我直接用的arecord,毕竟我是linux的工作环境。</p><p>其次是数据处理，音频我直接采用的mfcc,13维，其他特征没有尝试过，毕竟，mfcc似乎是最好的了。</p><p>我做的问题可以转为分类问题，因此直接用的cnn,使用google的Efficintnet网络，基于python写的分类。主要是网络上有现成的代码，<a href="https://blog.csdn.net/qq_38412266/article/details/106877790">csdn</a>,我是把mfcc后的图片直接喂给了cnn。这个网络架构也算比较轻量的，挺合适的。</p><p>这么看来我似乎没做什么实质性工作，笑。</p><p>接下来就得java写神经网络了，还想看resnet,虽然不是我这个方向的。</p><p>😴</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;摘要&quot;&gt;摘要&lt;/h1&gt;
+&lt;p&gt;本文实际上只是一些&lt;strong&gt;零碎&lt;/strong&gt;的东西。&lt;/p&gt;
+&lt;p&gt;信息密度比较低，随便写写。&lt;/p&gt;
+&lt;h1 id=&quot;正文&quot;&gt;正文&lt;/h1&gt;
+&lt;p&gt;语音/振动信号用于识别人的身份近几年才兴起。大概是2017年，出现了通过</summary>
+      
     
     
     
+    <category term="读书" scheme="https://heeler-deer.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
+    
+    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
+    
+    <category term="笔记" scheme="https://heeler-deer.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
