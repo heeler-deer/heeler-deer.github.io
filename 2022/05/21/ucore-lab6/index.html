@@ -16,12 +16,12 @@
   <meta name="author" content="Heeler-Deer">
   <meta name="keywords" content="">
   
-    <meta name="description" content="练习解答 练习0 填写实验  kern&#x2F;process&#x2F;proc.c kern&#x2F;mm&#x2F;pmm.c  有需要更改的文件，建议看Kiprey 练习1 练习1: 使用 Round Robin 调度算法（不需要编码） 完成练习0后，建议大家比较一下（可用kdiff3等文件比较软件）个人完成的lab5和练习0完成后的刚修改的lab6之间的区别，分析了解lab6采用RR调度算法后的执行过程。执行make gr">
+    <meta name="description" content="练习解答 练习0 填写实验  kern&#x2F;process&#x2F;proc.c kern&#x2F;mm&#x2F;pmm.c  有需要更改的文件，建议看Kiprey 练习1  练习1: 使用 Round Robin 调度算法（不需要编码） 完成练习0后，建议大家比较一下（可用kdiff3等文件比较软件）个人完成的lab5和练习0完成后的刚修改的lab6之间的区别，分析了解lab6采用RR调度算法后的执行过程。执行make g">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ucore-lab6">
 <meta property="og:url" content="https://heeler-deer.github.io/2022/05/21/ucore-lab6/index.html">
 <meta property="og:site_name" content="Heeler-Deer">
-<meta property="og:description" content="练习解答 练习0 填写实验  kern&#x2F;process&#x2F;proc.c kern&#x2F;mm&#x2F;pmm.c  有需要更改的文件，建议看Kiprey 练习1 练习1: 使用 Round Robin 调度算法（不需要编码） 完成练习0后，建议大家比较一下（可用kdiff3等文件比较软件）个人完成的lab5和练习0完成后的刚修改的lab6之间的区别，分析了解lab6采用RR调度算法后的执行过程。执行make gr">
+<meta property="og:description" content="练习解答 练习0 填写实验  kern&#x2F;process&#x2F;proc.c kern&#x2F;mm&#x2F;pmm.c  有需要更改的文件，建议看Kiprey 练习1  练习1: 使用 Round Robin 调度算法（不需要编码） 完成练习0后，建议大家比较一下（可用kdiff3等文件比较软件）个人完成的lab5和练习0完成后的刚修改的lab6之间的区别，分析了解lab6采用RR调度算法后的执行过程。执行make g">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211153269.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211156860.png">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211532686.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211535426.png">
 <meta property="article:published_time" content="2022-05-21T03:03:56.000Z">
-<meta property="article:modified_time" content="2022-05-21T07:43:40.222Z">
+<meta property="article:modified_time" content="2022-05-28T05:52:39.352Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="ucore">
@@ -87,9 +87,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<style>mjx-container[jax="SVG"] {
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -201,7 +199,9 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
+</style>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
 </head>
 
 
@@ -437,7 +437,7 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年5月21日 下午
+                  本文最后更新于：2022年5月28日 下午
                 
               </p>
             
@@ -451,6 +451,7 @@ mjx-container[display="true"] + br {
 </ul>
 <p>有需要更改的文件，建议看<a target="_blank" rel="noopener" href="https://kiprey.github.io/2020/09/uCore-6/#%E7%BB%83%E4%B9%A0%E8%A7%A3%E7%AD%94">Kiprey</a></p>
 <h2 id="练习1">练习1</h2>
+<blockquote>
 <p>练习1: 使用 Round Robin 调度算法（不需要编码）</p>
 <p>完成练习0后，建议大家比较一下（可用kdiff3等文件比较软件）个人完成的lab5和练习0完成后的刚修改的lab6之间的区别，分析了解lab6采用RR调度算法后的执行过程。执行make grade，大部分测试用例应该通过。但执行priority.c应该过不去。</p>
 <p>请在实验报告中完成：</p>
@@ -459,6 +460,7 @@ mjx-container[display="true"] + br {
 <li>请在实验报告中简要说明如何设计实现”多级反馈队列调度算法“，给出概要设计，鼓励给出详细设计</li>
 </ul>
 <p><strong>请理解并分析sched_class中各个函数指针的用法，并结合Round Robin 调度算法描ucore的调度执行过程</strong></p>
+</blockquote>
 <p>在kern/schedule/sched.h不难找到：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sched_class</span> {</span><br>    <span class="hljs-comment">// the name of sched_class</span><br>    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *name;<br>    <span class="hljs-comment">// Init the run queue</span><br>    <span class="hljs-keyword">void</span> (*init)(struct run_queue *rq);<br>    <span class="hljs-comment">// put the proc into runqueue, and this function must be called with rq_lock</span><br>    <span class="hljs-keyword">void</span> (*enqueue)(struct run_queue *rq, struct proc_struct *proc);<br>    <span class="hljs-comment">// get the proc out runqueue, and this function must be called with rq_lock</span><br>    <span class="hljs-keyword">void</span> (*dequeue)(struct run_queue *rq, struct proc_struct *proc);<br>    <span class="hljs-comment">// choose the next runnable task</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">proc_struct</span> *(*<span class="hljs-title">pick_next</span>)(<span class="hljs-keyword">struct</span> <span class="hljs-title">run_queue</span> *<span class="hljs-title">rq</span>);</span><br>    <span class="hljs-comment">// dealer of the time-tick</span><br>    <span class="hljs-keyword">void</span> (*proc_tick)(struct run_queue *rq, struct proc_struct *proc);<br>    <span class="hljs-comment">/* for SMP support in the future</span><br><span class="hljs-comment">     *  load_balance</span><br><span class="hljs-comment">     *     void (*load_balance)(struct rq* rq);</span><br><span class="hljs-comment">     *  get some proc from this rq, used in load_balance,</span><br><span class="hljs-comment">     *  return value is the num of gotten proc</span><br><span class="hljs-comment">     *  int (*get_proc)(struct rq* rq, struct proc* procs_moved[]);</span><br><span class="hljs-comment">     */</span><br>};<br></code></pre></div></td></tr></tbody></table></figure>
 <p>由于时间较紧，且根据注释易于理解，此处不再赘述</p>
@@ -472,6 +474,7 @@ mjx-container[display="true"] + br {
 <p><strong>请在实验报告中简要说明如何设计实现”多级反馈队列调度算法“，给出概要设计，鼓励给出详细设计</strong></p>
 <p>多级反馈队列实际上是通过设置多个优先级不同的队列实现，其中优先级越高，时间片越高。在enqueue中，如果该进程时间片为0则不改变其优先级，大于0则降低其优先级；调度时，参照ostep的规则，如果 A 的优先级 &gt; B 的优先级，运行 A（不运行 B）；如果 A 的优先级 = B 的优先级，轮转运行A 和 B；新进程进入系统时，放在最高优先级（最上层队列）；一旦工作用完了其在某一层中的时间配额（无论中间主动放弃了多少次CPU），就降低其优先级（移入低一级队列）；经过一段时间 S，就将系统中所有工作重新加入最高优先级队列。</p>
 <h2 id="练习二">练习二</h2>
+<blockquote>
 <p>练习2: 实现 Stride Scheduling 调度算法（需要编码）</p>
 <p>首先需要换掉RR调度器的实现，即用default_sched_stride_c覆盖default_sched.c。然后根据此文件和后续文档对Stride度器的相关描述，完成Stride调度算法的实现。</p>
 <p>后面的实验文档部分给出了Stride调度算法的大体描述。这里给出Stride调度算法的一些相关的资料（目前网上中文的资料比较欠缺）。</p>
@@ -482,6 +485,7 @@ mjx-container[display="true"] + br {
 </ul>
 <p>执行：make grade。如果所显示的应用程序检测都输出ok，则基本正确。如果只是priority.c过不去，可执行 make run-priority 命令来单独调试它。大致执行结果可看附录。（ 使用的是 qemu-1.0.1 ）。</p>
 <p>请在实验报告中简要说明你的设计实现过程。</p>
+</blockquote>
 <p>所谓stride算法，实际上就是通过对每一个进程添加一个stride以及一个pass数据，每次选择最小stride(或者说离cpu最近)的进程执行，执行后该进程的stride添加步长pass.其中pass与优先级成反比，pass=BIG_STRIDE / priority</p>
 <p>关于BIG_STRIDE的详细推导建议参考<a target="_blank" rel="noopener" href="https://yuerer.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-uCore-Lab-6/">yuerer</a></p>
 <p>具体代码实现建议参考<a target="_blank" rel="noopener" href="https://kiprey.github.io/2020/09/uCore-6/#2-%E7%BB%83%E4%B9%A02">kiprey</a></p>
@@ -712,7 +716,7 @@ mjx-container[display="true"] + br {
   
   
     <div>
-      <span class="post-count">45.5k&nbsp words</span>
+      <span class="post-count">48.7k&nbsp words</span>
       <span id="timeDate">载入天数...</span>
       <span id="times">载入时分秒...</span>
       <script>

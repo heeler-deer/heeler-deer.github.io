@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205132248605.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205132303683.png">
 <meta property="article:published_time" content="2022-05-13T08:24:25.000Z">
-<meta property="article:modified_time" content="2022-05-15T13:57:04.316Z">
+<meta property="article:modified_time" content="2022-05-28T05:53:39.008Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="ucore">
@@ -88,9 +88,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<style>mjx-container[jax="SVG"] {
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -202,7 +200,9 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
+</style>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
 </head>
 
 
@@ -438,7 +438,7 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年5月15日 晚上
+                  本文最后更新于：2022年5月28日 下午
                 
               </p>
             
@@ -457,9 +457,11 @@ mjx-container[display="true"] + br {
 <p>这东西不能直接拿lab4做过的用，实在是败笔。</p>
 <p>不嫌麻烦的可以参考<a target="_blank" rel="noopener" href="https://kiprey.github.io/2020/08/uCore-5/">kiprey</a></p>
 <h2 id="练习1加载应用程序并执行需要编码">练习1：加载应用程序并执行（需要编码）</h2>
+<blockquote>
 <p><strong>do_execv</strong>函数调用load_icode（位于kern/process/proc.c中）来加载并解析一个处于内存中的ELF执行文件格式的应用程序，建立相应的用户内存空间来放置应用程序的代码段、数据段等，且要设置好proc_struct结构中的成员变量trapframe中的内容，确保在执行此进程后，能够从应用程序设定的起始执行地址开始执行。需设置正确的trapframe内容。</p>
 <p>请在实验报告中简要说明你的设计实现过程。</p>
 <p>请在实验报告中描述当创建一个用户态进程并加载了应用程序后，CPU是如何让这个应用程序最终在用户态执行起来的。即这个用户态进程被ucore选择占用CPU执行（RUNNING态）到具体执行应用程序第一条指令的整个经过。</p>
+</blockquote>
 <p>代码：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* LAB5:EXERCISE1 YOUR CODE</span><br><span class="hljs-comment"> * should set tf_cs,tf_ds,tf_es,tf_ss,tf_esp,tf_eip,tf_eflags</span><br><span class="hljs-comment"> * NOTICE: If we set trapframe correctly, then the user level process can return to USER MODE from kernel. So</span><br><span class="hljs-comment"> *          tf_cs should be USER_CS segment (see memlayout.h)</span><br><span class="hljs-comment"> *          tf_ds=tf_es=tf_ss should be USER_DS segment</span><br><span class="hljs-comment"> *          tf_esp should be the top addr of user stack (USTACKTOP)</span><br><span class="hljs-comment"> *          tf_eip should be the entry point of this binary program (elf-&gt;e_entry)</span><br><span class="hljs-comment"> *          tf_eflags should be set to enable computer to produce Interrupt</span><br><span class="hljs-comment"> */</span><br>tf-&gt;tf_cs = USER_CS;<br>tf-&gt;tf_ds = tf-&gt;tf_es = tf-&gt;tf_ss = USER_DS;<br>tf-&gt;tf_esp = USTACKTOP;<br>tf-&gt;tf_eip = elf-&gt;e_entry;<br>tf-&gt;tf_eflags = FL_IF;<br>ret = <span class="hljs-number">0</span>;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>读取文件需要陷入内核态，在load_icode中我们需要完成tf_cs,tf_ds,tf_es,tf_ss,tf_esp,tf_eip,tf_eflags这几个变量的初始化。这注释都已经把答案写出来了。 <em><span class="github-emoji"><span>😆</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></em></p>
@@ -470,20 +472,24 @@ mjx-container[display="true"] + br {
 <p>proc.c内部的流程大致如上，不难找到：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">related syscall <span class="hljs-keyword">for</span> process:<br>SYS_exit        : process <span class="hljs-built_in">exit</span>,                           --&gt;do_exit<br>SYS_fork        : create child process, dup mm            --&gt;do_fork--&gt;wakeup_proc<br>SYS_wait        : wait process                            --&gt;do_wait<br>SYS_exec        : after fork, process execute a program   --&gt;load a program <span class="hljs-keyword">and</span> refresh the mm<br>SYS_clone       : create child thread                     --&gt;do_fork--&gt;wakeup_proc<br>SYS_yield       : process flag itself need resecheduling, -- proc-&gt;need_sched=<span class="hljs-number">1</span>, then scheduler will rescheule <span class="hljs-keyword">this</span> process<br>SYS_sleep       : process sleep                           --&gt;do_sleep <br>SYS_kill        : kill process                            --&gt;do_kill--&gt;proc-&gt;flags |= PF_EXITING<br>                                                                 --&gt;wakeup_proc--&gt;do_wait--&gt;do_exit   <br>SYS_getpid      : get the process<span class="hljs-number">'</span>s pid<br></code></pre></div></td></tr></tbody></table></figure>
 <h2 id="练习2-父进程复制自己的内存空间给子进程需要编码">练习2: 父进程复制自己的内存空间给子进程（需要编码）</h2>
+<blockquote>
 <p>创建子进程的函数do_fork在执行中将拷贝当前进程（即父进程）的用户内存地址空间中的合法内容到新进程中（子进程），完成内存资源的复制。具体是通过copy_range函数（位于kern/mm/pmm.c中）实现的，请补充copy_range的实现，确保能够正确执行。</p>
 <p>请在实验报告中简要说明如何设计实现”Copy on Write 机制“，给出概要设计，鼓励给出详细设计。</p>
+</blockquote>
 <blockquote>
 <p>Copy-on-write（简称COW）的基本概念是指如果有多个使用者对一个资源A（比如内存块）进行读操作，则每个使用者只需获得一个指向同一个资源A的指针，就可以该资源了。若某使用者需要对这个资源A进行写操作，系统会对该资源进行拷贝操作，从而使得该“写操作”使用者获得一个该资源A的“私有”拷贝—资源B，可对资源B进行写操作。该“写操作”使用者对资源B的改变对于其他的使用者而言是不可见的，因为其他使用者看到的还是资源A。</p>
 </blockquote>
 <p>代码：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">      <span class="hljs-comment">/* LAB5:EXERCISE2 YOUR CODE</span><br><span class="hljs-comment">       * replicate content of page to npage, build the map of phy addr of nage with the linear addr start</span><br><span class="hljs-comment">       *</span><br><span class="hljs-comment">       * Some Useful MACROs and DEFINEs, you can use them in below implementation.</span><br><span class="hljs-comment">       * MACROs or Functions:</span><br><span class="hljs-comment">       *    page2kva(struct Page *page): return the kernel vritual addr of memory which page managed (SEE pmm.h)</span><br><span class="hljs-comment">       *    page_insert: build the map of phy addr of an Page with the linear addr la</span><br><span class="hljs-comment">       *    memcpy: typical memory copy function</span><br><span class="hljs-comment">       *</span><br><span class="hljs-comment">       * (1) find src_kvaddr: the kernel virtual address of page</span><br><span class="hljs-comment">       * (2) find dst_kvaddr: the kernel virtual address of npage</span><br><span class="hljs-comment">       * (3) memory copy from src_kvaddr to dst_kvaddr, size is PGSIZE</span><br><span class="hljs-comment">       * (4) build the map of phy addr of  nage with the linear addr start</span><br><span class="hljs-comment">       */</span><br>      <span class="hljs-keyword">void</span> * kva_src = page2kva(page);<br><span class="hljs-comment">//找到src页面所在地址</span><br>      <span class="hljs-keyword">void</span> * kva_dst = page2kva(npage);<br>		<span class="hljs-comment">//找到dst页面所在地址</span><br>      <span class="hljs-built_in">memcpy</span>(kva_dst, kva_src, PGSIZE);<br><span class="hljs-comment">//复制</span><br>      ret = page_insert(to, npage, start, perm);<br><span class="hljs-comment">//按照链表方式加入pte</span><br>      assert(ret == <span class="hljs-number">0</span>);<br>      }<br>      start += PGSIZE;<br></code></pre></div></td></tr></tbody></table></figure>
 <h2 id="练习3-阅读分析源代码理解进程执行-forkexecwaitexit-的实现以及系统调用的实现不需要编码">练习3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现（不需要编码）</h2>
+<blockquote>
 <p>请在实验报告中简要说明你对 fork/exec/wait/exit函数的分析。并回答如下问题：</p>
 <ul>
 <li>请分析fork/exec/wait/exit在实现中是如何影响进程的执行状态的？</li>
 <li>请给出ucore中一个用户态进程的执行状态生命周期图（包执行状态，执行状态之间的变换关系，以及产生变换的事件或函数调用）。（字符方式画即可）</li>
 </ul>
 <p>执行：make grade。如果所显示的应用程序检测都输出ok，则基本正确。（使用的是qemu-1.0.1）</p>
+</blockquote>
 <p>注意，前面如果完全正确，参考我上周写的<a href="https://heeler-deer.github.io/2022/05/07/ucore-lab4/#%E7%BB%83%E4%B9%A02">lab4练习二</a>最后一部分更改一下语句就可以拿到136分。</p>
 <p>之后参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wuhualong/p/ucore_lab5_report.html">博客园</a>且自己看提示信息，可以看出这东西确实有bug</p>
 <p>我试了试，发现是init_main函数里面，</p>
@@ -570,10 +576,12 @@ flowchart TB
 </code>
 </pre>
 <h2 id="扩展练习-challenge-实现-copy-on-write-cow机制">扩展练习 Challenge ：实现 Copy on Write （COW）机制</h2>
+<blockquote>
 <p>给出实现源码,测试用例和设计报告（包括在cow情况下的各种状态转换（类似有限状态自动机）的说明）。</p>
 <p>这个扩展练习涉及到本实验和上一个实验“虚拟内存管理”。在ucore操作系统中，当一个用户父进程创建自己的子进程时，父进程会把其申请的用户空间设置为只读，子进程可共享父进程占用的用户内存空间中的页面（这就是一个共享的资源）<strong>。当其中任何一个进程修改此用户内存空间中的某页面时，ucore会通过page fault异常获知该操作，并完成拷贝内存页面</strong>，使得两个进程都有各自的内存页面。这样一个进程所做的修改不会被另外一个进程可见了。请在ucore中实现这样的COW机制。</p>
 <p>由于COW实现比较复杂，容易引入bug，请参考 https://dirtycow.ninja/ 看看能否在ucore的COW实现中模拟这个错误和解决方案。需要有解释。</p>
 <p>这是一个big challenge.</p>
+</blockquote>
 <p>不难理解是要干什么。</p>
 <p>参考<a target="_blank" rel="noopener" href="https://github.com/PKUanonym/REKCARC-TSC-UHT/blob/master/%E5%A4%A7%E4%B8%89%E4%B8%8B/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/hw/2017/2014011330_738795_163902674_lab5-2014011330/lab5-challenge-2014011330.md">github</a></p>
 <p>我们要修改pmm.c中的copy_range以及处理页错误的page_fault函数：</p>
@@ -779,7 +787,7 @@ flowchart TB
   
   
     <div>
-      <span class="post-count">45.5k&nbsp words</span>
+      <span class="post-count">48.7k&nbsp words</span>
       <span id="timeDate">载入天数...</span>
       <span id="times">载入时分秒...</span>
       <script>
