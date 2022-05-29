@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205281456958.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205281516855.png">
 <meta property="article:published_time" content="2022-05-27T13:12:49.000Z">
-<meta property="article:modified_time" content="2022-05-28T14:48:20.037Z">
+<meta property="article:modified_time" content="2022-05-29T08:37:50.728Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="ucore">
@@ -434,7 +434,7 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年5月28日 晚上
+                  本文最后更新于：2022年5月29日 下午
                 
               </p>
             
@@ -475,7 +475,7 @@ mjx-container[display="true"] + br {
 <p>那么，怎么云实现呢？可以在proc的结构体里面增加信号量的相关代码，用于获取信号量的值，发出增加或减少信号量的请求，再由操作系统实现。详细可以参考kiprey，他参考了linux的实现。</p>
 <h2 id="练习二">练习二</h2>
 <blockquote>
-<h4 id="练习2-完成内核级条件变量和基于内核级条件变量的哲学家就餐问题需要编码">练习2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题（需要编码）</h4>
+<p>练习2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题（需要编码）</p>
 <p>首先掌握管程机制，然后基于信号量实现完成条件变量实现，然后用管程机制实现哲学家就餐问题的解决方案（基于条件变量）。</p>
 <p>执行：<code>make grade</code> 。如果所显示的应用程序检测都输出ok，则基本正确。如果只是某程序过不去，比如matrix.c，则可执行</p>
 <figure class="highlight gauss"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gauss"><span class="hljs-built_in">make</span> <span class="hljs-keyword">run</span>-<span class="hljs-keyword">matrix</span><br></code></pre></div></td></tr></tbody></table></figure>
@@ -499,13 +499,13 @@ mjx-container[display="true"] + br {
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205281456958.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="challenge1">challenge1</h2>
 <blockquote>
-<h4 id="扩展练习-challenge-在ucore中实现简化的死锁和重入探测机制">扩展练习 Challenge ：　在ucore中实现简化的死锁和重入探测机制</h4>
+<p>扩展练习 Challenge ：　在ucore中实现简化的死锁和重入探测机制</p>
 <p>在ucore下实现一种探测机制，能够在多进程/线程运行同步互斥问题时，动态判断当前系统是否出现了死锁产生的必要条件，是否产生了多个进程进入临界区的情况。 如果发现，让系统进入monitor状态，打印出你的探测信息。</p>
 </blockquote>
 <p>暑假得抽个空补完这些没有参考的challenge</p>
 <h2 id="challengen2">challengen2</h2>
 <blockquote>
-<h4 id="扩展练习-challenge-参考linux的rcu机制在ucore中实现简化的rcu机制">扩展练习 Challenge ：　参考Linux的RCU机制，在ucore中实现简化的RCU机制</h4>
+<p>扩展练习 Challenge ：　参考Linux的RCU机制，在ucore中实现简化的RCU机制</p>
 <p>在ucore 下实现下Linux的RCU同步互斥机制。可阅读相关Linux内核书籍或查询网上资料，可了解RCU的设计实现细节，然后简化实现在ucore中。 要求有实验报告说明你的设计思路，并提供测试用例。下面是一些参考资料：</p>
 <ul>
 <li>http://www.ibm.com/developerworks/cn/linux/l-rcu/</li>
