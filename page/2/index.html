@@ -51,7 +51,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"heeler-deer.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"GCX7MRb8jHPOvWy5hXP1pLOT-gzGzoHsz","app_key":"81Myp4Kmaagh7J5spTpIoMWi","server_url":"https://gcx7mrb8.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"heeler-deer.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"GCX7MRb8jHPOvWy5hXP1pLOT-gzGzoHsz","app_key":"81Myp4Kmaagh7J5spTpIoMWi","server_url":"https://gcx7mrb8.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -357,6 +357,55 @@ mjx-container[display="true"] + br {
               <div class="col-12 col-md-10 m-auto">
                 
 
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/21/ucore-lab2/" target="_self">
+          ucore-lab2
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/21/ucore-lab2/" target="_self">
+          
+          知识点 连续内存分配  最先匹配就是寻找第一个大于所需空间的空闲块。 最佳匹配找到比n大的最小的那个空闲块，可以减少碎片的尺度。 最差匹配找不小于n的最大空闲分区。可以避免出现太多小碎片，但外部碎片较多，释放慢。 非连续式内存就是常见的段表管理机制。 其他内容建议看Kiprey ucore_lab2 练习0 合并代码，直接meld然后copy to right就行，lab1修改的文件有：  ker
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-21 19:40" pubdate>
+              2022-04-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/blog/">blog</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/cs/">cs</a>
+            
+              <a href="/tags/ucore/">ucore</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
   <div class="row mx-auto index-card">
     
@@ -793,53 +842,6 @@ mjx-container[display="true"] + br {
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/10/14/CSAPP/" target="_self">
-          CSAPP
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/10/14/CSAPP/" target="_self">
-          
-          看到第四章才发现看的第二版，偶emo了。。。。 第三版和第二版差别还是挺大的。 我找到的第三版电子书还是彩色的 暂时记录部分笔者看CSAPP的笔记，参考Kipery的笔记。 Kipery,yyds!!! 现在可以参考这本在线电子书： gitbook 计算机系统漫游 由于系统中所有信息都是由比特表示，因此区分不同数据对象的唯一方法是上下文. 如对于hello.c,其编译系统的执行如下：   grap
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-14 20:50" pubdate>
-              2021-10-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/blog/">blog</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/cs/">cs</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
@@ -1039,19 +1041,6 @@ mjx-container[display="true"] + br {
 
 
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
 
 
   
@@ -1115,19 +1104,6 @@ mjx-container[display="true"] + br {
 
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
 
