@@ -6,7 +6,7 @@
   <link href="https://heeler-deer.github.io/atom.xml" rel="self"/>
   
   <link href="https://heeler-deer.github.io/"/>
-  <updated>2022-06-02T09:28:57.101Z</updated>
+  <updated>2022-06-22T10:49:01.678Z</updated>
   <id>https://heeler-deer.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Progressive Relation Learning for Group Activity Recognition</title>
+    <link href="https://heeler-deer.github.io/2022/06/22/Progressive%20Relation%20Learning%20for%20Group%20Activity%20Recognition/"/>
+    <id>https://heeler-deer.github.io/2022/06/22/Progressive%20Relation%20Learning%20for%20Group%20Activity%20Recognition/</id>
+    <published>2022-06-22T10:47:31.000Z</published>
+    <updated>2022-06-22T10:49:01.678Z</updated>
+    
+    
+    
+    
+    <category term="读书" scheme="https://heeler-deer.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
+    
+    
+    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
+    
+    <category term="论文" scheme="https://heeler-deer.github.io/tags/%E8%AE%BA%E6%96%87/"/>
+    
+    <category term="笔记" scheme="https://heeler-deer.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>transformer</title>
