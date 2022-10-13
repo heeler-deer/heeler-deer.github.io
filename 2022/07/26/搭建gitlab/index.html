@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261634951.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261634341.png">
 <meta property="article:published_time" content="2022-07-26T07:55:37.000Z">
-<meta property="article:modified_time" content="2022-07-26T08:35:09.606Z">
+<meta property="article:modified_time" content="2022-10-03T13:43:26.425Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta name="twitter:card" content="summary_large_image">
@@ -328,7 +328,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年7月26日 下午
+                  本文最后更新于：2022年10月3日 晚上
                 
               </p>
             
@@ -337,7 +337,7 @@
 <p>不建议任何人在近半年内买树莓派/香橙派之类的玩具，由于芯片问题，树莓派/香橙派价格大涨。</p>
 <p><del>除非你和我一样是纯纯冤种</del></p>
 <figure>
-<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261601695.png" srcset="/img/loading.gif" lazyload alt="image-20220726160124366"><figcaption aria-hidden="true">image-20220726160124366</figcaption>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261601695.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>image-20220726160124366</figcaption>
 </figure>
 <h1 id="拆盒">拆盒</h1>
 <p>此处略过，建议阅读：</p>
@@ -346,17 +346,17 @@
 <p>记得买一个读卡器，大概10块钱；一般买pi都会顺便买一个tf卡，准备好这两个基本就行了。</p>
 <p>刷卡软件我建议使用<a target="_blank" rel="noopener" href="https://www.balena.io/etcher/">etcher</a>:</p>
 <figure>
-<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261605736.png" srcset="/img/loading.gif" lazyload alt="image-20220726160536693"><figcaption aria-hidden="true">image-20220726160536693</figcaption>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261605736.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>image-20220726160536693</figcaption>
 </figure>
 <figure>
-<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261607551.png" srcset="/img/loading.gif" lazyload alt="image-20220726160753504"><figcaption aria-hidden="true">image-20220726160753504</figcaption>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261607551.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>image-20220726160753504</figcaption>
 </figure>
 <p>之后用读卡器写入镜像就像。镜像建议从各种pi的官网下载</p>
 <p>至于联网，我是准备了一根网线直接链接家里的网络。由于后期要做内网穿透，<strong>不建议在学校进行</strong>。</p>
 <h2 id="连接">连接</h2>
 <p>如果你和我一样，没有能够使用的屏幕，只能ssh链接的话，在pi第一次启动时，ssh并未自动开启，可以像我一样准备/etc/rc.lcoal:</p>
 <figure>
-<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261608366.png" srcset="/img/loading.gif" lazyload alt="image-20220726160859255"><figcaption aria-hidden="true">image-20220726160859255</figcaption>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261608366.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>image-20220726160859255</figcaption>
 </figure>
 <p>使其能够开机后开启ssh服务。但第二次启动时需要删除25～26行，27行酌情删除</p>
 <p>之后在路由帐号内部查看pi的ip即可。</p>
@@ -364,32 +364,32 @@
 <h1 id="搭建gitlab">搭建gitlab</h1>
 <p>其实就是一个有图形化界面的gitlab,实际上完全可以不要gitlab的图像界面，转而使用gitcore+内网穿透的传统办法。由于我配置不行，最终卸载了gitlab（gitlab非常吃内存）</p>
 <figure>
-<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261611129.png" srcset="/img/loading.gif" lazyload alt="image-20220726161116833"><figcaption aria-hidden="true">image-20220726161116833</figcaption>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261611129.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>image-20220726161116833</figcaption>
 </figure>
 <p>首先去<a target="_blank" rel="noopener" href="https://packages.gitlab.com/gitlab">gitlab</a>下载需要的版本，我们选择raspberry-pi2即可。必须根据pi的版本选择合适的deb包，否则可能出现glibc版本不对应的情况。<strong>glibc版本更改较为困难，不建议更改</strong>。</p>
 <p>之后一路安装即可。</p>
 <h1 id="内网穿透">内网穿透</h1>
 <p>可以采取传统的工具进行穿透，也可以直接使用<a target="_blank" rel="noopener" href="https://hsk.oray.com/download/">花生壳</a>：</p>
 <figure>
-<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261627011.png" srcset="/img/loading.gif" lazyload alt="image-20220726162749703"><figcaption aria-hidden="true">image-20220726162749703</figcaption>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261627011.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>image-20220726162749703</figcaption>
 </figure>
 <p>一路安装即可，</p>
 <figure>
-<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261628942.png" srcset="/img/loading.gif" lazyload alt="image-20220726162833856"><figcaption aria-hidden="true">image-20220726162833856</figcaption>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261628942.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>image-20220726162833856</figcaption>
 </figure>
 <h1 id="配置邮箱">配置邮箱</h1>
 <p>gitlab可以配置邮箱，使新用户注册时可以收到邮件。</p>
 <p>首先根据 <a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15266039/4115941">blog</a> 更改管理员密码</p>
 <p>在根据 <a target="_blank" rel="noopener" href="https://juejin.cn/post/6991924908242501669">blog2</a>更改配置即可。</p>
 <figure>
-<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261634666.png" srcset="/img/loading.gif" lazyload alt="image-20220726163418532"><figcaption aria-hidden="true">image-20220726163418532</figcaption>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261634666.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>image-20220726163418532</figcaption>
 </figure>
 <figure>
-<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261634951.png" srcset="/img/loading.gif" lazyload alt="image-20220726163423819"><figcaption aria-hidden="true">image-20220726163423819</figcaption>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261634951.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>image-20220726163423819</figcaption>
 </figure>
 <p>最后重启即可</p>
 <figure>
-<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261634341.png" srcset="/img/loading.gif" lazyload alt="image-20220726163448204"><figcaption aria-hidden="true">image-20220726163448204</figcaption>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261634341.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>image-20220726163448204</figcaption>
 </figure>
 
             </div>
