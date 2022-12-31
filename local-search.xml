@@ -4,6 +4,60 @@
   
   
   <entry>
+    <title>socks5</title>
+    <link href="/2022/12/31/socks5/"/>
+    <url>/2022/12/31/socks5/</url>
+    
+    <content type="html"><![CDATA[<p>自己搭建vps服务器建议参考我之前的<a href="https://heeler-deer.github.io/2021/11/13/vps/">博客</a></p><p>本文主要参考<a href="https://cloud.tencent.com/developer/article/1852590">Rokas.Yang</a>。</p><p>针对国内云服务器无法使用github这一问题（如今各大运营商已经将github屏蔽），我的建议是尽早在服务器上使用代理。</p><h1 id="shadowsocksr">shadowsocksr</h1><p>软件安装，首先在本机下载软件<a href="https://github.com/RokasUrbelis/shadowsocksr">shadowsocksr</a></p><p>之后传输到服务器上。</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">解压</span><br>unzip sh*.zip<br><span class="hljs-meta">#</span><span class="bash">进入目录</span><br>cd sha*r<br><span class="hljs-meta">#</span><span class="bash">执行初始化脚本</span><br>sh initcfg.sh<br><span class="hljs-meta">#</span><span class="bash">更改配置文件</span><br>vim config.json<br></code></pre></div></td></tr></tbody></table></figure><p>配置文件具体内容按照代理的选项填充即可。</p><p>为了以后方便使用代理，建议将本地端口local port选项映射到2000</p><p>同时为了管理方便，将ssr通过systemctl进行管理</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">创建文件</span><br>mkdir -p ~/.config/systemd/user<br></code></pre></div></td></tr></tbody></table></figure><p>启动ssr代理需要三个选项：</p><ul><li>python运行环境</li><li>shadowsocksr/shadowsocks/local.py(即下载的目录里面的文件)</li><li>刚刚填写的配置文件config.json</li></ul><p>这里建议python为3.7及以上。</p><p>首先查询python运行环境，</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">此处查询服务器python位置</span><br>whereis python<br></code></pre></div></td></tr></tbody></table></figure><p>之后可以填写systemd的服务文件，<code>vim ~/.config/systemd/user/ssr-client.service</code></p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[Unit]<br>Description=Shadowsocks R Client Service<br>After=default.target<br>[Service]<br>ExecStart=/usr/local/python/bin/python3.10 /root/shadowsocksr-manyuser/shadowsocks/local.py -c /root/shadowsocksr-manyuser/user-config.json  #以你实际路径为准<br>Restart=on-abort<br>[Install]<br>WantedBy=default.target<br></code></pre></div></td></tr></tbody></table></figure><p>之后即可通过systemd管理服务：</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">重载服务</span><br>systemctl --user daemon-reload<br><span class="hljs-meta">#</span><span class="bash">启动ssr</span><br>systemctl --user start ssr-client<br><span class="hljs-meta">#</span><span class="bash">查看运行状态</span><br>systemctl --user status ssr-client<br><span class="hljs-meta">#</span><span class="bash">设置为开机启动</span><br>systemctl --user enable ssr-client<br></code></pre></div></td></tr></tbody></table></figure><h1 id="proxychains4">proxychains4</h1><p>为了更方便调用ssr代理，需要安装proxychains4</p><p>还是在本机电脑开代理下载<a href="https://github.com/rofl0r/proxychains-ng.git">proxychains4</a>，之后传输到服务器，</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">解压</span><br>unzip pro*.zip<br><span class="hljs-meta">#</span><span class="bash">进入目录</span><br>cd proxychains-ng<br><span class="hljs-meta">#</span><span class="bash">安装</span><br>./configure<br>make &amp;&amp; sudo make install<br><span class="hljs-meta">#</span><span class="bash">复制配置文件</span><br>sudo cp ./src/proxychains.conf /etc/proxychains.conf<br><span class="hljs-meta">#</span><span class="bash">编辑配置文件</span><br>sudo vim /etc/proxychains.conf<br></code></pre></div></td></tr></tbody></table></figure><p>由于刚刚已经把ssr的本地端口设置为2000,因此只需要把最后一行设置为socks5 127.0.0.1 2000即可。</p><p>检测是否能够使用代理，可以尝试curl一下google</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">proxychains4 curl www.google.com<br></code></pre></div></td></tr></tbody></table></figure><p>正常情况会返回如下所示的内容：</p><p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202212311712638.png" srcset="/img/loading.gif" lazyload></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>瞎搞</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>cs</tag>
+      
+      <tag>花里胡哨</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>MIT6.824-1</title>
+    <link href="/2022/11/23/MIT6-824-1/"/>
+    <url>/2022/11/23/MIT6-824-1/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    <categories>
+      
+      <category>blog</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>cs</tag>
+      
+      <tag>distributed_systems</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Resnet</title>
     <link href="/2022/10/19/Resnet/"/>
     <url>/2022/10/19/Resnet/</url>
@@ -56,48 +110,6 @@
       <tag>cs</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>ProxiMic: Convenient Voice Activation via Close-to-Mic Speech Detected by a Single Microphone</title>
-    <link href="/2022/09/26/ProxiMic-Convenient-Voice-Activation-via-Close-to-Mic-Speech-Detected-by-a-Single-Microphone/"/>
-    <url>/2022/09/26/ProxiMic-Convenient-Voice-Activation-via-Close-to-Mic-Speech-Detected-by-a-Single-Microphone/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    <categories>
-      
-      <category>读书</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>论文</tag>
-      
-      <tag>笔记</tag>
-      
-      <tag>cs</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Auth+Track: Enabling Authentication Free Interaction on Smartphone by Continuous User Tracking</title>
-    <link href="/2022/09/26/Auth-Track-Enabling-Authentication-Free-Interaction-on-Smartphone-by-Continuous-User-Tracking/"/>
-    <url>/2022/09/26/Auth-Track-Enabling-Authentication-Free-Interaction-on-Smartphone-by-Continuous-User-Tracking/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
     
   </entry>
   
@@ -210,19 +222,6 @@
       <tag>cs</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>transformer</title>
-    <link href="/2022/06/02/transformer/"/>
-    <url>/2022/06/02/transformer/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
     
   </entry>
   

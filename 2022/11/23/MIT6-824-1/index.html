@@ -17,17 +17,19 @@
   <meta name="keywords" content="">
   
     <meta property="og:type" content="article">
-<meta property="og:title" content="Auth+Track: Enabling Authentication Free Interaction on Smartphone by Continuous User Tracking">
-<meta property="og:url" content="https://heeler-deer.github.io/2022/09/26/Auth-Track-Enabling-Authentication-Free-Interaction-on-Smartphone-by-Continuous-User-Tracking/index.html">
+<meta property="og:title" content="MIT6.824-1">
+<meta property="og:url" content="https://heeler-deer.github.io/2022/11/23/MIT6-824-1/index.html">
 <meta property="og:site_name" content="Heeler-Deer">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-26T14:39:03.000Z">
-<meta property="article:modified_time" content="2022-10-03T13:43:37.785Z">
+<meta property="article:published_time" content="2022-11-23T14:29:44.000Z">
+<meta property="article:modified_time" content="2022-11-24T00:17:07.751Z">
 <meta property="article:author" content="Heeler-Deer">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="distributed_systems">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>Auth+Track: Enabling Authentication Free Interaction on Smartphone by Continuous User Tracking - Heeler-Deer</title>
+  <title>MIT6.824-1 - Heeler-Deer</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -78,7 +80,119 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
 </head>
 
 
@@ -232,9 +346,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Auth+Track: Enabling Authentication Free Interaction on Smartphone by Continuous User Tracking">
+            <span class="h2" id="subtitle" title="MIT6.824-1">
               
-                Auth+Track: Enabling Authentication Free Interaction on Smartphone by Continuous User Tracking
+                MIT6.824-1
               
             </span>
 
@@ -249,8 +363,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-09-26 22:39" pubdate>
-        2022年9月26日 晚上
+      <time datetime="2022-11-23 22:29" pubdate>
+        2022年11月23日 晚上
       </time>
     </span>
   
@@ -310,11 +424,11 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Auth+Track: Enabling Authentication Free Interaction on Smartphone by Continuous User Tracking</h1>
+            <h1 style="display: none">MIT6.824-1</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年10月3日 晚上
+                  本文最后更新于：2022年11月24日 早上
                 
               </p>
             
@@ -325,11 +439,27 @@
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/cs/">cs</a>
+                    
+                      <a class="hover-with-bg" href="/tags/distributed-systems/">distributed_systems</a>
+                    
+                  </div>
                 
               </div>
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">Heeler-Deer</a> <br>
-                <strong>本文链接: </strong><a href="https://heeler-deer.github.io/2022/09/26/Auth-Track-Enabling-Authentication-Free-Interaction-on-Smartphone-by-Continuous-User-Tracking/">https://heeler-deer.github.io/2022/09/26/Auth-Track-Enabling-Authentication-Free-Interaction-on-Smartphone-by-Continuous-User-Tracking/</a> <br>
+                <strong>本文链接: </strong><a href="https://heeler-deer.github.io/2022/11/23/MIT6-824-1/">https://heeler-deer.github.io/2022/11/23/MIT6-824-1/</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                 </p>
                 
@@ -338,9 +468,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/26/ProxiMic-Convenient-Voice-Activation-via-Close-to-Mic-Speech-Detected-by-a-Single-Microphone/">
+                      <a href="/2022/12/31/socks5/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ProxiMic: Convenient Voice Activation via Close-to-Mic Speech Detected by a Single Microphone</span>
+                        <span class="hidden-mobile">socks5</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -348,8 +478,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/23/email-in-cs/">
-                        <span class="hidden-mobile">email_in_cs</span>
+                      <a href="/2022/10/19/Resnet/">
+                        <span class="hidden-mobile">Resnet</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -374,7 +504,7 @@
         var options = Object.assign(
           {"clientID":"fb364385aff3688b9b61","clientSecret":"fac44b76c40c3e32297538f963a7c318fd1c7c7e","repo":"heeler-deer.github.io","owner":"heeler-deer","admin":["heeler-deer"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
           {
-            id: '8d0ec9b354cf796dead46dc327adc6c9'
+            id: '0a66cee5dbacf35740f4a3ded4f7d91b'
           }
         )
         var gitalk = new Gitalk(options);
@@ -499,7 +629,7 @@
   
   
     <div>
-      <span class="post-count">48.2k&nbsp words</span>
+      <span class="post-count">48.8k&nbsp words</span>
       <span id="timeDate">载入天数...</span>
       <span id="times">载入时分秒...</span>
       <script>
@@ -597,6 +727,13 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
 
 
 
@@ -678,6 +815,13 @@
 
 
 
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
 
 
 
