@@ -8,7 +8,7 @@
     <link href="/2022/12/31/socks5/"/>
     <url>/2022/12/31/socks5/</url>
     
-    <content type="html"><![CDATA[<p>自己搭建vps服务器建议参考我之前的<a href="https://heeler-deer.github.io/2021/11/13/vps/">博客</a></p><p>本文主要参考<a href="https://cloud.tencent.com/developer/article/1852590">Rokas.Yang</a>。</p><p>针对国内云服务器无法使用github这一问题（如今各大运营商已经将github屏蔽），我的建议是尽早在服务器上使用代理。</p><h1 id="shadowsocksr">shadowsocksr</h1><p>软件安装，首先在本机下载软件<a href="https://github.com/RokasUrbelis/shadowsocksr">shadowsocksr</a></p><p>之后传输到服务器上。</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">解压</span><br>unzip sh*.zip<br><span class="hljs-meta">#</span><span class="bash">进入目录</span><br>cd sha*r<br><span class="hljs-meta">#</span><span class="bash">执行初始化脚本</span><br>sh initcfg.sh<br><span class="hljs-meta">#</span><span class="bash">更改配置文件</span><br>vim config.json<br></code></pre></div></td></tr></tbody></table></figure><p>配置文件具体内容按照代理的选项填充即可。</p><p>为了以后方便使用代理，建议将本地端口local port选项映射到2000</p><p>同时为了管理方便，将ssr通过systemctl进行管理</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">创建文件</span><br>mkdir -p ~/.config/systemd/user<br></code></pre></div></td></tr></tbody></table></figure><p>启动ssr代理需要三个选项：</p><ul><li>python运行环境</li><li>shadowsocksr/shadowsocks/local.py(即下载的目录里面的文件)</li><li>刚刚填写的配置文件config.json</li></ul><p>这里建议python为3.7及以上。</p><p>首先查询python运行环境，</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">此处查询服务器python位置</span><br>whereis python<br></code></pre></div></td></tr></tbody></table></figure><p>之后可以填写systemd的服务文件，<code>vim ~/.config/systemd/user/ssr-client.service</code></p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[Unit]<br>Description=Shadowsocks R Client Service<br>After=default.target<br>[Service]<br>ExecStart=/usr/local/python/bin/python3.10 /root/shadowsocksr-manyuser/shadowsocks/local.py -c /root/shadowsocksr-manyuser/user-config.json  #以你实际路径为准<br>Restart=on-abort<br>[Install]<br>WantedBy=default.target<br></code></pre></div></td></tr></tbody></table></figure><p>之后即可通过systemd管理服务：</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">重载服务</span><br>systemctl --user daemon-reload<br><span class="hljs-meta">#</span><span class="bash">启动ssr</span><br>systemctl --user start ssr-client<br><span class="hljs-meta">#</span><span class="bash">查看运行状态</span><br>systemctl --user status ssr-client<br><span class="hljs-meta">#</span><span class="bash">设置为开机启动</span><br>systemctl --user enable ssr-client<br></code></pre></div></td></tr></tbody></table></figure><h1 id="proxychains4">proxychains4</h1><p>为了更方便调用ssr代理，需要安装proxychains4</p><p>还是在本机电脑开代理下载<a href="https://github.com/rofl0r/proxychains-ng.git">proxychains4</a>，之后传输到服务器，</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">解压</span><br>unzip pro*.zip<br><span class="hljs-meta">#</span><span class="bash">进入目录</span><br>cd proxychains-ng<br><span class="hljs-meta">#</span><span class="bash">安装</span><br>./configure<br>make &amp;&amp; sudo make install<br><span class="hljs-meta">#</span><span class="bash">复制配置文件</span><br>sudo cp ./src/proxychains.conf /etc/proxychains.conf<br><span class="hljs-meta">#</span><span class="bash">编辑配置文件</span><br>sudo vim /etc/proxychains.conf<br></code></pre></div></td></tr></tbody></table></figure><p>由于刚刚已经把ssr的本地端口设置为2000,因此只需要把最后一行设置为socks5 127.0.0.1 2000即可。</p><p>检测是否能够使用代理，可以尝试curl一下google</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">proxychains4 curl www.google.com<br></code></pre></div></td></tr></tbody></table></figure><p>正常情况会返回如下所示的内容：</p><p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202212311712638.png" srcset="/img/loading.gif" lazyload></p>]]></content>
+    <content type="html"><![CDATA[<p>自己搭建vps服务器建议参考我之前的<a href="https://heeler-deer.github.io/2021/11/13/vps/">博客</a></p><p>本文主要参考<a href="https://cloud.tencent.com/developer/article/1852590">Rokas.Yang</a>。</p><p>针对国内云服务器无法使用github这一问题（如今各大运营商已经将github屏蔽），我的建议是尽早在服务器上使用代理。</p><h1 id="shadowsocksr">shadowsocksr</h1><p>软件安装，首先在本机下载软件<a href="https://github.com/RokasUrbelis/shadowsocksr">shadowsocksr</a></p><p>之后传输到服务器上。</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">解压</span><br>unzip sh*.zip<br><span class="hljs-meta">#</span><span class="bash">进入目录</span><br>cd sha*r<br><span class="hljs-meta">#</span><span class="bash">执行初始化脚本</span><br>sh initcfg.sh<br><span class="hljs-meta">#</span><span class="bash">更改配置文件</span><br>vim config.json<br></code></pre></div></td></tr></tbody></table></figure><p>配置文件具体内容按照代理的选项填充即可。</p><p>为了以后方便使用代理，建议将本地端口local port选项映射到2000</p><p>同时为了管理方便，将ssr通过systemctl进行管理</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">创建文件</span><br>mkdir -p ~/.config/systemd/user<br></code></pre></div></td></tr></tbody></table></figure><p>启动ssr代理需要三个选项：</p><ul><li>python运行环境</li><li>shadowsocksr/shadowsocks/local.py(即下载的目录里面的文件)</li><li>刚刚填写的配置文件config.json</li></ul><p>这里建议python为3.7及以上。</p><p>首先查询python运行环境，</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">此处查询服务器python位置</span><br>whereis python<br></code></pre></div></td></tr></tbody></table></figure><p>之后可以填写systemd的服务文件，<code>vim ~/.config/systemd/user/ssr-client.service</code></p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[Unit]<br>Description=Shadowsocks R Client Service<br>After=default.target<br>[Service]<br>ExecStart=/usr/local/python/bin/python3.10 /root/shadowsocksr-manyuser/shadowsocks/local.py -c /root/shadowsocksr-manyuser/user-config.json  #以你实际路径为准<br>Restart=on-abort<br>[Install]<br>WantedBy=default.target<br></code></pre></div></td></tr></tbody></table></figure><p>之后即可通过systemd管理服务：</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">重载服务</span><br>systemctl --user daemon-reload<br><span class="hljs-meta">#</span><span class="bash">启动ssr</span><br>systemctl --user start ssr-client<br><span class="hljs-meta">#</span><span class="bash">查看运行状态</span><br>systemctl --user status ssr-client<br><span class="hljs-meta">#</span><span class="bash">设置为开机启动</span><br>systemctl --user enable ssr-client<br></code></pre></div></td></tr></tbody></table></figure><h1 id="proxychains4">proxychains4</h1><p>为了更方便调用ssr代理，需要安装proxychains4</p><p>还是在本机电脑开代理下载<a href="https://github.com/rofl0r/proxychains-ng.git">proxychains4</a>，之后传输到服务器，</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">解压</span><br>unzip pro*.zip<br><span class="hljs-meta">#</span><span class="bash">进入目录</span><br>cd proxychains-ng<br><span class="hljs-meta">#</span><span class="bash">安装</span><br>./configure<br>make &amp;&amp; sudo make install<br><span class="hljs-meta">#</span><span class="bash">复制配置文件</span><br>sudo cp ./src/proxychains.conf /etc/proxychains.conf<br><span class="hljs-meta">#</span><span class="bash">编辑配置文件</span><br>sudo vim /etc/proxychains.conf<br></code></pre></div></td></tr></tbody></table></figure><p>由于刚刚已经把ssr的本地端口设置为2000,因此只需要把最后一行设置为socks5 127.0.0.1 2000即可。</p><p>检测是否能够使用代理，可以尝试curl一下google</p><figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">proxychains4 curl www.google.com<br></code></pre></div></td></tr></tbody></table></figure><p>正常情况会返回如下所示的内容：</p><p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202212311712638.png" srcset="/img/loading.gif" lazyload></p><h1 id="issuses">issuses</h1><p><strong>问题一</strong></p><p>执行systemctl --user daemon-reload时报错：</p><p><span class="github-emoji"><span>☠</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2620.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> Failed to get D-Bus connection: No such file or directory</p><p>这个问题，在我的centos(uname -r 查看版本为3.10.0-1160.80.1.el7.x86_64)上可以通过去掉--user选项解决。网上说高版本的centos不会出错。</p><p><strong>问题二</strong></p><p>执行systemctl --user daemon-reload时报错：service not found</p><p>这个问题其实还是centos的版本问题，建议有root权限的话直接将文件ssr-client.service编写在/usr/lib/systemd/system下面。</p>]]></content>
     
     
     <categories>
@@ -74,11 +74,11 @@
     
     <tags>
       
+      <tag>cs</tag>
+      
       <tag>论文</tag>
       
       <tag>笔记</tag>
-      
-      <tag>cs</tag>
       
     </tags>
     
@@ -103,11 +103,11 @@
     
     <tags>
       
+      <tag>cs</tag>
+      
       <tag>论文</tag>
       
       <tag>笔记</tag>
-      
-      <tag>cs</tag>
       
     </tags>
     
@@ -186,11 +186,11 @@
     
     <tags>
       
+      <tag>cs</tag>
+      
       <tag>论文</tag>
       
       <tag>笔记</tag>
-      
-      <tag>cs</tag>
       
     </tags>
     
@@ -215,11 +215,11 @@
     
     <tags>
       
+      <tag>cs</tag>
+      
       <tag>论文</tag>
       
       <tag>笔记</tag>
-      
-      <tag>cs</tag>
       
     </tags>
     
@@ -244,11 +244,11 @@
     
     <tags>
       
+      <tag>cs</tag>
+      
       <tag>论文</tag>
       
       <tag>笔记</tag>
-      
-      <tag>cs</tag>
       
     </tags>
     
@@ -273,9 +273,9 @@
     
     <tags>
       
-      <tag>笔记</tag>
-      
       <tag>cs</tag>
+      
+      <tag>笔记</tag>
       
     </tags>
     
@@ -733,17 +733,6 @@
   
   
   <entry>
-    <title>academic</title>
-    <link href="/"/>
-    <url>/</url>
-    
-    <content type="html"><![CDATA[<div class="markdown-body"><p>本页面主要存放本人的论文笔记，我目前做的内容是通过振动识别人的身份，有低频振动，也有音频信号，牵涉到深度学习，信号处理等多个方面。</p><p>偶尔也会研究一下神经网络的结构，搞一些深度学习的理论研究。</p><p>具体文章仍可以在归档里面看到，本页面只是手动的罗列一下笔记。</p><h2 id="论文">论文</h2><p>原文：</p><p><a href="https://dl.acm.org/doi/abs/10.1145/3447993.3483277?casa_token=o_KYbtA7bioAAAAA:mMnzeXoTDF7u0LWm2xszASF7Sc5DWOBqQ3avnW07a_dDVrxPqNNm0YSGHTotVfrpocJxX82J8GZGmJc">Notification Privacy Protection via Unobtrusive Gripping Hand Verification Using Media Sounds</a></p><p>笔记：</p><p><a href="https://heeler-deer.github.io/2022/05/27/Notification%20Privacy%20Protection%20via%20Unobtrusive%20Gripping%20Hand%20Verification%20Using%20Media%20Sounds/">Notification Privacy Protection via Unobtrusive Gripping Hand Verification Using Media Sounds</a></p><hr><p>原文：</p><p><a href="https://openaccess.thecvf.com/content_CVPR_2020/html/Hu_Progressive_Relation_Learning_for_Group_Activity_Recognition_CVPR_2020_paper.html">Progressive Relation Learning for Group Activity Recognition</a></p><p>笔记：</p><p><a href="https://heeler-deer.github.io/2022/06/22/Progressive%20Relation%20Learning%20for%20Group%20Activity%20Recognition/">Progressive Relation Learning for Group Activity Recognition</a></p><hr><p>原文：</p><p><a href="https://dl.acm.org/doi/abs/10.1145/2973750.2973764">Device-Free Gesture Tracking Using Acoustic Signals</a></p><p>笔记：</p><p><a href="https://heeler-deer.github.io/2022/06/25/Device-Free%20Gesture%20Tracking%20Using%20Acoustic%20Signals/">Device-Free Gesture Tracking Using Acoustic Signals</a></p><hr><p>原文：</p><p><a href="https://proceedings.mlr.press/v162/xie22d.html">Device-Free Gesture Tracking Using Acoustic Signals</a></p><p>笔记：</p><p><a href="https://heeler-deer.github.io/2022/10/09/Adaptive-Inertia-Disentangling-the-Effects-of-Adaptive-Learning-Rate-and-Momentum/">Device-Free Gesture Tracking Using Acoustic Signals</a></p><hr><h2 id="笔记闲谈">笔记/闲谈</h2><p>随便写点东西，轻喷</p><p><a href="https://heeler-deer.github.io/2022/05/27/%E8%AF%AD%E9%9F%B3-%E6%8C%AF%E5%8A%A8%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E5%8F%8ACNN%E7%82%BC%E4%B8%B9/">第一次闲谈</a></p></div>]]></content>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title></title>
     <link href="/"/>
     <url>/</url>
@@ -760,6 +749,17 @@
     <url>/</url>
     
     <content type="html"><![CDATA[<div class="markdown-body"><h1>杂谈</h1></div><style>.city {  background-color:      SlateBlue;  color:      Cyan;  border: 2px solid black;  margin: 20px;  padding: 20px;}</style>不定期记录和删除自己的一些想法<div style="background-color: #2C3E50 ;color:#D7DBDD"><h2 style="color:#D7DBDD">Tasks</h2><h5 style="color:#D7DBDD">挺忙的</h5><p>可以看看学习率、优化器相关的</p><ul style="color:     MediumSpringGreen"><li>sit</li><li>SE</li></ul><p></p></div><div style="background-color: #D7DBDD ;color:#2C3E50"><h2 style="color:#2C3E50">Else</h2><h5 style="color:#2C3E50">原神</h5><p>抽了终末，确实不错</p><ul style="color: #3498DB "></ul><p></p></div><div class="markdown-body"></div>]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>academic</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<div class="markdown-body"><p>本页面主要存放本人的论文笔记，我目前做的内容是通过振动识别人的身份，有低频振动，也有音频信号，牵涉到深度学习，信号处理等多个方面。</p><p>偶尔也会研究一下神经网络的结构，搞一些深度学习的理论研究。</p><p>具体文章仍可以在归档里面看到，本页面只是手动的罗列一下笔记。</p><h2 id="论文">论文</h2><p>原文：</p><p><a href="https://dl.acm.org/doi/abs/10.1145/3447993.3483277?casa_token=o_KYbtA7bioAAAAA:mMnzeXoTDF7u0LWm2xszASF7Sc5DWOBqQ3avnW07a_dDVrxPqNNm0YSGHTotVfrpocJxX82J8GZGmJc">Notification Privacy Protection via Unobtrusive Gripping Hand Verification Using Media Sounds</a></p><p>笔记：</p><p><a href="https://heeler-deer.github.io/2022/05/27/Notification%20Privacy%20Protection%20via%20Unobtrusive%20Gripping%20Hand%20Verification%20Using%20Media%20Sounds/">Notification Privacy Protection via Unobtrusive Gripping Hand Verification Using Media Sounds</a></p><hr><p>原文：</p><p><a href="https://openaccess.thecvf.com/content_CVPR_2020/html/Hu_Progressive_Relation_Learning_for_Group_Activity_Recognition_CVPR_2020_paper.html">Progressive Relation Learning for Group Activity Recognition</a></p><p>笔记：</p><p><a href="https://heeler-deer.github.io/2022/06/22/Progressive%20Relation%20Learning%20for%20Group%20Activity%20Recognition/">Progressive Relation Learning for Group Activity Recognition</a></p><hr><p>原文：</p><p><a href="https://dl.acm.org/doi/abs/10.1145/2973750.2973764">Device-Free Gesture Tracking Using Acoustic Signals</a></p><p>笔记：</p><p><a href="https://heeler-deer.github.io/2022/06/25/Device-Free%20Gesture%20Tracking%20Using%20Acoustic%20Signals/">Device-Free Gesture Tracking Using Acoustic Signals</a></p><hr><p>原文：</p><p><a href="https://proceedings.mlr.press/v162/xie22d.html">Device-Free Gesture Tracking Using Acoustic Signals</a></p><p>笔记：</p><p><a href="https://heeler-deer.github.io/2022/10/09/Adaptive-Inertia-Disentangling-the-Effects-of-Adaptive-Learning-Rate-and-Momentum/">Device-Free Gesture Tracking Using Acoustic Signals</a></p><hr><h2 id="笔记闲谈">笔记/闲谈</h2><p>随便写点东西，轻喷</p><p><a href="https://heeler-deer.github.io/2022/05/27/%E8%AF%AD%E9%9F%B3-%E6%8C%AF%E5%8A%A8%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E5%8F%8ACNN%E7%82%BC%E4%B8%B9/">第一次闲谈</a></p></div>]]></content>
     
   </entry>
   
