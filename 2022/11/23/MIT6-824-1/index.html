@@ -16,13 +16,15 @@
   <meta name="author" content="Heeler-Deer">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="环境搭建 推荐视频：b站 2020课程时间安排表： MIT 实验代码仓库： 1git clone git:&#x2F;&#x2F;g.csail.mit.edu&#x2F;6.824-golabs-2020 6.824 实验采用的开发语言为go，建议在linux下开发.同时建议使用goland这个IDE，go的环境手动配置还是有点麻烦的 vscode配置go建议参考：知乎 注意go升级环境时需要将旧版本全部删除在覆盖到原先的路">
+<meta property="og:type" content="article">
 <meta property="og:title" content="MIT6.824-1">
 <meta property="og:url" content="https://heeler-deer.github.io/2022/11/23/MIT6-824-1/index.html">
 <meta property="og:site_name" content="Heeler-Deer">
+<meta property="og:description" content="环境搭建 推荐视频：b站 2020课程时间安排表： MIT 实验代码仓库： 1git clone git:&#x2F;&#x2F;g.csail.mit.edu&#x2F;6.824-golabs-2020 6.824 实验采用的开发语言为go，建议在linux下开发.同时建议使用goland这个IDE，go的环境手动配置还是有点麻烦的 vscode配置go建议参考：知乎 注意go升级环境时需要将旧版本全部删除在覆盖到原先的路">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-23T14:29:44.000Z">
-<meta property="article:modified_time" content="2022-11-24T00:17:07.751Z">
+<meta property="article:modified_time" content="2023-02-20T15:27:24.165Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="distributed_systems">
@@ -78,9 +80,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<style>mjx-container[jax="SVG"] {
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -192,7 +192,9 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
+</style>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
 </head>
 
 
@@ -222,30 +224,6 @@ mjx-container[display="true"] + br {
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/sth./">
-                <i class="iconfont icon-stack-overflow-fill"></i>
-                sth.
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/academic/">
-                <i class="iconfont icon-book"></i>
-                academic
               </a>
             </li>
           
@@ -374,7 +352,7 @@ mjx-container[display="true"] + br {
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      433 字
     </span>
   
 
@@ -383,7 +361,7 @@ mjx-container[display="true"] + br {
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      4 分钟
     </span>
   
 
@@ -428,12 +406,33 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年11月24日 早上
+                  本文最后更新于：2023年2月20日 晚上
                 
               </p>
             
             <div class="markdown-body">
-              
+              <h1 id="环境搭建">环境搭建</h1>
+<p>推荐视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1x7411M7Sf/">b站</a></p>
+<p>2020课程时间安排表： <a target="_blank" rel="noopener" href="http://nil.csail.mit.edu/6.824/2020/schedule.html">MIT</a></p>
+<p>实验代码仓库：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git clone git://g.csail.mit.edu/6.824-golabs-2020 6.824<br></code></pre></div></td></tr></tbody></table></figure>
+<p>实验采用的开发语言为go，建议在linux下开发.同时建议使用goland这个IDE，go的环境手动配置还是有点麻烦的</p>
+<p>vscode配置go建议参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/320343679">知乎</a></p>
+<p>注意go升级环境时需要将旧版本全部删除在覆盖到原先的路径下。新旧版本同时存在容易出错。</p>
+<h1 id="map-and-reduce">Map and Reduce</h1>
+<blockquote>
+<p>Please do not publish your code or make it available to current or future 6.824 students.</p>
+</blockquote>
+<p>lab1的<a target="_blank" rel="noopener" href="http://nil.csail.mit.edu/6.824/2020/labs/lab-mr.html">网址</a></p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">go mod init src<br><br></code></pre></div></td></tr></tbody></table></figure>
+<blockquote>
+<p>There will be just one master process, and one or more worker processes executing in parallel.</p>
+</blockquote>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li>https://zhuanlan.zhihu.com/p/260470258</li>
+</ul>
+
             </div>
             <hr>
             <div>
@@ -629,7 +628,7 @@ mjx-container[display="true"] + br {
   
   
     <div>
-      <span class="post-count">48.9k&nbsp words</span>
+      <span class="post-count">49k&nbsp words</span>
       <span id="timeDate">载入天数...</span>
       <span id="times">载入时分秒...</span>
       <script>
