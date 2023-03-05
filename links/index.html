@@ -255,25 +255,14 @@
   <article class="comments" id="comments">
     
     
-  <div id="valine"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
-        var options = Object.assign(
-          {"appId":"GCX7MRb8jHPOvWy5hXP1pLOT-gzGzoHsz","appKey":"81Myp4Kmaagh7J5spTpIoMWi","path":"window.location.pathname","placeholder":"( 。＿ 。） ✎ ＿来说句话吧！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://gcx7mrb8.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
-          {
-            el: "#valine",
-            path: window.location.pathname
-          }
-        )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
-        })
+  <div id="lv-container" data-id="city" data-uid="MTAyMC81ODEzMy8zNDU5Ng==">
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#lv-container', function() {
+        Fluid.utils.createScript('https://cdn-city.livere.com/js/embed.dist.js');
       });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
 
 
   </article>
