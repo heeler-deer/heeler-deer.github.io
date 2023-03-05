@@ -1,0 +1,1134 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/faviconn.png">
+  <link rel="icon" href="/img/faviconn.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Heeler-Deer">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="RT  官方文档：gitbook 的github地址:github 准备工作：下载ucorelab在的master分支（注意不是main分支）,需要用到的资料以及答案都在里面。 实验环境： 及更高版本 准备工作：  安装gcc: 1sudo apt-get install build-essential 安装qemu: 1sudo apt-get install qemu-system  涉及到的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ucore-lab1">
+<meta property="og:url" content="https://heeler-deer.github.io/2022/04/16/ucore-lab1/index.html">
+<meta property="og:site_name" content="Heeler-Deer">
+<meta property="og:description" content="RT  官方文档：gitbook 的github地址:github 准备工作：下载ucorelab在的master分支（注意不是main分支）,需要用到的资料以及答案都在里面。 实验环境： 及更高版本 准备工作：  安装gcc: 1sudo apt-get install build-essential 安装qemu: 1sudo apt-get install qemu-system  涉及到的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204191822060.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192130713.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192158253.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192202995.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192216709.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192223617.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192230246.png">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f914.png?v8">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204202353757.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161708193.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161740543.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161745960.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161754838.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161812996.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161828865.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161841018.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161844164.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204171129336.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204162235049.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204171130119.png">
+<meta property="article:published_time" content="2022-04-16T07:37:55.000Z">
+<meta property="article:modified_time" content="2022-04-23T14:02:49.426Z">
+<meta property="article:author" content="Heeler-Deer">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="ucore">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204191822060.png">
+  
+  
+  <title>ucore-lab1 - Heeler-Deer</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/vs.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/mac.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"heeler-deer.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"OmwitJK3WCwtKw9Hfg8NLidl-MdYXbMMI","app_key":"KyDmU5DQyqKmDOcBTfN2BRv9","server_url":"https://omwitjk3.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Heeler-Deer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                rss
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://github.com/heeler-deer/absorbing/blob/main/png/6.jpg?raw=true') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ucore-lab1">
+              
+                ucore-lab1
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Heeler-Deer
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-16 15:37" pubdate>
+        2022年4月16日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      14k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      114 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ucore-lab1</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年4月23日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>RT</p>
+<p><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="12.361ex" height="1.756ex" role="img" focusable="false" viewBox="0 -694 5463.4 776"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D448" d="M107 637Q73 637 71 641Q70 643 70 649Q70 673 81 682Q83 683 98 683Q139 681 234 681Q268 681 297 681T342 682T362 682Q378 682 378 672Q378 670 376 658Q371 641 366 638H364Q362 638 359 638T352 638T343 637T334 637Q295 636 284 634T266 623Q265 621 238 518T184 302T154 169Q152 155 152 140Q152 86 183 55T269 24Q336 24 403 69T501 205L552 406Q599 598 599 606Q599 633 535 637Q511 637 511 648Q511 650 513 660Q517 676 519 679T529 683Q532 683 561 682T645 680Q696 680 723 681T752 682Q767 682 767 672Q767 650 759 642Q756 637 737 637Q666 633 648 597Q646 592 598 404Q557 235 548 205Q515 105 433 42T263 -22Q171 -22 116 34T60 167V183Q60 201 115 421Q164 622 164 628Q164 635 107 637Z"></path></g><g data-mml-node="mi" transform="translate(767,0)"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g><g data-mml-node="mi" transform="translate(1200,0)"><path data-c="1D45C" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"></path></g><g data-mml-node="mi" transform="translate(1685,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(2136,0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mo" transform="translate(2824.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(3824.4,0)"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mi" transform="translate(4505.4,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(5034.4,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g></svg></mjx-container></span> 官方文档：<a target="_blank" rel="noopener" href="https://chyyuu.gitbooks.io/ucore_os_docs/content/">gitbook</a></p>
+<p><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="12.361ex" height="1.756ex" role="img" focusable="false" viewBox="0 -694 5463.4 776"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D448" d="M107 637Q73 637 71 641Q70 643 70 649Q70 673 81 682Q83 683 98 683Q139 681 234 681Q268 681 297 681T342 682T362 682Q378 682 378 672Q378 670 376 658Q371 641 366 638H364Q362 638 359 638T352 638T343 637T334 637Q295 636 284 634T266 623Q265 621 238 518T184 302T154 169Q152 155 152 140Q152 86 183 55T269 24Q336 24 403 69T501 205L552 406Q599 598 599 606Q599 633 535 637Q511 637 511 648Q511 650 513 660Q517 676 519 679T529 683Q532 683 561 682T645 680Q696 680 723 681T752 682Q767 682 767 672Q767 650 759 642Q756 637 737 637Q666 633 648 597Q646 592 598 404Q557 235 548 205Q515 105 433 42T263 -22Q171 -22 116 34T60 167V183Q60 201 115 421Q164 622 164 628Q164 635 107 637Z"></path></g><g data-mml-node="mi" transform="translate(767,0)"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g><g data-mml-node="mi" transform="translate(1200,0)"><path data-c="1D45C" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"></path></g><g data-mml-node="mi" transform="translate(1685,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(2136,0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mo" transform="translate(2824.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(3824.4,0)"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mi" transform="translate(4505.4,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(5034.4,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g></svg></mjx-container></span>的github地址:<a target="_blank" rel="noopener" href="https://github.com/chyyuu/os_kernel_lab">github</a></p>
+<p>准备工作：下载ucorelab在<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex" xmlns="http://www.w3.org/2000/svg" width="7.649ex" height="1.645ex" role="img" focusable="false" viewBox="0 -705 3381 727"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D43A" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q492 659 471 656T418 643T357 615T294 567T236 496T189 394T158 260Q156 242 156 221Q156 173 170 136T206 79T256 45T308 28T353 24Q407 24 452 47T514 106Q517 114 529 161T541 214Q541 222 528 224T468 227H431Q425 233 425 235T427 254Q431 267 437 273H454Q494 271 594 271Q634 271 659 271T695 272T707 272Q721 272 721 263Q721 261 719 249Q714 230 709 228Q706 227 694 227Q674 227 653 224Q646 221 643 215T629 164Q620 131 614 108Q589 6 586 3Q584 1 581 1Q571 1 553 21T530 52Q530 53 528 52T522 47Q448 -22 322 -22Q201 -22 126 55T50 252Z"></path></g><g data-mml-node="mi" transform="translate(786,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(1131,0)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g><g data-mml-node="mi" transform="translate(1492,0)"><path data-c="1D43B" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mi" transform="translate(2380,0)"><path data-c="1D462" d="M21 287Q21 295 30 318T55 370T99 420T158 442Q204 442 227 417T250 358Q250 340 216 246T182 105Q182 62 196 45T238 27T291 44T328 78L339 95Q341 99 377 247Q407 367 413 387T427 416Q444 431 463 431Q480 431 488 421T496 402L420 84Q419 79 419 68Q419 43 426 35T447 26Q469 29 482 57T512 145Q514 153 532 153Q551 153 551 144Q550 139 549 130T540 98T523 55T498 17T462 -8Q454 -10 438 -10Q372 -10 347 46Q345 45 336 36T318 21T296 6T267 -6T233 -11Q189 -11 155 7Q103 38 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(2952,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g></svg></mjx-container></span>的master分支（注意不是main分支）,需要用到的资料以及答案都在里面。</p>
+<p><strong>实验环境：</strong></p>
+<p><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex" xmlns="http://www.w3.org/2000/svg" width="12.622ex" height="1.62ex" role="img" focusable="false" viewBox="0 -694 5579 716"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D448" d="M107 637Q73 637 71 641Q70 643 70 649Q70 673 81 682Q83 683 98 683Q139 681 234 681Q268 681 297 681T342 682T362 682Q378 682 378 672Q378 670 376 658Q371 641 366 638H364Q362 638 359 638T352 638T343 637T334 637Q295 636 284 634T266 623Q265 621 238 518T184 302T154 169Q152 155 152 140Q152 86 183 55T269 24Q336 24 403 69T501 205L552 406Q599 598 599 606Q599 633 535 637Q511 637 511 648Q511 650 513 660Q517 676 519 679T529 683Q532 683 561 682T645 680Q696 680 723 681T752 682Q767 682 767 672Q767 650 759 642Q756 637 737 637Q666 633 648 597Q646 592 598 404Q557 235 548 205Q515 105 433 42T263 -22Q171 -22 116 34T60 167V183Q60 201 115 421Q164 622 164 628Q164 635 107 637Z"></path></g><g data-mml-node="mi" transform="translate(767,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><g data-mml-node="mi" transform="translate(1196,0)"><path data-c="1D462" d="M21 287Q21 295 30 318T55 370T99 420T158 442Q204 442 227 417T250 358Q250 340 216 246T182 105Q182 62 196 45T238 27T291 44T328 78L339 95Q341 99 377 247Q407 367 413 387T427 416Q444 431 463 431Q480 431 488 421T496 402L420 84Q419 79 419 68Q419 43 426 35T447 26Q469 29 482 57T512 145Q514 153 532 153Q551 153 551 144Q550 139 549 130T540 98T523 55T498 17T462 -8Q454 -10 438 -10Q372 -10 347 46Q345 45 336 36T318 21T296 6T267 -6T233 -11Q189 -11 155 7Q103 38 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(1768,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(2368,0)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g><g data-mml-node="mi" transform="translate(2729,0)"><path data-c="1D462" d="M21 287Q21 295 30 318T55 370T99 420T158 442Q204 442 227 417T250 358Q250 340 216 246T182 105Q182 62 196 45T238 27T291 44T328 78L339 95Q341 99 377 247Q407 367 413 387T427 416Q444 431 463 431Q480 431 488 421T496 402L420 84Q419 79 419 68Q419 43 426 35T447 26Q469 29 482 57T512 145Q514 153 532 153Q551 153 551 144Q550 139 549 130T540 98T523 55T498 17T462 -8Q454 -10 438 -10Q372 -10 347 46Q345 45 336 36T318 21T296 6T267 -6T233 -11Q189 -11 155 7Q103 38 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mn" transform="translate(3301,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" transform="translate(500,0)"></path><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z" transform="translate(1000,0)"></path><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" transform="translate(1278,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(1778,0)"></path></g></g></g></svg></mjx-container></span>及更高版本</p>
+<p><strong>准备工作：</strong></p>
+<ol type="1">
+<li><p>安装gcc:</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> install build-essential<br></code></pre></div></td></tr></tbody></table></figure></li>
+<li><p>安装qemu:</p>
+<figure class="highlight livecodeserver"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livecodeserver">sudo apt-<span class="hljs-built_in">get</span> install qemu-<span class="hljs-keyword">system</span><br></code></pre></div></td></tr></tbody></table></figure></li>
+</ol>
+<p><strong>涉及到的知识点：</strong></p>
+<ol type="1">
+<li><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="10.011ex" height="1.595ex" role="img" focusable="false" viewBox="0 -694 4425 705"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D440" d="M289 629Q289 635 232 637Q208 637 201 638T194 648Q194 649 196 659Q197 662 198 666T199 671T201 676T203 679T207 681T212 683T220 683T232 684Q238 684 262 684T307 683Q386 683 398 683T414 678Q415 674 451 396L487 117L510 154Q534 190 574 254T662 394Q837 673 839 675Q840 676 842 678T846 681L852 683H948Q965 683 988 683T1017 684Q1051 684 1051 673Q1051 668 1048 656T1045 643Q1041 637 1008 637Q968 636 957 634T939 623Q936 618 867 340T797 59Q797 55 798 54T805 50T822 48T855 46H886Q892 37 892 35Q892 19 885 5Q880 0 869 0Q864 0 828 1T736 2Q675 2 644 2T609 1Q592 1 592 11Q592 13 594 25Q598 41 602 43T625 46Q652 46 685 49Q699 52 704 61Q706 65 742 207T813 490T848 631L654 322Q458 10 453 5Q451 4 449 3Q444 0 433 0Q418 0 415 7Q413 11 374 317L335 624L267 354Q200 88 200 79Q206 46 272 46H282Q288 41 289 37T286 19Q282 3 278 1Q274 0 267 0Q265 0 255 0T221 1T157 2Q127 2 95 1T58 0Q43 0 39 2T35 11Q35 13 38 25T43 40Q45 46 65 46Q135 46 154 86Q158 92 223 354T289 629Z"></path></g><g data-mml-node="mi" transform="translate(1051,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(1580,0)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mi" transform="translate(2101,0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mi" transform="translate(2567,0)"><path data-c="1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"></path></g><g data-mml-node="mi" transform="translate(3316,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(3661,0)"><path data-c="1D459" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path></g><g data-mml-node="mi" transform="translate(3959,0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g></g></g></svg></mjx-container></span>,建议参考<a href="https://heeler-deer.github.io/2021/10/20/makefile/">Heeler-Deer</a>,以及<a target="_blank" rel="noopener" href="https://seisman.github.io/how-to-write-makefile/overview.html">博客</a></li>
+<li>gcc,gdb等的基本使用</li>
+<li>shell的基本使用，诸如diff,ld,readelf等命令</li>
+</ol>
+<p>详细请参考ucorelab的<a target="_blank" rel="noopener" href="https://chyyuu.gitbooks.io/ucore_os_docs/content/lab0/lab0_ref_ucore-tools.html">官方文档</a></p>
+<p>强烈建议在<strong>学堂在线</strong>看thu的ucore课程</p>
+<h1 id="知识点">知识点</h1>
+<p>先定一个小目标，学一学doxygen以及binutils的相关工具</p>
+<h3 id="meld">meld</h3>
+<p>先<code>sudo apt-get  install meld</code>，然后就可以用了</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204191822060.png" srcset="/img/loading.gif" lazyload></p>
+<p>这是meld官网：<a target="_blank" rel="noopener" href="https://meldmerge.org/help/index.html#advanced">usage</a></p>
+<h3 id="doxygen">doxygen</h3>
+<p>参考<a target="_blank" rel="noopener" href="https://cedar-renjun.github.io/2014/03/21/learn-doxygen-in-10-minutes/">博客</a></p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192130713.png" srcset="/img/loading.gif" lazyload></p>
+<p>doxygen能生成latex，通过规范注释来解释项目结构。</p>
+<p>常用命令：</p>
+<figure class="highlight nginx"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">doxygen</span> -g <span class="hljs-comment">#生成Doxygenfile</span><br></code></pre></div></td></tr></tbody></table></figure>
+<figure class="highlight jboss-cli"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli">doxygen <span class="hljs-string">./Doxyfile</span> <span class="hljs-comment">#生成文档</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>注释规范：</p>
+<figure class="highlight actionscript"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs actionscript"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * 正常注释</span><br><span class="hljs-comment"> */</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 要输出成文档的注释</span><br><span class="hljs-comment"> */</span><br><br> 或者<br><br><span class="hljs-comment">/*!</span><br><span class="hljs-comment"> * 要输出成文档的注释</span><br><span class="hljs-comment"> */</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>或者是：</p>
+<figure class="highlight markdown"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs markdown">//<span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**<span class="hljs-emphasis">*</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! \brief  Print Int number to terimal device.</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//!</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! \param  [in] number is the data you want to print.</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! \retval the number of print information, in bytes. return zero indicate print error !.</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//!</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! \note</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! *</span> Be sure you have called \ref Dev<span class="hljs-emphasis">_Init function before call this fuction.</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//! * Remember to check return value.</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">//<span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**<span class="hljs-emphasis">*</span></span></span></span><br><span class="hljs-emphasis"><span class="hljs-strong"><span class="hljs-emphasis"><span class="hljs-strong">extern int Dev_PrintInt(int number);</span></span></span></span><br></code></pre></div></td></tr></tbody></table></figure>
+<h3 id="binutils">binutils</h3>
+<p>binutils包含很多命令，不详细介绍了，列举一下：</p>
+<ul>
+<li><p><strong>ld</strong> - the GNU linker.</p></li>
+<li><p><strong>as</strong> - the GNU assembler.</p></li>
+<li><p><strong>addr2line</strong> - Converts addresses into filenames and line numbers.</p></li>
+<li><p><strong>ar</strong> - A utility for creating, modifying and extracting from archives.</p></li>
+<li><p><strong>c++filt</strong> - Filter to demangle encoded C++ symbols.</p></li>
+<li><p><strong>dlltool</strong> - Creates files for building and using DLLs.</p></li>
+<li><p><strong>gold</strong> - A new, faster, ELF only linker, still in beta test.</p></li>
+<li><p><strong>gprof</strong> - Displays profiling information.</p></li>
+<li><p><strong>nlmconv</strong> - Converts object code into an NLM.</p></li>
+<li><p><strong>nm</strong> - Lists symbols from object files.</p></li>
+<li><p><strong>objcopy</strong> - Copies and translates object files.</p></li>
+<li><p><strong>objdump</strong> - Displays information from object files.</p></li>
+<li><p><strong>ranlib</strong> - Generates an index to the contents of an archive.</p></li>
+<li><p><strong>readelf</strong> - Displays information from any ELF format object file.</p></li>
+<li><p><strong>size</strong> - Lists the section sizes of an object or archive file.</p></li>
+<li><p><strong>strings</strong> - Lists printable strings from files.</p></li>
+<li><p><strong>strip</strong> - Discards symbols.</p></li>
+<li><p><strong>windmc</strong> - A Windows compatible message compiler.</p></li>
+<li><p><strong>windres</strong> - A compiler for Windows resource files.</p></li>
+</ul>
+<h2 id="系统启动及中断">系统启动及中断</h2>
+<p>bios提供了基本的i/o功能</p>
+<p>cpu加电后执行ROM里的初始化代码：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192158253.png" srcset="/img/loading.gif" lazyload></p>
+<p>从硬盘/网络启动是由bios决定，bios加载程序到磁盘的引导扇区，跳转到cs:ip=0000:7c00,读取加载程序，用加载程序识别文件系统，识别文件系统之后就可以读取os的内核代码，在把控制权转给os:</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192202995.png" srcset="/img/loading.gif" lazyload></p>
+<p>bios和uefi的区别：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192216709.png" srcset="/img/loading.gif" lazyload></p>
+<p>中断（来自硬件）、异常（非法指令等）、系统调用（应用程序主动向os发的请求）：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192223617.png" srcset="/img/loading.gif" lazyload></p>
+<p>计算机对上述三种情况采用的中断处理机制：</p>
+<ol type="1">
+<li><p>cpu初始化时设置中断使能，设置中断标志，根据中断向量调用相关中断服务例程</p></li>
+<li><p>软件处理：</p></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204192230246.png" srcset="/img/loading.gif" lazyload></p>
+<p>中断是可以嵌套的，也就是异常里可以出现异常 <span class="github-emoji"><span>🤔</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f914.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
+<p>系统调用采用int和iret指令，可以进行堆栈切换以及特权级的转换，函数调用采用call和ret指令，一般情况下没有堆栈切换</p>
+<p>遗漏的知识点参考kiprey,仅记录本人不熟悉的知识点</p>
+<h3 id="bioslinuxdos中断的区别">bios/linux/dos中断的区别</h3>
+<p>bios/dos建立在实模式下，他们建立的中断调用都采用中断向量表，linux则是在进入保护模式后才建立中断例程，通过中断描述符表idt实现中断</p>
+<h3 id="文件">文件</h3>
+<p>os通过文件系统的magic number得知文件系统类型，一般在分区的第二个扇区</p>
+<h3 id="实模式">实模式</h3>
+<p>实模式的主要特性是：<strong>程序用到的地址都是真实的物理地址</strong>。同时，实模式下的地址寻址空间只有1MB(20bit)</p>
+<blockquote>
+<p>从intel 80386开始的CPU，只要进入实模式，地址寻址空间就限制在1MB。</p>
+</blockquote>
+<p>实模式下的地址计算方式为<strong>16*段寄存器值+段内偏移地址</strong>，其CPU寻址方式为</p>
+<ul>
+<li>寄存器寻址</li>
+<li>立即数寻址</li>
+<li>内存寻址</li>
+<li>直接寻址。</li>
+<li>基址寻址</li>
+<li>变址寻址</li>
+<li>基址变址寻址</li>
+</ul>
+<p>在分段存储管理机制的保护模式下，每个段由如下三个参数进行定义：段基地址(Base Address)、段界限(Limit)和段属性(Attributes)</p>
+<ul>
+<li>段基地址：规定线性地址空间中段的起始地址。任何一个段都可以从32位线性地址空间中的任何一个字节开始，不用像实模式下规定边界必须被16整除。</li>
+<li>段界限：规定段的大小。可以以字节为单位或以4K字节为单位。</li>
+<li>段属性：确定段的各种性质。</li>
+</ul>
+<p>全局描述符表（GDT）是一个保存多个段描述符的“数组”，其起始地址保存在全局描述符表寄存器GDTR中。GDTR长48位，其中高32位为基地址，低16位为段界限</p>
+<p>线性地址部分的选择子是用来选择哪个描述符表和在该表中索引哪个描述符的。选择子可以做为指针变量的一部分，从而对应用程序员是可见的，但是一般是由连接加载器来设置的。</p>
+<p>段选择子结构</p>
+<ul>
+<li>索引（Index）：在描述符表中从8192个描述符中选择一个描述符。处理器自动将这个索引值乘以8（描述符的长度），再加上描述符表的基址来索引描述符表，从而选出一个合适的描述符。</li>
+<li>表指示位（Table Indicator，TI）：选择应该访问哪一个描述符表。0代表应该访问全局描述符表（GDT），1代表应该访问局部描述符表（LDT）。</li>
+<li>请求特权级（Requested Privilege Level，RPL）：保护机制</li>
+</ul>
+<h3 id="中断与异常">中断与异常</h3>
+<p>在操作系统中，有三种特殊的中断事件：</p>
+<ul>
+<li>异步中断(asynchronous interrupt)。这是由CPU外部设备引起的外部事件中断，例如I/O中断、时钟中断、控制台中断等。</li>
+<li>同步中断(synchronous interrupt)。这是CPU执行指令期间检测到不正常的或非法的条件(如除零错、地址访问越界)所引起的内部事件。</li>
+<li>陷入中断(trap interrupt)。这是在程序中使用请求系统服务的系统调用而引发的事件。</li>
+</ul>
+<p>IDT中包含了3种类型的Descriptor</p>
+<ul>
+<li>Task-gate descriptor</li>
+<li>Interrupt-gate descriptor （中断方式用到）</li>
+<li>Trap-gate descriptor（系统调用用到）</li>
+</ul>
+<h3 id="特权">特权</h3>
+<p>特权级共分为四档，分别为0-3，其中<code>Kernel</code>为第0特权级（ring 0），用户程序为第3特权级（ring 3），操作系统保护分别为第1和第2特权级。</p>
+<ul>
+<li><p><strong>DPL存储于段描述符中</strong>，规定<strong>访问该段的权限级别</strong>(Descriptor Privilege Level)，每个段的DPL固定。 当进程访问一个段时，需要进程特权级检查。</p></li>
+<li><p><strong>CPL</strong>存在于CS寄存器的低两位，<strong>即CPL是CS段描述符的DPL</strong>，是当前代码的权限级别(Current Privilege Level)。</p></li>
+<li><p><strong>RPL存在于段选择子中</strong>，说明的是<strong>进程对段访问的请求权限</strong>(Request Privilege Level)，是对于<strong>段选择子</strong>而言的，每个段选择子有自己的RPL。而且RPL对每个段来说不是固定的，两次访问同一段时的RPL可以不同。RPL可能会削弱CPL的作用，例如当前CPL=0的进程要访问一个数据段，它把段选择符中的RPL设为3，这样虽然它对该段仍然只有特权为3的访问权限。</p></li>
+<li><p>IOPL(I/O Privilege Level)即I/O特权标志，位于<strong>eflag寄存器</strong>中，用两位二进制位来表示，也称为I/O特权级字段。该字段指定了要求执行I/O指令的特权级。如 果当前的特权级别在数值上小于等于IOPL的值，那么，该I/O指令可执行，否则将发生一个保护异常。</p>
+<blockquote>
+<p>只有当CPL=0时，可以改变IOPL的值，当CPL&lt;=IOPL时，可以改变IF标志位。</p>
+</blockquote></li>
+<li><p>访问门时（中断、陷入、异常），要求<strong>DPL[段] &lt;= CPL &lt;= DPL[门]</strong></p>
+<blockquote>
+<p>访问门的代码权限<strong>比门的特权级要高</strong>，因为这样才能访问门。</p>
+<p>但访问门的代码权限<strong>比被访问的段的权限要低</strong>，因为通过门的目的是<strong>访问特权级更高的段</strong>，这样就可以达到<strong>低权限应用程序使用高权限内核服务</strong>的目的。</p>
+</blockquote></li>
+<li><p>访问段时，要求<strong>DPL[段] &gt;= max {CPL, RPL}</strong></p>
+<blockquote>
+<p>只能使用最低的权限来访问段数据。</p>
+</blockquote></li>
+</ul>
+<p><strong>TSS(Task State Segment)</strong> 是操作系统在进行进程切换时保存进程现场信息的段</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204202353757.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>trapframe</code>结构是进入中断门所必须的结构，其结构如下</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">trapframe</span> {</span><br>    <span class="hljs-comment">// tf_regs保存了基本寄存器的值，包括eax,ebx,esi,edi寄存器等等</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pushregs</span> <span class="hljs-title">tf_regs</span>;</span><br>    <span class="hljs-keyword">uint16_t</span> tf_gs;<br>    <span class="hljs-keyword">uint16_t</span> tf_padding0;<br>    <span class="hljs-keyword">uint16_t</span> tf_fs;<br>    <span class="hljs-keyword">uint16_t</span> tf_padding1;<br>    <span class="hljs-keyword">uint16_t</span> tf_es;<br>    <span class="hljs-keyword">uint16_t</span> tf_padding2;<br>    <span class="hljs-keyword">uint16_t</span> tf_ds;<br>    <span class="hljs-keyword">uint16_t</span> tf_padding3;<br>    <span class="hljs-keyword">uint32_t</span> tf_trapno;<br>    <span class="hljs-comment">// 以下这些信息会被CPU硬件自动压入切换后的栈。包括下面切换特权级所使用的esp、ss等数据</span><br>    <span class="hljs-keyword">uint32_t</span> tf_err;<br>    <span class="hljs-keyword">uintptr_t</span> tf_eip;<br>    <span class="hljs-keyword">uint16_t</span> tf_cs;<br>    <span class="hljs-keyword">uint16_t</span> tf_padding4;<br>    <span class="hljs-keyword">uint32_t</span> tf_eflags;<br>    <span class="hljs-comment">// 以下这些信息会在切换特权级时被使用</span><br>    <span class="hljs-keyword">uintptr_t</span> tf_esp;<br>    <span class="hljs-keyword">uint16_t</span> tf_ss;<br>    <span class="hljs-keyword">uint16_t</span> tf_padding5;<br>} __attribute__((packed));<br></code></pre></div></td></tr></tbody></table></figure>
+<p>以上内容大部分复制自kiprey,不知道kiprey佬是在那里学的</p>
+<h1 id="ucore_lab1">ucore_lab1</h1>
+<p><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="13.492ex" height="1.756ex" role="img" focusable="false" viewBox="0 -694 5963.4 776"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D448" d="M107 637Q73 637 71 641Q70 643 70 649Q70 673 81 682Q83 683 98 683Q139 681 234 681Q268 681 297 681T342 682T362 682Q378 682 378 672Q378 670 376 658Q371 641 366 638H364Q362 638 359 638T352 638T343 637T334 637Q295 636 284 634T266 623Q265 621 238 518T184 302T154 169Q152 155 152 140Q152 86 183 55T269 24Q336 24 403 69T501 205L552 406Q599 598 599 606Q599 633 535 637Q511 637 511 648Q511 650 513 660Q517 676 519 679T529 683Q532 683 561 682T645 680Q696 680 723 681T752 682Q767 682 767 672Q767 650 759 642Q756 637 737 637Q666 633 648 597Q646 592 598 404Q557 235 548 205Q515 105 433 42T263 -22Q171 -22 116 34T60 167V183Q60 201 115 421Q164 622 164 628Q164 635 107 637Z"></path></g><g data-mml-node="mi" transform="translate(767,0)"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g><g data-mml-node="mi" transform="translate(1200,0)"><path data-c="1D45C" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"></path></g><g data-mml-node="mi" transform="translate(1685,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(2136,0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mo" transform="translate(2824.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(3824.4,0)"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mi" transform="translate(4505.4,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(5034.4,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><g data-mml-node="mn" transform="translate(5463.4,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></svg></mjx-container></span>没什么需要做的，主要是为了后面的内容，需要点一下相关知识点。</p>
+<h2 id="练习1">练习1</h2>
+<ul>
+<li>理解通过make生成执行文件的过程。</li>
+</ul>
+<p>在os_kernel_lab-master/labcodes/lab1/Makefile中，可以找到要分析的makefile。</p>
+<p>makefile的结构如下：</p>
+<figure class="highlight jboss-cli"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli">target.<span class="hljs-string">..</span><span class="hljs-function">:prerequisites...</span><br>   <span class="hljs-keyword">command</span><br>   <span class="hljs-string">...</span><br>   <span class="hljs-string">...</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>我们通过:</p>
+<figure class="highlight applescript"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">❯ make V= &gt;&gt; <span class="hljs-literal">result</span>.txt<br></code></pre></div></td></tr></tbody></table></figure>
+<p>来查看make到底执行了那些命令。</p>
+<p>直接看<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="10.011ex" height="1.595ex" role="img" focusable="false" viewBox="0 -694 4425 705"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D440" d="M289 629Q289 635 232 637Q208 637 201 638T194 648Q194 649 196 659Q197 662 198 666T199 671T201 676T203 679T207 681T212 683T220 683T232 684Q238 684 262 684T307 683Q386 683 398 683T414 678Q415 674 451 396L487 117L510 154Q534 190 574 254T662 394Q837 673 839 675Q840 676 842 678T846 681L852 683H948Q965 683 988 683T1017 684Q1051 684 1051 673Q1051 668 1048 656T1045 643Q1041 637 1008 637Q968 636 957 634T939 623Q936 618 867 340T797 59Q797 55 798 54T805 50T822 48T855 46H886Q892 37 892 35Q892 19 885 5Q880 0 869 0Q864 0 828 1T736 2Q675 2 644 2T609 1Q592 1 592 11Q592 13 594 25Q598 41 602 43T625 46Q652 46 685 49Q699 52 704 61Q706 65 742 207T813 490T848 631L654 322Q458 10 453 5Q451 4 449 3Q444 0 433 0Q418 0 415 7Q413 11 374 317L335 624L267 354Q200 88 200 79Q206 46 272 46H282Q288 41 289 37T286 19Q282 3 278 1Q274 0 267 0Q265 0 255 0T221 1T157 2Q127 2 95 1T58 0Q43 0 39 2T35 11Q35 13 38 25T43 40Q45 46 65 46Q135 46 154 86Q158 92 223 354T289 629Z"></path></g><g data-mml-node="mi" transform="translate(1051,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(1580,0)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mi" transform="translate(2101,0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mi" transform="translate(2567,0)"><path data-c="1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"></path></g><g data-mml-node="mi" transform="translate(3316,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(3661,0)"><path data-c="1D459" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path></g><g data-mml-node="mi" transform="translate(3959,0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g></g></g></svg></mjx-container></span>，查询关键字ucore.img,可以发现这样一段代码：</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-comment"># create ucore.img</span><br>UCOREIMG	:= $(call totarget,ucore.img)<br><br>$(UCOREIMG): $(kernel) $(bootblock)<br>	$(V)dd <span class="hljs-attribute">if</span>=/dev/zero <span class="hljs-attribute">of</span>=<span class="hljs-variable">$@</span> <span class="hljs-attribute">count</span>=10000<br>	$(V)dd <span class="hljs-attribute">if</span>=$(bootblock) <span class="hljs-attribute">of</span>=<span class="hljs-variable">$@</span> <span class="hljs-attribute">conv</span>=notrunc<br>	$(V)dd <span class="hljs-attribute">if</span>=$(kernel) <span class="hljs-attribute">of</span>=<span class="hljs-variable">$@</span> <span class="hljs-attribute">seek</span>=1 <span class="hljs-attribute">conv</span>=notrunc<br><br>$(call create_target,ucore.img)<br></code></pre></div></td></tr></tbody></table></figure>
+<p>也就是说要生成ucore.img,会先生成bootblock,kernel这两个target,我们依次找寻生成bootblock、kernel所需要的文件，得到这样一个文件树：</p>
+
+<pre><code class="mermaid" type="">
+graph LR
+   ucore--&gt;bootblock
+   ucore--&gt;kernel
+   bmo[(bootmain.o)]
+   bso[(bootasm.o)]
+   bootblock--&gt;bso
+   bootblock--&gt;bmo
+   bootblock--&gt;sign
+   bsos[(bootasm.S)]
+   bso--&gt;bsos
+   bmoc[(bootmain.c)]
+   bmo--&gt;bmoc
+   sign--&gt;sign.c
+   num[(kernel.ld等)]
+   kernel--&gt;num
+
+</code>
+</pre>
+<p>对于ucore:</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">UCOREIMG	:= $(call totarget,ucore.img)<br><br>$(UCOREIMG): $(kernel) $(bootblock)<br>	$(V)dd <span class="hljs-attribute">if</span>=/dev/zero <span class="hljs-attribute">of</span>=<span class="hljs-variable">$@</span> <span class="hljs-attribute">count</span>=10000<br>	$(V)dd <span class="hljs-attribute">if</span>=$(bootblock) <span class="hljs-attribute">of</span>=<span class="hljs-variable">$@</span> <span class="hljs-attribute">conv</span>=notrunc<br>	$(V)dd <span class="hljs-attribute">if</span>=$(kernel) <span class="hljs-attribute">of</span>=<span class="hljs-variable">$@</span> <span class="hljs-attribute">seek</span>=1 <span class="hljs-attribute">conv</span>=notrunc<br><br>$(call create_target,ucore.img)<br></code></pre></div></td></tr></tbody></table></figure>
+<p>其中dd命令和cp差不多，但dd更多的针对底层文件的复制.</p>
+<p>if和ifeq差不多，仍是实现条件判断的语句，实际上是判断后面的文件是否存在，比如/dev/zero就存在于linux的/dev/目录下</p>
+<p>of以及后面的语句则是对参数进行赋值,count指定是10000个块的字节，之后从第一个块写入bootblock的内容，seek则是指定从第二个块开始写入kernel的内容，有点类似于<a href="https://heeler-deer.github.io/2022/04/06/%E5%AF%B9udisk%E6%93%8D%E4%BD%9C/">sg_read</a></p>
+<p>生成bootasm.o时的实际命令为：</p>
+<figure class="highlight stata"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata"> gcc -Iboot/ -fno-builtin -Wall -ggdb -m32 -gstabs \<br>-nostdinc  -fno-<span class="hljs-keyword">stack</span>-protector -Ilibs/ -Os -nostdinc \<br>-c <span class="hljs-keyword">boot</span>/bootasm.S -o obj/<span class="hljs-keyword">boot</span>/bootasm.o<br></code></pre></div></td></tr></tbody></table></figure>
+<p>解释一下参数：</p>
+<p>-fno-builtin指若函数前没有builtin则不进行内部函数的优化（如下图），-Wall就是生成警告信息，-ggdb生成gdb调试信息，-m32就是按照32位机器生成代码，-gstabs生成stabs格式的调试信息，-nostdinc不是用标准库，-fno-stack-protector关闭栈保护，-Os是优化选项，-Iboot/指在boot下生成文件。</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161708193.png" srcset="/img/loading.gif" lazyload></p>
+<p>生成sign的实际命令：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">gcc -Itools/ -g -Wall -O2 -c tools/sign.c \<br>-o obj/sign/tools/sign.o<br>gcc -g -Wall -O2 obj/sign/tools/sign.o -o bin/sign<br></code></pre></div></td></tr></tbody></table></figure>
+<p>在有了sing，bootasm.o,bootmain.o后，makefile生成bootblock.o：</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">ld</span> -m    elf_i<span class="hljs-number">386</span> -nostdlib -N -e start -Ttext <span class="hljs-number">0</span>x<span class="hljs-number">7</span>C<span class="hljs-number">00</span> \<br><span class="hljs-attribute">obj</span>/boot/bootasm.o obj/boot/bootmain.o -o obj/bootblock.o<br></code></pre></div></td></tr></tbody></table></figure>
+<p>ld是连接器，详细用法我参考的是<a target="_blank" rel="noopener" href="https://www.computerhope.com/unix/uld.htm">computerhope</a></p>
+<p>上面的代码实际上是模拟了i386的连接器（-m elf_i386）,-nostdlib即不准使用标准库，-N设置代码段以及数据段均可读写,-e指定了入口是start,-Text指定了代码段的开始位置。</p>
+<p>最后就是使用sign处理bootblock.o,首先<code>objcopy -S -O binary obj/bootblock.o obj/bootblock.out</code>，实际上-S移除了所有符号和重定位信息，-O指定输出格式，sign在处理bootblock.out生成bootblock</p>
+<p>对于kernel,实际上没有用到多少新的参数。只需要注意ld的参数-T &lt; script &gt; 是让ld使用指定的script即可。</p>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-constructor">$(<span class="hljs-params">kernel</span>)</span>: tools/kernel.ld<br><span class="hljs-constructor">$(<span class="hljs-params">kernel</span>)</span>: <span class="hljs-constructor">$(KOBJS)</span><br>@echo + ld $@<br><span class="hljs-constructor">$(V)</span><span class="hljs-constructor">$(LD)</span> <span class="hljs-constructor">$(LDFLAGS)</span> -T tools/kernel.ld -o $@ <span class="hljs-constructor">$(KOBJS)</span><br>@<span class="hljs-constructor">$(OBJDUMP)</span> -S $@ &gt; <span class="hljs-constructor">$(<span class="hljs-params">call</span> <span class="hljs-params">asmfile</span>,<span class="hljs-params">kernel</span>)</span><br>@<span class="hljs-constructor">$(OBJDUMP)</span> -t $@ <span class="hljs-pattern-match">| <span class="hljs-constructor">$(SED)</span> '1,<span class="hljs-operator">/</span><span class="hljs-constructor">SYMBOL</span> <span class="hljs-constructor">TABLE</span><span class="hljs-operator">/</span>d; s<span class="hljs-operator">/</span> .<span class="hljs-operator">*</span> <span class="hljs-operator">/</span> <span class="hljs-operator">/</span>; \</span><br><span class="hljs-pattern-match"><span class="hljs-operator">/</span>^<span class="hljs-constructor">$$</span><span class="hljs-operator">/</span>d' &gt; <span class="hljs-constructor">$(<span class="hljs-params">call</span> <span class="hljs-params">symfile</span>,<span class="hljs-params">kernel</span>)</span></span><br></code></pre></div></td></tr></tbody></table></figure>
+<ul>
+<li>一个被系统认为是符合规范的硬盘主引导扇区的特征是什么?</li>
+</ul>
+<p>我们可以看sign.c,一个磁盘主引导扇区只有512字节，且第510个是0x55，第511个是0xAA</p>
+<h2 id="练习2">练习2</h2>
+<p>参考真正の佬<a target="_blank" rel="noopener" href="https://kiprey.github.io/2020/08/uCore-1/#%E7%BB%83%E4%B9%A0%E8%A7%A3%E7%AD%94">kiprey</a></p>
+<p>修改tools/gdbinit:</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">file</span> obj/bootblock.o<br><span class="hljs-attribute">set</span> architecture i<span class="hljs-number">8086</span><br><span class="hljs-attribute">target</span> remote :<span class="hljs-number">1234</span><br><span class="hljs-attribute">b</span>* <span class="hljs-number">0</span>x<span class="hljs-number">7</span>c<span class="hljs-number">00</span><br><br><span class="hljs-attribute">define</span> hook-stop<br><span class="hljs-attribute">x</span>/i $eip<br><span class="hljs-attribute">end</span><br><span class="hljs-attribute">continue</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>其中define hook-step ... end告诉gdb在每一次断点时自动输出下一条指令。</p>
+<p>之后make debug:</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161740543.png" srcset="/img/loading.gif" lazyload></p>
+<p>单步跟踪使用si即可，这是continue的结果：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161745960.png" srcset="/img/loading.gif" lazyload></p>
+<p>设置断点：</p>
+<p>修改gdbinit为：</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">file</span> obj/bootblock.o<br><span class="hljs-attribute">set</span> architecture i<span class="hljs-number">8086</span><br><span class="hljs-attribute">target</span> remote :<span class="hljs-number">1234</span><br><span class="hljs-attribute">b</span>* <span class="hljs-number">0</span>x<span class="hljs-number">7</span>c<span class="hljs-number">00</span><br><br><span class="hljs-attribute">define</span> hook-stop<br><span class="hljs-attribute">x</span>/i $eip<br><span class="hljs-attribute">end</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>之后make debug,输入<code>x/5i (($cs &lt;&lt;4)+$eip)</code>得到：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161754838.png" srcset="/img/loading.gif" lazyload></p>
+<p>修改为：</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">file</span> obj/bootblock.o<br><span class="hljs-attribute">set</span> architecture i<span class="hljs-number">8086</span><br><span class="hljs-attribute">target</span> remote :<span class="hljs-number">1234</span><br><span class="hljs-attribute">b</span>* <span class="hljs-number">0</span>x<span class="hljs-number">7</span>c<span class="hljs-number">00</span><br><br><span class="hljs-attribute">define</span> hook-stop<br><span class="hljs-attribute">c</span><br><span class="hljs-attribute">x</span> /<span class="hljs-number">10</span>i $pc<br><span class="hljs-attribute">end</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>输入<code>qemu-system-i386 -hda yourpath/os_kernel_lab-master/labcodes/lab1/bin/ucore.img  -s -S -d in_asm -D q.log</code> 打开ucore,打开gdb,输入<code>target remote localhost:1234</code> ,之后单步调试si得到：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161812996.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以看到0x7c00处的代码和bootasm.S处的代码一致</p>
+<h2 id="练习3">练习3</h2>
+<p>在bootblock.asm中，通过注释不难发现，disable interrupts禁用了中断，之后初始化了DS,ES,SS这三个寄存器的值，都先置0，之后enable A20,开启原因在注释里面也有：</p>
+<p>physical address line 20 is tied low ,that addresses higher than 1MB.因此我们需要开启A20去兼容早期的回绕特征。kipery这样解释：</p>
+<blockquote>
+<ul>
+<li>Intel早期的8086 CPU提供了20根地址线，但寄存器只有16位，所以使用<strong>段寄存器值 &lt;&lt; 4 + 段内偏移值</strong>的方法来访问到所有内存，但按这种方式来计算出的地址的最大值为1088KB，超过20根地址线所能表示的范围，会发生“回卷”（和整数溢出有点类似）。但下一代的基于Intel 80286 CPU的计算机系统提供了24根地址线，当CPU计算出的地址超过1MB时便<strong>不会发生回卷</strong>，而这就造成了<strong>向下不兼容</strong>。为了保持完全的向下兼容性，IBM在计算机系统上加个硬件逻辑来模仿早期的回绕特征，而这就是<strong>A20 Gate</strong>。</li>
+<li>A20 Gate的方法是把A20地址线控制和键盘控制器的一个输出进行AND操作，这样来控制A20地址线的打开（使能）和关闭（屏蔽）。一开始时A20地址线控制是被屏蔽的（总为0），直到系统软件通过一定的IO操作去打开它。当A20 地址线控制禁止时，则程序就像在8086中运行，1MB以上的地址不可访问；保护模式下A20地址线控制必须打开。A20控制打开后，内存寻址将不会发生回卷。</li>
+<li>在当前环境中，所用到的键盘控制器8042的IO端口只有0x60和0x64两个端口。8042通过这些端口给键盘控制器或键盘发送命令或读取状态。输出端口P2用于特定目的。位0（P20引脚）用于实现CPU复位操作，位1（P21引脚）用于控制A20信号线的开启与否。</li>
+</ul>
+</blockquote>
+<p>接下来就是加载gdt这个全局描述符表，最后重新使用32位模式，重新切回到保护模式。</p>
+<p>在bootasm.S中，</p>
+<p>初始化了gdt:</p>
+<figure class="highlight jboss-cli"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># Bootstrap GDT</span><br><span class="hljs-string">.p2align</span> 2                                          <span class="hljs-comment"># force 4 byte alignment</span><br>gdt:<br>    SEG_NULLASM                                     <span class="hljs-comment"># null seg</span><br>    SEG_ASM<span class="hljs-params">(STA_X|STA_R, 0x0, 0xffffffff)</span>           <span class="hljs-comment"># code seg for bootloader and kernel</span><br>    SEG_ASM<span class="hljs-params">(STA_W, 0x0, 0xffffffff)</span>                 <span class="hljs-comment"># data seg for bootloader and kernel</span><br><br>gdtdesc:<br>    <span class="hljs-string">.word</span> 0x17                                      <span class="hljs-comment"># sizeof(gdt) - 1</span><br>    <span class="hljs-string">.long</span> gdt     <br></code></pre></div></td></tr></tbody></table></figure>
+<p>看注释即可理解。bootasm.s中的代码设置了CR0_PE_ON来返回保护模式：</p>
+<figure class="highlight cos"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cos">.<span class="hljs-keyword">set</span> CR0_PE_ON,             <span class="hljs-number">0</span>x1                     # protected mode enable flag<br>.........<br>lgdt gdtdesc<br> movl <span class="hljs-built_in">%cr</span>0, <span class="hljs-built_in">%eax</span><br> orl <span class="hljs-built_in">$CR</span>0_PE_ON, <span class="hljs-built_in">%eax</span><br> movl <span class="hljs-built_in">%eax</span>, <span class="hljs-built_in">%cr</span>0<br></code></pre></div></td></tr></tbody></table></figure>
+<h2 id="练习4">练习4</h2>
+<p>ELF文件结构：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161828865.png" srcset="/img/loading.gif" lazyload></p>
+<p>在bootmain.c中，bootloader为了读取扇区，采用了下面的代码：</p>
+<figure class="highlight less"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-comment">/* waitdisk - wait for disk ready */</span><br><span class="hljs-selector-tag">static</span> <span class="hljs-selector-tag">void</span><br><span class="hljs-selector-tag">waitdisk</span>(void) {<br>    <span class="hljs-selector-tag">while</span> ((inb(<span class="hljs-number">0</span>x1F7) &amp; <span class="hljs-number">0</span>xC0) != <span class="hljs-number">0</span>x40)<br>        <span class="hljs-comment">/* do nothing */</span>;<br>}<br><br><span class="hljs-comment">/* readsect - read a single sector at @secno into @dst */</span><br><span class="hljs-selector-tag">static</span> <span class="hljs-selector-tag">void</span><br><span class="hljs-selector-tag">readsect</span>(void *dst, uint32_t secno) {<br>    <span class="hljs-comment">// wait for disk to be ready</span><br>    <span class="hljs-selector-tag">waitdisk</span>();<br><br>    <span class="hljs-selector-tag">outb</span>(<span class="hljs-number">0</span>x1F2, <span class="hljs-number">1</span>);                         <span class="hljs-comment">// count = 1</span><br>    <span class="hljs-selector-tag">outb</span>(<span class="hljs-number">0</span>x1F3, secno &amp; <span class="hljs-number">0</span>xFF);<br>    <span class="hljs-selector-tag">outb</span>(<span class="hljs-number">0</span>x1F4, (secno &gt;&gt; <span class="hljs-number">8</span>) &amp; <span class="hljs-number">0</span>xFF);<br>    <span class="hljs-selector-tag">outb</span>(<span class="hljs-number">0</span>x1F5, (secno &gt;&gt; <span class="hljs-number">16</span>) &amp; <span class="hljs-number">0</span>xFF);<br>    <span class="hljs-selector-tag">outb</span>(<span class="hljs-number">0</span>x1F6, ((secno &gt;&gt; <span class="hljs-number">24</span>) &amp; <span class="hljs-number">0</span>xF) | <span class="hljs-number">0</span>xE0);<br>    <span class="hljs-selector-tag">outb</span>(<span class="hljs-number">0</span>x1F7, <span class="hljs-number">0</span>x20);                      <span class="hljs-comment">// cmd 0x20 - read sectors</span><br><br>    <span class="hljs-comment">// wait for disk to be ready</span><br>    <span class="hljs-selector-tag">waitdisk</span>();<br><br>    <span class="hljs-comment">// read a sector</span><br>    <span class="hljs-selector-tag">insl</span>(<span class="hljs-number">0</span>x1F0, dst, SECTSIZE / <span class="hljs-number">4</span>);<br>}<br></code></pre></div></td></tr></tbody></table></figure>
+<p>即先waitdisk,等待磁盘，然后写入0x1f2~0x1f5,0x1f7,准备读取磁盘，磁盘准备好时再调用insl读取到内存。</p>
+<p>bootloader先将os加载到：</p>
+<figure class="highlight lasso"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lasso">#define ELFHDR          ((struct elfhdr *)<span class="hljs-number">0x10000</span>) <br><span class="hljs-params">...</span><span class="hljs-params">...</span><span class="hljs-params">...</span>..<br>readseg((uintptr_t)ELFHDR, SECTSIZE * <span class="hljs-number">8</span>, <span class="hljs-number">0</span>);<br></code></pre></div></td></tr></tbody></table></figure>
+<p>在比对elf文件的magic number来判断elf文件的正确性，最后在加载elf的每一个段，</p>
+<figure class="highlight xl"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xl"><span class="hljs-function"><span class="hljs-title">ph</span> = (struct proghdr *)((uintptr_t)ELFHDR + ELFHDR-&gt;</span>e_phoff);<br><span class="hljs-function"><span class="hljs-title">eph</span> = ph + ELFHDR-&gt;</span>e_phnum;<br><span class="hljs-keyword">for</span> (; ph &lt; eph; ph ++) {<br>    <span class="hljs-function"><span class="hljs-title">readseg</span>(ph-&gt;</span><span class="hljs-function"><span class="hljs-title">p_va</span> &amp; 0xFFFFFF, ph-&gt;</span><span class="hljs-function"><span class="hljs-title">p_memsz</span>, ph-&gt;</span>p_offset);<br>}<br></code></pre></div></td></tr></tbody></table></figure>
+<h2 id="练习5">练习5</h2>
+<p>在kern/debug/kdebug.c的最后有我们要完成的代码，不难写出：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print_stackframe</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{<br>        <span class="hljs-keyword">uint32_t</span> ebp=<span class="hljs-built_in">read_ebp</span>();        <span class="hljs-comment">//(1) call read_ebp() to get the value of ebp. the type is (uint32_t)</span><br>        <span class="hljs-keyword">uint32_t</span> eip=<span class="hljs-built_in">read_eip</span>();        <span class="hljs-comment">//(2) call read_eip() to get the value of eip. the type is (uint32_t)</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;STACKFRAME_DEPTH&amp;&amp;ebp!=<span class="hljs-number">0</span>;i++){    <span class="hljs-comment">//(3) from 0 .. STACKFRAME_DEPTH</span><br>              <span class="hljs-built_in">cprintf</span>(<span class="hljs-string">"ebp:0x%08x   eip:0x%08x "</span>,ebp,eip);    <span class="hljs-comment">//(3.1)printf value of ebp, eip</span><br>              <span class="hljs-keyword">uint32_t</span> *tmp=(<span class="hljs-keyword">uint32_t</span> *)ebp+<span class="hljs-number">2</span>;<br>              <span class="hljs-built_in">cprintf</span>(<span class="hljs-string">"arg :0x%08x 0x%08x 0x%08x 0x%08x"</span>,*(tmp+<span class="hljs-number">0</span>),*(tmp+<span class="hljs-number">1</span>),*(tmp+<span class="hljs-number">2</span>),*(tmp+<span class="hljs-number">3</span>));    <span class="hljs-comment">//(3.2)(uint32_t)calling </span><br><br>arguments [<span class="hljs-number">0.</span><span class="hljs-number">.4</span>] = the contents in <span class="hljs-built_in">address</span> (<span class="hljs-keyword">unit32_t</span>)ebp +<span class="hljs-number">2</span> [<span class="hljs-number">0.</span><span class="hljs-number">.4</span>]<br>              <span class="hljs-built_in">cprintf</span>(<span class="hljs-string">"\n"</span>);            <span class="hljs-comment">//(3.3) cprintf("\n");</span><br>              <span class="hljs-built_in">print_debuginfo</span>(eip<span class="hljs-number">-1</span>);    <span class="hljs-comment">//(3.4) call print_debuginfo(eip-1) to print the C calling function name and line </span><br><br>number, etc.<br>              eip=((<span class="hljs-keyword">uint32_t</span> *)ebp)[<span class="hljs-number">1</span>];<br>              ebp=((<span class="hljs-keyword">uint32_t</span> *)ebp)[<span class="hljs-number">0</span>];    <span class="hljs-comment">//(3.5) popup a calling stackframe</span><br>          }<br>    }<br></code></pre></div></td></tr></tbody></table></figure>
+<p>注意先切换eip,在切换ebp</p>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161841018.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="练习6">练习6</h2>
+<p>直接上图和代码：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204161844164.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">   <span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>;<br>   extern uintptr_t __vectors<span class="hljs-literal">[]</span>;<br>   <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">255</span>; ++i)<br>   {<br>	<span class="hljs-comment">//  vectors 中存储了中断处理程序的入口地址。vectors 定义在 vector.S 文件中，通过一个工具程序 vector.c 生成</span><br>       <span class="hljs-constructor">SETGATE(<span class="hljs-params">idt</span>[<span class="hljs-params">i</span>], 0, GD_KTEXT, <span class="hljs-params">__vectors</span>[<span class="hljs-params">i</span>], 0)</span>;<br>       <span class="hljs-comment">//在os中，特权级别通常用数字表示，这里的0就是kernel模式</span><br>   }<br><span class="hljs-comment">// setgate切换用户模式到内核模式</span><br>   <span class="hljs-constructor">SETGATE(<span class="hljs-params">idt</span>[T_SWITCH_TOK], 1, GD_KTEXT, <span class="hljs-params">__vectors</span>[T_SWITCH_TOK], 3)</span>;<br>   <span class="hljs-comment">//加载idt </span><br>   lidt(&amp;idt_pd);<br></code></pre></div></td></tr></tbody></table></figure>
+<figure class="highlight scss"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scss">case IRQ_OFFSET + IRQ_TIMER:<br>    <br> ticks ++;<br> if (ticks % TICK_NUM == <span class="hljs-number">0</span>) {<br> print_ticks();<br> }<br><br>    break;<br>    <span class="hljs-comment">//这个没什么意思</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204171129336.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="扩展练习">扩展练习</h2>
+<h3 id="challenge-1">challenge 1</h3>
+<p>修改：</p>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">struct trapframe *switchu2k;<br>struct trapframe switchk2u;<br>........<br><span class="hljs-regexp">//</span> 全局变量<br>struct trapframe switchk2u;<br><span class="hljs-regexp">//</span> ......<br>case T_SWITCH_TOK:<br>    <span class="hljs-keyword">if</span> (tf-&gt;tf_cs != KERNEL_CS) {<br>    <span class="hljs-regexp">//</span> 修改相应段以提升特权级<br>    tf-&gt;tf_cs = KERNEL_CS;<br>    tf-&gt;tf_ds = tf-&gt;tf_es = KERNEL_DS;<br>    tf-&gt;tf_eflags &amp;= ~FL_IOPL_MASK;<br>    <br>    <span class="hljs-regexp">//</span> 计算将要保存新trapFrame的用户栈地址<br>    <span class="hljs-regexp">//</span>    数值减<span class="hljs-number">8</span>是因为内核调用中断时CPU没有压入ss和esp<br>    switchu2k = (struct trapframe *)(tf-&gt;tf_esp - (sizeof(struct trapframe) - <span class="hljs-number">8</span>));<br>    <span class="hljs-regexp">//</span> 将修改后的trapFrame写入用户栈(注意当前是内核栈)。注意trapFrame中ss和esp的值不需要写入。<br>    memmove(switchu2k, tf, sizeof(struct trapframe) - <span class="hljs-number">8</span>);<br>    <span class="hljs-regexp">//</span> 设置弹出esp的值为用户栈的新地址<br>    *((uint32_t *)tf - <span class="hljs-number">1</span>) = (uint32_t)switchu2k;<br>}<br><span class="hljs-keyword">break</span>;<br><span class="hljs-regexp">//</span> 全局变量<br>struct trapframe *switchu2k;<br><span class="hljs-regexp">//</span> ......<br>case T_SWITCH_TOU:<br>    <span class="hljs-keyword">if</span> (tf-&gt;tf_cs != USER_CS) {<br>    <span class="hljs-regexp">//</span> switchk2u是之前定义的trapframe,将中断的栈帧赋给临时中断帧<br>    switchk2u = *tf;<br><br>    switchk2u.tf_cs = USER_CS;<br><br>    switchk2u.tf_ds = switchk2u.tf_es = switchk2u.tf_ss = USER_DS;<br>    <span class="hljs-regexp">//</span>上面是修改对应的段为user段<br><br>    <span class="hljs-regexp">//</span>    数值减<span class="hljs-number">8</span>是因为iret不会弹出ss和esp，所以不需要这<span class="hljs-number">8</span>个字节<br>    switchk2u.tf_esp = (uint32_t)tf + sizeof(struct trapframe) - <span class="hljs-number">8</span>;<br><br>    <span class="hljs-regexp">//</span> 将eflags中对应的IOPL位置成表示用户态的<span class="hljs-number">3</span><br>    switchk2u.tf_eflags |= FL_IOPL_MASK;<br>    <span class="hljs-regexp">//</span> 设置中断处理例程结束时pop出的%esp，这样可以用修改后的数据来恢复上下文。<br>    *((uint32_t *)tf - <span class="hljs-number">1</span>) = (uint32_t)&amp;switchk2u;<br>    }<br>    <span class="hljs-regexp">//</span>实质只是通过改变段来改变权级<br><span class="hljs-keyword">break</span>;<br></code></pre></div></td></tr></tbody></table></figure>
+<p>以及：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lab1_switch_to_user</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{<br><br>	<span class="hljs-function"><span class="hljs-keyword">asm</span> <span class="hljs-title">volatile</span> <span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">	    <span class="hljs-string">"sub $0x8, %%esp \n"</span></span></span><br><span class="hljs-params"><span class="hljs-function">	    <span class="hljs-string">"int %0 \n"</span></span></span><br><span class="hljs-params"><span class="hljs-function">	    <span class="hljs-string">"movl %%ebp, %%esp"</span></span></span><br><span class="hljs-params"><span class="hljs-function">	    : </span></span><br><span class="hljs-params"><span class="hljs-function">	    : <span class="hljs-string">"i"</span>(T_SWITCH_TOU)</span></span><br><span class="hljs-params"><span class="hljs-function">	)</span></span>;<br>}<br><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lab1_switch_to_kernel</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{<br><br>	<span class="hljs-function"><span class="hljs-keyword">asm</span> <span class="hljs-title">volatile</span> <span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">	    <span class="hljs-string">"int %0 \n"</span></span></span><br><span class="hljs-params"><span class="hljs-function">	    <span class="hljs-string">"movl %%ebp, %%esp \n"</span></span></span><br><span class="hljs-params"><span class="hljs-function">	    : </span></span><br><span class="hljs-params"><span class="hljs-function">	    : <span class="hljs-string">"i"</span>(T_SWITCH_TOK)</span></span><br><span class="hljs-params"><span class="hljs-function">	)</span></span>;<br>}<br></code></pre></div></td></tr></tbody></table></figure>
+<p>inti.c里有坑，第一个函数需要是void类型</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204162235049.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="chanllenge-2">chanllenge 2</h3>
+<figure class="highlight xl"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xl">case IRQ_OFFSET + IRQ_KBD:<br>        c = cons_getc();<br>        cprintf(<span class="hljs-string">"kbd [%03d] %c\n"</span>, c, c);<br><span class="hljs-comment">//和chanllenge1代码基本相同</span><br>        <span class="hljs-keyword">if</span>(c == <span class="hljs-string">'0'</span>)<br>        {<br>             <span class="hljs-function"><span class="hljs-title">if</span> (tf-&gt;</span>tf_cs != KERNEL_CS) {<br>                 cprintf(<span class="hljs-string">"+++ switch to  kernel  mode +++\n"</span>);<br>                <span class="hljs-function"><span class="hljs-title">tf</span>-&gt;</span>tf_cs = KERNEL_CS;<br>                <span class="hljs-function"><span class="hljs-title">tf</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">tf_ds</span> = tf-&gt;</span>tf_es = KERNEL_DS;<br>                <span class="hljs-function"><span class="hljs-title">tf</span>-&gt;</span>tf_eflags &amp;= ~FL_IOPL_MASK;<br>                <span class="hljs-function"><span class="hljs-title">switchu2k</span> = (struct trapframe *)(tf-&gt;</span>tf_esp - (sizeof(struct trapframe) - <span class="hljs-number">8</span>));<br>                memmove(switchu2k, tf, sizeof(struct trapframe) - <span class="hljs-number">8</span>);<br>                *((uint32_t *)tf - <span class="hljs-number">1</span>) = (uint32_t)switchu2k;<br>        }<br>    }<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(c == <span class="hljs-string">'3'</span>)<br>        {<br>            <span class="hljs-function"><span class="hljs-title">if</span> (tf-&gt;</span>tf_cs != USER_CS) {<br>                cprintf(<span class="hljs-string">"+++ switch to  user  mode +++\n"</span>);<br>                switchk2u = *tf;<br>                switchk2u.tf_cs = USER_CS;<br>                switchk2u.tf_ds = switchk2u.tf_es = switchk2u.tf_ss = USER_DS;<br>                switchk2u.tf_esp = (uint32_t)tf + sizeof(struct trapframe) - <span class="hljs-number">8</span>;<br>                switchk2u.tf_eflags |= FL_IOPL_MASK;<br>                *((uint32_t *)tf - <span class="hljs-number">1</span>) = (uint32_t)&amp;switchk2u;<br>        }<br>    }<br><br>    <br>        <span class="hljs-comment">/* do nothing */</span><br>        break;<br></code></pre></div></td></tr></tbody></table></figure>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204171130119.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="参考博客">参考博客</h1>
+<p><a target="_blank" rel="noopener" href="https://belyenochi.github.io/2018/09/16/ucore-lab1/">belyenochi</a></p>
+<p><a target="_blank" rel="noopener" href="https://kiprey.github.io/2020/08/uCore-1/#%E7%BB%83%E4%B9%A0%E8%A7%A3%E7%AD%94">kiprey</a></p>
+<p><a target="_blank" rel="noopener" href="https://yuerer.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-uCore-Lab-1/">Yuerer</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/cs/">cs</a>
+                    
+                      <a class="hover-with-bg" href="/tags/ucore/">ucore</a>
+                    
+                  </div>
+                
+              </div>
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">Heeler-Deer</a> <br>
+                <strong>本文链接: </strong><a href="https://heeler-deer.github.io/2022/04/16/ucore-lab1/">https://heeler-deer.github.io/2022/04/16/ucore-lab1/</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                </p>
+                
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/21/ucore-lab2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ucore-lab2</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/06/%E5%AF%B9udisk%E6%93%8D%E4%BD%9C/">
+                        <span class="hidden-mobile">对udisk操作</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"fb364385aff3688b9b61","clientSecret":"fac44b76c40c3e32297538f963a7c318fd1c7c7e","repo":"heeler-deer.github.io","owner":"heeler-deer","admin":["heeler-deer"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
+          {
+            id: 'bc9f764aa47040d2cf4a5e6332b40a24'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <font size="3" face="Georgia">
+    <div class="translate-style">
+      🌀繁/简切换按钮：<a id="translateLink" href="javascript:translatePage();">繁体
+      </a>
+    </div>
+    <script type="text/javascript" src="/js/tw_cn.js"></script>
+    <script type="text/javascript">
+      var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+      var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+      var cookieDomain = "https://heeler-deer.github.io/"; //Cookie地址, 一定要设定, 通常为你的网址
+      var msgToTraditionalChinese = "繁体"; //此处可以更改为你想要显示的文字
+      var msgToSimplifiedChinese = "简体"; //同上，但两处均不建议更改
+      var translateButtonId = "translateLink"; //默认互换id
+      translateInitilization();
+    </script>
+  
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            🔮&nbsp 
+            <span id="leancloud-site-pv"></span>
+             times
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            🧬&nbsp 
+            <span id="leancloud-site-uv"></span>
+             nums
+          </span>
+      
+
+    
+  </div>
+
+
+    
+
+  
+  
+    
+  
+  
+    <div>
+      <span class="post-count">50.5k&nbsp words</span>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+        var now = new Date();
+        function createtime(){
+          var grt= new Date("07/24/2021 21:02:06");//此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+            hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+            mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+            snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "🚀 &nbsp for &nbsp"+dnum+"&nbspdays";  //此次自定义显示内容
+          document.getElementById("times").innerHTML = hnum + "&nbsphr&nbsp" + mnum + "&nbspmin&nbsp" + snum + "&nbspsec";
+        }  //此次自定义显示内容
+        setInterval("createtime()",250);
+      </script>
+    </div>
+  
+  
+    <!--<div class="text-center py-1">
+      <div>
+        <span>Copyright © 2020</span></a>
+        <a href="https://yousazoe.top/" target="_blank" rel="nofollow noopener">
+          <span>Fl0w3r</span></a>    <br>
+      </div>-->
+  
+  </footer>
+  
+  
+  <!-- SCRIPTS -->
+  
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+  <!-- SCRIPTS -->
+  
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

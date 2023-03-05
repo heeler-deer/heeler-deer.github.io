@@ -1,0 +1,917 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/faviconn.png">
+  <link rel="icon" href="/img/faviconn.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Heeler-Deer">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="练习解答 练习0 填写实验  kern&#x2F;process&#x2F;proc.c kern&#x2F;mm&#x2F;pmm.c  有需要更改的文件，建议看Kiprey 练习1  练习1: 使用 Round Robin 调度算法（不需要编码） 完成练习0后，建议大家比较一下（可用kdiff3等文件比较软件）个人完成的lab5和练习0完成后的刚修改的lab6之间的区别，分析了解lab6采用RR调度算法后的执行过程。执行make g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ucore-lab6">
+<meta property="og:url" content="https://heeler-deer.github.io/2022/05/21/ucore-lab6/index.html">
+<meta property="og:site_name" content="Heeler-Deer">
+<meta property="og:description" content="练习解答 练习0 填写实验  kern&#x2F;process&#x2F;proc.c kern&#x2F;mm&#x2F;pmm.c  有需要更改的文件，建议看Kiprey 练习1  练习1: 使用 Round Robin 调度算法（不需要编码） 完成练习0后，建议大家比较一下（可用kdiff3等文件比较软件）个人完成的lab5和练习0完成后的刚修改的lab6之间的区别，分析了解lab6采用RR调度算法后的执行过程。执行make g">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211153269.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211156860.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211518593.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211518135.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211532686.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211535426.png">
+<meta property="article:published_time" content="2022-05-21T03:03:56.000Z">
+<meta property="article:modified_time" content="2022-05-28T05:52:39.352Z">
+<meta property="article:author" content="Heeler-Deer">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="ucore">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211153269.png">
+  
+  
+  <title>ucore-lab6 - Heeler-Deer</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/vs.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/mac.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"heeler-deer.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"OmwitJK3WCwtKw9Hfg8NLidl-MdYXbMMI","app_key":"KyDmU5DQyqKmDOcBTfN2BRv9","server_url":"https://omwitjk3.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Heeler-Deer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                rss
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://github.com/heeler-deer/absorbing/blob/main/png/6.jpg?raw=true') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ucore-lab6">
+              
+                ucore-lab6
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Heeler-Deer
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-21 11:03" pubdate>
+        2022年5月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      72 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ucore-lab6</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年5月28日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="练习解答">练习解答</h1>
+<h2 id="练习0">练习0</h2>
+<p>填写实验</p>
+<ul>
+<li><p>kern/process/proc.c</p></li>
+<li><p>kern/mm/pmm.c</p></li>
+</ul>
+<p>有需要更改的文件，建议看<a target="_blank" rel="noopener" href="https://kiprey.github.io/2020/09/uCore-6/#%E7%BB%83%E4%B9%A0%E8%A7%A3%E7%AD%94">Kiprey</a></p>
+<h2 id="练习1">练习1</h2>
+<blockquote>
+<p>练习1: 使用 Round Robin 调度算法（不需要编码）</p>
+<p>完成练习0后，建议大家比较一下（可用kdiff3等文件比较软件）个人完成的lab5和练习0完成后的刚修改的lab6之间的区别，分析了解lab6采用RR调度算法后的执行过程。执行make grade，大部分测试用例应该通过。但执行priority.c应该过不去。</p>
+<p>请在实验报告中完成：</p>
+<ul>
+<li>请理解并分析sched_class中各个函数指针的用法，并结合Round Robin 调度算法描ucore的调度执行过程</li>
+<li>请在实验报告中简要说明如何设计实现”多级反馈队列调度算法“，给出概要设计，鼓励给出详细设计</li>
+</ul>
+<p><strong>请理解并分析sched_class中各个函数指针的用法，并结合Round Robin 调度算法描ucore的调度执行过程</strong></p>
+</blockquote>
+<p>在kern/schedule/sched.h不难找到：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sched_class</span> {</span><br>    <span class="hljs-comment">// the name of sched_class</span><br>    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *name;<br>    <span class="hljs-comment">// Init the run queue</span><br>    <span class="hljs-keyword">void</span> (*init)(struct run_queue *rq);<br>    <span class="hljs-comment">// put the proc into runqueue, and this function must be called with rq_lock</span><br>    <span class="hljs-keyword">void</span> (*enqueue)(struct run_queue *rq, struct proc_struct *proc);<br>    <span class="hljs-comment">// get the proc out runqueue, and this function must be called with rq_lock</span><br>    <span class="hljs-keyword">void</span> (*dequeue)(struct run_queue *rq, struct proc_struct *proc);<br>    <span class="hljs-comment">// choose the next runnable task</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">proc_struct</span> *(*<span class="hljs-title">pick_next</span>)(<span class="hljs-keyword">struct</span> <span class="hljs-title">run_queue</span> *<span class="hljs-title">rq</span>);</span><br>    <span class="hljs-comment">// dealer of the time-tick</span><br>    <span class="hljs-keyword">void</span> (*proc_tick)(struct run_queue *rq, struct proc_struct *proc);<br>    <span class="hljs-comment">/* for SMP support in the future</span><br><span class="hljs-comment">     *  load_balance</span><br><span class="hljs-comment">     *     void (*load_balance)(struct rq* rq);</span><br><span class="hljs-comment">     *  get some proc from this rq, used in load_balance,</span><br><span class="hljs-comment">     *  return value is the num of gotten proc</span><br><span class="hljs-comment">     *  int (*get_proc)(struct rq* rq, struct proc* procs_moved[]);</span><br><span class="hljs-comment">     */</span><br>};<br></code></pre></div></td></tr></tbody></table></figure>
+<p>由于时间较紧，且根据注释易于理解，此处不再赘述</p>
+<p>在kern/schedule/default_sched.c不难找到rr算法的实现，</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">RR_init</span><span class="hljs-params">(struct run_queue *rq)</span> </span>{<br>    list_init(&amp;(rq-&gt;run_list));<br>    rq-&gt;proc_num = <span class="hljs-number">0</span>;<br>}<br><span class="hljs-comment">//初始化对应的list</span><br><span class="hljs-comment">//run queue的进程号设置为0</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">RR_enqueue</span><span class="hljs-params">(struct run_queue *rq, struct proc_struct *proc)</span> </span>{<br>    assert(list_empty(&amp;(proc-&gt;run_link)));<br>    list_add_before(&amp;(rq-&gt;run_list), &amp;(proc-&gt;run_link));<br>    <span class="hljs-keyword">if</span> (proc-&gt;time_slice == <span class="hljs-number">0</span> || proc-&gt;time_slice &gt; rq-&gt;max_time_slice) {<br>        <span class="hljs-comment">//进程时间片等于0或者大于最大时间片时，重新赋值</span><br>        proc-&gt;time_slice = rq-&gt;max_time_slice;<br>    }<br>    proc-&gt;rq = rq;<br>    rq-&gt;proc_num ++;<br>}<br><span class="hljs-comment">//将进程添加至队列，</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">RR_dequeue</span><span class="hljs-params">(struct run_queue *rq, struct proc_struct *proc)</span> </span>{<br>    assert(!list_empty(&amp;(proc-&gt;run_link)) &amp;&amp; proc-&gt;rq == rq);<br>    list_del_init(&amp;(proc-&gt;run_link));<br>    rq-&gt;proc_num --;<br>}<br><span class="hljs-comment">//去除队列</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> struct proc_struct *</span><br><span class="hljs-function"><span class="hljs-title">RR_pick_next</span><span class="hljs-params">(struct run_queue *rq)</span> </span>{<br>    <span class="hljs-keyword">list_entry_t</span> *le = list_next(&amp;(rq-&gt;run_list));<br>    <span class="hljs-keyword">if</span> (le != &amp;(rq-&gt;run_list)) {<br>        <span class="hljs-keyword">return</span> le2proc(le, run_link);<br>    }<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>}<br><span class="hljs-comment">//选择队列最前面的进程</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">RR_proc_tick</span><span class="hljs-params">(struct run_queue *rq, struct proc_struct *proc)</span> </span>{<br>    <span class="hljs-keyword">if</span> (proc-&gt;time_slice &gt; <span class="hljs-number">0</span>) {<br>        proc-&gt;time_slice --;<br>    }<br>    <span class="hljs-keyword">if</span> (proc-&gt;time_slice == <span class="hljs-number">0</span>) {<br>        proc-&gt;need_resched = <span class="hljs-number">1</span>;<br>    }<br>}<br><span class="hljs-comment">//tick,用于时间片的处理，等于0是重新安排（resched）</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>如注释所示。</p>
+<p>那么也就是说，ucore的RR算法，首先调用kern/schedule/sched.c中的sched_init函数进行初始化（加入list），之后初始化进程(proc目录下的函数)，ucore执行cpu_idle（proc目录下）函数，调用sched_class_enqueue加入队列，启动进程计时器。之后pick_next,有可以执行的进程就dequeue,继续proc_run.</p>
+<p>相关调用图：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211153269.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211156860.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>请在实验报告中简要说明如何设计实现”多级反馈队列调度算法“，给出概要设计，鼓励给出详细设计</strong></p>
+<p>多级反馈队列实际上是通过设置多个优先级不同的队列实现，其中优先级越高，时间片越高。在enqueue中，如果该进程时间片为0则不改变其优先级，大于0则降低其优先级；调度时，参照ostep的规则，如果 A 的优先级 &gt; B 的优先级，运行 A（不运行 B）；如果 A 的优先级 = B 的优先级，轮转运行A 和 B；新进程进入系统时，放在最高优先级（最上层队列）；一旦工作用完了其在某一层中的时间配额（无论中间主动放弃了多少次CPU），就降低其优先级（移入低一级队列）；经过一段时间 S，就将系统中所有工作重新加入最高优先级队列。</p>
+<h2 id="练习二">练习二</h2>
+<blockquote>
+<p>练习2: 实现 Stride Scheduling 调度算法（需要编码）</p>
+<p>首先需要换掉RR调度器的实现，即用default_sched_stride_c覆盖default_sched.c。然后根据此文件和后续文档对Stride度器的相关描述，完成Stride调度算法的实现。</p>
+<p>后面的实验文档部分给出了Stride调度算法的大体描述。这里给出Stride调度算法的一些相关的资料（目前网上中文的资料比较欠缺）。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://wwwagss.informatik.uni-kl.de/Projekte/Squirrel/stride/node3.html">strid-shed paper location1</a></li>
+<li><a target="_blank" rel="noopener" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.138.3502&amp;rank=1">strid-shed paper location2</a></li>
+<li>也可GOOGLE “Stride Scheduling” 来查找相关资料</li>
+</ul>
+<p>执行：make grade。如果所显示的应用程序检测都输出ok，则基本正确。如果只是priority.c过不去，可执行 make run-priority 命令来单独调试它。大致执行结果可看附录。（ 使用的是 qemu-1.0.1 ）。</p>
+<p>请在实验报告中简要说明你的设计实现过程。</p>
+</blockquote>
+<p>所谓stride算法，实际上就是通过对每一个进程添加一个stride以及一个pass数据，每次选择最小stride(或者说离cpu最近)的进程执行，执行后该进程的stride添加步长pass.其中pass与优先级成反比，pass=BIG_STRIDE / priority</p>
+<p>关于BIG_STRIDE的详细推导建议参考<a target="_blank" rel="noopener" href="https://yuerer.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-uCore-Lab-6/">yuerer</a></p>
+<p>具体代码实现建议参考<a target="_blank" rel="noopener" href="https://kiprey.github.io/2020/09/uCore-6/#2-%E7%BB%83%E4%B9%A02">kiprey</a></p>
+<p>这里贴一下代码：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;defs.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;list.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;proc.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;assert.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;default_sched.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> USE_SKEW_HEAP 1</span><br><br><span class="hljs-comment">/* You should define the BigStride constant here*/</span><br><span class="hljs-comment">/* LAB6: YOUR CODE */</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BIG_STRIDE  ((uint32_t) -1) / 2</span><br><span class="hljs-comment">//选取合适的进程</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span></span><br><span class="hljs-function"><span class="hljs-title">proc_stride_comp_f</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *a, <span class="hljs-keyword">void</span> *b)</span></span><br><span class="hljs-function"></span>{<br>     <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">proc_struct</span> *<span class="hljs-title">p</span> =</span> le2proc(a, lab6_run_pool);<br>     <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">proc_struct</span> *<span class="hljs-title">q</span> =</span> le2proc(b, lab6_run_pool);<br>     <span class="hljs-keyword">int32_t</span> c = p-&gt;lab6_stride - q-&gt;lab6_stride;<br>     <span class="hljs-keyword">if</span> (c &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>     <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>     <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>}<br><span class="hljs-comment">//直接选取斜堆的顶端，</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> struct proc_struct *</span><br><span class="hljs-function"><span class="hljs-title">stride_pick_next</span><span class="hljs-params">(struct run_queue *rq)</span> </span>{<br>    <span class="hljs-keyword">skew_heap_entry_t</span>* she = rq-&gt;lab6_run_pool;<br>    <span class="hljs-keyword">if</span> (she != <span class="hljs-literal">NULL</span>) {<br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">proc_struct</span>* <span class="hljs-title">p</span> =</span> le2proc(she, lab6_run_pool);<br>        <span class="hljs-comment">//更新stride</span><br>        p-&gt;lab6_stride += BIG_STRIDE / p-&gt;lab6_priority;<br>        <span class="hljs-keyword">return</span> p;<br>    }<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>}<br><br><span class="hljs-comment">//初始化，多了一个指针</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">stride_init</span><span class="hljs-params">(struct run_queue *rq)</span> </span>{<br>    list_init(&amp;(rq-&gt;run_list));<br>   <br>    rq-&gt;lab6_run_pool = <span class="hljs-literal">NULL</span>;<br>    rq-&gt;proc_num = <span class="hljs-number">0</span>;<br>}<br><span class="hljs-comment">//enqueue以及dequeue更新指针即可</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">stride_enqueue</span><span class="hljs-params">(struct run_queue *rq, struct proc_struct *proc)</span> </span>{<br>    rq-&gt;lab6_run_pool = skew_heap_insert(rq-&gt;lab6_run_pool, &amp;(proc-&gt;lab6_run_pool), proc_stride_comp_f);<br>    <span class="hljs-keyword">if</span> (proc-&gt;time_slice == <span class="hljs-number">0</span> || proc-&gt;time_slice &gt; rq-&gt;max_time_slice) {<br>        proc-&gt;time_slice = rq-&gt;max_time_slice;<br>    }<br>    proc-&gt;rq = rq;<br>    rq-&gt;proc_num ++;<br>}<br><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">stride_dequeue</span><span class="hljs-params">(struct run_queue *rq, struct proc_struct *proc)</span> </span>{<br>    rq-&gt;lab6_run_pool = skew_heap_remove(rq-&gt;lab6_run_pool, &amp;(proc-&gt;lab6_run_pool), proc_stride_comp_f);<br>    rq-&gt;proc_num --;<br>}<br><span class="hljs-comment">//tick正常</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">stride_proc_tick</span><span class="hljs-params">(struct run_queue *rq, struct proc_struct *proc)</span> </span>{<br>     <span class="hljs-keyword">if</span> (proc-&gt;time_slice &gt; <span class="hljs-number">0</span>) {<br>        proc-&gt;time_slice --;<br>    }<br>    <span class="hljs-keyword">if</span> (proc-&gt;time_slice == <span class="hljs-number">0</span>) {<br>        proc-&gt;need_resched = <span class="hljs-number">1</span>;<br>    }<br>}<br><span class="hljs-comment">//改一下名字就好了</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sched_class</span> <span class="hljs-title">default_sched_class</span> =</span> {<br>     .name = <span class="hljs-string">"stride_scheduler"</span>,<br>     .init = stride_init,<br>     .enqueue = stride_enqueue,<br>     .dequeue = stride_dequeue,<br>     .pick_next = stride_pick_next,<br>     .proc_tick = stride_proc_tick,<br>};<br><br></code></pre></div></td></tr></tbody></table></figure>
+<p>到这里，执行make grade时，会出错。</p>
+<p>根据网上博客，解决办法是注释掉grade.sh的221到233行，我们来看一下这一段：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> found和not相等就为真</span><br><span class="hljs-meta">#</span><span class="bash"> found,not都是标志变量，</span><br><span class="hljs-meta">#</span><span class="bash"> not在代码没有错误的情况下为0</span><br><span class="hljs-meta">#</span><span class="bash"> found=$(($? == <span class="hljs-number">0</span>)),不是很清楚在干什么。。。</span><br>if [ $found -eq $not ]; then<br>                if [ $found -eq 0 ]; then<br>                    msg="!! error: missing '$i'"<br>                else<br>                    msg="!! error: got unexpected line '$i'"<br>                fi<br>                okay=no<br>                if [ -z "$error" ]; then<br>                    error="$msg"<br>                else<br>                    error="$error\n$msg"<br>                fi<br>            fi<br></code></pre></div></td></tr></tbody></table></figure>
+<p>这一段是在check_regexps里面，okay为no时就会报错，而ucore的最终得分就是通过检查有无报错产生的。如果想蒙混过关，把这个no改成yes或者注释掉这一段代码或者把-eq改成-ne就行了</p>
+<p><del>但如果每一次验收实验都只是为了验收而验收，自己什么都没学到，那还有什么意思呢？</del></p>
+<p><del>当然对os不感兴趣的话混就得了</del></p>
+<p>实际上，我们的错误是由于一个细节，在之前的kern/schedule/default_sched.c中，优先级初始化为0，而0在stride中是不能作为被除数存在的，因此需要更改kern/process/proc.c中的proc-&gt;lab6_priority为1。</p>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211518593.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211518135.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="challenge-1">Challenge 1</h2>
+<p>扩展练习 Challenge 1 ：实现 Linux 的 CFS 调度算法</p>
+<p>在ucore的调度器框架下实现下Linux的CFS调度算法。可阅读相关Linux内核书籍或查询网上资料，可了解CFS的细节，然后大致实现在ucore中。</p>
+<blockquote>
+<p>CFS （完全公平调度器）实现的主要思想是维护为任务提供处理器时间方面的平衡（公平性）。它给每个进程设置了一个虚拟时钟vruntime。其中vruntime=实际运行时间∗1024/进程权重</p>
+<p>进程按照各自不同的速率在物理时钟节拍内前进，优先级高则权重大，其虚拟时钟比真实时钟跑得慢，但获得比较多的运行时间；CFS调度器总是选择虚拟时钟跑得慢的进程来运行，从而让每个调度实体的虚拟运行时间互相追赶，进而实现进程调度上的平衡。</p>
+<p>CFS使用<strong>红黑树</strong>来进行快速高效的插入和删除进程。</p>
+</blockquote>
+<p>仍是参考<a target="_blank" rel="noopener" href="https://github.com/PKUanonym">PKUanonym</a>的仓库：<a target="_blank" rel="noopener" href="https://github.com/PKUanonym/REKCARC-TSC-UHT/blob/master/%E5%A4%A7%E4%B8%89%E4%B8%8B/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/hw/2017/2014011330_738797_362804411_lab6-2014011330/lab6-challenge-2014011330.md">ucore</a></p>
+<p>先上结果：</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211532686.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205211535426.png" srcset="/img/loading.gif" lazyload></p>
+<p>下面分析佬的代码，</p>
+<p>kern/schedule/cfs_sched.h没有什么大的改变，改个名字就好了</p>
+<p>kern/schedule/cfs_sched.c中，</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> NICE_0_LOAD 1024</span><br><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span></span><br><span class="hljs-function"><span class="hljs-title">proc_cfs_comp_f</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *a, <span class="hljs-keyword">void</span> *b)</span></span><br><span class="hljs-function"></span>{<br>     <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">proc_struct</span> *<span class="hljs-title">p</span> =</span> le2proc(a, lab6_run_pool);<br>     <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">proc_struct</span> *<span class="hljs-title">q</span> =</span> le2proc(b, lab6_run_pool);<br>     <span class="hljs-keyword">int32_t</span> c = p-&gt;lab6_stride - q-&gt;lab6_stride;<br>     <span class="hljs-keyword">if</span> (c &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>     <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>     <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>}<br><span class="hljs-comment">//绝对公平，不需要list或者其他数据</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">cfs_init</span><span class="hljs-params">(struct run_queue *rq)</span> </span>{<br>	rq-&gt;lab6_run_pool = <span class="hljs-literal">NULL</span>;<br>	rq-&gt;proc_num = <span class="hljs-number">0</span>;<br>}<br><span class="hljs-comment">//enqueue以及dequeue没什么说的</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">cfs_enqueue</span><span class="hljs-params">(struct run_queue *rq, struct proc_struct *proc)</span> </span>{<br>	rq-&gt;lab6_run_pool = skew_heap_insert(rq-&gt;lab6_run_pool, &amp;(proc-&gt;lab6_run_pool),<br>			proc_cfs_comp_f);<br>    <span class="hljs-keyword">if</span> (proc-&gt;time_slice == <span class="hljs-number">0</span> || proc-&gt;time_slice &gt; rq-&gt;max_time_slice) {<br>         proc-&gt;time_slice = rq-&gt;max_time_slice;<br>    }<br>    proc-&gt;rq = rq;<br>    rq-&gt;proc_num += <span class="hljs-number">1</span>;<br>}<br><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">cfs_dequeue</span><span class="hljs-params">(struct run_queue *rq, struct proc_struct *proc)</span> </span>{<br>	rq-&gt;lab6_run_pool = skew_heap_remove(rq-&gt;lab6_run_pool, &amp;(proc-&gt;lab6_run_pool),<br>			proc_cfs_comp_f);<br>	rq-&gt;proc_num -= <span class="hljs-number">1</span>;<br>}<br><span class="hljs-comment">//通过设置进程的时间来改变优先级，类似与stride</span><br><span class="hljs-comment">//可以对比一下，</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">static struct proc_struct *</span><br><span class="hljs-comment">stride_pick_next(struct run_queue *rq) {</span><br><span class="hljs-comment">    skew_heap_entry_t* she = rq-&gt;lab6_run_pool;</span><br><span class="hljs-comment">    if (she != NULL) {</span><br><span class="hljs-comment">        struct proc_struct* p = le2proc(she, lab6_run_pool);</span><br><span class="hljs-comment">        //更新stride</span><br><span class="hljs-comment">        p-&gt;lab6_stride += BIG_STRIDE / p-&gt;lab6_priority;</span><br><span class="hljs-comment">        return p;</span><br><span class="hljs-comment">    }</span><br><span class="hljs-comment">    return NULL;</span><br><span class="hljs-comment">}</span><br><span class="hljs-comment">*/</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> struct proc_struct *</span><br><span class="hljs-function"><span class="hljs-title">cfs_pick_next</span><span class="hljs-params">(struct run_queue *rq)</span> </span>{<br>	<span class="hljs-keyword">if</span> (rq-&gt;lab6_run_pool == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">proc_struct</span>* <span class="hljs-title">min_proc</span> =</span> le2proc(rq-&gt;lab6_run_pool, lab6_run_pool);<br>	<span class="hljs-keyword">if</span> (min_proc-&gt;lab6_priority == <span class="hljs-number">0</span>) {<br>		min_proc-&gt;lab6_stride += NICE_0_LOAD;<br>	} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (min_proc-&gt;lab6_priority &gt; NICE_0_LOAD) {<br>		min_proc-&gt;lab6_stride += <span class="hljs-number">1</span>;<br>	} <span class="hljs-keyword">else</span> {<br>		min_proc-&gt;lab6_stride += NICE_0_LOAD / min_proc-&gt;lab6_priority;<br>	}<br>	<span class="hljs-keyword">return</span> min_proc;<br>}<br><span class="hljs-comment">//tick没什么</span><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span></span><br><span class="hljs-function"><span class="hljs-title">cfs_proc_tick</span><span class="hljs-params">(struct run_queue *rq, struct proc_struct *proc)</span> </span>{<br>    <span class="hljs-keyword">if</span> (proc-&gt;time_slice &gt; <span class="hljs-number">0</span>) {<br>         proc-&gt;time_slice --;<br>    }<br>    <span class="hljs-keyword">if</span> (proc-&gt;time_slice == <span class="hljs-number">0</span>) {<br>         proc-&gt;need_resched = <span class="hljs-number">1</span>;<br>    }<br>}<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sched_class</span> <span class="hljs-title">cfs_sched_class</span> =</span> {<br>     .name = <span class="hljs-string">"cfs_scheduler"</span>,<br>     .init = cfs_init,<br>     .enqueue = cfs_enqueue,<br>     .dequeue = cfs_dequeue,<br>     .pick_next = cfs_pick_next,<br>     .proc_tick = cfs_proc_tick,<br>};<br><br></code></pre></div></td></tr></tbody></table></figure>
+<h2 id="challenge-2">Challenge 2</h2>
+<p>看着就知道工作量大，没空，也不会。</p>
+<p>闲了再说。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/cs/">cs</a>
+                    
+                      <a class="hover-with-bg" href="/tags/ucore/">ucore</a>
+                    
+                  </div>
+                
+              </div>
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">Heeler-Deer</a> <br>
+                <strong>本文链接: </strong><a href="https://heeler-deer.github.io/2022/05/21/ucore-lab6/">https://heeler-deer.github.io/2022/05/21/ucore-lab6/</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                </p>
+                
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/27/ucore-lab7/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ucore-lab7</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/13/ucore-lab5/">
+                        <span class="hidden-mobile">ucore-lab5</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"fb364385aff3688b9b61","clientSecret":"fac44b76c40c3e32297538f963a7c318fd1c7c7e","repo":"heeler-deer.github.io","owner":"heeler-deer","admin":["heeler-deer"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
+          {
+            id: '130bca07e638d23b7f6dc718e849635e'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <font size="3" face="Georgia">
+    <div class="translate-style">
+      🌀繁/简切换按钮：<a id="translateLink" href="javascript:translatePage();">繁体
+      </a>
+    </div>
+    <script type="text/javascript" src="/js/tw_cn.js"></script>
+    <script type="text/javascript">
+      var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+      var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+      var cookieDomain = "https://heeler-deer.github.io/"; //Cookie地址, 一定要设定, 通常为你的网址
+      var msgToTraditionalChinese = "繁体"; //此处可以更改为你想要显示的文字
+      var msgToSimplifiedChinese = "简体"; //同上，但两处均不建议更改
+      var translateButtonId = "translateLink"; //默认互换id
+      translateInitilization();
+    </script>
+  
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            🔮&nbsp 
+            <span id="leancloud-site-pv"></span>
+             times
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            🧬&nbsp 
+            <span id="leancloud-site-uv"></span>
+             nums
+          </span>
+      
+
+    
+  </div>
+
+
+    
+
+  
+  
+    
+  
+  
+    <div>
+      <span class="post-count">50.5k&nbsp words</span>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+        var now = new Date();
+        function createtime(){
+          var grt= new Date("07/24/2021 21:02:06");//此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+            hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+            mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+            snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "🚀 &nbsp for &nbsp"+dnum+"&nbspdays";  //此次自定义显示内容
+          document.getElementById("times").innerHTML = hnum + "&nbsphr&nbsp" + mnum + "&nbspmin&nbsp" + snum + "&nbspsec";
+        }  //此次自定义显示内容
+        setInterval("createtime()",250);
+      </script>
+    </div>
+  
+  
+    <!--<div class="text-center py-1">
+      <div>
+        <span>Copyright © 2020</span></a>
+        <a href="https://yousazoe.top/" target="_blank" rel="nofollow noopener">
+          <span>Fl0w3r</span></a>    <br>
+      </div>-->
+  
+  </footer>
+  
+  
+  <!-- SCRIPTS -->
+  
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+  <!-- SCRIPTS -->
+  
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
