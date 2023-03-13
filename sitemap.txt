@@ -1,3 +1,4 @@
+https://heeler-deer.github.io/2023/03/08/RAFT-6-824-lab2/
 https://heeler-deer.github.io/2023/03/26/MIT6-824-1/
 https://heeler-deer.github.io/about/index.html
 https://heeler-deer.github.io/2022/05/27/ucore-lab7/
