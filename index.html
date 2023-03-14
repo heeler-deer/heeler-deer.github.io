@@ -59,7 +59,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><style>mjx-container[jax="SVG"] {
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -171,9 +173,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style>
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
+</style><link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
 </head>
 
 
@@ -375,15 +375,15 @@ mjx-container[display="true"] + br {
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/03/26/MIT6-824-1/" target="_self">
-          MIT6.824-1
+        <a href="/2023/03/08/RAFT-6-824-lab2/" target="_self">
+          RAFT &amp;&amp; 6.824_lab2
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2023/03/26/MIT6-824-1/" target="_self">
+        <a href="/2023/03/08/RAFT-6-824-lab2/" target="_self">
           
-          阅读须知 MIT 6.824的实验难度较大，且据我推测是每年都会有改动。学习6.824的正确姿势应该是先去观看公开课，找到官方的课程时间安排表，里面附带学习资料。即在阅读论文后上课、上完公开课后在做实验。 实验的具体完成时间可以参看课程时间安排表的due 如果你不会go，强烈建议在Go学习go,语法简单，很快就能学会的。 环境搭建 推荐视频：b站 2020课程时间安排表： MIT 实验代码仓库：
+          设计 Raft是著名的状态机类型的协议，他通过在多个服务器之间确定leader,保证了服务器之间对于一对key-value的consensus，可以通过这个可视化动画来理解raft 在6.824要求阅读的论文中，有一个关于raft服务器的状态机图：  lab2要求我们实现一个raft.具体编码工作在.&#x2F;src&#x2F;raft&#x2F;raft.go里面 lab2a要求我们实现raft里面的leader elec
         </a>
       </p>
 
@@ -391,8 +391,8 @@ mjx-container[display="true"] + br {
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-03-26 00:19" pubdate>
-              2023-03-26
+            <time datetime="2023-03-08 20:27" pubdate>
+              2023-03-08
             </time>
           </div>
         
@@ -424,15 +424,15 @@ mjx-container[display="true"] + br {
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/03/08/RAFT-6-824-lab2/" target="_self">
-          RAFT &amp;&amp; 6.824_lab2
+        <a href="/2023/02/26/MIT6-824-1/" target="_self">
+          MIT6.824-1
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2023/03/08/RAFT-6-824-lab2/" target="_self">
+        <a href="/2023/02/26/MIT6-824-1/" target="_self">
           
-          设计 Raft是著名的状态机类型的协议，他通过在多个服务器之间确定leader,保证了服务器之间对于一对key-value的consensus，可以通过这个可视化动画来理解raft 在6.824要求阅读的论文中，有一个关于raft服务器的状态机图：  lab2要求我们实现一个raft.具体编码工作在.&#x2F;src&#x2F;raft&#x2F;raft.go里面 lab2a要求我们实现raft里面的leader elec
+          阅读须知 MIT 6.824的实验难度较大，且据我推测是每年都会有改动。学习6.824的正确姿势应该是先去观看公开课，找到官方的课程时间安排表，里面附带学习资料。即在阅读论文后上课、上完公开课后在做实验。 实验的具体完成时间可以参看课程时间安排表的due 如果你不会go，强烈建议在Go学习go,语法简单，很快就能学会的。 环境搭建 推荐视频：b站 2020课程时间安排表： MIT 实验代码仓库：
         </a>
       </p>
 
@@ -440,8 +440,8 @@ mjx-container[display="true"] + br {
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-03-08 20:27" pubdate>
-              2023-03-08
+            <time datetime="2023-02-26 00:19" pubdate>
+              2023-02-26
             </time>
           </div>
         
@@ -555,11 +555,11 @@ mjx-container[display="true"] + br {
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
+              <a href="/tags/cs/">cs</a>
+            
               <a href="/tags/%E8%AE%BA%E6%96%87/">论文</a>
             
               <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
-            
-              <a href="/tags/cs/">cs</a>
             
           </div>
         
@@ -606,11 +606,11 @@ mjx-container[display="true"] + br {
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
+              <a href="/tags/cs/">cs</a>
+            
               <a href="/tags/%E8%AE%BA%E6%96%87/">论文</a>
             
               <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
-            
-              <a href="/tags/cs/">cs</a>
             
           </div>
         
@@ -753,11 +753,11 @@ mjx-container[display="true"] + br {
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
+              <a href="/tags/cs/">cs</a>
+            
               <a href="/tags/%E8%AE%BA%E6%96%87/">论文</a>
             
               <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
-            
-              <a href="/tags/cs/">cs</a>
             
           </div>
         
@@ -804,11 +804,11 @@ mjx-container[display="true"] + br {
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
+              <a href="/tags/cs/">cs</a>
+            
               <a href="/tags/%E8%AE%BA%E6%96%87/">论文</a>
             
               <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
-            
-              <a href="/tags/cs/">cs</a>
             
           </div>
         
