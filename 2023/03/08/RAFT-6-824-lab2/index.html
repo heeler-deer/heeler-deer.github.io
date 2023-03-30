@@ -30,8 +30,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303131514742.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303082122769.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303131529453.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303301451306.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303301512191.png">
 <meta property="article:published_time" content="2023-03-08T12:27:10.000Z">
-<meta property="article:modified_time" content="2023-03-13T07:31:26.558Z">
+<meta property="article:modified_time" content="2023-03-30T07:14:01.429Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="distributed_systems">
@@ -360,7 +362,7 @@ mjx-container[display="true"] + br {
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      2.5k 字
     </span>
   
 
@@ -369,7 +371,7 @@ mjx-container[display="true"] + br {
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12 分钟
+      21 分钟
     </span>
   
 
@@ -414,7 +416,7 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年3月13日 下午
+                  本文最后更新于：2023年3月30日 下午
                 
               </p>
             
@@ -422,7 +424,7 @@ mjx-container[display="true"] + br {
               <h1 id="设计">设计</h1>
 <p>Raft是著名的状态机类型的协议，他通过在多个服务器之间确定leader,保证了服务器之间对于一对key-value的<strong>consensus</strong>，可以通过这个<a target="_blank" rel="noopener" href="http://thesecretlivesofdata.com/raft/">可视化动画</a>来理解raft</p>
 <p>在6.824要求阅读的<a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.824/papers/raft-extended.pdf">论文</a>中，有一个关于raft服务器的状态机图：</p>
-<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303082122769.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303082122769.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p>
 <p>lab2要求我们实现一个raft.具体编码工作在./src/raft/raft.go里面</p>
 <p>lab2a要求我们实现raft里面的leader election。显然，我们需要着重于以下几点：</p>
 <ol type="1">
@@ -440,7 +442,7 @@ mjx-container[display="true"] + br {
 </ul>
 <p>初次之外，TA还使用python根据log的类别，VERBOSE=1更改了log的颜色，使之更容易阅读</p>
 <p>在你阅读完上述材料后，你的代码目录里至少多了TA提供的两个python文件，并且更改了src/raft/util.go</p>
-<p>具体使用类似下方：</p>
+<p>具体使用效果类似下方：</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303131530910.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="代码实现">代码实现</h1>
 <p>首先， <strong>完全参照</strong> 论文，实现对应的结构体</p>
@@ -469,8 +471,8 @@ mjx-container[display="true"] + br {
 <p>我们有两个需要进行倒计时的时间要素，其中倒计时时间需要满足election time&gt;heartbeat time,同时两个时间需要是随机化的。至少有三个函数，分别能够返回随机化的election time,heartbeat time以及用于提示raft这两个时间是否超时的函数。</p>
 <h3 id="appendentries-rpc-requestvote-rpc">AppendEntries RPC &amp;&amp; RequestVote RPC</h3>
 <p>这一部分仍需要参照论文，具体内容不再解释</p>
-<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303131513279.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303131514742.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303131513279.png" srcset="/img/loading.gif" lazyload style="zoom:25%;"></p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303131514742.png" srcset="/img/loading.gif" lazyload style="zoom:25%;"></p>
 <h3 id="term相关">Term相关</h3>
 <p>在figure 4里面，和term相关的内容有：</p>
 <ul>
@@ -480,9 +482,30 @@ mjx-container[display="true"] + br {
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303082122769.png" srcset="/img/loading.gif" lazyload style="zoom:25%;"></p>
 <h3 id="选举心跳机制">选举、心跳机制</h3>
 <p>这一部分需要注意各种条件的判断，其他的按照流程实现即可</p>
-<h2 id="测试lab2a">测试lab2a</h2>
-<p>成功通过后，我们将看到console输出如下信息：</p>
+<p>成功通过后，我们将看到console输出如下信息一个：</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303131529453.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="lab-2blab2c">LAB 2B&amp;&amp;Lab2C</h2>
+<p><del>最近太忙了，没动力写了</del></p>
+<p>lab2B要求我们实现appendentries,这里需要提示的是，如果你的lab2A已经通过而lab2B/2C始终无法通过，那么很有可能是你的lab2A某些地方的判断条件写错了，这里建议仔细检查lab2A的每一个判断条件。</p>
+<p>首先审视raft.go找到需要我们完成的函数，首先是start,这个函数注释已经把条件写的很清楚了，照着注释写即可。</p>
+<p>其次是由于我们需要将日志里面的内容应用到机器上，因此我们需要一个能够处理appendlog并将其应用的函数applylogs，这个函数需要在传入的raft结构体未被杀死的情况下，一直访问该结构体的日志，并将其应用，同时，我们可以想到两点，一个是访问日志时需要加锁，另一个则是官网上也给出的提示：在每次应用完日志后等待一段时间。</p>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303301451306.png" srcset="/img/loading.gif" lazyload alt="image-20230330145127910" style="zoom:25%;"></p>
+<p>lab2C要求我们实现持久化。实验代码里面已经给出了可以直接实现持久化的persister.go,里面通过状态机和快照机制实现持久化，我们编写代码时直接调用即可。我们需要做的就是处理好持久化（恢复）的时机、序列化以及反序列化。</p>
+<p>先看序列化以及反序列化，实验代码提供了labgob编码器以供使用，直接对需要（反）序列化的数据使用labgob.NewDecoder/NewEncoder即可</p>
+<p>按照论文里面的内容，我们需要对log,currentTrem,votedFor这三个变量进行持久化操作，仔细检查之前的代码，这三个变量有更改操作时进行持久化即可。而在机器重启时，我们进行持久化恢复操作即可。</p>
+<p>除此之外，在Hint里面提到，</p>
+<blockquote>
+<ul>
+<li>You will probably need the optimization that backs up nextIndex by more than one entry at a time. Look at the <a target="_blank" rel="noopener" href="http://nil.csail.mit.edu/6.824/2020/papers/raft-extended.pdf">extended Raft paper</a> starting at the bottom of page 7 and top of page 8 (marked by a gray line). The paper is vague about the details; you will need to fill in the gaps, perhaps with the help of the 6.824 Raft lectures.</li>
+</ul>
+</blockquote>
+<p>这个就是为了防止一条条回退太慢。同步时，</p>
+<ol type="1">
+<li>leader发现冲突位置的term自己有，就从该term的最后一个日志开始同步，</li>
+<li>冲突位置term没有，就从该term第一个日志开始同步</li>
+<li>同步的位置不存在，leader就回退到被同步节点的尾部开始同步</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303301512191.png" srcset="/img/loading.gif" lazyload alt="image-20230330151258781" style="zoom:25%;"></p>
 
             </div>
             <hr>
@@ -517,6 +540,12 @@ mjx-container[display="true"] + br {
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/03/15/kaggle-GoDaddy%E5%BE%AE%E5%9E%8B%E4%BC%81%E4%B8%9A%E5%AF%86%E5%BA%A6%E9%A2%84%E6%B5%8B%E6%80%BB%E7%BB%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">kaggle_GoDaddy微型企业密度预测总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -664,7 +693,7 @@ mjx-container[display="true"] + br {
   
   
     <div>
-      <span class="post-count">51.4k&nbsp words</span>
+      <span class="post-count">52.1k&nbsp words</span>
       <span id="timeDate">载入天数...</span>
       <span id="times">载入时分秒...</span>
       <script>
