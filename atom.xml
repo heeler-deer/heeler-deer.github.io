@@ -6,7 +6,7 @@
   <link href="https://heeler-deer.github.io/atom.xml" rel="self"/>
   
   <link href="https://heeler-deer.github.io/"/>
-  <updated>2023-03-15T15:08:27.499Z</updated>
+  <updated>2023-03-30T07:16:50.592Z</updated>
   <id>https://heeler-deer.github.io/</id>
   
   <author>
@@ -21,18 +21,26 @@
     <link href="https://heeler-deer.github.io/2023/03/15/kaggle-GoDaddy%E5%BE%AE%E5%9E%8B%E4%BC%81%E4%B8%9A%E5%AF%86%E5%BA%A6%E9%A2%84%E6%B5%8B%E6%80%BB%E7%BB%93/"/>
     <id>https://heeler-deer.github.io/2023/03/15/kaggle-GoDaddy%E5%BE%AE%E5%9E%8B%E4%BC%81%E4%B8%9A%E5%AF%86%E5%BA%A6%E9%A2%84%E6%B5%8B%E6%80%BB%E7%BB%93/</id>
     <published>2023-03-15T01:14:24.000Z</published>
-    <updated>2023-03-15T15:08:27.499Z</updated>
+    <updated>2023-03-30T07:16:50.592Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303152308293.png" srcset="/img/loading.gif" lazyload style="zoom:25%;"></p>]]></content>
+    <content type="html"><![CDATA[<p>先占个坑，等正式结束在写</p><figure><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303301516289.png" srcset="/img/loading.gif" lazyload alt=""><figcaption>image-20230330151609238</figcaption></figure>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303152308293.png&quot; srcset=&quot;/img/loading.gif&quot; lazyload s</summary>
+    <summary type="html">&lt;p&gt;先占个坑，等正式结束在写&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202303301516289.png&quot; srcset=&quot;/i</summary>
       
     
     
     
+    <category term="blog" scheme="https://heeler-deer.github.io/categories/blog/"/>
+    
+    
+    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
+    
+    <category term="kaggle" scheme="https://heeler-deer.github.io/tags/kaggle/"/>
     
   </entry>
   
@@ -141,11 +149,11 @@
     <category term="读书" scheme="https://heeler-deer.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
     
-    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
-    
     <category term="论文" scheme="https://heeler-deer.github.io/tags/%E8%AE%BA%E6%96%87/"/>
     
     <category term="笔记" scheme="https://heeler-deer.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
     
   </entry>
   
@@ -169,11 +177,11 @@
     <category term="读书" scheme="https://heeler-deer.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
     
-    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
-    
     <category term="论文" scheme="https://heeler-deer.github.io/tags/%E8%AE%BA%E6%96%87/"/>
     
     <category term="笔记" scheme="https://heeler-deer.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
     
   </entry>
   
@@ -258,11 +266,11 @@
     <category term="读书" scheme="https://heeler-deer.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
     
-    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
-    
     <category term="论文" scheme="https://heeler-deer.github.io/tags/%E8%AE%BA%E6%96%87/"/>
     
     <category term="笔记" scheme="https://heeler-deer.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
     
   </entry>
   
@@ -287,11 +295,11 @@
     <category term="读书" scheme="https://heeler-deer.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
     
-    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
-    
     <category term="论文" scheme="https://heeler-deer.github.io/tags/%E8%AE%BA%E6%96%87/"/>
     
     <category term="笔记" scheme="https://heeler-deer.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
     
   </entry>
   
@@ -317,11 +325,11 @@
     <category term="读书" scheme="https://heeler-deer.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
     
-    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
-    
     <category term="论文" scheme="https://heeler-deer.github.io/tags/%E8%AE%BA%E6%96%87/"/>
     
     <category term="笔记" scheme="https://heeler-deer.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
     
   </entry>
   
@@ -349,9 +357,9 @@
     <category term="读书" scheme="https://heeler-deer.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
     
-    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
-    
     <category term="笔记" scheme="https://heeler-deer.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="cs" scheme="https://heeler-deer.github.io/tags/cs/"/>
     
   </entry>
   
