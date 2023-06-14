@@ -19,7 +19,7 @@
     <meta name="description" content="本实验主要是对页替换算法的实现 woc,有人写了ucore step-by-step,太强了。 知识点 当程序访问内存时，会出现三种情况：  写入一个存在物理页的虚拟页 读一个不存在的页 不满足访问权限  这时就需要缺页处理程序来处理，cpu会把产生异常的线性地址存储到lab2里提到过的cr2寄存器中，并且把页访问异常的错误码存放在中断栈中。 这里只讨论物理页面不够用的时候，应该置换那个物理页面。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ucore-lab3">
-<meta property="og:url" content="https://heeler-deer.top/posts/44602/index.html">
+<meta property="og:url" content="https://heeler-deer.github.io/posts/44602/index.html">
 <meta property="og:site_name" content="Heeler-Deer">
 <meta property="og:description" content="本实验主要是对页替换算法的实现 woc,有人写了ucore step-by-step,太强了。 知识点 当程序访问内存时，会出现三种情况：  写入一个存在物理页的虚拟页 读一个不存在的页 不满足访问权限  这时就需要缺页处理程序来处理，cpu会把产生异常的线性地址存储到lab2里提到过的cr2寄存器中，并且把页访问异常的错误码存放在中断栈中。 这里只讨论物理页面不够用的时候，应该置换那个物理页面。">
 <meta property="og:locale" content="zh_CN">
@@ -77,7 +77,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"heeler-deer.top","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"OmwitJK3WCwtKw9Hfg8NLidl-MdYXbMMI","app_key":"KyDmU5DQyqKmDOcBTfN2BRv9","server_url":"https://omwitjk3.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"heeler-deer.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"OmwitJK3WCwtKw9Hfg8NLidl-MdYXbMMI","app_key":"KyDmU5DQyqKmDOcBTfN2BRv9","server_url":"https://omwitjk3.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -461,7 +461,7 @@ mjx-container[display="true"] + br {
 <ul>
 <li>请描述页目录项（Page Directory Entry）和页表项（Page Table Entry）中组成部分对ucore实现页替换算法的潜在用处。</li>
 </ul>
-<p>参考<a target="_blank" rel="noopener" href="https://heeler-deer.github.io/2022/04/21/ucore-lab2/#%E7%BB%83%E4%B9%A0%E4%BA%8C">hd</a></p>
+<p>参考<a href="https://heeler-deer.github.io/2022/04/21/ucore-lab2/#%E7%BB%83%E4%B9%A0%E4%BA%8C">hd</a></p>
 <ul>
 <li>如果ucore的缺页服务例程在执行过程中访问内存，出现了页访问异常，请问硬件要做哪些事情？</li>
 </ul>
@@ -547,7 +547,7 @@ mjx-container[display="true"] + br {
               </div>
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">Heeler-Deer</a> <br>
-                <strong>本文链接: </strong><a href="https://heeler-deer.top/posts/44602/">https://heeler-deer.top/posts/44602/</a> <br>
+                <strong>本文链接: </strong><a href="https://heeler-deer.github.io/posts/44602/">https://heeler-deer.github.io/posts/44602/</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                 </p>
                 
