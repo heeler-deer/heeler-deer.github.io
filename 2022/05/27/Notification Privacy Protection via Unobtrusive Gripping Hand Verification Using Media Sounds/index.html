@@ -19,7 +19,7 @@
     <meta name="description" content="笔记模板源于网络，我稍微改了一下，使其更符合我的习惯。 笔记 Summary 这项工作提供了一种不显眼的解决方案来保护用户的通知隐私，同时保持完整的通知功能。 通过IIR以及高通滤波器去噪，导出声音、振动频谱图来描述两个领域中人们抓握的手部生物特征，并基于 CNN ，SNR进行用户身份验证。 Background &#x2F; Problem Statement 研究的背景以及问题陈述： 目前，手机app的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Notification Privacy Protection via Unobtrusive Gripping Hand Verification Using Media Sounds">
-<meta property="og:url" content="https://heeler-deer.github.io/2022/05/27/Notification%20Privacy%20Protection%20via%20Unobtrusive%20Gripping%20Hand%20Verification%20Using%20Media%20Sounds/index.html">
+<meta property="og:url" content="https://heeler-deer.top/2022/05/27/Notification%20Privacy%20Protection%20via%20Unobtrusive%20Gripping%20Hand%20Verification%20Using%20Media%20Sounds/index.html">
 <meta property="og:site_name" content="Heeler-Deer">
 <meta property="og:description" content="笔记模板源于网络，我稍微改了一下，使其更符合我的习惯。 笔记 Summary 这项工作提供了一种不显眼的解决方案来保护用户的通知隐私，同时保持完整的通知功能。 通过IIR以及高通滤波器去噪，导出声音、振动频谱图来描述两个领域中人们抓握的手部生物特征，并基于 CNN ，SNR进行用户身份验证。 Background &#x2F; Problem Statement 研究的背景以及问题陈述： 目前，手机app的">
 <meta property="og:locale" content="zh_CN">
@@ -80,7 +80,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"heeler-deer.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"OmwitJK3WCwtKw9Hfg8NLidl-MdYXbMMI","app_key":"KyDmU5DQyqKmDOcBTfN2BRv9","server_url":"https://omwitjk3.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"heeler-deer.top","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"OmwitJK3WCwtKw9Hfg8NLidl-MdYXbMMI","app_key":"KyDmU5DQyqKmDOcBTfN2BRv9","server_url":"https://omwitjk3.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -88,7 +88,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><style>mjx-container[jax="SVG"] {
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -200,9 +202,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style>
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
+</style><link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
 </head>
 
 
@@ -564,7 +564,7 @@ mjx-container[display="true"] + br {
               </div>
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">Heeler-Deer</a> <br>
-                <strong>本文链接: </strong><a href="https://heeler-deer.github.io/2022/05/27/Notification%20Privacy%20Protection%20via%20Unobtrusive%20Gripping%20Hand%20Verification%20Using%20Media%20Sounds/">https://heeler-deer.github.io/2022/05/27/Notification%20Privacy%20Protection%20via%20Unobtrusive%20Gripping%20Hand%20Verification%20Using%20Media%20Sounds/</a> <br>
+                <strong>本文链接: </strong><a href="https://heeler-deer.top/2022/05/27/Notification%20Privacy%20Protection%20via%20Unobtrusive%20Gripping%20Hand%20Verification%20Using%20Media%20Sounds/">https://heeler-deer.top/2022/05/27/Notification%20Privacy%20Protection%20via%20Unobtrusive%20Gripping%20Hand%20Verification%20Using%20Media%20Sounds/</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                 </p>
                 
