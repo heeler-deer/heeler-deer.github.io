@@ -16,12 +16,12 @@
   <meta name="author" content="Heeler-Deer">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 不建议任何人在近半年内买树莓派&#x2F;香橙派之类的玩具，由于芯片问题，树莓派&#x2F;香橙派价格大涨。 除非你和我一样是纯纯冤种  拆盒 此处略过，建议阅读： 上手必读 刷系统 记得买一个读卡器，大概10块钱；一般买pi都会顺便买一个tf卡，准备好这两个基本就行了。 刷卡软件我建议使用etcher:   之后用读卡器写入镜像就像。镜像建议从各种pi的官网下载 至于联网，我是准备了一根网线直接链接家里的网络">
+    <meta name="description" content="前言不建议任何人在近半年内买树莓派&#x2F;香橙派之类的玩具，由于芯片问题，树莓派&#x2F;香橙派价格大涨。 除非你和我一样是纯纯冤种  拆盒此处略过，建议阅读： 上手必读 刷系统记得买一个读卡器，大概10块钱；一般买pi都会顺便买一个tf卡，准备好这两个基本就行了。 刷卡软件我建议使用etcher:   之后用读卡器写入镜像就像。镜像建议从各种pi的官网下载 至于联网，我是准备了一根网线直接链接家里的网络。由于">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搭建gitlab">
 <meta property="og:url" content="https://heeler-deer.top/posts/40544/index.html">
 <meta property="og:site_name" content="Heeler-Deer">
-<meta property="og:description" content="前言 不建议任何人在近半年内买树莓派&#x2F;香橙派之类的玩具，由于芯片问题，树莓派&#x2F;香橙派价格大涨。 除非你和我一样是纯纯冤种  拆盒 此处略过，建议阅读： 上手必读 刷系统 记得买一个读卡器，大概10块钱；一般买pi都会顺便买一个tf卡，准备好这两个基本就行了。 刷卡软件我建议使用etcher:   之后用读卡器写入镜像就像。镜像建议从各种pi的官网下载 至于联网，我是准备了一根网线直接链接家里的网络">
+<meta property="og:description" content="前言不建议任何人在近半年内买树莓派&#x2F;香橙派之类的玩具，由于芯片问题，树莓派&#x2F;香橙派价格大涨。 除非你和我一样是纯纯冤种  拆盒此处略过，建议阅读： 上手必读 刷系统记得买一个读卡器，大概10块钱；一般买pi都会顺便买一个tf卡，准备好这两个基本就行了。 刷卡软件我建议使用etcher:   之后用读卡器写入镜像就像。镜像建议从各种pi的官网下载 至于联网，我是准备了一根网线直接链接家里的网络。由于">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261601695.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261605736.png">
@@ -309,39 +309,32 @@
               </p>
             
             <div class="markdown-body">
-              <h1 id="前言">前言</h1>
-<p>不建议任何人在近半年内买树莓派/香橙派之类的玩具，由于芯片问题，树莓派/香橙派价格大涨。</p>
+              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>不建议任何人在近半年内买树莓派/香橙派之类的玩具，由于芯片问题，树莓派/香橙派价格大涨。</p>
 <p><del>除非你和我一样是纯纯冤种</del></p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261601695.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="拆盒">拆盒</h1>
-<p>此处略过，建议阅读：</p>
+<h1 id="拆盒"><a href="#拆盒" class="headerlink" title="拆盒"></a>拆盒</h1><p>此处略过，建议阅读：</p>
 <p><a target="_blank" rel="noopener" href="https://shumeipai.nxez.com/hot-explorer#beginner">上手必读</a></p>
-<h2 id="刷系统">刷系统</h2>
-<p>记得买一个读卡器，大概10块钱；一般买pi都会顺便买一个tf卡，准备好这两个基本就行了。</p>
+<h2 id="刷系统"><a href="#刷系统" class="headerlink" title="刷系统"></a>刷系统</h2><p>记得买一个读卡器，大概10块钱；一般买pi都会顺便买一个tf卡，准备好这两个基本就行了。</p>
 <p>刷卡软件我建议使用<a target="_blank" rel="noopener" href="https://www.balena.io/etcher/">etcher</a>:</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261605736.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261607551.png" srcset="/img/loading.gif" lazyload></p>
 <p>之后用读卡器写入镜像就像。镜像建议从各种pi的官网下载</p>
 <p>至于联网，我是准备了一根网线直接链接家里的网络。由于后期要做内网穿透，<strong>不建议在学校进行</strong>。</p>
-<h2 id="连接">连接</h2>
-<p>如果你和我一样，没有能够使用的屏幕，只能ssh链接的话，在pi第一次启动时，ssh并未自动开启，可以像我一样准备/etc/rc.lcoal:</p>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>如果你和我一样，没有能够使用的屏幕，只能ssh链接的话，在pi第一次启动时，ssh并未自动开启，可以像我一样准备/etc/rc.lcoal:</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261608366.png" srcset="/img/loading.gif" lazyload></p>
 <p>使其能够开机后开启ssh服务。但第二次启动时需要删除25～26行，27行酌情删除</p>
 <p>之后在路由帐号内部查看pi的ip即可。</p>
 <p>根据需要安装桌面。</p>
-<h1 id="搭建gitlab">搭建gitlab</h1>
-<p>其实就是一个有图形化界面的gitlab,实际上完全可以不要gitlab的图像界面，转而使用gitcore+内网穿透的传统办法。由于我配置不行，最终卸载了gitlab（gitlab非常吃内存）</p>
+<h1 id="搭建gitlab"><a href="#搭建gitlab" class="headerlink" title="搭建gitlab"></a>搭建gitlab</h1><p>其实就是一个有图形化界面的gitlab,实际上完全可以不要gitlab的图像界面，转而使用gitcore+内网穿透的传统办法。由于我配置不行，最终卸载了gitlab（gitlab非常吃内存）</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261611129.png" srcset="/img/loading.gif" lazyload></p>
 <p>首先去<a target="_blank" rel="noopener" href="https://packages.gitlab.com/gitlab">gitlab</a>下载需要的版本，我们选择raspberry-pi2即可。必须根据pi的版本选择合适的deb包，否则可能出现glibc版本不对应的情况。<strong>glibc版本更改较为困难，不建议更改</strong>。</p>
 <p>之后一路安装即可。</p>
-<h1 id="内网穿透">内网穿透</h1>
-<p>可以采取传统的工具进行穿透，也可以直接使用<a target="_blank" rel="noopener" href="https://hsk.oray.com/download/">花生壳</a>：</p>
+<h1 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h1><p>可以采取传统的工具进行穿透，也可以直接使用<a target="_blank" rel="noopener" href="https://hsk.oray.com/download/">花生壳</a>：</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261627011.png" srcset="/img/loading.gif" lazyload></p>
 <p>一路安装即可，</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261628942.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="配置邮箱">配置邮箱</h1>
-<p>gitlab可以配置邮箱，使新用户注册时可以收到邮件。</p>
-<p>首先根据 <a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15266039/4115941">blog</a> 更改管理员密码</p>
+<h1 id="配置邮箱"><a href="#配置邮箱" class="headerlink" title="配置邮箱"></a>配置邮箱</h1><p>gitlab可以配置邮箱，使新用户注册时可以收到邮件。</p>
+<p>首先根据  <a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15266039/4115941">blog</a>  更改管理员密码</p>
 <p>在根据 <a target="_blank" rel="noopener" href="https://juejin.cn/post/6991924908242501669">blog2</a>更改配置即可。</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261634666.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202207261634951.png" srcset="/img/loading.gif" lazyload></p>
@@ -532,7 +525,7 @@
   
   
     <div>
-      <span class="post-count">52.1k&nbsp words</span>
+      <span class="post-count">52.3k&nbsp words</span>
       <span id="timeDate">载入天数...</span>
       <span id="times">载入时分秒...</span>
       <script>

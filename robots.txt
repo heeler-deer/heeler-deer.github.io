@@ -1,0 +1,5 @@
+User-agent: * 
+Allow: /
+Allow: /archives/
+Sitemap: https://heeler-deer.top/sitemap.xml
+Sitemap: https://heeler-deer.top/baidusitemap.xml

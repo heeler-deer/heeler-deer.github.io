@@ -16,12 +16,12 @@
   <meta name="author" content="Heeler-Deer">
   <meta name="keywords" content="">
   
-    <meta name="description" content="tools-tcp&#x2F;ip 之前阅读掘金小册时一直没实战，这里就补一下 tcpdump 参考网站: 博客园 默认情况下tcpdump抓第一个网卡上的数据包 监听特定网卡使用-i参数 1tcpdump -i wlo1 监听特定本机和特定ip的通信使用host参数： 1tcpdump host 111.111.11.11 监听来源&#x2F;目标地址通信： 12tcpdump src host 111.111.1">
+    <meta name="description" content="tools-tcp&#x2F;ip之前阅读掘金小册时一直没实战，这里就补一下 tcpdump参考网站: 博客园 默认情况下tcpdump抓第一个网卡上的数据包 监听特定网卡使用-i参数 1tcpdump -i wlo1  监听特定本机和特定ip的通信使用host参数： 1tcpdump host 111.111.11.11  监听来源&#x2F;目标地址通信： 12tcpdump src host 111.111.1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tools-tcp">
 <meta property="og:url" content="https://heeler-deer.top/posts/e142a365/index.html">
 <meta property="og:site_name" content="Heeler-Deer">
-<meta property="og:description" content="tools-tcp&#x2F;ip 之前阅读掘金小册时一直没实战，这里就补一下 tcpdump 参考网站: 博客园 默认情况下tcpdump抓第一个网卡上的数据包 监听特定网卡使用-i参数 1tcpdump -i wlo1 监听特定本机和特定ip的通信使用host参数： 1tcpdump host 111.111.11.11 监听来源&#x2F;目标地址通信： 12tcpdump src host 111.111.1">
+<meta property="og:description" content="tools-tcp&#x2F;ip之前阅读掘金小册时一直没实战，这里就补一下 tcpdump参考网站: 博客园 默认情况下tcpdump抓第一个网卡上的数据包 监听特定网卡使用-i参数 1tcpdump -i wlo1  监听特定本机和特定ip的通信使用host参数： 1tcpdump host 111.111.11.11  监听来源&#x2F;目标地址通信： 12tcpdump src host 111.111.1">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8">
 <meta property="article:published_time" content="2022-02-25T08:06:04.000Z">
@@ -81,9 +81,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<style>mjx-container[jax="SVG"] {
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -195,7 +193,9 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
+</style>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Heeler-Deer" type="application/atom+xml">
 </head>
 
 
@@ -412,53 +412,64 @@ mjx-container[display="true"] + br {
               </p>
             
             <div class="markdown-body">
-              <h1 id="tools-tcpip">tools-tcp/ip</h1>
-<p>之前阅读<a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733788681928712/section/6844733788795174920">掘金小册</a>时一直没实战，这里就补一下</p>
-<h2 id="tcpdump">tcpdump</h2>
-<p>参考网站: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/chyingp/p/linux-command-tcpdump.html">博客园</a></p>
+              <h1 id="tools-tcp-x2F-ip"><a href="#tools-tcp-x2F-ip" class="headerlink" title="tools-tcp/ip"></a>tools-tcp/ip</h1><p>之前阅读<a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733788681928712/section/6844733788795174920">掘金小册</a>时一直没实战，这里就补一下</p>
+<h2 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h2><p>参考网站: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/chyingp/p/linux-command-tcpdump.html">博客园</a></p>
 <p>默认情况下tcpdump抓第一个网卡上的数据包</p>
 <p>监听特定网卡使用-i参数</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tcpdump -i wlo1<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>监听特定本机和特定ip的通信使用host参数：</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tcpdump host 111.111.11.11<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>监听来源/目标地址通信：</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tcpdump src host 111.111.11.11<br>tcpdump dst host 111.111.11.11<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>监听特定端口：</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tcpdump port 3000<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>可以指定tcp/udp</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tcpdump tcp<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>监听特定主机之间的通信（需要有权限）</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tcpdump ip host 210.27.48.1 and 210.27.48.2<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>稍微详细点的例子</p>
 <figure class="highlight powershell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">tcpdump tcp <span class="hljs-literal">-i</span> eth1 <span class="hljs-literal">-t</span> <span class="hljs-literal">-s</span> <span class="hljs-number">0</span> <span class="hljs-literal">-c</span> <span class="hljs-number">100</span> and dst port ! <span class="hljs-number">22</span> and src net <span class="hljs-number">192.168</span>.<span class="hljs-number">1.0</span>/<span class="hljs-number">24</span> <span class="hljs-literal">-w</span> ./target.cap<br></code></pre></div></td></tr></tbody></table></figure>
+
 <blockquote>
-<p>(1)tcp: ip icmp arp rarp 和 tcp、udp、icmp这些选项等都要放到第一个参数的位置，用来过滤数据报的类型 (2)-i eth1 : 只抓经过接口eth1的包 (3)-t : 不显示时间戳 (4)-s 0 : 抓取数据包时默认抓取长度为68字节。加上-S 0 后可以抓到完整的数据包 (5)-c 100 : 只抓取100个数据包 (6)dst port ! 22 : 不抓取目标端口是22的数据包 (7)src net 192.168.1.0/24 : 数据包的源网络地址为192.168.1.0/24 (8)-w ./target.cap : 保存成cap文件，方便用ethereal(即wireshark)分析</p>
+<p>(1)tcp: ip icmp arp rarp 和 tcp、udp、icmp这些选项等都要放到第一个参数的位置，用来过滤数据报的类型<br>(2)-i eth1 : 只抓经过接口eth1的包<br>(3)-t : 不显示时间戳<br>(4)-s 0 : 抓取数据包时默认抓取长度为68字节。加上-S 0 后可以抓到完整的数据包<br>(5)-c 100 : 只抓取100个数据包<br>(6)dst port ! 22 : 不抓取目标端口是22的数据包<br>(7)src net 192.168.1.0/24 : 数据包的源网络地址为192.168.1.0/24<br>(8)-w ./target.cap : 保存成cap文件，方便用ethereal(即wireshark)分析</p>
 </blockquote>
-<h2 id="strace">strace</h2>
-<p>参考网站： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/ggjucheng/archive/2012/01/08/2316692.html">博客园</a></p>
+<h2 id="strace"><a href="#strace" class="headerlink" title="strace"></a>strace</h2><p>参考网站： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/ggjucheng/archive/2012/01/08/2316692.html">博客园</a></p>
 <p>strace用来跟踪进程执行时的系统调用以及所接收的信号，如：</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">strace cat /dev/null <br>execve("/usr/bin/cat", ["cat", "/dev/null"], 0x7ffc3650b2a8 /* 80 vars */) = 0<br>brk(NULL)                               = 0x560885cd5000<br>arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd61de71d0) = -1 EINVAL (无效的参数)<br>mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f8cb41e5000<br>access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (没有那个文件或目录)<br>openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3<br>newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=132945, ...}, AT_EMPTY_PATH) = 0<br>mmap(NULL, 132945, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f8cb41c4000<br>close(3)                                = 0<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>每一行都是一个系统调用</p>
 <p>strace的参数：</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">-c 统计每一系统调用的所执行的时间,次数和出错的次数等. <br>-d 输出strace关于标准错误的调试信息. <br>-f 跟踪由fork调用所产生的子进程. <br>-ff 如果提供-o filename,则所有进程的跟踪结果输出到相应的filename.pid中,pid是各进程的进程号. <br>-F 尝试跟踪vfork调用.在-f时,vfork不被跟踪. <br>-r 打印出相对时间关于,,每一个系统调用. <br>-t 在输出中的每一行前加上时间信息.  <br>-e trace=set <br>只跟踪指定的系统 调用.例如:-e trace=open,close,rean,write表示只跟踪这四个系统调用.默认的为set=all. <br>-e trace=file <br>只跟踪有关文件操作的系统调用. <br>-e trace=process <br>只跟踪有关进程控制的系统调用. <br>-e trace=network <br>跟踪与网络有关的所有系统调用. <br>-e strace=signal <br>跟踪所有与系统信号有关的 系统调用 <br>-e trace=ipc <br>跟踪所有与进程通讯有关的系统调用 <br>-o filename <br>将strace的输出写入文件filename <br>-p pid <br>跟踪指定的进程pid. <br>-u username <br>以username 的UID和GID执行被跟踪的命令<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>这个佬的博客写的很详细，案例也不错，建议看看。</p>
 <p>strace给我的感觉是如果不加参数过滤一些信息，给出的信息实在太多了。</p>
 <p>如在我的电脑上<code>strace -o 1.txt pkill goldendict</code>，strace就给出了3287行的信息。。。如果加上参数-e trace=process，那么就只有4行：</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">execve("/usr/bin/pkill", ["pkill", "goldendict"], 0x7ffc17024708 /* 83 vars */) = 0<br>kill(340891, SIGTERM)                   = 0<br>exit_group(0)                           = ?<br>+++ exited with 0 +++<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>我后来又试了试了，<code>sudo strace -e trace=close -f -d -uheeler -o 1.txt pkill goldendict</code>,发现kill这个goldendict的调用的close是真多 <span class="github-emoji"><span>😃</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<h2 id="packetdrill">packetdrill</h2>
-<p>安装：<a href="https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fgoogle%2Fpacketdrill">github</a></p>
+<h2 id="packetdrill"><a href="#packetdrill" class="headerlink" title="packetdrill"></a>packetdrill</h2><p>安装：<a href="https://link.juejin.cn/?target=https://github.com/google/packetdrill">github</a></p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> gtests/net/packetdrill<br>sudo apt-get install -y bison flex<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>为避免 offload 机制对包大小的影响，修改 netdev.c 注释掉 set_device_offload_flags 函数所有内容</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./configure<br></code></pre></div></td></tr></tbody></table></figure>
-<p>修改 Makefile，去掉第一行的末尾的 -static 执行 make 命令编译 可以在目录下尝试packetdrill是否正常生成 加入环境变量：</p>
+
+<p>修改 Makefile，去掉第一行的末尾的 -static<br>执行 make 命令编译<br>可以在目录下尝试packetdrill是否正常生成<br>加入环境变量：</p>
 <figure class="highlight awk"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sudo vim <span class="hljs-regexp">/etc/</span>profile<br></code></pre></div></td></tr></tbody></table></figure>
-<p>加入你的路径即可。之后任意打开一个命令行。<code>packetdrill</code>查看是否成功 由于packetdrill需要sudo权限，因此需要更改/.zshrc (我用的zsh解释器)，在里面加入</p>
+
+<p>加入你的路径即可。之后任意打开一个命令行。<code>packetdrill</code>查看是否成功<br>由于packetdrill需要sudo权限，因此需要更改/.zshrc (我用的zsh解释器)，在里面加入</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">alias sudo='sudo env PATH="$PATH"'<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>之后保存， <code>source /.zshrc</code> 即可</p>
 <p>packetdrill实际上方便了程序员以确定的时间安排系统调用。他可以执行系统调用函数、把数据包注入到内核协议栈，并且支持py、shell,</p>
 <p>来看一个张师傅给出的简单的例子：</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">0   socket(..., SOCK_STREAM, IPPROTO_TCP) = 3<br>//在第0秒创建一个socket<br>+0  setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0<br>+0  bind(3, ..., ...) = 0<br>+0  listen(3, 1) = 0<br><br>//TCP three-way handshake<br>+0  &lt; S 0:0(0) win 4000 &lt;mss 1000&gt;<br>//&lt;表示输入数据包<br>+0  &gt; S. 0:0(0) ack 1 &lt;...&gt;<br><span class="hljs-meta">//&gt;</span><span class="bash">表示预期协议栈响应的包</span><br>+.1 &lt; . 1:1(0) ack 1 win 1000<br><br>+0 accept(3, ..., ...) = 4<br>+0 write(4, ..., 10) = 10<br>+0 &gt; P. 1:11(10) ack 1<br>+.1 &lt; . 1:1(0) ack 6 win 1000<br></code></pre></div></td></tr></tbody></table></figure>
+
 <p>上述代码可以通过tcpdump抓到8080端口的包</p>
 <p>packetdrill实际上是通过创建一个虚拟网卡来模拟协议的执行。</p>
 <p>其他内容建议参考: <a target="_blank" rel="noopener" href="https://developpaper.com/packetdrill-a-powerful-tool-for-testing-tcp-stack-behavior/">developpaper</a></p>
@@ -647,7 +658,7 @@ mjx-container[display="true"] + br {
   
   
     <div>
-      <span class="post-count">52.1k&nbsp words</span>
+      <span class="post-count">52.3k&nbsp words</span>
       <span id="timeDate">载入天数...</span>
       <span id="times">载入时分秒...</span>
       <script>
