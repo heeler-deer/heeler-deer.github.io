@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204301125606.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204301113424.png">
 <meta property="article:published_time" content="2022-04-28T02:49:31.000Z">
-<meta property="article:modified_time" content="2023-06-14T07:26:44.299Z">
+<meta property="article:modified_time" content="2023-06-22T01:57:22.000Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="ucore">
@@ -399,13 +399,14 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年6月14日 下午
+                  本文最后更新于：2023年6月22日 上午
                 
               </p>
             
             <div class="markdown-body">
               <p>本实验主要是对页替换算法的实现</p>
-<p>woc,有人写了<a target="_blank" rel="noopener" href="https://1790865014.gitbook.io/ucore-step-by-step/">ucore step-by-step</a>,太强了。</p>
+<p>woc,有人写了<a target="_blank" rel="noopener" href="https://1790865014.gitbook.io/ucore-step-by-step/">ucore
+step-by-step</a>,太强了。</p>
 <h1 id="知识点">知识点</h1>
 <p>当程序访问内存时，会出现三种情况：</p>
 <ul>
@@ -438,7 +439,8 @@ mjx-container[display="true"] + br {
 <p>完成do_pgfault（kern/mm/vmm.c）函数，给未被映射的地址映射上物理页。</p>
 <p>该段代码上方有call graph:</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">CALL GRAPH: trap--&gt; trap_dispatch--&gt;pgfault_handler--&gt;do_pgfault<br></code></pre></div></td></tr></tbody></table></figure>
-<p><del>不得不说，vsc的那个tabnine ai assitant是挂，我还没写完就直接显示出ai分析的代码了，写if的时候直接分析出我想写的代码，纯纯的挂。</del></p>
+<p><del>不得不说，vsc的那个tabnine ai
+assitant是挂，我还没写完就直接显示出ai分析的代码了，写if的时候直接分析出我想写的代码，纯纯的挂。</del></p>
 <p>exercise1代码：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/*LAB3 EXERCISE 1: YOUR CODE*/</span><br><span class="hljs-comment">//(1) try to find a pte, if pte's PT(Page Table) isn't existed, then create a PT.</span><br><span class="hljs-keyword">if</span>((ptep=get_pte(mm-&gt;pgdir,addr,<span class="hljs-number">1</span>))==<span class="hljs-literal">NULL</span>){<br>    cprintf(<span class="hljs-string">"get_pte in do_pgfault failed\n"</span>);<br>    <span class="hljs-keyword">goto</span> failed;<br>}<br><span class="hljs-keyword">if</span> (*ptep == <span class="hljs-number">0</span>) {<br><span class="hljs-comment">//(2) if the phy addr isn't exist, then alloc a page &amp; map the phy addr with logical addr</span><br><span class="hljs-keyword">if</span>(pgdir_alloc_page(mm-&gt;pgdir,addr,perm)== <span class="hljs-literal">NULL</span>){<br>    cprintf(<span class="hljs-string">"pgdir_alloc_page in do_pgfault failed\n"</span>);<br>    <span class="hljs-keyword">goto</span> failed;<br>}<br>}<br></code></pre></div></td></tr></tbody></table></figure>
 <p>主要思路就是先查找当前虚拟地址对应的页表项，判断对应的*ptep是不是等于0（不存在），如果不存在就分配一块物理页。</p>
@@ -447,7 +449,8 @@ mjx-container[display="true"] + br {
 <p>由于实在很难截图，所以这是在练习二完成后截的图</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204301032929.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
-<li>请描述页目录项（Page Directory Entry）和页表项（Page Table Entry）中组成部分对ucore实现页替换算法的潜在用处。</li>
+<li>请描述页目录项（Page Directory Entry）和页表项（Page Table
+Entry）中组成部分对ucore实现页替换算法的潜在用处。</li>
 </ul>
 <p>参考<a target="_blank" rel="noopener" href="https://heeler-deer.github.io/2022/04/21/ucore-lab2/#%E7%BB%83%E4%B9%A0%E4%BA%8C">hd</a></p>
 <ul>
@@ -474,7 +477,8 @@ mjx-container[display="true"] + br {
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204301050148.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202204301125606.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
-<li>如果要在ucore上实现"extended clock页替换算法"请给你的设计方案，现有的swap_manager框架是否足以支持在ucore中实现此算法？如果是，请给你的设计方案。如果不是，请给出你的新的扩展和基此扩展的设计方案。并需要回答如下问题
+<li>如果要在ucore上实现"extended
+clock页替换算法"请给你的设计方案，现有的swap_manager框架是否足以支持在ucore中实现此算法？如果是，请给你的设计方案。如果不是，请给出你的新的扩展和基此扩展的设计方案。并需要回答如下问题
 <ul>
 <li>需要被换出的页的特征是什么？</li>
 <li>在ucore中如何判断具有这样特征的页？</li>
@@ -485,13 +489,15 @@ mjx-container[display="true"] + br {
 <p>其次，根据页结构，显然可以通过位运算查看PTE_P以及PTE_D.</p>
 <p>最后，缺页时可以换入，物理页满时换出。根据 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.464ex" xmlns="http://www.w3.org/2000/svg" width="7.113ex" height="2.009ex" role="img" focusable="false" viewBox="0 -683 3144 888"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D43E" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"></path></g><g data-mml-node="mi" transform="translate(889,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(1234,0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mi" transform="translate(1737,0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mi" transform="translate(2203,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(2654,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container></span>的说法，要注意对脏页的处理，</p>
 <blockquote>
-<p>可以在修改dirty的时候写入外存，或者可以在最终要删除该物理页时再写入外存。后者有利于多个写操作的合并，降低缺页代价，但此时的页替换算法却退化成普通的clock算法，而不是extended clock算法了。</p>
+<p>可以在修改dirty的时候写入外存，或者可以在最终要删除该物理页时再写入外存。后者有利于多个写操作的合并，降低缺页代价，但此时的页替换算法却退化成普通的clock算法，而不是extended
+clock算法了。</p>
 </blockquote>
 <h2 id="challenge1">challenge1</h2>
 <p>实现识别dirty bit的 extended clock页替换算法（需要编程）</p>
 <blockquote>
 <ul>
-<li>改进的时钟（Enhanced Clock）页替换算法：在时钟置换算法中，淘汰一个页面时只考虑了页面是否被访问过，但在实际情况中，还应考虑被淘汰的页面是否被修改过。因为淘汰修改过的页面还需要写回硬盘，使得其置换代价大于未修改过的页面，所以优先淘汰没有修改的页，减少磁盘操作次数。改进的时钟置换算法除了考虑页面的访问情况，还需考虑页面的修改情况。即该算法不但希望淘汰的页面是最近未使用的页，而且还希望被淘汰的页是在主存驻留期间其页面内容未被修改过的。这需要为每一页的对应页表项内容中增加一位引用位和一位修改位。当该页被访问时，CPU中的MMU硬件将把访问位置“1”。当该页被“写”时，CPU中的MMU硬件将把修改位置“1”。这样这两位就存在四种可能的组合情况：（0，0）表示最近未被引用也未被修改，首先选择此页淘汰；（0，1）最近未被使用，但被修改，其次选择；（1，0）最近使用而未修改，再次选择；（1，1）最近使用且修改，最后选择。该算法与时钟算法相比，可进一步减少磁盘的I/O操作次数，但为了查找到一个尽可能适合淘汰的页面，可能需要经过多次扫描，增加了算法本身的执行开销。</li>
+<li>改进的时钟（Enhanced
+Clock）页替换算法：在时钟置换算法中，淘汰一个页面时只考虑了页面是否被访问过，但在实际情况中，还应考虑被淘汰的页面是否被修改过。因为淘汰修改过的页面还需要写回硬盘，使得其置换代价大于未修改过的页面，所以优先淘汰没有修改的页，减少磁盘操作次数。改进的时钟置换算法除了考虑页面的访问情况，还需考虑页面的修改情况。即该算法不但希望淘汰的页面是最近未使用的页，而且还希望被淘汰的页是在主存驻留期间其页面内容未被修改过的。这需要为每一页的对应页表项内容中增加一位引用位和一位修改位。当该页被访问时，CPU中的MMU硬件将把访问位置“1”。当该页被“写”时，CPU中的MMU硬件将把修改位置“1”。这样这两位就存在四种可能的组合情况：（0，0）表示最近未被引用也未被修改，首先选择此页淘汰；（0，1）最近未被使用，但被修改，其次选择；（1，0）最近使用而未修改，再次选择；（1，1）最近使用且修改，最后选择。该算法与时钟算法相比，可进一步减少磁盘的I/O操作次数，但为了查找到一个尽可能适合淘汰的页面，可能需要经过多次扫描，增加了算法本身的执行开销。</li>
 </ul>
 </blockquote>
 <p>更改swap_out_victim函数即可。</p>

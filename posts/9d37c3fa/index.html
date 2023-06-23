@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言 这几天的实验让我觉得有必要学习一下makefile 参考博客：博客  会不会写makefile，从一个侧面说明了一个人是否具有完成大型工程的能力  makefile带来的好处是自动化编译 规则 1234target...:prerequisites...   command   ...   ... target是一个object file,可以是一个执行文件，也可以是一个标签preerqui">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-20T01:50:24.000Z">
-<meta property="article:modified_time" content="2022-04-07T15:37:45.419Z">
+<meta property="article:modified_time" content="2023-06-22T01:57:22.000Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta name="twitter:card" content="summary_large_image">
@@ -393,7 +393,7 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年4月7日 晚上
+                  本文最后更新于：2023年6月22日 上午
                 
               </p>
             
@@ -406,7 +406,8 @@ mjx-container[display="true"] + br {
 <p>makefile带来的好处是自动化编译</p>
 <h1 id="规则">规则</h1>
 <figure class="highlight jboss-cli"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli">target.<span class="hljs-string">..</span><span class="hljs-function">:prerequisites...</span><br>   <span class="hljs-keyword">command</span><br>   <span class="hljs-string">...</span><br>   <span class="hljs-string">...</span><br></code></pre></div></td></tr></tbody></table></figure>
-<p>target是一个object file,可以是一个执行文件，也可以是一个标签preerquisites是依赖的文件command是shell命令</p>
+<p>target是一个object
+file,可以是一个执行文件，也可以是一个标签preerquisites是依赖的文件command是shell命令</p>
 <blockquote>
 <p>prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行。</p>
 </blockquote>
@@ -439,7 +440,8 @@ mjx-container[display="true"] + br {
 <figure class="highlight makefile"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-meta"><span class="hljs-meta-keyword">.PHONY</span>: clean</span><br><span class="hljs-section">clean:</span><br>    -rm edit <span class="hljs-variable">$(objects)</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>.PHONY是一个伪目标，rm前的<code>-</code>告诉make也许某些文件会出现问题，但不要管，继续clean</p>
 <h2 id="makefile的文件系统">makefile的文件系统</h2>
-<p>如果你不想使用<code>makefile</code>或者<code>Makefile</code>的文件名，可以用<code>make -f file</code>，file是你的文件名。 makefile中包含其他makefile的指令如同c++ 一样：</p>
+<p>如果你不想使用<code>makefile</code>或者<code>Makefile</code>的文件名，可以用<code>make -f file</code>，file是你的文件名。
+makefile中包含其他makefile的指令如同c++ 一样：</p>
 <figure class="highlight stylus"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">-include foo<span class="hljs-selector-class">.make</span> <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.mk</span> <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.mk</span> c<span class="hljs-selector-class">.mk</span> e<span class="hljs-selector-class">.mk</span> f.mk<br></code></pre></div></td></tr></tbody></table></figure>
 <p>减号仍然表示不管怎样报错都继续执行下去，上面的命令可以采用部分正则规则简化：</p>
 <figure class="highlight haml"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haml">-<span class="ruby"><span class="hljs-keyword">include</span> foo,make *,mk <span class="hljs-variable">$(</span>bar)</span><br></code></pre></div></td></tr></tbody></table></figure>
@@ -464,7 +466,8 @@ mjx-container[display="true"] + br {
 <figure class="highlight jboss-cli"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli">vpath %<span class="hljs-string">.h</span> <span class="hljs-string">../headers</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>make的伪目标特性可以一次生成多个可执行文件：</p>
 <figure class="highlight stylus"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">all : prog1 prog2 prog <span class="hljs-number">3</span><br><span class="hljs-selector-class">.PHONY</span> : all<br>prog1 : prog1<span class="hljs-selector-class">.o</span> utils<span class="hljs-selector-class">.o</span><br>    cc -o prog1 prog1<span class="hljs-selector-class">.o</span> utils<span class="hljs-selector-class">.o</span><br><br>prog2 : prog2<span class="hljs-selector-class">.o</span><br>    cc -o prog2 prog2<span class="hljs-selector-class">.o</span><br><br>prog3 : prog3<span class="hljs-selector-class">.o</span> sort<span class="hljs-selector-class">.o</span> utils<span class="hljs-selector-class">.o</span><br>    cc -o prog3 prog3<span class="hljs-selector-class">.o</span> sort<span class="hljs-selector-class">.o</span> utils.o<br></code></pre></div></td></tr></tbody></table></figure>
-<p>上述代码生成多个目标：prog1~3 makefile的静态模式可以自动寻找target,pattern,如：</p>
+<p>上述代码生成多个目标：prog1~3
+makefile的静态模式可以自动寻找target,pattern,如：</p>
 <figure class="highlight makefile"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile">objects = foo.o bar.o<br><br><span class="hljs-section">all: <span class="hljs-variable">$(objects)</span></span><br><br><span class="hljs-variable">$(objects)</span>: %.o: %.c<br>    <span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>上述例子等价于：</p>
 <figure class="highlight stylus"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">foo<span class="hljs-selector-class">.o</span> : foo<span class="hljs-selector-class">.c</span><br>    $(CC) -c $(CFLAGS) foo<span class="hljs-selector-class">.c</span> -o foo<span class="hljs-selector-class">.o</span><br>bar<span class="hljs-selector-class">.o</span> : bar<span class="hljs-selector-class">.c</span><br>    $(CC) -c $(CFLAGS) bar<span class="hljs-selector-class">.c</span> -o bar.o<br></code></pre></div></td></tr></tbody></table></figure>
@@ -475,7 +478,8 @@ mjx-container[display="true"] + br {
 <p>defs.h是main.c中包含的头文件</p>
 <h1 id="命令">命令</h1>
 <figure class="highlight jboss-cli"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli">@<span class="hljs-keyword">echo</span> 正在编译xxx模块<span class="hljs-string">...</span><br></code></pre></div></td></tr></tbody></table></figure>
-<p>如果echo前没有@，那么会显示<code>echo 正在编译xxx模块</code>，加上@后则不会显示echo 如果你希望上一条命令作用于下一条命令，那么两个命令应该在同一行且用分号分隔：</p>
+<p>如果echo前没有@，那么会显示<code>echo 正在编译xxx模块</code>，加上@后则不会显示echo
+如果你希望上一条命令作用于下一条命令，那么两个命令应该在同一行且用分号分隔：</p>
 <figure class="highlight gradle"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">cd <span class="hljs-regexp">/home/</span><span class="hljs-keyword">file</span>;pwd<br></code></pre></div></td></tr></tbody></table></figure>
 <p>要<strong>嵌套</strong>执行maek，可以这么做：</p>
 <figure class="highlight makefile"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">subsystem:</span><br>    cd subdir &amp;&amp; <span class="hljs-variable">$(MAKE)</span><br></code></pre></div></td></tr></tbody></table></figure>
@@ -505,7 +509,8 @@ mjx-container[display="true"] + br {
 <h2 id="patsubst">patsubst</h2>
 <p>功能和subst一样，不过匹配的是模式，</p>
 <figure class="highlight reasonml"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-constructor">$(<span class="hljs-params">patsubst</span> %.<span class="hljs-params">c</span>,%.<span class="hljs-params">o</span>,<span class="hljs-params">x</span>.<span class="hljs-params">c</span>.<span class="hljs-params">c</span> <span class="hljs-params">bar</span>.<span class="hljs-params">c</span>)</span><br></code></pre></div></td></tr></tbody></table></figure>
-<p>把字串 x.c.c bar.c 符合模式 %.c 的单词替换成 %.o ，返回结果是 x.c.o bar.o</p>
+<p>把字串 x.c.c bar.c 符合模式 %.c 的单词替换成 %.o ，返回结果是 x.c.o
+bar.o</p>
 <h2 id="strip">strip</h2>
 <p>去掉开头和结尾的空格</p>
 <figure class="highlight reasonml"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-constructor">$(<span class="hljs-params">strip</span> <span class="hljs-params">a</span> <span class="hljs-params">b</span> <span class="hljs-params">c</span> )</span><br></code></pre></div></td></tr></tbody></table></figure>

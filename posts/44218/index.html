@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205132248605.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205132303683.png">
 <meta property="article:published_time" content="2022-05-13T08:24:25.000Z">
-<meta property="article:modified_time" content="2023-06-14T07:26:44.299Z">
+<meta property="article:modified_time" content="2023-06-22T01:57:22.000Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="ucore">
@@ -402,7 +402,7 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年6月14日 下午
+                  本文最后更新于：2023年6月22日 上午
                 
               </p>
             
@@ -428,31 +428,38 @@ mjx-container[display="true"] + br {
 </blockquote>
 <p>代码：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* LAB5:EXERCISE1 YOUR CODE</span><br><span class="hljs-comment"> * should set tf_cs,tf_ds,tf_es,tf_ss,tf_esp,tf_eip,tf_eflags</span><br><span class="hljs-comment"> * NOTICE: If we set trapframe correctly, then the user level process can return to USER MODE from kernel. So</span><br><span class="hljs-comment"> *          tf_cs should be USER_CS segment (see memlayout.h)</span><br><span class="hljs-comment"> *          tf_ds=tf_es=tf_ss should be USER_DS segment</span><br><span class="hljs-comment"> *          tf_esp should be the top addr of user stack (USTACKTOP)</span><br><span class="hljs-comment"> *          tf_eip should be the entry point of this binary program (elf-&gt;e_entry)</span><br><span class="hljs-comment"> *          tf_eflags should be set to enable computer to produce Interrupt</span><br><span class="hljs-comment"> */</span><br>tf-&gt;tf_cs = USER_CS;<br>tf-&gt;tf_ds = tf-&gt;tf_es = tf-&gt;tf_ss = USER_DS;<br>tf-&gt;tf_esp = USTACKTOP;<br>tf-&gt;tf_eip = elf-&gt;e_entry;<br>tf-&gt;tf_eflags = FL_IF;<br>ret = <span class="hljs-number">0</span>;<br></code></pre></div></td></tr></tbody></table></figure>
-<p>读取文件需要陷入内核态，在load_icode中我们需要完成tf_cs,tf_ds,tf_es,tf_ss,tf_esp,tf_eip,tf_eflags这几个变量的初始化。这注释都已经把答案写出来了。 <em><span class="github-emoji"><span>😆</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></em></p>
+<p>读取文件需要陷入内核态，在load_icode中我们需要完成tf_cs,tf_ds,tf_es,tf_ss,tf_esp,tf_eip,tf_eflags这几个变量的初始化。这注释都已经把答案写出来了。
+<em><span class="github-emoji"><span>😆</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></em></p>
 <p>实验让我们描述用户态进程从被选择执行到具体执行的经过。</p>
 <p>建议参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wuhualong/p/ucore_lab5_report.html">博客园</a>,这里只给出部分关系图以及代码。</p>
 <p>proc.c的cluster call internal:</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205131715688.png" srcset="/img/loading.gif" lazyload></p>
 <p>proc.c内部的流程大致如上，不难找到：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">related syscall <span class="hljs-keyword">for</span> process:<br>SYS_exit        : process <span class="hljs-built_in">exit</span>,                           --&gt;do_exit<br>SYS_fork        : create child process, dup mm            --&gt;do_fork--&gt;wakeup_proc<br>SYS_wait        : wait process                            --&gt;do_wait<br>SYS_exec        : after fork, process execute a program   --&gt;load a program <span class="hljs-keyword">and</span> refresh the mm<br>SYS_clone       : create child thread                     --&gt;do_fork--&gt;wakeup_proc<br>SYS_yield       : process flag itself need resecheduling, -- proc-&gt;need_sched=<span class="hljs-number">1</span>, then scheduler will rescheule <span class="hljs-keyword">this</span> process<br>SYS_sleep       : process sleep                           --&gt;do_sleep <br>SYS_kill        : kill process                            --&gt;do_kill--&gt;proc-&gt;flags |= PF_EXITING<br>                                                                 --&gt;wakeup_proc--&gt;do_wait--&gt;do_exit   <br>SYS_getpid      : get the process<span class="hljs-number">'</span>s pid<br></code></pre></div></td></tr></tbody></table></figure>
-<h2 id="练习2-父进程复制自己的内存空间给子进程需要编码">练习2: 父进程复制自己的内存空间给子进程（需要编码）</h2>
+<h2 id="练习2-父进程复制自己的内存空间给子进程需要编码">练习2:
+父进程复制自己的内存空间给子进程（需要编码）</h2>
 <blockquote>
 <p>创建子进程的函数do_fork在执行中将拷贝当前进程（即父进程）的用户内存地址空间中的合法内容到新进程中（子进程），完成内存资源的复制。具体是通过copy_range函数（位于kern/mm/pmm.c中）实现的，请补充copy_range的实现，确保能够正确执行。</p>
-<p>请在实验报告中简要说明如何设计实现”Copy on Write 机制“，给出概要设计，鼓励给出详细设计。</p>
+<p>请在实验报告中简要说明如何设计实现”Copy on Write
+机制“，给出概要设计，鼓励给出详细设计。</p>
 </blockquote>
 <blockquote>
 <p>Copy-on-write（简称COW）的基本概念是指如果有多个使用者对一个资源A（比如内存块）进行读操作，则每个使用者只需获得一个指向同一个资源A的指针，就可以该资源了。若某使用者需要对这个资源A进行写操作，系统会对该资源进行拷贝操作，从而使得该“写操作”使用者获得一个该资源A的“私有”拷贝—资源B，可对资源B进行写操作。该“写操作”使用者对资源B的改变对于其他的使用者而言是不可见的，因为其他使用者看到的还是资源A。</p>
 </blockquote>
 <p>代码：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">      <span class="hljs-comment">/* LAB5:EXERCISE2 YOUR CODE</span><br><span class="hljs-comment">       * replicate content of page to npage, build the map of phy addr of nage with the linear addr start</span><br><span class="hljs-comment">       *</span><br><span class="hljs-comment">       * Some Useful MACROs and DEFINEs, you can use them in below implementation.</span><br><span class="hljs-comment">       * MACROs or Functions:</span><br><span class="hljs-comment">       *    page2kva(struct Page *page): return the kernel vritual addr of memory which page managed (SEE pmm.h)</span><br><span class="hljs-comment">       *    page_insert: build the map of phy addr of an Page with the linear addr la</span><br><span class="hljs-comment">       *    memcpy: typical memory copy function</span><br><span class="hljs-comment">       *</span><br><span class="hljs-comment">       * (1) find src_kvaddr: the kernel virtual address of page</span><br><span class="hljs-comment">       * (2) find dst_kvaddr: the kernel virtual address of npage</span><br><span class="hljs-comment">       * (3) memory copy from src_kvaddr to dst_kvaddr, size is PGSIZE</span><br><span class="hljs-comment">       * (4) build the map of phy addr of  nage with the linear addr start</span><br><span class="hljs-comment">       */</span><br>      <span class="hljs-keyword">void</span> * kva_src = page2kva(page);<br><span class="hljs-comment">//找到src页面所在地址</span><br>      <span class="hljs-keyword">void</span> * kva_dst = page2kva(npage);<br>		<span class="hljs-comment">//找到dst页面所在地址</span><br>      <span class="hljs-built_in">memcpy</span>(kva_dst, kva_src, PGSIZE);<br><span class="hljs-comment">//复制</span><br>      ret = page_insert(to, npage, start, perm);<br><span class="hljs-comment">//按照链表方式加入pte</span><br>      assert(ret == <span class="hljs-number">0</span>);<br>      }<br>      start += PGSIZE;<br></code></pre></div></td></tr></tbody></table></figure>
-<h2 id="练习3-阅读分析源代码理解进程执行-forkexecwaitexit-的实现以及系统调用的实现不需要编码">练习3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现（不需要编码）</h2>
+<h2 id="练习3-阅读分析源代码理解进程执行-forkexecwaitexit-的实现以及系统调用的实现不需要编码">练习3:
+阅读分析源代码，理解进程执行 fork/exec/wait/exit
+的实现，以及系统调用的实现（不需要编码）</h2>
 <blockquote>
-<p>请在实验报告中简要说明你对 fork/exec/wait/exit函数的分析。并回答如下问题：</p>
+<p>请在实验报告中简要说明你对
+fork/exec/wait/exit函数的分析。并回答如下问题：</p>
 <ul>
 <li>请分析fork/exec/wait/exit在实现中是如何影响进程的执行状态的？</li>
 <li>请给出ucore中一个用户态进程的执行状态生命周期图（包执行状态，执行状态之间的变换关系，以及产生变换的事件或函数调用）。（字符方式画即可）</li>
 </ul>
-<p>执行：make grade。如果所显示的应用程序检测都输出ok，则基本正确。（使用的是qemu-1.0.1）</p>
+<p>执行：make
+grade。如果所显示的应用程序检测都输出ok，则基本正确。（使用的是qemu-1.0.1）</p>
 </blockquote>
 <p>注意，前面如果完全正确，参考我上周写的<a target="_blank" rel="noopener" href="https://heeler-deer.github.io/2022/05/07/ucore-lab4/#%E7%BB%83%E4%B9%A02">lab4练习二</a>最后一部分更改一下语句就可以拿到136分。</p>
 <p>之后参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wuhualong/p/ucore_lab5_report.html">博客园</a>且自己看提示信息，可以看出这东西确实有bug</p>
@@ -539,11 +546,14 @@ flowchart TB
 
 </code>
 </pre>
-<h2 id="扩展练习-challenge-实现-copy-on-write-cow机制">扩展练习 Challenge ：实现 Copy on Write （COW）机制</h2>
+<h2 id="扩展练习-challenge-实现-copy-on-write-cow机制">扩展练习
+Challenge ：实现 Copy on Write （COW）机制</h2>
 <blockquote>
 <p>给出实现源码,测试用例和设计报告（包括在cow情况下的各种状态转换（类似有限状态自动机）的说明）。</p>
-<p>这个扩展练习涉及到本实验和上一个实验“虚拟内存管理”。在ucore操作系统中，当一个用户父进程创建自己的子进程时，父进程会把其申请的用户空间设置为只读，子进程可共享父进程占用的用户内存空间中的页面（这就是一个共享的资源）<strong>。当其中任何一个进程修改此用户内存空间中的某页面时，ucore会通过page fault异常获知该操作，并完成拷贝内存页面</strong>，使得两个进程都有各自的内存页面。这样一个进程所做的修改不会被另外一个进程可见了。请在ucore中实现这样的COW机制。</p>
-<p>由于COW实现比较复杂，容易引入bug，请参考 https://dirtycow.ninja/ 看看能否在ucore的COW实现中模拟这个错误和解决方案。需要有解释。</p>
+<p>这个扩展练习涉及到本实验和上一个实验“虚拟内存管理”。在ucore操作系统中，当一个用户父进程创建自己的子进程时，父进程会把其申请的用户空间设置为只读，子进程可共享父进程占用的用户内存空间中的页面（这就是一个共享的资源）<strong>。当其中任何一个进程修改此用户内存空间中的某页面时，ucore会通过page
+fault异常获知该操作，并完成拷贝内存页面</strong>，使得两个进程都有各自的内存页面。这样一个进程所做的修改不会被另外一个进程可见了。请在ucore中实现这样的COW机制。</p>
+<p>由于COW实现比较复杂，容易引入bug，请参考 https://dirtycow.ninja/
+看看能否在ucore的COW实现中模拟这个错误和解决方案。需要有解释。</p>
 <p>这是一个big challenge.</p>
 </blockquote>
 <p>不难理解是要干什么。</p>
@@ -553,7 +563,8 @@ flowchart TB
 <figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (*ptep &amp; PTE_P) {<br>	<span class="hljs-comment">// Read-only possibly caused by COW.</span><br>    <span class="hljs-comment">//确定可以写且可以更改</span><br>	<span class="hljs-keyword">if</span> (vma-&gt;vm_flags &amp; VM_WRITE) {<br>		<span class="hljs-comment">// If ref of pages == 1, it is not shared, just make pte writable.</span><br>		<span class="hljs-comment">// else, alloc a new page, copy content and reset pte.</span><br>		<span class="hljs-comment">// also, remember to decrease ref of that page!</span><br>        <span class="hljs-comment">//看佬的注释很容易明白</span><br>		<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Page</span>* <span class="hljs-title">p</span> =</span> pte2page(*ptep);<br>		assert(p != <span class="hljs-literal">NULL</span>);<br>		assert(p-&gt;ref &gt; <span class="hljs-number">0</span>);<br>		<span class="hljs-keyword">if</span> (p-&gt;ref &gt; <span class="hljs-number">1</span>) {<br>            <span class="hljs-comment">//复制页面</span><br>			<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Page</span> *<span class="hljs-title">npage</span> =</span> alloc_page();<br>			assert(npage != <span class="hljs-literal">NULL</span>);<br>			<span class="hljs-keyword">void</span> * src_kvaddr = page2kva(p);<br>			<span class="hljs-keyword">void</span> * dst_kvaddr = page2kva(npage);<br>			<span class="hljs-built_in">memcpy</span>(dst_kvaddr, src_kvaddr, PGSIZE);<br>			<span class="hljs-comment">// addr already ROUND down.</span><br>            <span class="hljs-comment">//插入</span><br>			page_insert(mm-&gt;pgdir, npage, addr, ((*ptep) &amp; PTE_USER) | PTE_W);<br>			<span class="hljs-comment">// page_ref_dec(p);</span><br>            <span class="hljs-comment">//</span><br>			cprintf(<span class="hljs-string">"Handled one COW fault at %x: copied\n"</span>, addr);<br>		} <span class="hljs-keyword">else</span> {<br>			page_insert(mm-&gt;pgdir, p, addr, ((*ptep) &amp; PTE_USER) | PTE_W);<br>			cprintf(<span class="hljs-string">"Handled one COW fault: reused\n"</span>);<br>		}<br>	} <span class="hljs-keyword">else</span> {<br>		cprintf(<span class="hljs-string">"Not a COW read-only fault.\n"</span>);<br>		<span class="hljs-keyword">goto</span> failed;<br>	}<br>} <span class="hljs-keyword">else</span> {<br>	<span class="hljs-comment">// 处理缺页</span><br>}<br></code></pre></div></td></tr></tbody></table></figure>
 <p>结果：</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205132248605.png" srcset="/img/loading.gif" lazyload></p>
-<p>由于一些原因，我并没有按照佬的md做出来Handled one COW fault: reused,所以就鸽了。。</p>
+<p>由于一些原因，我并没有按照佬的md做出来Handled one COW fault:
+reused,所以就鸽了。。</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205132303683.png" srcset="/img/loading.gif" lazyload></p>
 
             </div>

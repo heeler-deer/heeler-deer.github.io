@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205071712799.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205071712796.png">
 <meta property="article:published_time" content="2022-05-07T05:45:11.000Z">
-<meta property="article:modified_time" content="2023-06-14T07:26:44.299Z">
+<meta property="article:modified_time" content="2023-06-22T01:57:22.000Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="ucore">
@@ -402,7 +402,7 @@ mjx-container[display="true"] + br {
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年6月14日 下午
+                  本文最后更新于：2023年6月22日 上午
                 
               </p>
             
@@ -428,7 +428,8 @@ mjx-container[display="true"] + br {
 <p>kern/mm/vmm.c</p>
 <h2 id="练习1">练习1</h2>
 <h4 id="分配并初始化一个进程控制块需要编码">分配并初始化一个进程控制块（需要编码）</h4>
-<p>alloc_proc函数（位于kern/process/proc.c中）负责分配并返回一个新的struct proc_struct结构，用于存储新建立的内核线程的管理信息。ucore需要对这个结构进行最基本的初始化，你需要完成这个初始化过程。</p>
+<p>alloc_proc函数（位于kern/process/proc.c中）负责分配并返回一个新的struct
+proc_struct结构，用于存储新建立的内核线程的管理信息。ucore需要对这个结构进行最基本的初始化，你需要完成这个初始化过程。</p>
 <blockquote>
 <p>【提示】在alloc_proc函数的实现中，需要初始化的proc_struct结构中的成员变量至少包括：state/pid/runs/kstack/need_resched/parent/mm/context/tf/cr3/flags/name。</p>
 </blockquote>
@@ -490,7 +491,8 @@ mjx-container[display="true"] + br {
 <p>才可以100分。应该是设计评分系统时与之前输出语句不同，因此会造成上图的error</p>
 <p><img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/png/os-1/202205071712799.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="练习3">练习3</h2>
-<p>阅读代码，理解 proc_run 函数和它调用的函数如何完成进程切换的。（无编码工作）</p>
+<p>阅读代码，理解 proc_run
+函数和它调用的函数如何完成进程切换的。（无编码工作）</p>
 <p>请在实验报告中简要说明你对proc_run函数的分析。并回答如下问题：</p>
 <ul>
 <li>在本实验的执行过程中，创建且运行了几个内核线程？</li>
@@ -506,7 +508,8 @@ mjx-container[display="true"] + br {
 <li>在本实验的执行过程中，创建且运行了几个内核线程？</li>
 </ul>
 <p>两个内核线程，分别是<code>idleproc</code>和<code>initproc</code></p>
-<p>首先是idleproc内核线程，该线程是最初的内核线程，完成内核中各个子线程的创建以及初始化。之后循环执行调度，执行其他进程。还有一个是initproc内核线程，该线程主要是为了显示实验的完成而打印出字符串"hello world"的内核线程。</p>
+<p>首先是idleproc内核线程，该线程是最初的内核线程，完成内核中各个子线程的创建以及初始化。之后循环执行调度，执行其他进程。还有一个是initproc内核线程，该线程主要是为了显示实验的完成而打印出字符串"hello
+world"的内核线程。</p>
 <p>语句<code>local_intr_save(intr_flag);....local_intr_restore(intr_flag);</code>在这里有何作用?请说明理由</p>
 <p>见上文</p>
 <h2 id="challenge">challenge</h2>
