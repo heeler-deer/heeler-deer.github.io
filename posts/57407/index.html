@@ -16,32 +16,23 @@
   <meta name="author" content="Heeler-Deer">
   <meta name="keywords" content="">
   
-    <meta name="description" content="起因   一直以来，我奉行的都是白嫖政策：编辑器白嫖，github白嫖，微信读书白嫖，当别人买域名时我却一直在用github提供的服务，从未在网络上付过费，毕竟网络水太深，我把握不住💔   但当我的lantern(懂得都懂)不小心被我删了后（listary的启动和卸载两个选项离得太近！），我开始琢磨怎么自己实现科学上网。于是我开始用bing搜索起教程，最终找到了前人铺好的路，并实现了我的目标💥">
+    <meta name="description" content="本篇内容主要涉及：  windows安装wsl2以及wsl2安装Arch Arch搭建node&#x2F;conda&#x2F;java&#x2F;flutter&#x2F;c++等开发环境 Android Studio使用连接windows的手机设备  wsl2安装 为什么是wsl2 nvidia对linux的相关驱动已经越来越完善，越来越多的人使用linux&#x2F;mac系统作为日常开发环境——而windows相较unix系系统，本身的快">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vps">
-<meta property="og:url" content="https://heeler-deer.top/posts/490e9480/index.html">
+<meta property="og:title" content="wsl2开发环境搭建">
+<meta property="og:url" content="https://heeler-deer.top/posts/57407/index.html">
 <meta property="og:site_name" content="Heeler-Deer">
-<meta property="og:description" content="起因   一直以来，我奉行的都是白嫖政策：编辑器白嫖，github白嫖，微信读书白嫖，当别人买域名时我却一直在用github提供的服务，从未在网络上付过费，毕竟网络水太深，我把握不住💔   但当我的lantern(懂得都懂)不小心被我删了后（listary的启动和卸载两个选项离得太近！），我开始琢磨怎么自己实现科学上网。于是我开始用bing搜索起教程，最终找到了前人铺好的路，并实现了我的目标💥">
+<meta property="og:description" content="本篇内容主要涉及：  windows安装wsl2以及wsl2安装Arch Arch搭建node&#x2F;conda&#x2F;java&#x2F;flutter&#x2F;c++等开发环境 Android Studio使用连接windows的手机设备  wsl2安装 为什么是wsl2 nvidia对linux的相关驱动已经越来越完善，越来越多的人使用linux&#x2F;mac系统作为日常开发环境——而windows相较unix系系统，本身的快">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f494.png?v8">
-<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f4a5.png?v8">
-<meta property="og:image" content="https://github.com/heeler-deer/absorbing/blob/main/png/Camera%20Roll/fir.png?raw=true">
-<meta property="og:image" content="https://github.com/heeler-deer/absorbing/blob/main/png/Camera%20Roll/de.png?raw=true">
-<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f630.png?v8">
-<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f60f.png?v8">
-<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f64c.png?v8">
-<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f649.png?v8">
-<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/2764.png?v8">
-<meta property="article:published_time" content="2021-11-13T15:32:44.000Z">
-<meta property="article:modified_time" content="2023-06-22T01:57:22.000Z">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8">
+<meta property="article:published_time" content="2023-06-25T09:04:52.000Z">
+<meta property="article:modified_time" content="2023-06-25T16:38:31.588Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
-<meta property="article:tag" content="花里胡哨">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f494.png?v8">
+<meta name="twitter:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8">
   
   
-  <title>vps - Heeler-Deer</title>
+  <title>wsl2开发环境搭建 - Heeler-Deer</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -210,9 +201,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vps">
+            <span class="h2" id="subtitle" title="wsl2开发环境搭建">
               
-                vps
+                wsl2开发环境搭建
               
             </span>
 
@@ -227,8 +218,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-11-13 23:32" pubdate>
-        2021年11月13日 晚上
+      <time datetime="2023-06-25 17:04" pubdate>
+        2023年6月25日 下午
       </time>
     </span>
   
@@ -238,7 +229,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      2.9k 字
     </span>
   
 
@@ -247,7 +238,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14 分钟
+      25 分钟
     </span>
   
 
@@ -288,56 +279,88 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vps</h1>
+            <h1 style="display: none">wsl2开发环境搭建</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年6月22日 上午
+                  本文最后更新于：2023年6月26日 凌晨
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="起因">起因</h1>
-<p>  一直以来，我奉行的都是<strong>白嫖</strong>政策：编辑器白嫖，github白嫖，微信读书白嫖，当别人买域名时我却一直在用github提供的服务，从未在网络上付过费，毕竟网络水太深，我把握不住<span class="github-emoji"><span>💔</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f494.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>
-  但当我的lantern(懂得都懂)不小心被我删了后（listary的启动和卸载两个选项离得太近！），我开始琢磨怎么自己实现科学上网。于是我开始用bing搜索起教程，最终找到了前人铺好的路，并实现了我的目标<span class="github-emoji"><span>💥</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a5.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<h1 id="过程">过程</h1>
-<p>  接下来，我将复盘我科学上网、ipv6免流、搭建ftp的过程。</p>
-<h2 id="参考连接">参考连接</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/alvin9999/new-pac/wiki/%E8%87%AA%E5%BB%BAss%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%99%E7%A8%8B">自建ssr服务+校园网免流</a>
-<a target="_blank" rel="noopener" href="https://www.cnblogs.com/sopcce/p/10743241.html">ftp搭建</a></p>
-<h2 id="过程-1">过程</h2>
-<p>  既然要科学上网，就必须选择国内外都没有被墙的ip,我选择的是vultr,5$的centos
-7x(without
-selinux),这个配置内核版本比较低，不会有奇奇怪怪的防火墙导致的错误。
-  因为网上一直有亚洲的vultr节点被墙的说法，我选择了new
-york的服务，虽然确实慢了点，但风险较小。如果你想实现校园网免流，记得勾选enable
-ipv6 <img src="https://github.com/heeler-deer/absorbing/blob/main/png/Camera%20Roll/fir.png?raw=true" srcset="/img/loading.gif" lazyload>
-  这是某次我创建是的截图，现在该云主机已销毁： <img src="https://github.com/heeler-deer/absorbing/blob/main/png/Camera%20Roll/de.png?raw=true" srcset="/img/loading.gif" lazyload>
-  在云主机配置好后，我们需要一个办法远程连接这台主机，当然你直接在vultr的控制台连接也行。
-  远程连接使用xshell,可以用学校邮箱白嫖免费的版本----我第一次注册湖大的邮箱就白嫖<span class="github-emoji"><span>😰</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f630.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>
-  如果你和我一样，想要让多个人使用你的ssr，那么使用第一个参考连接的脚本，使用下面的配置：</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">wget -N --no-check-certificate https:<span class="hljs-comment">//raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/ssrmu.sh &amp;&amp; chmod +x ssrmu.sh &amp;&amp; bash ssrmu.sh</span><br></code></pre></div></td></tr></tbody></table></figure>
-<p>  最终按照提示，可以一步步完成ssr的配置,需要注意的是，我刚开始并没有搭建好ssr服务，在用邮箱问过第一个参考连接的作者后，采用了如下的配置，这些都可以在你启动ssr前选择好：</p>
-<figure class="highlight maxima"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima"><br>加密<br>chacha20<br><br><br>协议<br><span class="hljs-built_in">origin</span><br><br><br>混淆<br>tls1.2_ticket_auth<br></code></pre></div></td></tr></tbody></table></figure>
-<p>   <strong>注意：</strong>
-如果你是采用我博客中的wget连接安装脚本，启动脚本的方式就是最后的<code>bash ssrmu.sh</code>,而当你开启脚本并选择的上面的加密、协议、混淆方式后，需要选择4来安装那个libsodium,这样才能启动脚本。
-  启动脚本后，采用第一个参考连接，服务端启动ssr的加速。之后在你的电脑或移动设备上下载shadowsockr或者v2ray就可以科学上网，这些第一个参考链接里都有下载方式。</p>
-<hr>
-<p>  之后，在你的电脑端填入你的vps的ipv6地址就可以实现校园网ipv6免流了。</p>
-<figure class="highlight smali"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smali">原理简介：通过使用代理，在本地请求后以ipv6的方式发送给代理，在由代理获得数据后以ipv6的方式返回给本地。<br></code></pre></div></td></tr></tbody></table></figure>
-<p>  也就是说，必须要校园网支持ipv6免流才可行。对于手机，由于其不能被HNU的校园网识别为电脑，因此在配置ssr时不能填入服务器的ipv6地址，也就无法实现免流，</p>
-<hr>
-<p>  接下来我搭建了一个简易的ftp服务器，参考第二个连接。
-  此处不再赘述。需要注意的是，/etc/vsftpd/vsftpd.conf中，要满足：</p>
-<figure class="highlight ini"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">userlist_deny</span>=<span class="hljs-literal">YES</span><br></code></pre></div></td></tr></tbody></table></figure>
-<p>  这样设置好的ftp就可以正常使用了。虽然使用filezilla比较慢，简易的服务也无法和各大云盘比较，但一个月5$总要多用用<span class="github-emoji"><span>😏</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f60f.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>
-  如果你在尝试的时候不小心把sopftpuser的一些文件删了，可以像我一样采用重新创建同名文件并赋予777权限的方法挽救损失<span class="github-emoji"><span>🙌</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f64c.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<h1 id="总结">总结</h1>
-<p>  ( •̀ ω •́
-)y我会了linux的基本操作了，尤其是vim这些对文件的基本操作。虽然自己有一个物理机ubuntu,但一直都是图形化操作，这次算是熟练使用了vim的命令行操作。了解了firewall-cmd以及selinux的ufw这些防火墙的操作，之前一直因为icmp开放而tcp不开放纠结
-<span class="github-emoji"><span>🙉</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f649.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>   此处感谢<a target="_blank" rel="noopener" href="https://kiprey.github.io/">Kipery</a>以及众多愿意在网上分享技术的网友们<span class="github-emoji"><span>❤</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>
-<strong>附连接</strong>： <a target="_blank" rel="noopener" href="https://www.toolsdaquan.com/ipcheck/">ip可用性检测国内外icmp+tcp</a>
-<a target="_blank" rel="noopener" href="http://test-ipv6.com/index.html.zh_CN">ipv6检测</a></p>
+              <p>本篇内容主要涉及：</p>
+<ol type="1">
+<li>windows安装wsl2以及wsl2安装Arch</li>
+<li>Arch搭建node/conda/java/flutter/c++等开发环境</li>
+<li>Android Studio使用连接windows的手机设备</li>
+</ol>
+<h1 id="wsl2安装">wsl2安装</h1>
+<h3 id="为什么是wsl2">为什么是wsl2</h3>
+<p>nvidia对linux的相关驱动已经越来越完善，越来越多的人使用linux/mac系统作为日常开发环境——而windows相较unix系系统，本身的快捷键、命令行等相关支持并不完善，所幸经过几年的完善，wsl2已经发展的比较完善了，而使用wsl2的优点在于：存在于wsl2的整个环境都可以打包，迁移方便，可以轻松管理开发环境。在我看来，这是wsl2最大的优点，尽管wsl2目前的gui程序还存在一些问题，但作为个人开发者，wsl2已经可以满足大多数开发场景了——你不需要像使用纯linux一下配置驱动、配置各种应用程序（尽管有些程序确实比windows下相应的程序好）</p>
+<h3 id="安装wsl2">安装wsl2</h3>
+<p>可以参考：<a target="_blank" rel="noopener" href="https://gitee.com/regentsai/wsl_arch_kde">wsl2+archlinux+kde+tigerVNC图形化配置:
+漫长的折腾以后完成了wsl2下archlinux的安装和kde桌面的图形化显示。以此记录。
+(gitee.com)</a></p>
+<p>在微软商店中，直接搜索wsl安装即可获得wsl1,这个时候，我们以管理员模式打开powershell,输入：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux<br></code></pre></div></td></tr></tbody></table></figure>
+<p>重启wsl,再次输入：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart<br>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart<br>wsl --set-default-version 2<br></code></pre></div></td></tr></tbody></table></figure>
+<p>即可设置为wsl2.</p>
+<p>这个时候，在微软商店中安装arch即可。注意，我们不需要为wsl2配置图形化界面，只需要安装好中文即可。按照我的体验，无论是vnc还是xrdp，都不如直接终端启动wsl2的图形化程序。</p>
+<h3 id="wsl的迁移与基础配置">wsl的迁移与基础配置</h3>
+<p>由于Arch上要装许多开发环境，占用空间越来越大，建议将wsl迁移到其他盘，可以参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/406917270">WSL的安装和位置迁移 - 知乎
+(zhihu.com)</a></p>
+<p>首先powershell中关停wsl:</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">wsl --shutdown<br></code></pre></div></td></tr></tbody></table></figure>
+<p>之后导出：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">wsl --export Arch D:/export.tar<br></code></pre></div></td></tr></tbody></table></figure>
+<p>最后注销原来的虚拟机器卸载并导入：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">wsl --unregister Arch<br>wsl --import Arch D:\export\ D:\export.tar --version 2<br></code></pre></div></td></tr></tbody></table></figure>
+<h4 id="配置代理">配置代理</h4>
+<p>首先假设你的host机器能够科学上网，且在127.0.0.1:7890开了端口。那么我们在wsl2里面需要做的就是把流量引导到windows中，而我们就需要获取windows的ip:</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">export hostip=$(cat /etc/resolv.conf |grep -oP '(?&lt;=nameserver\ ).*')<br></code></pre></div></td></tr></tbody></table></figure>
+<p>之后，可以通过命令设置https_proxy以及http_proxy的值，注意引号中的内容需要根据自己使用的协议选择http或者socks5</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">export https_proxy="http://${hostip}:7890";<br>export http_proxy="http://${hostip}:7890";<br></code></pre></div></td></tr></tbody></table></figure>
+<p>参考 <a target="_blank" rel="noopener" href="https://solidspoon.xyz/2021/02/17/%E9%85%8D%E7%BD%AEWSL2%E4%BD%BF%E7%94%A8Windows%E4%BB%A3%E7%90%86%E4%B8%8A%E7%BD%91/">代理上网</a>，可以在.bashrc/.zshrc中添加
+：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">export hostip=$(cat /etc/resolv.conf |grep -oP '(?&lt;=nameserver\ ).*')<br>alias setss='export all_proxy="socks5://${hostip}:7890";'<br>alias unsetss='unset all_proxy'<br></code></pre></div></td></tr></tbody></table></figure>
+<p>这个时候，尽管我们可以通过setss让终端科学上网，但无法让wsl2的其他程序上网，这里可以使用proxychains4,配置后即可通过proxychains4
+program来让程序也科学上网。</p>
+<h1 id="arch开发环境搭建">Arch开发环境搭建</h1>
+<p>建议先使用pacman安装yay,之后使用yay安装其他软件即可：</p>
+<figure class="highlight vala"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala"><span class="hljs-meta"># 初始化</span><br><span class="hljs-meta">## 设置root密码</span><br>passwd<br>pacman-key --init<br>pacman-key --populate<br>pacman -S archlinuxcn-keyring<br> <br><span class="hljs-meta"># 更新</span><br>pacman -Syyu<br> <br><span class="hljs-meta"># 安装基本软件</span><br>pacman -S base base-devel git curl wget zsh yay neofetch net-tools dnsutils inetutils<br></code></pre></div></td></tr></tbody></table></figure>
+<h1 id="android-studio相关配置">Android Studio相关配置</h1>
+<p>首先，在wsl2中使用gui程序，有时是会直接卡死的，因此要做好心理准备<span class="github-emoji"><span>😃</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
+<p>安装的android
+studio的话，非常简单，官网下载包就行，执行文件在./AndroidStudio/bin下的studio.sh。我的做法是将该路径添加到/etc/profile的path环境变量中，这些source
+/etc/profile后就可以在任意路径执行studio.sh了。</p>
+<p>Android Studio的使用和windows/mac基本一致，不在详述。</p>
+<p>关于安卓代码调试，在我的环境中，Android
+Studio不支持创建虚拟设备，因此只能选择物理真机调试，此时需要做一个网络端口转发才能让wsl2的android
+studio连接到物理机。</p>
+<p>首先，windows安装adb并将其添加到环境变量中，将手机连接后，在powershell中执行</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">adb start-server<br>adb devices<br></code></pre></div></td></tr></tbody></table></figure>
+<p>可以看到连接windows的设备。</p>
+<p>此时，在wsl2的arch中安装adb,同时执行：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">adb start-server<br>adb devices<br></code></pre></div></td></tr></tbody></table></figure>
+<p>这个时候应该看不到手机（该终端未执行setss时）</p>
+<p>而为了让wsl2能够看到手机，我们需要host主机的ip,由于在前述中，我们设置了hostip用于保存windows的ip，因此此时我们可以通过执行：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">setss<br>adb start-server<br>adb devices<br></code></pre></div></td></tr></tbody></table></figure>
+<p>来看到手机，或者通过修改proxychains4的配置文件，执行：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">proxychains4 adb devices<br></code></pre></div></td></tr></tbody></table></figure>
+<p>来看到手机。而要想让Android Studio在device
+manager中看到手机，只需要执行：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">proxychians4 studio.sh<br></code></pre></div></td></tr></tbody></table></figure>
+<p>即可。注意，这里不推荐手动填写配置AS的代理设置，通过proxychains4更加方便。</p>
+<h1 id="参考">参考</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/regentsai/wsl_arch_kde">wsl2+archlinux+kde+tigerVNC图形化配置:
+漫长的折腾以后完成了wsl2下archlinux的安装和kde桌面的图形化显示。以此记录。
+(gitee.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://solidspoon.xyz/2021/02/17/%E9%85%8D%E7%BD%AEWSL2%E4%BD%BF%E7%94%A8Windows%E4%BB%A3%E7%90%86%E4%B8%8A%E7%BD%91/">代理上网</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/406917270">WSL的安装和位置迁移
+- 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lentikr/p/16433148.html">WSL2+ArchLinux环境配置
+- lentikr - 博客园 (cnblogs.com)</a></p>
 
             </div>
             <hr>
@@ -347,7 +370,7 @@ ipv6 <img src="https://github.com/heeler-deer/absorbing/blob/main/png/Camera%20R
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%9E%8E%E6%90%9E/">瞎搞</a>
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
                     
                   </div>
                 
@@ -357,14 +380,12 @@ ipv6 <img src="https://github.com/heeler-deer/absorbing/blob/main/png/Camera%20R
                     
                       <a class="hover-with-bg" href="/tags/cs/">cs</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%8A%B1%E9%87%8C%E8%83%A1%E5%93%A8/">花里胡哨</a>
-                    
                   </div>
                 
               </div>
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">Heeler-Deer</a> <br>
-                <strong>本文链接: </strong><a href="https://heeler-deer.top/posts/490e9480/">https://heeler-deer.top/posts/490e9480/</a> <br>
+                <strong>本文链接: </strong><a href="https://heeler-deer.top/posts/57407/">https://heeler-deer.top/posts/57407/</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                 </p>
                 
@@ -373,18 +394,12 @@ ipv6 <img src="https://github.com/heeler-deer/absorbing/blob/main/png/Camera%20R
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/6ab04511/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">os</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/9d37c3fa/">
-                        <span class="hidden-mobile">makefile</span>
+                      <a href="/posts/4a17b156/">
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
