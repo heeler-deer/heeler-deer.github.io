@@ -23,13 +23,14 @@
 <meta property="og:site_name" content="Heeler-Deer">
 <meta property="og:description" content="本篇内容主要涉及：  windows安装wsl2以及wsl2安装Arch Arch搭建node&#x2F;conda&#x2F;java&#x2F;flutter&#x2F;c++等开发环境 Android Studio使用连接windows的手机设备  wsl2安装 为什么是wsl2 nvidia对linux的相关驱动已经越来越完善，越来越多的人使用linux&#x2F;mac系统作为日常开发环境——而windows相较unix系系统，本身的快">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/jpg/202306271648765.png">
 <meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8">
 <meta property="article:published_time" content="2023-06-25T09:04:52.000Z">
-<meta property="article:modified_time" content="2023-06-26T02:59:06.778Z">
+<meta property="article:modified_time" content="2023-06-27T08:50:00.846Z">
 <meta property="article:author" content="Heeler-Deer">
 <meta property="article:tag" content="cs">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heeler-deer/absorbing/main/jpg/202306271648765.png">
   
   
   <title>wsl2开发环境搭建 - Heeler-Deer</title>
@@ -238,7 +239,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      29 分钟
+      30 分钟
     </span>
   
 
@@ -283,7 +284,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年6月26日 上午
+                  本文最后更新于：2023年6月27日 下午
                 
               </p>
             
@@ -306,7 +307,11 @@
 <p>重启wsl,再次输入：</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart<br>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart<br>wsl --set-default-version 2<br></code></pre></div></td></tr></tbody></table></figure>
 <p>即可设置为wsl2.</p>
-<p>这个时候，在微软商店中安装arch即可。注意，我们不需要为wsl2配置图形化界面，只需要安装好中文即可。按照我的体验，无论是vnc还是xrdp，都不如直接终端启动wsl2的图形化程序。</p>
+<p>这个时候，在微软商店中安装arch即可。注意，我们不需要为wsl2配置图形化界面，只需要安装好中文即可。按照我的体验，不建议使用vnc作为图形界面，不如直接终端启动wsl2的图形化程序。</p>
+<figure>
+<img src="https://raw.githubusercontent.com/heeler-deer/absorbing/main/jpg/202306271648765.png" srcset="/img/loading.gif" lazyload alt="image-20230627164829709">
+<figcaption aria-hidden="true">image-20230627164829709</figcaption>
+</figure>
 <h3 id="wsl的迁移与基础配置">wsl的迁移与基础配置</h3>
 <p>由于Arch上要装许多开发环境，占用空间越来越大，建议将wsl迁移到其他盘，可以参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/406917270">WSL的安装和位置迁移 - 知乎
 (zhihu.com)</a></p>
