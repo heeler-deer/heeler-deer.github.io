@@ -815,15 +815,16 @@ number来判断elf文件的正确性，最后在加载elf的每一个段，</p>
   <div class="disqus" style="width:100%">
     <div id="disqus_thread"></div>
     
-      <script>
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://heeler-deer.top/posts/28603/';
+          this.page.identifier = '/posts/28603/';
+        };
         Fluid.utils.loadComments('#disqus_thread', function() {
-          Fluid.utils.createCssLink('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css');
-          Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', function() {
-            new DisqusJS({
-              shortname: 'heeler-deer',
-              apikey: 'zHkuMFpS82vaLOaaNEze3DlcJ6iUoSZSEmjQ060oZyEoATmyYU5x0tDL0lNd01fF'
-            });
-          });
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'heeler-deer' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
         });
       </script>
     
