@@ -2,9 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://heeler-deer.top/posts/3391/</loc>
+    
+    <lastmod>2023-07-18T03:03:25.939Z</lastmod>
+    
+    <date>1665306673000</date>
+    <title>Adaptive Inertia: Disentangling the Effects of Adaptive Learning Rate and Momentum | Heeler-Deer</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
     <loc>https://heeler-deer.top/posts/57407/</loc>
     
-    <lastmod>2023-07-17T16:48:18.785Z</lastmod>
+    <lastmod>2023-07-18T03:03:21.969Z</lastmod>
     
     <date>1687683892000</date>
     <title>wsl2开发环境搭建 | Heeler-Deer</title>
@@ -30,17 +41,6 @@
     
     <date>1650094675000</date>
     <title>ucore-lab1 | Heeler-Deer</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
-    <loc>https://heeler-deer.top/posts/3391/</loc>
-    
-    <lastmod>2023-06-22T01:57:22.000Z</lastmod>
-    
-    <date>1665306673000</date>
-    <title>Adaptive Inertia: Disentangling the Effects of Adaptive Learning Rate and Momentum | Heeler-Deer</title>
     
     <desc></desc>
   </url>
