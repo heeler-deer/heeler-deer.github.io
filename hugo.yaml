@@ -1,6 +1,6 @@
-baseURL: "https://examplesite.com/"
-title: ExampleSite
-paginate.PageSize: 10
+baseURL: "https://heeler-deer.top/"
+title: Blog
+paginate.PageSize: 5
 theme: PaperMod
 
 enableRobotsTXT: true
@@ -16,8 +16,8 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: ExampleSite
-  description: "ExampleSite description"
+  title: Blog
+  description: "Blog description"
   keywords: [Blog, Portfolio, PaperMod]
   author: Me
   # author: ["Me", "You"] # multiple authors
@@ -59,7 +59,7 @@ params:
   # profile-mode
   profileMode:
     enabled: false # needs to be explicitly set
-    title: ExampleSite
+    title: Blog
     subtitle: "This is subtitle"
     imageUrl: "<img location>"
     imageWidth: 120
@@ -77,12 +77,12 @@ params:
     Content: Welcome to my blog
 
   socialIcons:
-    - name: x
-      url: "https://x.com/"
-    - name: stackoverflow
-      url: "https://stackoverflow.com"
+    # - name: x
+    #   url: "https://x.com/"
+    # - name: stackoverflow
+    #   url: "https://stackoverflow.com"
     - name: github
-      url: "https://github.com/"
+      url: "https://github.com/heeler-deer/"
 
   analytics:
     google:
@@ -115,6 +115,14 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
+    - identifier: archives
+      name: archives
+      url: /archives/
+      weight: 1
+    - identifier: search
+      name: search
+      url: /search/
+      weight: 1
     - identifier: categories
       name: categories
       url: /categories/
@@ -123,10 +131,11 @@ menu:
       name: tags
       url: /tags/
       weight: 20
-    - identifier: example
-      name: example.org
-      url: https://example.org
-      weight: 30
+
+    # - identifier: Blog
+    #   name: example.org
+    #   url: https://example.org
+    #   weight: 30
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
