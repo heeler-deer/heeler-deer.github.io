@@ -25,7 +25,7 @@ params:
   DateFormat: "January 2, 2006"
   defaultTheme: auto # dark, light
   disableThemeToggle: false
-  math: true
+  math: katex
   katex: true
   ShowReadingTime: true
   ShowShareButtons: false
