@@ -24,16 +24,14 @@ jobs:
       - name: Build
         run: |
           hugo --gc --minify --cleanDestinationDir --environment development
-          # 双重保险：检查 CNAME 是否存在
-          if [ ! -f public/CNAME ]; then
-            echo "heeler-deer.top" > public/CNAME
-          fi  
+
       - name: Check Hugo Version
         run: hugo version
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          force_orphan: true  # 强制清空 gh-pages 分支历史
+          keep_files: false   # 不保留任何旧文件
