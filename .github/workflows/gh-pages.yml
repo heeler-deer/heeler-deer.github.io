@@ -23,11 +23,11 @@ jobs:
 
       - name: Build
         run: |
-          hugo --minify
+          hugo --minify --environment production
           # 双重保险：检查 CNAME 是否存在
           if [ ! -f public/CNAME ]; then
             echo "heeler-deer.top" > public/CNAME
-          fi
+          fi  
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
