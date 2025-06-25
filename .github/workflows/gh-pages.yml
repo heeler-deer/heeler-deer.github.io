@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0    # 获取所有历史以便于lastmod等
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: "0.147.9"
           extended: true
@@ -28,6 +28,8 @@ jobs:
           if [ ! -f public/CNAME ]; then
             echo "heeler-deer.top" > public/CNAME
           fi  
+      - name: Check Hugo Version
+        run: hugo version
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
