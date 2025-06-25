@@ -2,6 +2,7 @@
 date: '2025-06-25T18:09:03+08:00'
 draft: false
 title: 'Hello World'
+math: true
 ---
 
 ## 数学公式测试
