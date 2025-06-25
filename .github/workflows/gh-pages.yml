@@ -23,7 +23,7 @@ jobs:
 
       - name: Build
         run: |
-          hugo --gc --minify --cleanDestinationDir --environment development
+          hugo --gc --minify --cleanDestinationDir 
 
       - name: Check Hugo Version
         run: hugo version
@@ -32,6 +32,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./public
           force_orphan: true  # 强制清空 gh-pages 分支历史
           keep_files: false   # 不保留任何旧文件
