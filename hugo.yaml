@@ -155,3 +155,7 @@ outputs:
     - RSS
     - JSON # necessary for search
 
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
