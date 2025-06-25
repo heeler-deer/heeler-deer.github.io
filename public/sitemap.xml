@@ -5,18 +5,35 @@
     <loc>http://localhost:1313/</loc>
     <lastmod>2025-06-25T18:09:03+08:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2025-06-25T18:09:03+08:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/hello-world/</loc>
+    <lastmod>2025-06-25T18:09:03+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/hugo/</loc>
     <lastmod>2025-06-25T18:09:03+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-06-25T18:09:03+08:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2025-06-25T18:09:03+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2025-06-25T18:09:03+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2025-06-25T18:09:03+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2025-06-25T18:09:03+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/</loc>
+    <lastmod>2025-06-25T18:09:03+08:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/archives/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
-  </url><url>
     <loc>http://localhost:1313/search/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
   </url>
 </urlset>
