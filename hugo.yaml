@@ -9,7 +9,7 @@ buildFuture: false
 buildExpired: false
 
 googleAnalytics: UA-123-45
-
+publishDir: "public"
 minify:
   disableXML: true
   minifyOutput: true
