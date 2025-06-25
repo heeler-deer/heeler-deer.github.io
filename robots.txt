@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://heeler-deer.top/sitemap.xml
