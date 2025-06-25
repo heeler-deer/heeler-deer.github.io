@@ -8,7 +8,7 @@ math: true
 ## 数学公式测试
 
 行内公式：$E = mc^2$
-test s s
+test s s s
 块级公式：
 
 $$
