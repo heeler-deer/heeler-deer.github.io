@@ -23,7 +23,8 @@
 &lt;p&gt;块级公式：&lt;/p&gt;
 &lt;p&gt;$$
 \int_a^b f(x) dx = F(b) - F(a)
-$$&lt;/p&gt;</description>
+$$&lt;/p&gt;
+&lt;p&gt;test&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
