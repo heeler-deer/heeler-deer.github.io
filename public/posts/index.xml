@@ -20,7 +20,7 @@
       <guid>http://localhost:1313/posts/hello-world/</guid>
       <description>&lt;h2 id=&#34;数学公式测试&#34;&gt;数学公式测试&lt;/h2&gt;
 &lt;p&gt;行内公式：$E = mc^2$
-test s
+test s s
 块级公式：&lt;/p&gt;
 &lt;p&gt;$$
 \int_a^b f(x) dx = F(b) - F(a)
