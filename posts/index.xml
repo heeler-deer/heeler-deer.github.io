@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Blog</title>
+    <link>https://heeler-deer.top/posts/</link>
+    <description>Recent content in Posts on Blog</description>
+    <image>
+      <title>Blog</title>
+      <url>https://heeler-deer.top/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://heeler-deer.top/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 30 Jun 2025 22:56:35 +0800</lastBuildDate>
+    <atom:link href="https://heeler-deer.top/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Recsys Challenge2025参赛经历</title>
+      <link>https://heeler-deer.top/posts/recsys-challenge2025%E5%8F%82%E8%B5%9B%E7%BB%8F%E5%8E%86/</link>
+      <pubDate>Mon, 30 Jun 2025 22:56:35 +0800</pubDate>
+      <guid>https://heeler-deer.top/posts/recsys-challenge2025%E5%8F%82%E8%B5%9B%E7%BB%8F%E5%8E%86/</guid>
+      <description>&lt;p&gt;这场比赛给定了用户的五种行为数据，要求参赛者根据这些数据构建一个通用的用户表征，用户emb会在架构、参数固定的一个网络上在不同的下游任务中训练，以训练结果作为用户得分，在不同的任务上计算参赛者的N - rank得分，最终排名以Borda count为准。我最终的bord count为440，队伍排名40，排在我前面的学术队伍有17个。&lt;/p&gt;
+&lt;h2 id=&#34;baseline&#34;&gt;baseline&lt;/h2&gt;
+&lt;p&gt;这场比赛的baseline使用时间滑动窗口统计用户[1,7,30]天内各种行为的次数，以此作为用户emb，在总共六个任务上取得的分数分别是：0.6947	0.6985	0.6919	0.6579	0.7382	0.7207，这里的分数因任务不同而不同，比如第二个任务的得分计算方式为0.8 × AUROC + 0.1 × Novelty + 0.1 × Diversity，具体内容可以查看 &lt;a href=&#34;https://www.codabench.org/competitions/7230/#/pages-tab&#34;&gt;https://www.codabench.org/competitions/7230/#/pages-tab&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;相对来说，这个baseline还是较高的。&lt;/p&gt;
+&lt;h2 id=&#34;方案&#34;&gt;方案&lt;/h2&gt;
+&lt;p&gt;这个比赛直到最后我都没有构建出合适的CV，一个原因是本地在三个公开任务的分数差距与leadboard差距过大、变化不一致，另一个原因是有标签能构建公开任务的数据只有不到20W用户。我最终采用的方案是使用自监督学习+辅助任务训练模型。&lt;/p&gt;
+&lt;h3 id=&#34;行为序列的多维融合&#34;&gt;行为序列的多维融合&lt;/h3&gt;
+&lt;p&gt;比赛总共有用户的五种行为数据。其中buy行为最少，浏览行为最多。相同用户的不同行为其意图应该接近，因此我采用了多视图的方式，将buy,cart,rm_cart与另外两者行为进行对比，拉近两者之间的距离。在经过一系列操作后，在采用type_cross_attn建模行为间的交互关系，并进行加权聚合。&lt;/p&gt;
+&lt;h3 id=&#34;多兴趣建模&#34;&gt;多兴趣建模&lt;/h3&gt;
+&lt;p&gt;我采用了兴趣胶囊的形式，捕捉用户序列中的兴趣，这一步提升很大。&lt;/p&gt;
+&lt;h3 id=&#34;时间建模&#34;&gt;时间建模&lt;/h3&gt;
+&lt;p&gt;从baseline的代码中可以分析出时间是行为序列很重要的因素，因此我考虑加入了时间衰减权重，并通过离散的时间桶为行为序列赋予不同的含义。&lt;/p&gt;
+&lt;h3 id=&#34;辅助任务设计&#34;&gt;辅助任务设计&lt;/h3&gt;
+&lt;p&gt;我这里设计了三种辅助任务，一种是价格预测任务，通过输入用户的cart序列预测用户cart中的价格，提升模型对于价格的感知程度；第二种是bert式的mask恢复任务，随机mask行为序列中的一部分，让模型尝试恢复被mask的序列。第三种则是根据规则为用户打标签，让模型预测用户的类别，这一步提升效果较大。&lt;/p&gt;
+&lt;h2 id=&#34;最终结果&#34;&gt;最终结果&lt;/h2&gt;
+&lt;p&gt;由于比赛的评分网络是一个瓶颈型的架构，因此我尝试把baseline的特征与模型生成的emb直接链接，得到更加层次性的表达。这样拼接带来的提升是很明显的，最终我在六个任务上分别达到了0.7167	0.7808	0.7708	0.733	0.7506	0.788 的分数，相较于baseline提升还是挺大的。&lt;/p&gt;
+&lt;h2 id=&#34;回顾&#34;&gt;回顾&lt;/h2&gt;
+&lt;p&gt;我其实还尝试了很多办法，如图建模（耗时太长，接受不了训练总时长）、困难负样本挖掘、活跃用户加权等，然而其效果要么是微乎其微，要么是拉低分数。受限于个人参赛以及显卡资源，我最终只能得到这样的分数。这次参赛经历加深了我对推荐系统用户emb的认知，单纯使用自监督学习训练出的“通用emb”必须在下游任务上表现足够好才是真的好。假如实验时多尝试下游任务与自监督任务的平衡，应该能获得更好的分数。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hello World</title>
+      <link>https://heeler-deer.top/posts/hello-world/</link>
+      <pubDate>Wed, 25 Jun 2025 18:09:03 +0800</pubDate>
+      <guid>https://heeler-deer.top/posts/hello-world/</guid>
+      <description>&lt;h2 id=&#34;数学公式测试&#34;&gt;数学公式测试&lt;/h2&gt;
+&lt;p&gt;行内公式：$E = mc^2$&lt;/p&gt;
+&lt;p&gt;块级公式：&lt;/p&gt;
+&lt;p&gt;$$
+\int_a^b f(x) dx = F(b) - F(a)
+$$&lt;/p&gt;
+&lt;p&gt;test&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
